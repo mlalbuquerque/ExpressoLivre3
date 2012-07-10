@@ -335,7 +335,7 @@ class Felamimail_Backend_Cache_Imap_Message extends Felamimail_Backend_Cache_Ima
      * @param string|array $_sort
      * @return array
      * 
-     * @todo try to derive 
+     * @todo pass the search parameters
      */
     protected function _getIds(array $_imapFilters, $_sort = array('ARRIVAL'))
     {
@@ -454,13 +454,18 @@ Tinebase_Core::getLogger()->alert(__METHOD__ . '#####::#####' . __LINE__ . ' Mes
      */
     public function searchCount(Tinebase_Model_Filter_FilterGroup $_filter)
     {
-/*        
-Tinebase_Core::getLogger()->alert(__METHOD__ . '#####::#####' . __LINE__ . ' Message searchCount = $_filter ' . print_r($_filter,true));
-*/  
-        $aux = new Felamimail_Backend_Cache_Sql_Message();
-        $retorno = $aux->searchCount($_filter);
+        
+        $result = $this->_getIds($this->_parseFilterGroup($_filter));
+        
+        $ids = array();
+        foreach ($result as $tmp)
+        {
+            $ids = array_merge($ids, $tmp);
+        }
+        
+        $return = count($ids);
 //Tinebase_Core::getLogger()->alert(__METHOD__ . '#####::#####' . __LINE__ . 'Message searchCount = $retorno ' . print_r($retorno,true));
-        return $retorno;
+        return $return;
     }
     
     /**
