@@ -17,7 +17,7 @@
  * @package     Felamimail
  * @subpackage  Controller
  */
-class Felamimail_Controller_Message extends Felamimail_Controller_Message_Abstract
+class Felamimail_Controller_Message
 {
      /**
      * holds the instance of the singleton
