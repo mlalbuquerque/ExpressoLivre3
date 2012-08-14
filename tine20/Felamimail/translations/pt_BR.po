@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tine 2.0 - Felamimail\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-11-09 13:21-0300\n"
-"Last-Translator: Cassiano Dal Pizzol <cassiano@dalpizzol@serpro.gov.br>\n"
+"PO-Revision-Date: 2012-08-14 16:51-0300\n"
+"Last-Translator: Mário César Kolling <mario.kolling@serpro.gov.br>\n"
 "Language-Team: Tine 2.0 Translators <rommel.cysne@serpro.gov.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -1163,6 +1163,7 @@ msgstr "Marcar como Importante"
 msgid "Activate this toggle button to mark this message as important."
 msgstr "Ative este botão para marcar esta mensagem como importante."
 
+<<<<<<< HEAD
 #: js/MessageEditDialog.js:
 #: 1133
 msgid "Empty subject"
@@ -1173,3 +1174,5 @@ msgstr "Assunto vazio"
 msgid "Do you really want to send a message with an empty subject?"
 msgstr "Você realmente deseja enviar esta mensagem com o Assunto vazio?"
 
+=======
+>>>>>>> Task #66 - PT_BR translation of "Mark as Important" button.
