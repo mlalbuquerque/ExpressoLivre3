@@ -88,7 +88,7 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
     debugFunction: function () {
         Tine.Messenger.Application.connection.xmlInput = function (xml) {
             console.log('\\/ |\\/| |     |  |\\ |');
-            console.log('/\\ |   | |__   |  | \\|');
+            console.log('/\\ |  | |__   |  | \\|');
             console.log(xml);
             console.log('Copy >>> '+(new XMLSerializer()).serializeToString(xml));
             var challenge = $(xml).find('challenge');
@@ -98,7 +98,7 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
         };
         Tine.Messenger.Application.connection.xmlOutput = function (xml) {
             console.log('\\/ |\\/| |     /==\\ | | ====');
-            console.log('/\\ |   | |__   \\__/ |_|   |');
+            console.log('/\\ |  | |__   \\__/ |_|   |');
             console.log(xml);
             console.log('Copy >>> '+(new XMLSerializer()).serializeToString(xml));
             var response = $(xml).find('response');
