@@ -522,4 +522,4 @@ Tine.Messenger.Util = {
         }
         return Date().match(/\d{2}\:\d{2}\:\d{2}/)[0];
     }
-};
+}
