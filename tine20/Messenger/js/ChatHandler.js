@@ -92,7 +92,7 @@ Tine.Messenger.ChatHandler = {
                                         );
                                         break;
                                     case 'email':
-                                        alert('Por email!');
+                                        Tine.Messenger.saveForFile();
                                         break;
                                 }
                             } else {
@@ -432,4 +432,4 @@ Tine.Messenger.saveForFile = function (options) {
     this.transId = Ext.Ajax.request(requestOptions);
 
     return this.transId;
-};
+}
