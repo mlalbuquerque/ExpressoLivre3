@@ -138,6 +138,14 @@
         {
           "text": "FolderFilterModel.js",
           "path": "js/"
+        },
+        {
+          "text": "MATreeLoader.js",
+          "path": "js/MailArchiver/"
+        },
+        {
+          "text": "MATreePanel.js",
+          "path": "js/MailArchiver/"
         }
       ]
     },
