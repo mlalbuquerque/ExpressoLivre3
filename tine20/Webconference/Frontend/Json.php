@@ -113,6 +113,11 @@ class Webconference_Frontend_Json extends Tinebase_Frontend_Json_Abstract {
 	return Webconference_Controller_BigBlueButton::getInstance()->inviteUsersToJoin($users, $moderator, $roomId);
     }
     
+//    public function inviteUsersToJoinToFelamimail($roomId, $moderator, $userName, $email)
+//    {
+//        return Webconference_Controller_BigBlueButton::getInstance()->inviteUsersToJoinToFelamimail($roomId, $moderator, $userName, $email);
+//    }   
+    
     public function isMeetingActive($roomId, $url)
     {
         $translate = Tinebase_Translation::getTranslation('Webconference');

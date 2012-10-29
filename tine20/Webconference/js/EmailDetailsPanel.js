@@ -213,3 +213,4 @@ Tine.Webconference.EmailDetailsPanel = Ext.extend(Tine.widgets.grid.DetailsPanel
         return this.singleRecordPanel;
     }
 });
+
