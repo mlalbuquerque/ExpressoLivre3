@@ -65,6 +65,14 @@ class Webconference_Frontend_Json extends Tinebase_Frontend_Json_Abstract {
         return $this->_save($recordData, Webconference_Controller_Config::getInstance(), 'Config');
     }
 
+    /**
+     * load Webconference configuration
+     * 
+     * @return array -- record data  
+     */
+    public function loadConfig() {
+        return $this->_controller->loadConfig();
+    }
 
     /**
      * deletes existing records Webconference configuration
