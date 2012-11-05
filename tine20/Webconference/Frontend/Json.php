@@ -65,14 +65,6 @@ class Webconference_Frontend_Json extends Tinebase_Frontend_Json_Abstract {
         return $this->_save($recordData, Webconference_Controller_Config::getInstance(), 'Config');
     }
 
-    /**
-     * load Webconference configuration
-     * 
-     * @return array -- record data  
-     */
-    public function loadConfig() {
-        return $this->_controller->loadConfig();
-    }
 
     /**
      * deletes existing records Webconference configuration
@@ -120,11 +112,6 @@ class Webconference_Frontend_Json extends Tinebase_Frontend_Json_Abstract {
     {
 	return Webconference_Controller_BigBlueButton::getInstance()->inviteUsersToJoin($users, $moderator, $roomId);
     }
-    
-//    public function inviteUsersToJoinToFelamimail($roomId, $moderator, $userName, $email)
-//    {
-//        return Webconference_Controller_BigBlueButton::getInstance()->inviteUsersToJoinToFelamimail($roomId, $moderator, $userName, $email);
-//    }   
     
     public function isMeetingActive($roomId, $url)
     {
@@ -206,3 +193,4 @@ class Webconference_Frontend_Json extends Tinebase_Frontend_Json_Abstract {
     }   
     
 }
+
