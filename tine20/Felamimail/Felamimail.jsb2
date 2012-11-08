@@ -146,6 +146,10 @@
         {
           "text": "MATreePanel.js",
           "path": "js/MailArchiver/"
+        },
+        {
+          "text": "WestPanel.js",
+          "path": "js/"
         }
       ]
     },

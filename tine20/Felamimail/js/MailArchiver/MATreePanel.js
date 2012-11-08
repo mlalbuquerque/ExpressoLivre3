@@ -131,13 +131,13 @@ Ext.extend(Tine.Felamimail.MATreePanel, Ext.tree.TreePanel, {
      */
     initComponent: function() {
         // get folder store
-        this.folderStore = Tine.Tinebase.appMgr.get('Felamimail').getFolderStore();
+        //this.folderStore = Tine.Tinebase.appMgr.get('Felamimail').getFolderStore();
     	
         // init tree loader
-        this.loader = new Tine.Felamimail.MATreeLoader({
-            folderStore: this.folderStore,
-            app: this.app
-        });
+//        this.loader = new Tine.Felamimail.MATreeLoader({
+//            folderStore: this.folderStore,
+//            app: this.app
+//        });
 
         // set the root node
         this.root = new Ext.tree.TreeNode({
@@ -150,48 +150,48 @@ Ext.extend(Tine.Felamimail.MATreePanel, Ext.tree.TreePanel, {
         });
         
         // add account nodes
-        this.initAccounts();
+        //this.initAccounts();
         
         // init drop zone
-        this.dropConfig = {
-            ddGroup: this.ddGroup || 'TreeDD',
-            appendOnly: this.ddAppendOnly === true,
-            notifyEnter : function() {this.isDropSensitive = true;}.createDelegate(this),
-            notifyOut : function() {this.isDropSensitive = false;}.createDelegate(this),
-            onNodeOver : function(n, dd, e, data) {
-                var node = n.node;
-                
-                // auto node expand check (only for non-account nodes)
-                if(!this.expandProcId && node.attributes.allowDrop && node.hasChildNodes() && !node.isExpanded()){
-                    this.queueExpand(node);
-                } else if (! node.attributes.allowDrop) {
-                    this.cancelExpand();
-                }
-                return node.attributes.allowDrop ? 'tinebase-tree-drop-move' : false;
-            },
-            isValidDropPoint: function(n, dd, e, data){
-                return n.node.attributes.allowDrop;
-            }
-        };
+//        this.dropConfig = {
+//            ddGroup: this.ddGroup || 'TreeDD',
+//            appendOnly: this.ddAppendOnly === true,
+//            notifyEnter : function() {this.isDropSensitive = true;}.createDelegate(this),
+//            notifyOut : function() {this.isDropSensitive = false;}.createDelegate(this),
+//            onNodeOver : function(n, dd, e, data) {
+//                var node = n.node;
+//                
+//                // auto node expand check (only for non-account nodes)
+//                if(!this.expandProcId && node.attributes.allowDrop && node.hasChildNodes() && !node.isExpanded()){
+//                    this.queueExpand(node);
+//                } else if (! node.attributes.allowDrop) {
+//                    this.cancelExpand();
+//                }
+//                return node.attributes.allowDrop ? 'tinebase-tree-drop-move' : false;
+//            },
+//            isValidDropPoint: function(n, dd, e, data){
+//                return n.node.attributes.allowDrop;
+//            }
+//        };
         
         // init selection model (multiselect)
-        this.selModel = new Ext.tree.MultiSelectionModel({});
+//        this.selModel = new Ext.tree.MultiSelectionModel({});
         
         // init context menu TODO use Ext.apply
-        var initCtxMenu = Tine.Felamimail.setTreeContextMenus.createDelegate(this);
-        initCtxMenu();
+       // var initCtxMenu = Tine.Felamimail.setTreeContextMenus.createDelegate(this);
+       // initCtxMenu();
         
     	// add listeners
-        this.on('beforeclick', this.onBeforeClick, this);
-        this.on('click', this.onClick, this);
-        this.on('contextmenu', this.onContextMenu, this);
-        this.on('beforenodedrop', this.onBeforenodedrop, this);
-        this.on('append', this.onAppend, this);
-        this.on('containeradd', this.onFolderAdd, this);
-        this.on('containerrename', this.onFolderRename, this);
-        this.on('containerdelete', this.onFolderDelete, this);
-        this.selModel.on('selectionchange', this.onSelectionChange, this);
-        this.folderStore.on('update', this.onUpdateFolderStore, this);
+//        this.on('beforeclick', this.onBeforeClick, this);
+//        this.on('click', this.onClick, this);
+//        this.on('contextmenu', this.onContextMenu, this);
+//        this.on('beforenodedrop', this.onBeforenodedrop, this);
+//        this.on('append', this.onAppend, this);
+//        this.on('containeradd', this.onFolderAdd, this);
+//        this.on('containerrename', this.onFolderRename, this);
+//        this.on('containerdelete', this.onFolderDelete, this);
+//        this.selModel.on('selectionchange', this.onSelectionChange, this);
+//        this.folderStore.on('update', this.onUpdateFolderStore, this);
         
         // call parent::initComponent
         Tine.Felamimail.MATreePanel.superclass.initComponent.call(this);
