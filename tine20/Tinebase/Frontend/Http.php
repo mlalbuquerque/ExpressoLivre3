@@ -695,8 +695,8 @@ class Tinebase_Frontend_Http extends Tinebase_Frontend_Http_Abstract
             )));
 	    }
 	}
-	
-	/**
+        
+        /**
 	 * downloads an image/thumbnail at a given size
 	 *
 	 * @param unknown_type $application
@@ -773,6 +773,60 @@ class Tinebase_Frontend_Http extends Tinebase_Frontend_Http_Abstract
             
             die($image->blob);
         }
+	}
+	
+	/**
+	 * downloads an temp file (used by signing applet)
+	 *
+	 * @param string $id
+	 */
+	public function getTempFile($id)
+	{
+	    $this->checkAuth();
+
+	    // close session to allow other requests
+            Zend_Session::writeClose(true);
+
+            $clientETag      = null;
+            $ifModifiedSince = null;
+
+            if (isset($_SERVER['If_None_Match'])) {
+                $clientETag     = trim($_SERVER['If_None_Match'], '"');
+                $ifModifiedSince = trim($_SERVER['If_Modified_Since'], '"');
+            } elseif (isset($_SERVER['HTTP_IF_NONE_MATCH']) && isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
+                $clientETag     = trim($_SERVER['HTTP_IF_NONE_MATCH'], '"');
+                $ifModifiedSince = trim($_SERVER['HTTP_IF_MODIFIED_SINCE'], '"'); 
+            }
+            
+            $tempFile = Tinebase_TempFile::getInstance()->getTempFile($id);
+
+            $fileData = file_get_contents($tempFile->path);
+
+            $serverETag = sha1($fileData);
+
+            // cache for 3600 seconds
+            $maxAge = 3600;
+            header('Cache-Control: private, max-age=' . $maxAge);
+            header("Expires: " . gmdate('D, d M Y H:i:s', Tinebase_DateTime::now()->addSecond($maxAge)->getTimestamp()) . " GMT");
+
+            // overwrite Pragma header from session
+            header("Pragma: cache");
+
+            // if the cache id is still valid
+            if ($clientETag == $serverETag) {
+                header("Last-Modified: " . $ifModifiedSince);
+                header("HTTP/1.0 304 Not Modified");
+                header('Content-Length: 0');
+            } else {
+
+                header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+                header('Content-Type: '. $tempFile->type);
+                header('Etag: "' . $serverETag . '"');
+
+                flush();
+
+                die($fileData);
+            }
 	}
 	
 	/**

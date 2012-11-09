@@ -4,6 +4,7 @@
  * @package     Felamimail
  * @license     http://www.gnu.org/licenses/agpl.html AGPL Version 3
  * @author      Philipp Schüle <p.schuele@metaways.de>
+ * @author      Mário César Kolling <mario.kolling@serpro.gov.br>
  * @copyright   Copyright (c) 2009-2011 Metaways Infosystems GmbH (http://www.metaways.de)
  */
  
@@ -250,17 +251,62 @@ Ext.namespace('Tine.Felamimail');
             }]
         });
     },
+    
+    fromApplet: function(response)
+    {
+        Tine.log.debug('response: ' + response);
+        // Após assinatura continua processamento.
+        // Tine.Felamimail.MessageEditDialog.superclass.onApplyChanges.apply(this, arguments)
+        
+        Tine.Felamimail.MessageEditDialog.superclass.onApplyChanges.apply(this, this.savedArguments)
+    },
  
+    onSignatureApplet: function(operation, save)
+    {
+        this.savedArguments = save;
+        this.onRecordUpdate();
+        // this.attachmentGrid.store
+        
+//        var record = this.record.copy(); // clone the record
+//        Ext.data.Record.id(record);
+//        
+//        var inputs = [];
+//        for (var i = 0; i <  this.attachmentGrid.store.data.items.length; i++)
+//        {
+//            inputs.push(
+//                {
+//                    value: this.attachmentGrid.store.data.items[i].data.input.getAsDataURL(),
+//                    name: this.attachmentGrid.store.data.items[i].data.input.name,
+//                    size: this.attachmentGrid.store.data.items[i].data.input.size,
+//                    type: this.attachmentGrid.store.data.items[i].data.input.type
+//                }
+//            );
+//            
+//            
+//            
+//        }
+//        
+//        record.set('attachments', inputs);
+        
+//        record.data.attachments.each(function(attachment) {
+//            var test = attachment;
+//        }, this);
+
+        var data = Ext.util.JSON.encode(this.record.data);
+        
+        document.getElementById('signatureApplet').doButtonClickAction(navigator.userAgent, this.id, data);
+    },
+    
     /**
      * onSaveAndClose
      */
-	onSaveAndClose: function() {
+    onSaveAndClose: function() {
+        
+        this.supr().onSaveAndClose.apply(this, arguments);
 
-        this.supr().onSaveAndClose.apply(this, arguments);    
+        this.checkUnknownContacts();
 
-		this.checkUnknownContacts();
-		
-	},
+    },
 
     /**
      * checkUnknownEmails
@@ -1029,12 +1075,6 @@ Ext.namespace('Tine.Felamimail');
         
         this.initAttachmentGrid();
         this.initAccountCombo();
-        this.signatureAppletPanel = new Tine.Felamimail.SignatureAppletPanel({
-            record: this.record,
-            width: 0,
-            height: 0,
-            region: 'east'
-        });
         
         this.recipientGrid = new Tine.Felamimail.RecipientGrid({
             record: this.record,
@@ -1080,28 +1120,52 @@ Ext.namespace('Tine.Felamimail');
                 items: [
                     this.accountCombo, 
                     this.recipientGrid, 
-                {
-                    xtype:'textfield',
-                    plugins: [ Ext.ux.FieldLabeler ],
-                    fieldLabel: this.app.i18n._('Subject'),
-                    name: 'subject',
-                    ref: '../../subjectField',
-                    enableKeyEvents: true,
-                    listeners: {
-                        scope: this,
-                        // update title on keyup event
-                        'keyup': function(field, e) {
-                            if (! e.isSpecialKey()) {
-                                this.window.setTitle(
-                                    this.app.i18n._('Compose email:') + ' ' 
-                                    + field.getValue()
-                                );
+                    {
+                        xtype:'textfield',
+                        plugins: [ Ext.ux.FieldLabeler ],
+                        fieldLabel: this.app.i18n._('Subject'),
+                        name: 'subject',
+                        ref: '../../subjectField',
+                        enableKeyEvents: true,
+                        listeners: {
+                            scope: this,
+                            // update title on keyup event
+                            'keyup': function(field, e) {
+                                if (! e.isSpecialKey()) {
+                                    this.window.setTitle(
+                                        this.app.i18n._('Compose email:') + ' ' 
+                                        + field.getValue()
+                                    );
+                                }
                             }
                         }
-                    }
-                }, this.htmlEditor
+                    }, this.htmlEditor
                 ]
-            }, this.southPanel, this.signatureAppletPanel]
+            }, 
+            this.southPanel, 
+            new Tine.Felamimail.SignatureAppletPanel({
+                record: this.record,
+                width: 0,
+                height: 0,
+                region: 'east',
+                bodyCfg: {
+                    id: 'signatureApplet',
+                    tag: 'applet',
+                    codebase: '/Felamimail/java/',
+                    archive: 'httpclient-4.2.1.jar, httpcore-4.2.2.jar, commons-codec-1.6.jar,'+
+                        ' commons-logging-1.1.1.jar, commons-lang3-3.1.jar, jackson-core-asl-1.9.10.jar,'+
+                        ' jackson-mapper-asl-1.9.10.jar, mail.jar, bcprov-jdk15-142.jar,'+
+                        ' bcmail-jdk15-142.jar, activation.jar, jericho-html-3.3.jar,'+
+                        ' ExpressoCert.jar, ExpressoCertMail.jar',
+                    code: 'ExpressoSmimeApplet',
+                    mayscript: true
+        
+// Other params, probably we'll get those from a properties file.
+//        cn: [
+//            {tag: 'param', name: 'backcolor', value: '234,234,234'},
+//        ]
+                }
+            })]
         };
     },
 
@@ -1138,6 +1202,7 @@ Ext.namespace('Tine.Felamimail');
      * TODO add note editing textfield here
      */
     onApplyChanges: function(button, event, closeWindow) {
+        var subjectOk = (this.getForm().findField('subject').getValue() == '') ? false : true;
         if (this.getForm().findField('subject').getValue() == '') {
             Tine.log.debug('Tine.Felamimail.MessageEditDialog::onApplyChanges - empty subject');
             Ext.MessageBox.confirm(
@@ -1146,14 +1211,20 @@ Ext.namespace('Tine.Felamimail');
                 function (button) {
                     Tine.log.debug('Tine.Felamimail.MessageEditDialog::onApplyChanges - button: ' + button);
                     if (button == 'yes') {
-                        Tine.Felamimail.MessageEditDialog.superclass.onApplyChanges.apply(this, arguments)
+                        subjectOk = true;
                     }
                 },
                 this
             );
-        } else {
-            Tine.Felamimail.MessageEditDialog.superclass.onApplyChanges.apply(this, arguments)
         }
+        
+        if (subjectOk)
+        {
+            // todo: test signature or encryption toggle buttons
+            this.onSignatureApplet('sign', arguments);
+            // todo: else Tine.Felamimail.MessageEditDialog.superclass.onApplyChanges.apply(this, arguments)
+        }
+        
         
         /*
         if (this.record.data.note) {
@@ -1216,4 +1287,10 @@ Tine.Felamimail.MessageEditDialog.openWindow = function (config) {
         contentPanelConstructorConfig: config
     });
     return window;
+};
+
+var appletStub = function(response)
+{
+    var extObj = Ext.ComponentMgr.get(response);
+    extObj.fromApplet(response);
 };

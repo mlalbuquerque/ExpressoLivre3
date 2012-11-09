@@ -24,8 +24,6 @@ Ext.namespace('Tine.Felamimail');
 
  Tine.Felamimail.SignatureAppletPanel = Ext.extend(Ext.Panel, {
     
-    id: 'signatureApplet',
-    
     messageModel: null,
     
     signedMessageModel: null, // todo: create this model.
@@ -34,6 +32,7 @@ Ext.namespace('Tine.Felamimail');
      * @cfg {object} bodyCfg
      */
     bodyCfg: {
+        id: 'signatureApplet',
         tag: 'applet',
         codebase: '/Felamimail/java/',
         archive: 'mail.jar, bcprov-jdk15-142.jar, bcmail-jdk15-142.jar, activation.jar, ExpressoCert.jar, ExpressoCertMail.jar',
@@ -55,11 +54,6 @@ Ext.namespace('Tine.Felamimail');
     toApplet: function()
     {
         // call Applet passing => this.messageModel.toString();
-    },
-    
-    fromApplet: function(response)
-    {
-        // get response and send the signed message
     }
     
 });
