@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tine 2.0 Messenger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-02 14:33-0300\n"
-"PO-Revision-Date: 2012-10-02 14:40-0300\n"
+"POT-Creation-Date: 2012-11-14 15:06-0300\n"
+"PO-Revision-Date: 2012-11-14 15:06-0300\n"
 "Last-Translator: Marcio Albuquerque <marcio.lima.albuquerque@gmail.com>\n"
 "Language-Team: SERPRO Salvador <marcio.albuquerque@serpro.gov.br>\n"
 "Language: \n"
@@ -159,8 +159,8 @@ msgstr "Envio de erro:"
 #: Messenger/js/ChatHandler.js:109
 #: Messenger/js/Messenger.js:210
 #: Messenger/js/Messenger.js:297
-#: Messenger/js/RosterHandler.js:306
-#: Messenger/js/RosterHandler.js:360
+#: Messenger/js/RosterHandler.js:307
+#: Messenger/js/RosterHandler.js:362
 msgid "Error"
 msgstr "Erro"
 
@@ -229,7 +229,7 @@ msgstr "Grupo criado com sucesso"
 
 #: Messenger/js/Window.js:21
 #: Messenger/js/Layout.js:46
-#: Messenger/js/Layout.js:428
+#: Messenger/js/Layout.js:430
 msgid "Add Group"
 msgid_plural "Add Group"
 msgstr[0] "Adicionar Grupo"
@@ -285,7 +285,7 @@ msgid "Actions"
 msgstr "Ações"
 
 #: Messenger/js/Layout.js:38
-#: Messenger/js/Layout.js:352
+#: Messenger/js/Layout.js:354
 msgid "Add Contact"
 msgid_plural "Add Contact"
 msgstr[0] "Adicionar Contato"
@@ -297,77 +297,77 @@ msgid_plural "Logout"
 msgstr[0] "Sair"
 msgstr[1] "Sair"
 
-#: Messenger/js/Layout.js:116
+#: Messenger/js/Layout.js:117
 msgid "your Status"
 msgstr "seu Status"
 
-#: Messenger/js/Layout.js:117
+#: Messenger/js/Layout.js:118
 msgid "press ENTER after"
 msgstr "pressione ENTER depois"
 
-#: Messenger/js/Layout.js:146
+#: Messenger/js/Layout.js:148
 msgid "Online"
 msgstr "Disponível"
 
-#: Messenger/js/Layout.js:147
+#: Messenger/js/Layout.js:149
 msgid "Away"
 msgstr "Ausente"
 
-#: Messenger/js/Layout.js:148
+#: Messenger/js/Layout.js:150
 msgid "Do Not Disturb"
 msgstr "Não Perturbe"
 
-#: Messenger/js/Layout.js:149
+#: Messenger/js/Layout.js:151
 msgid "Unavailable"
 msgstr "Indisponível"
 
-#: Messenger/js/Layout.js:370
+#: Messenger/js/Layout.js:372
 msgid "JID"
 msgstr "JID"
 
-#: Messenger/js/Layout.js:377
-#: Messenger/js/Layout.js:436
+#: Messenger/js/Layout.js:379
+#: Messenger/js/Layout.js:438
 msgid "Name"
 msgstr "Nome"
 
-#: Messenger/js/Layout.js:382
+#: Messenger/js/Layout.js:384
 msgid "Group"
 msgstr "Grupo"
 
-#: Messenger/js/Layout.js:388
+#: Messenger/js/Layout.js:390
 msgid "Select a group"
 msgstr "Selecione um grupo"
 
-#: Messenger/js/Layout.js:398
-#: Messenger/js/Layout.js:441
+#: Messenger/js/Layout.js:400
+#: Messenger/js/Layout.js:443
 msgid "Add"
 msgstr "Incluir"
 
-#: Messenger/js/Layout.js:474
+#: Messenger/js/Layout.js:476
 msgid "Join Groupchat"
 msgstr "Entrar em Sala de Bate-papo"
 
-#: Messenger/js/Layout.js:483
+#: Messenger/js/Layout.js:485
 msgid "Identity"
 msgstr "Identidade"
 
-#: Messenger/js/Layout.js:489
+#: Messenger/js/Layout.js:491
 msgid "Host"
 msgstr "Anfitrião"
 
-#: Messenger/js/Layout.js:494
+#: Messenger/js/Layout.js:496
 msgid "Room"
 msgstr "Sala"
 
-#: Messenger/js/Layout.js:499
+#: Messenger/js/Layout.js:501
 msgid "Nickname"
 msgstr "Apelido"
 
-#: Messenger/js/Layout.js:505
+#: Messenger/js/Layout.js:507
 msgid "Password"
 msgstr "Senha"
 
-#: Messenger/js/Layout.js:509
+#: Messenger/js/Layout.js:511
 msgid "Join"
 msgstr "Entrar"
 
@@ -449,7 +449,7 @@ msgstr "Excluir Contato"
 
 #: Messenger/js/RosterTree.js:80
 #: Messenger/js/RosterTree.js:179
-msgid "Are you sure to delete "
+msgid "Are you sure you want to delete "
 msgstr "Tem certeza que deseja excluir "
 
 #: Messenger/js/RosterTree.js:115
