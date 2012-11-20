@@ -397,6 +397,10 @@ Tinebase_Core::getLogger()->alert(__METHOD__ . '#####::#####' . __LINE__ . ' Mes
                 $folderArray = $folder->toArray();
                 
                 $imap = Felamimail_Backend_ImapFactory::factory($folderArray['account_id']);
+<<<<<<< HEAD
+=======
+                $imap->selectFolder($folderArray['globalname']);
+>>>>>>> cleaning out the code, Refactor of Felamimail_Backend_Cache_Imap_Message->search() and Felamimail_BackEnd_Imap->sort() methods, to separate search of messages IDs.
                 
                 // TODO: Debbugar getSummary();
                 $messages = array_merge($messages, $imap->getSummary($idsInFolder, $folder));
