@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tine 2.0 Messenger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-21 14:29-0300\n"
-"PO-Revision-Date: 2012-11-21 14:29-0300\n"
+"POT-Creation-Date: 2012-11-21 14:38-0300\n"
+"PO-Revision-Date: 2012-11-21 14:38-0300\n"
 "Last-Translator: Marcio Albuquerque <marcio.lima.albuquerque@gmail.com>\n"
 "Language-Team: SERPRO Salvador <marcio.albuquerque@serpro.gov.br>\n"
 "Language: \n"
@@ -80,7 +80,7 @@ msgid "Role"
 msgstr "Papel"
 
 #: Messenger/js/LogHandler.js:78
-#: Messenger/js/ChatHandler.js:126
+#: Messenger/js/ChatHandler.js:123
 msgid "is unavailable"
 msgstr "está indisponível"
 
@@ -155,8 +155,8 @@ msgid "Error sending: "
 msgstr "Envio de erro:"
 
 #: Messenger/js/LogHandler.js:204
-#: Messenger/js/ChatHandler.js:100
-#: Messenger/js/ChatHandler.js:109
+#: Messenger/js/ChatHandler.js:98
+#: Messenger/js/ChatHandler.js:107
 #: Messenger/js/Messenger.js:210
 #: Messenger/js/Messenger.js:297
 #: Messenger/js/RosterHandler.js:307
@@ -186,8 +186,8 @@ msgid "Cancel 503: Service unavailable."
 msgstr "Cancelamento 503: Serviço indisponível."
 
 #: Messenger/js/LogHandler.js:244
-#: Messenger/js/ChatHandler.js:126
-#: Messenger/js/ChatHandler.js:127
+#: Messenger/js/ChatHandler.js:123
+#: Messenger/js/ChatHandler.js:124
 msgid "Info"
 msgstr "Informação"
 
@@ -207,19 +207,19 @@ msgstr "Você escolheu baixar todos os históricos de chats"
 msgid "Do you want to download this chat"
 msgstr "Tem certeza que quer baixar este chat"
 
-#: Messenger/js/ChatHandler.js:101
+#: Messenger/js/ChatHandler.js:99
 msgid "Error downloading Chat History"
 msgstr "Erro no download do Histórico do Chat"
 
-#: Messenger/js/ChatHandler.js:127
+#: Messenger/js/ChatHandler.js:124
 msgid "Your messages will be sent offline"
 msgstr "Sua mensagem será enviada offline"
 
-#: Messenger/js/ChatHandler.js:233
+#: Messenger/js/ChatHandler.js:230
 msgid " stopped typing!"
 msgstr " parou de digitar!"
 
-#: Messenger/js/ChatHandler.js:235
+#: Messenger/js/ChatHandler.js:232
 msgid " is typing..."
 msgstr " está digitando..."
 
@@ -331,13 +331,13 @@ msgstr "Indisponível"
 #: Messenger/js/Layout.js:251
 msgid "Action"
 msgid_plural "Actions"
-msgstr[0] "Ações"
+msgstr[0] "Ação"
 msgstr[1] "Ações"
 
 #: Messenger/js/Layout.js:289
 msgid "Preference"
 msgid_plural "Preferences"
-msgstr[0] "Preferências"
+msgstr[0] "Preferência"
 msgstr[1] "Preferências"
 
 #: Messenger/js/Layout.js:548
@@ -453,7 +453,7 @@ msgid "Move to"
 msgstr "Mover para"
 
 #: Messenger/js/RosterTree.js:44
-#: Messenger/js/Chat.js:27
+#: Messenger/js/Chat.js:26
 msgid "Send file"
 msgstr "Enviar arquivo"
 
@@ -551,13 +551,22 @@ msgstr " já existe. Não foi renomeado."
 
 #: Messenger/js/RosterHandler.js:364
 msgid "was not removed"
-msgstr "não foi removido"
+msgstr " não foi excluído"
 
-#: Messenger/js/Chat.js:22
+#: Messenger/js/Chat.js:21
 msgid "Options"
 msgstr "Opções"
 
-#: Messenger/js/Chat.js:39
+#: Messenger/js/Chat.js:35
 msgid "Start video chat"
 msgstr "Iniciar video chat"
 
+#~ msgid ""
+#~ "You're logged in Messenger. If you leave the page, Messenger will "
+#~ "disconnect!"
+#~ msgstr ""
+#~ "Você está conectado no Messenger. Se sair da página, o Messenger será "
+#~ "desconectado!"
+
+#~ msgid " was successfully removed!"
+#~ msgstr " foi excluído com sucesso!"
