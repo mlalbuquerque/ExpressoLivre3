@@ -80,9 +80,9 @@ Tine.Messenger.ChatHandler = {
                                 switch (Tine.Messenger.registry.get('preferences').get('chatHistory')) {
                                     case 'download': 
                                         Ext.Msg.confirm(
-                                            Tine.Tinebase.appMgr.get('Messenger').i18n._('Chat History'),
-                                            Tine.Tinebase.appMgr.get('Messenger').i18n._('You chose to download the every chat history') + '.<br>' +
-                                            Tine.Tinebase.appMgr.get('Messenger').i18n._('Do you want to download this chat') + '?',
+                                            IM.i18n()._('Chat History'),
+                                            IM.i18n()._('You chose to download the every chat history') + '.<br>' +
+                                            IM.i18n()._('Do you want to download this chat') + '?',
                                             function (id) {
                                                 if (id == 'yes')
                                                     $('#iframe-history').attr('src', '/download/' + response.fileName);
@@ -97,8 +97,8 @@ Tine.Messenger.ChatHandler = {
                                 }
                             } else {
                                 Ext.Msg.show({
-                                    title: Tine.Tinebase.appMgr.get('Messenger').i18n._('Error'),
-                                    msg: Tine.Tinebase.appMgr.get('Messenger').i18n._('Error downloading Chat History')+'!',
+                                    title: IM.i18n()._('Error'),
+                                    msg: IM.i18n()._('Error downloading Chat History')+'!',
                                     buttons: Ext.Msg.OK,
                                     icon: Ext.MessageBox.ERROR
                                 });
@@ -107,7 +107,7 @@ Tine.Messenger.ChatHandler = {
                         error: function (xhr, status, err) {
                             Ext.Msg.show({
                                 title: _('Error'),
-                                msg: Tine.Tinebase.appMgr.get('Messenger').i18n._(status) + ': ' + Tine.Tinebase.appMgr.get('Messenger').i18n._(err) + '!',
+                                msg: IM.i18n()._(status) + ': ' + IM.i18n()._(err) + '!',
                                 buttons: Ext.Msg.OK,
                                 icon: Ext.MessageBox.ERROR
                             });
@@ -250,7 +250,7 @@ Tine.Messenger.ChatHandler = {
             chat = Ext.getCmp(chat_id);
        
         if(chat){
-            var node = chat.findById('messenger-chat-notifications');
+            var node = chat.getComponent('messenger-chat-notifications');
             if(state){
                 var message = state,
                     html = '',
@@ -387,7 +387,7 @@ Tine.Messenger.ChatHandler = {
         var html = '<div class="chat-notification">' 
                   +    message
                   +'</div>';
-        var node = chat.findById('messenger-chat-notifications');
+        var node = chat.getComponent('messenger-chat-notifications');
         node.hide();
 //        html.delay(8000).fadeOut("slow");
         node.body.dom.innerHTML = html;
