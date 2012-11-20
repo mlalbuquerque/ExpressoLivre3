@@ -167,7 +167,7 @@ Tine.Messenger.FileTransfer = {
             
         return protocol + '//' + host + port + filePath;
     },
-    
+
     downloadHandler: function(file, download, window) {
         window.close()
         var filePath = file.attr('path') + file.attr('name');
