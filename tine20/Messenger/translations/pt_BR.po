@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tine 2.0 Messenger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-21 11:06-0300\n"
-"PO-Revision-Date: 2012-11-21 11:06-0300\n"
+"POT-Creation-Date: 2012-11-21 14:24-0300\n"
+"PO-Revision-Date: 2012-11-21 14:24-0300\n"
 "Last-Translator: Marcio Albuquerque <marcio.lima.albuquerque@gmail.com>\n"
 "Language-Team: SERPRO Salvador <marcio.albuquerque@serpro.gov.br>\n"
 "Language: \n"
@@ -554,7 +554,6 @@ msgid "was not removed"
 msgstr "não foi removido"
 
 #: Messenger/js/Chat.js:22
-#, fuzzy
 msgid "Options"
 msgstr "Opções"
 
