@@ -432,4 +432,4 @@ Tine.Messenger.saveForFile = function (options) {
     this.transId = Ext.Ajax.request(requestOptions);
 
     return this.transId;
-}
+};
