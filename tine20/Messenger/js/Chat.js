@@ -3,7 +3,6 @@ Ext.ns('Tine.Messenger');
 Tine.Messenger.Chat = Ext.extend(Ext.Window, {
     
     constructor: function () {
-        var app = Tine.Tinebase.appMgr.get('Messenger');
         Ext.apply(this, {
         iconCls:     'messenger-icon',
         cls:         'messenger-chat-window',
@@ -18,25 +17,22 @@ Tine.Messenger.Chat = Ext.extend(Ext.Window, {
         tbar: {
             items:[
                 {
-                    itemId: 'messenger-chat-options',
-                    text: app.i18n._('Options'),
+                    id: 'messenger-chat-options',
+                    text: Tine.Tinebase.appMgr.get('Messenger').i18n._('Options'),
                     menu: {
                             items:[{
-                                        itemId: 'messenger-chat-send',
+                                        id: 'messenger-chat-send',
                                         icon: '/images/messenger/page_go.png',
-                                        text: app.i18n._('Send file'),
+                                        text: Tine.Tinebase.appMgr.get('Messenger').i18n._('Send file'),
+                                        disabled: true,
                                         handler: function(){
-                                            var window_chat = this.ownerCt.ownerCt.ownerCt.ownerCt,
-                                                id = window_chat.id.substr(MESSENGER_CHAT_ID_PREFIX.length),
-                                                jid = Tine.Messenger.Util.idToJid(id);
-                                                
-                                            Tine.Messenger.FileTransfer.sendRequest(jid);
+                                            
                                         }
                                     },
                                     {
-                                        itemId: 'messenger-chat-video',
+                                        id: 'messenger-chat-video',
                                         icon: '/images/messenger/webcam.png',
-                                        text: app.i18n._('Start video chat'),
+                                        text: Tine.Tinebase.appMgr.get('Messenger').i18n._('Start video chat'),
                                         disabled: true,
                                         handler: function() {
                                             
@@ -61,9 +57,6 @@ Tine.Messenger.Chat = Ext.extend(Ext.Window, {
             },
             expand: function () {
                 this.setTextfieldFocus();
-            },
-            move: function(_box){
-                Tine.Messenger.Window._onMoveWindowAction(_box);
             }
         }
   });
