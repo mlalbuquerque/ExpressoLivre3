@@ -293,18 +293,94 @@ Tine.Messenger.Config = {
                                 if (configWindow == null)
                                     configWindow = new Tine.Messenger.ConfigWindow();
                                 
-Tine.Messenger._ChatRoster = 
-    new Ext.tree.TreePanel({
-        loader:       new Ext.tree.TreeLoader(),
-        border:       false,
-        cls:          'messenger-groupchat-roster',
-        rootVisible:  false,
-        root: new Ext.tree.AsyncTreeNode({
-            expanded: true,
-            leaf:     false,
-            cls:      'messenger-groupchat-roster-tree'
-        })
-})
+                                configWindow.show();
+                            }
+                        }]
+            },
+            items:[{
+			region:'center',
+			border:false,
+                        bodyStyle:'padding:6px 3px 0 3px;',
+			layout:'fit',
+                        items: Tine.Messenger._Roster
+                    } 
+                    ,{
+                        id: 'messenger-connect-display',
+                        html: '<img src="/images/messenger/loading_animation_liferay.gif" style="display:none" />',
+                        cls: 'messenger-connect-display',
+                        region:'center',
+                        border: false,
+                        buttons: [
+                                {
+                                    id: 'messenger-connect-cmd',
+                                    text: 'Connect',
+                                    region:'center',
+                                    cls: 'messenger-connect-cmd',
+                                    handler: function() {
+                                        Tine.Messenger.ChatHandler.connect();
+                                    }
+                                }
+                            ]
+                    }
+		]
+            ,bbar:{
+                id: 'status-container',
+                height: 27,
+                cls: 'messenger-client-tbar',
+                items: [{   
+                        id: 'messenger-change-status-button',
+                        icon: '/images/messenger/user_offline.png'
+                    },
+                    {xtype: 'tbspacer', width: 5},
+                    {
+                        xtype:'textfield',
+//                        store: Tine.Messenger.factory.statusStore,
+                        displayField:'text',
+                        width: 175,
+                        valueField:'value',
+                        typeAhead: true,
+                        name:'message',
+                        mode: 'local',
+                        triggerAction: 'all',
+                        id:'messenger-status-box',
+                        emptyText:'your Status... (press ENTER after)',
+                        selectOnFocus:true
+                    }
+                ]
+            }
+    }
+    
+    , ChatWindowLayout : {
+        iconCls:     'messenger-icon',
+        cls:         'messenger-chat-window',
+        width:       460,
+        minWidth:    400,
+        height:      360,
+        minHeight:   280,
+        closeAction: 'hide', //'close' - destroy the component
+        collapsible: true,
+        plain:       true,
+        layout:      'border',
+        listeners: {
+            beforerender: function(_box){
+                Tine.Messenger.AddItems(_box);
+            },
+            resize: function(_box, _width, _height){
+                Tine.Messenger.ChatHandler.adjustChatAreaHeight(_box.id, _width, _height);
+            },
+            show: function () {
+                this.setTextfieldFocus();
+            },
+            activate: function () {
+                this.setTextfieldFocus();
+            },
+            expand: function () {
+                this.setTextfieldFocus();
+            }
+        }
+  }
+    
+}
 
 Tine.Messenger.AddItems = function(_box) {
     if(!_box.items){
