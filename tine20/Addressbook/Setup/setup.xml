@@ -160,8 +160,7 @@
                 </field>
                 <field>
                     <name>employee_number</name>
-                    <type>text</type>
-                    <length>32</length>
+                    <type>integer</type>
                     <notnull>false</notnull>
                 </field>
                 <field>
