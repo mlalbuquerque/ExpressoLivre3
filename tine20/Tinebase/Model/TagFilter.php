@@ -77,7 +77,11 @@ class Tinebase_Model_TagFilter extends Tinebase_Record_Abstract
                 array('context' => SQL_TABLE_PREFIX . 'tags_context'), 
                 $db->quoteIdentifier('tags.id') . ' = ' . $db->quoteIdentifier('context.tag_id'),
                 array()
+<<<<<<< HEAD
             )->where($db->quoteInto($db->quoteIdentifier('context.application_id') . ' IN ('.$appZero . ', ?)', $applicationId));
+=======
+            )->where($db->quoteInto($db->quoteIdentifier('context.application_id') . ' IN ("0", ?)', $applicationId));
+>>>>>>> Resolving conflict with master (Addressbook translation)
         }
         
         $orWhere = array();
