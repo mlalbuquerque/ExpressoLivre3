@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tine 2.0 Messenger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-21 16:37-0300\n"
-"PO-Revision-Date: 2012-11-21 16:37-0300\n"
+"POT-Creation-Date: 2012-11-21 16:40-0300\n"
+"PO-Revision-Date: 2012-11-21 16:40-0300\n"
 "Last-Translator: Marcio Albuquerque <marcio.lima.albuquerque@gmail.com>\n"
 "Language-Team: SERPRO Salvador <marcio.albuquerque@serpro.gov.br>\n"
 "Language: \n"
@@ -24,7 +24,7 @@ msgstr "Show Notifications"
 
 #: Messenger/Preference.php:58
 msgid "Show notifications ..."
-msgstr "Show Notifications ..."
+msgstr "Show notifications ..."
 
 #: Messenger/Preference.php:61
 msgid "Chat History"
@@ -469,7 +469,7 @@ msgstr "Delete Contact"
 #: Messenger/js/RosterTree.js:80
 #: Messenger/js/RosterTree.js:179
 msgid "Are you sure you want to delete "
-msgstr "Are you sure you want to delete"
+msgstr "Are you sure you want to delete "
 
 #: Messenger/js/RosterTree.js:115
 msgid "Empty"
