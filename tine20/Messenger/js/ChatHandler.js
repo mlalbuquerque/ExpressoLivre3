@@ -80,9 +80,9 @@ Tine.Messenger.ChatHandler = {
                                 switch (Tine.Messenger.registry.get('preferences').get('chatHistory')) {
                                     case 'download': 
                                         Ext.Msg.confirm(
-                                            IM.i18n()._('Chat History'),
-                                            IM.i18n()._('You chose to download the every chat history') + '.<br>' +
-                                            IM.i18n()._('Do you want to download this chat') + '?',
+                                            app.i18n._('Chat History'),
+                                            app.i18n._('You chose to download the every chat history') + '.<br>' +
+                                            app.i18n._('Do you want to download this chat') + '?',
                                             function (id) {
                                                 if (id == 'yes')
                                                     $('#iframe-history').attr('src', '/download/' + response.fileName);
@@ -97,8 +97,8 @@ Tine.Messenger.ChatHandler = {
                                 }
                             } else {
                                 Ext.Msg.show({
-                                    title: IM.i18n()._('Error'),
-                                    msg: IM.i18n()._('Error downloading Chat History')+'!',
+                                    title: app.i18n._('Error'),
+                                    msg: app.i18n._('Error downloading Chat History')+'!',
                                     buttons: Ext.Msg.OK,
                                     icon: Ext.MessageBox.ERROR
                                 });
@@ -107,7 +107,7 @@ Tine.Messenger.ChatHandler = {
                         error: function (xhr, status, err) {
                             Ext.Msg.show({
                                 title: _('Error'),
-                                msg: IM.i18n()._(status) + ': ' + IM.i18n()._(err) + '!',
+                                msg: app.i18n._(status) + ': ' + app.i18n._(err) + '!',
                                 buttons: Ext.Msg.OK,
                                 icon: Ext.MessageBox.ERROR
                             });

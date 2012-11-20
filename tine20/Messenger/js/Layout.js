@@ -557,7 +557,7 @@ Tine.Messenger.WindowConfig = function(window, args) {
                     {
                         xtype: 'combo',
                         id: 'messenger-contact-add-group',
-                        fieldLabel: IM.i18n()._('Group'),
+                        fieldLabel: app.i18n._('Group'),
                         store: new Ext.data.SimpleStore({
 //                                        data: Tine.Messenger.RosterTree().getGroupsFromTree(),
                                         id: 0,

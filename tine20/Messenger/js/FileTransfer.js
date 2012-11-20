@@ -5,6 +5,7 @@ Tine.Messenger.FileTransfer = {
     resource: null,
     
     sendRequest: function (item) {
+        var app = Tine.Tinebase.appMgr.get('Messenger');
         var to = typeof item == 'string' ? item : item.node.attributes.jid,
             iFrame = $('#iframe-upload'),
             inputFile = iFrame.contents().find('#sendfile');
