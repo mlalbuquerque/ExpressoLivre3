@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Tine 2.0 Messenger\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-11-21 16:32-0300\n"
-"PO-Revision-Date: 2012-11-21 16:32-0300\n"
+"PO-Revision-Date: 2012-11-21 16:37-0300\n"
 "Last-Translator: Marcio Albuquerque <marcio.lima.albuquerque@gmail.com>\n"
 "Language-Team: SERPRO Expresso <marcio.albuquerque@serpro.gov.br>\n"
 "Language: \n"
@@ -96,7 +96,7 @@ msgstr "está lejos"
 
 #: Messenger/js/LogHandler.js:89
 msgid "is busy"
-msgstr "está ocupada"
+msgstr "está ocupado(a)"
 
 #: Messenger/js/LogHandler.js:92
 msgid "auto status (idle)"
@@ -104,7 +104,7 @@ msgstr "el estado automático (en espera)"
 
 #: Messenger/js/LogHandler.js:95
 msgid "is on-line"
-msgstr "no está en línea"
+msgstr "está online"
 
 #: Messenger/js/LogHandler.js:112
 msgid "The intended recipient is temporarily unavailable."
@@ -203,7 +203,7 @@ msgstr "Chatea con"
 
 #: Messenger/js/ChatHandler.js:84
 msgid "You chose to download the every chat history"
-msgstr "You chose to download the every chat history"
+msgstr "Usted elige descargar el historial de cada conversación"
 
 #: Messenger/js/ChatHandler.js:85
 msgid "Do you want to download this chat"
@@ -444,7 +444,7 @@ msgstr "Rebautizar"
 #: Messenger/js/RosterTree.js:22
 #: Messenger/js/RosterTree.js:138
 msgid "Remove"
-msgstr "Quitar"
+msgstr "Retirar"
 
 #: Messenger/js/RosterTree.js:29
 msgid "Subscribe"

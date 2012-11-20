@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tine 2.0 Messenger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-21 16:29-0300\n"
-"PO-Revision-Date: 2012-11-21 16:29-0300\n"
+"POT-Creation-Date: 2012-11-21 16:37-0300\n"
+"PO-Revision-Date: 2012-11-21 16:37-0300\n"
 "Last-Translator: Marcio Albuquerque <marcio.lima.albuquerque@gmail.com>\n"
 "Language-Team: SERPRO Salvador <marcio.albuquerque@serpro.gov.br>\n"
 "Language: \n"
@@ -11,12 +11,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2012-03-02 09:32+0000\n"
-"X-Generator: Launchpad (build 14886)\n"
-"X-Poedit-Country: UNITED STATES\n"
 "X-Poedit-Language: en\n"
+"X-Poedit-Country: United States\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-KeywordsList: _\n"
+"X-Poedit-KeywordsList: _;app.i18n._\n"
 "X-Poedit-Basepath: ../../\n"
 "X-Poedit-SearchPath-0: Messenger\n"
 
@@ -26,7 +24,7 @@ msgstr "Show Notifications"
 
 #: Messenger/Preference.php:58
 msgid "Show notifications ..."
-msgstr "Show notifications ..."
+msgstr "Show Notifications ..."
 
 #: Messenger/Preference.php:61
 msgid "Chat History"
@@ -219,7 +217,7 @@ msgstr "Your messages will be sent offline"
 
 #: Messenger/js/ChatHandler.js:233
 msgid " stopped typing!"
-msgstr "stopped typing!"
+msgstr " stopped typing!"
 
 #: Messenger/js/ChatHandler.js:235
 msgid " is typing..."
@@ -471,7 +469,7 @@ msgstr "Delete Contact"
 #: Messenger/js/RosterTree.js:80
 #: Messenger/js/RosterTree.js:179
 msgid "Are you sure you want to delete "
-msgstr "Are you sure you want to delete "
+msgstr "Are you sure you want to delete"
 
 #: Messenger/js/RosterTree.js:115
 msgid "Empty"
