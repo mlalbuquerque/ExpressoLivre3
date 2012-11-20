@@ -347,7 +347,7 @@ class Felamimail_Backend_Cache_Imap_Message extends Felamimail_Backend_Cache_Ima
             list($accountId, $mailbox) = $path;
             
             $imap = Felamimail_Backend_ImapFactory::factory($accountId);
-            $imap->selectFolder($mailbox);
+            $imap->selectFolder(Felamimail_Model_Folder::encodeFolderName($mailbox));
 
             // TODO: pass the search parameter too.
             $messages[$folderId] = $imap->sort((array)$_sort);
@@ -396,13 +396,8 @@ Tinebase_Core::getLogger()->alert(__METHOD__ . '#####::#####' . __LINE__ . ' Mes
                 $folder = Felamimail_Controller_Folder::getInstance()->get($folderId);
                 $folderArray = $folder->toArray();
                 
-                $imap = Felamimail_Backend_ImapFactory::factory($folderArray['account_id']);
-<<<<<<< HEAD
-=======
-                $imap->selectFolder($folderArray['globalname']);
->>>>>>> cleaning out the code, Refactor of Felamimail_Backend_Cache_Imap_Message->search() and Felamimail_BackEnd_Imap->sort() methods, to separate search of messages IDs.
-                
-                // TODO: Debbugar getSummary();
+                $imap = Felamimail_Backend_ImapFactory::factory($folder->account_id);
+                $imap->selectFolder(Felamimail_Model_Folder::encodeFolderName($folder->globalname));
                 $messages = array_merge($messages, $imap->getSummary($idsInFolder, $folder));
             }
 
