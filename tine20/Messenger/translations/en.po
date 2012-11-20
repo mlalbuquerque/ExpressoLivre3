@@ -503,10 +503,6 @@ msgstr "Preferences"
 msgid "Notifications"
 msgstr "Notifications"
 
-#: Messenger/js/ConfigWindow.js:28
-msgid "Show notifications"
-msgstr "Show Notifications"
-
 #: Messenger/js/ConfigWindow.js:39
 msgid "History"
 msgstr "History"
