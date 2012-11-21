@@ -2,7 +2,7 @@ Ext.ns('Tine.Messenger');
 
 // Messenger Application constants
 var MESSENGER_CHAT_ID_PREFIX = 'messenger-chat-',
-    MESSENGER_DEBUG = false;
+    MESSENGER_DEBUG = true;
 
 Tine.Messenger.factory={
     statusStore : new Ext.data.SimpleStore({
@@ -24,7 +24,7 @@ Tine.Messenger.Credential = {
         return '';
     }
   , myNick: function(){
-        return 'ME';
+        return Tine.Tinebase.appMgr.get('Messenger').i18n._('ME');
     }
   , myAvatar: function(){
         return '/images/empty_photo_male.png';

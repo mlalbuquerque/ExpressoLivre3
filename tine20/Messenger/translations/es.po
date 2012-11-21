@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tine 2.0 Messenger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-21 11:02-0300\n"
-"PO-Revision-Date: 2012-11-21 11:02-0300\n"
+"POT-Creation-Date: 2012-11-21 11:09-0300\n"
+"PO-Revision-Date: 2012-11-21 11:09-0300\n"
 "Last-Translator: Marcio Albuquerque <marcio.lima.albuquerque@gmail.com>\n"
 "Language-Team: SERPRO Expresso <marcio.albuquerque@serpro.gov.br>\n"
 "Language: \n"
@@ -219,11 +219,11 @@ msgstr "Los mensajes serán enviados fuera de línea"
 
 #: Messenger/js/ChatHandler.js:233
 msgid " stopped typing!"
-msgstr "escrito detenido!"
+msgstr " dejó de escribir!"
 
 #: Messenger/js/ChatHandler.js:235
 msgid " is typing..."
-msgstr "está escribiendo..."
+msgstr " está escribiendo..."
 
 #: Messenger/js/Window.js:18
 msgid "Group created successfully"
@@ -232,7 +232,7 @@ msgstr "Fecha de creación con éxito"
 #: Messenger/js/Window.js:21
 #: Messenger/js/Layout.js:46
 #: Messenger/js/Layout.js:268
-#: Messenger/js/Layout.js:596
+#: Messenger/js/Layout.js:606
 msgid "Add Group"
 msgid_plural "Add Group"
 msgstr[0] "Agregar grupo"
@@ -254,6 +254,10 @@ msgstr "Añadir amigo"
 #: Messenger/js/Window.js:62
 msgid "Buddy not added"
 msgstr "Amigo no añade"
+
+#: Messenger/js/Messenger.js:27
+msgid "ME"
+msgstr "YO"
 
 #: Messenger/js/Messenger.js:74
 msgid "Messenger"
@@ -289,7 +293,7 @@ msgstr "Acciones"
 
 #: Messenger/js/Layout.js:38
 #: Messenger/js/Layout.js:259
-#: Messenger/js/Layout.js:520
+#: Messenger/js/Layout.js:530
 msgid "Add Contact"
 msgid_plural "Add Contact"
 msgstr[0] "Añadir este contacto"
@@ -304,7 +308,7 @@ msgstr[1] "Cerrar sesión"
 
 #: Messenger/js/Layout.js:117
 msgid "Type your Status"
-msgstr "Escriba su Estado"
+msgstr "su Estado"
 
 #: Messenger/js/Layout.js:118
 msgid "press ENTER after"
@@ -329,62 +333,62 @@ msgstr "Indisponible"
 #: Messenger/js/Layout.js:251
 msgid "Action"
 msgid_plural "Actions"
-msgstr[0] "Accion"
+msgstr[0] "Acciones"
 msgstr[1] "Acciones"
 
 #: Messenger/js/Layout.js:289
 msgid "Preference"
 msgid_plural "Preferences"
-msgstr[0] "Preferencia"
+msgstr[0] "Preferencias"
 msgstr[1] "Preferencias"
 
-#: Messenger/js/Layout.js:538
+#: Messenger/js/Layout.js:548
 msgid "JID"
 msgstr "JID"
 
-#: Messenger/js/Layout.js:545
-#: Messenger/js/Layout.js:604
+#: Messenger/js/Layout.js:555
+#: Messenger/js/Layout.js:614
 msgid "Name"
 msgstr "Nombre"
 
-#: Messenger/js/Layout.js:550
+#: Messenger/js/Layout.js:560
 msgid "Group"
 msgstr "Grupo"
 
-#: Messenger/js/Layout.js:556
+#: Messenger/js/Layout.js:566
 msgid "Select a group"
 msgstr "Seleccione un grupo de"
 
-#: Messenger/js/Layout.js:566
-#: Messenger/js/Layout.js:609
+#: Messenger/js/Layout.js:576
+#: Messenger/js/Layout.js:619
 msgid "Add"
 msgstr "añadir"
 
-#: Messenger/js/Layout.js:642
+#: Messenger/js/Layout.js:652
 msgid "Join Groupchat"
 msgstr "Únete al grupo de charla"
 
-#: Messenger/js/Layout.js:651
+#: Messenger/js/Layout.js:661
 msgid "Identity"
 msgstr "Identidad"
 
-#: Messenger/js/Layout.js:657
+#: Messenger/js/Layout.js:667
 msgid "Host"
 msgstr "Host"
 
-#: Messenger/js/Layout.js:662
+#: Messenger/js/Layout.js:672
 msgid "Room"
 msgstr "Sala"
 
-#: Messenger/js/Layout.js:667
+#: Messenger/js/Layout.js:677
 msgid "Nickname"
 msgstr "Apodo"
 
-#: Messenger/js/Layout.js:673
+#: Messenger/js/Layout.js:683
 msgid "Password"
 msgstr "contraseña"
 
-#: Messenger/js/Layout.js:677
+#: Messenger/js/Layout.js:687
 msgid "Join"
 msgstr "Unirse"
 
@@ -505,7 +509,7 @@ msgstr "Mostrar notificaciones"
 
 #: Messenger/js/ConfigWindow.js:39
 msgid "History"
-msgstr "Historia"
+msgstr "Historial de Chat"
 
 #: Messenger/js/ConfigWindow.js:69
 msgid "Custom Name"
@@ -559,344 +563,3 @@ msgstr "Opciones"
 msgid "Start video chat"
 msgstr "Iniciar chat de vídeo"
 
-#~ msgid "manage shared addressbooks"
-#~ msgstr "administrar libretas de direcciones compartidas"
-
-#~ msgid "Create new shared addressbook folders"
-#~ msgstr "Crear nuevas libretas de direcciones compartidas"
-
-#~ msgid "%s's personal addressbook"
-#~ msgstr "Libreta de direcciones de %s's"
-
-#~ msgid "Business Contact Data"
-#~ msgstr "Datos de contacto de empresa"
-
-#~ msgid "Organisation / Unit"
-#~ msgstr "Organización / Unidad"
-
-#~ msgid "Business Address"
-#~ msgstr "Dirección de la empresa"
-
-#~ msgid "Email"
-#~ msgstr "Email"
-
-#~ msgid "Telephone Work"
-#~ msgstr "Teléfono de trabajo"
-
-#~ msgid "Telephone Cellphone"
-#~ msgstr "Teléfono celular"
-
-#~ msgid "Telephone Car"
-#~ msgstr "Teléfono del automóvil"
-
-#~ msgid "Telephone Fax"
-#~ msgstr "Teléfono Fax"
-
-#~ msgid "Telephone Page"
-#~ msgstr "Página del teléfono"
-
-#~ msgid "URL"
-#~ msgstr "URL"
-
-#~ msgid "Assistant"
-#~ msgstr "Asistente"
-
-#~ msgid "Assistant Telephone"
-#~ msgstr "Teléfono del asistente"
-
-#~ msgid "Private Contact Data"
-#~ msgstr "Datos de contacto privados"
-
-#~ msgid "Private Address"
-#~ msgstr "Dirección privada"
-
-#~ msgid "Email Home"
-#~ msgstr "Email doméstico"
-
-#~ msgid "Telephone Home"
-#~ msgstr "Teléfono del hogar"
-
-#~ msgid "Telephone Cellphone Private"
-#~ msgstr "Teléfono Celular Privado"
-
-#~ msgid "Telephone Fax Home"
-#~ msgstr "Teléfono Fax Doméstico"
-
-#~ msgid "URL Home"
-#~ msgstr "URL doméstico"
-
-#~ msgid "Other Data"
-#~ msgstr "Otra Información"
-
-#~ msgid "Birthday"
-#~ msgstr "Cumpleaños"
-
-#~ msgid "Job Title"
-#~ msgstr "Nombre del Cargo"
-
-#~ msgid "Map"
-#~ msgstr "Mapa"
-
-#~ msgid "Personal Information"
-#~ msgstr "Información Personal"
-
-#~ msgid "Salutation"
-#~ msgstr "Trato"
-
-#~ msgid "Title"
-#~ msgstr "Título"
-
-#~ msgid "First Name"
-#~ msgstr "Nombre"
-
-#~ msgid "Middle Name"
-#~ msgstr "Segundo Nombre"
-
-#~ msgid "Company"
-#~ msgstr "Compañía"
-
-#~ msgid "Unit"
-#~ msgstr "Unidad"
-
-#~ msgid "Display Name"
-#~ msgstr "Nombre a Mostrar"
-
-#~ msgid "Suffix"
-#~ msgstr "Sufijo"
-
-#~ msgid "Job Role"
-#~ msgstr "Descripción del Cargo"
-
-#~ msgid "Contact Information"
-#~ msgstr "Información de Contacto"
-
-#~ msgid "Phone"
-#~ msgstr "Teléfono"
-
-#~ msgid "Mobile"
-#~ msgstr "Móvil"
-
-#~ msgid "Fax"
-#~ msgstr "Fax"
-
-#~ msgid "Phone (private)"
-#~ msgstr "Fono (privado)"
-
-#~ msgid "Mobile (private)"
-#~ msgstr "Celular (privado)"
-
-#~ msgid "Fax (private)"
-#~ msgstr "Fax (privado)"
-
-#~ msgid "E-Mail"
-#~ msgstr "E-Mail"
-
-#~ msgid "E-Mail (private)"
-#~ msgstr "E-Mail (privado)"
-
-#~ msgid "Web"
-#~ msgstr "Web"
-
-#~ msgid "Company Address"
-#~ msgstr "Dirección de la Empresa"
-
-#~ msgid "Street"
-#~ msgstr "Calle"
-
-#~ msgid "Street 2"
-#~ msgstr "Dirección 2"
-
-#~ msgid "Region"
-#~ msgstr "Región"
-
-#~ msgid "Postal Code"
-#~ msgstr "Código Postal"
-
-#~ msgid "City"
-#~ msgstr "Ciudad"
-
-#~ msgid "Country"
-#~ msgstr "País"
-
-#~ msgid "Enter description"
-#~ msgstr "Escribir descripción"
-
-#~ msgid "Export as pdf"
-#~ msgstr "Exportar como pdf"
-
-#~ msgid "Either {0} or {1} must be given"
-#~ msgstr "Debe ingresar {0} o {1}"
-
-#~ msgid "Type"
-#~ msgstr "Tipo"
-
-#~ msgid "Tags"
-#~ msgstr "Etiquetas"
-
-#~ msgid "Full Name"
-#~ msgstr "Nombre Completo"
-
-#~ msgid "Postalcode"
-#~ msgstr "Código Postal"
-
-#~ msgid "Street (private)"
-#~ msgstr "Calle (privado)"
-
-#~ msgid "City (private)"
-#~ msgstr "Ciudad (privado)"
-
-#~ msgid "Region (private)"
-#~ msgstr "Región (privado)"
-
-#~ msgid "Postalcode (private)"
-#~ msgstr "Código Postal (privado)"
-
-#~ msgid "Country (private)"
-#~ msgstr "País (privado)"
-
-#~ msgid "Car phone"
-#~ msgstr "Teléfono del Automóvil"
-
-#~ msgid "Pager"
-#~ msgstr "Buscapersonas"
-
-#~ msgid "Email (private)"
-#~ msgstr "Email (privado)"
-
-#~ msgid "URL (private)"
-#~ msgstr "URL (privado)"
-
-#~ msgid "Timezone"
-#~ msgstr "Zona Horaria"
-
-#~ msgid "Geo"
-#~ msgstr "Geo"
-
-#~ msgid "Export Contact"
-#~ msgstr "Exportar Contacto"
-
-#~ msgid "Export as PDF"
-#~ msgstr "Exportar como PDF"
-
-#~ msgid "Export as CSV"
-#~ msgstr "Exportar como CSV"
-
-#~ msgid "Internal Contact"
-#~ msgstr "Contacto Interno"
-
-#~ msgid "Contacts"
-#~ msgstr "Contactos"
-
-#~ msgid "Private"
-#~ msgstr "Privado"
-
-#~ msgid "User Account"
-#~ msgstr "Cuenta de Usuario"
-
-#~ msgid "Quick search"
-#~ msgstr "Búsqueda Rápida"
-
-#~ msgid "Creation Time"
-#~ msgstr "Fecha de Creación"
-
-#~ msgid "Default Addressbook"
-#~ msgstr "Libreta de Contactos Predefinida"
-
-#~ msgid "The default addressbook for new contacts"
-#~ msgstr "La libreta de dirección predefinida para nuevos contactos"
-
-#~ msgid "Mr"
-#~ msgstr "Sr"
-
-#~ msgid "Ms"
-#~ msgstr "Sra"
-
-#~ msgid "Internal Contacts"
-#~ msgstr "Contactos Internos"
-
-#~ msgid "Searching..."
-#~ msgstr "Buscando..."
-
-#~ msgid "Call contact"
-#~ msgstr "Contacto de llamadas"
-
-#~ msgid "Compose email"
-#~ msgstr "Escribir Email"
-
-#~ msgid "Work"
-#~ msgstr "Trabajo"
-
-#~ msgid "Home"
-#~ msgstr "Hogar"
-
-#~ msgid "Cell"
-#~ msgstr "Celular"
-
-#~ msgid "Cell private"
-#~ msgstr "Celular privado"
-
-#~ msgid "Last Modified Time"
-#~ msgstr "Fecha Última Modificación"
-
-#~ msgid "addressbook"
-
-#~ msgid_plural "addressbooks"
-#~ msgstr[0] "libreta de direcciones"
-#~ msgstr[1] "addressbooks"
-
-#~ msgid "addressbooks"
-#~ msgstr "libretas de direcciones"
-
-#~ msgid "contacts"
-#~ msgstr "contactos"
-
-#~ msgid "export as pdf"
-#~ msgstr "exportar como pdf"
-
-#~ msgid "Loading Contact..."
-#~ msgstr "Cargando Contacto..."
-
-#~ msgid "Please Wait"
-#~ msgstr "Por Favor Espere"
-
-#~ msgid "Add new contact"
-#~ msgstr "Agregar nuevo contacto"
-
-#~ msgid "Edit Contact \"{0}\""
-#~ msgstr "Editar Contacto \"{0}\""
-
-#~ msgid "Please wait a moment..."
-#~ msgstr "Espere un momento..."
-
-#~ msgid "Saving Contact"
-#~ msgstr "Guardando Contacto"
-
-#~ msgid "Failed"
-#~ msgstr "Falló"
-
-#~ msgid "Could not save contact."
-#~ msgstr "No se puede guardar contacto."
-
-#~ msgid "Either "
-#~ msgstr "Cualquiera"
-
-#~ msgid "Start date is not valid"
-#~ msgstr "La fecha de inicio no es válido"
-
-#~ msgid "Please fix the errors noted."
-#~ msgstr "Por favor los errores mostrados."
-
-#~ msgid "Deleting contact..."
-#~ msgstr "Borrando contacto..."
-
-#~ msgid "Some error occured while trying to delete the contact."
-#~ msgstr "Ocurrió un error al intentar borrar el contacto."
-
-#~ msgid "Custom Fields"
-#~ msgstr "Campos Personalizados"
-
-#~ msgid "Link"
-
-#~ msgid_plural "Links [%d]"
-#~ msgstr[0] "Enlace"
-#~ msgstr[1] "Enlaces [%d]"
