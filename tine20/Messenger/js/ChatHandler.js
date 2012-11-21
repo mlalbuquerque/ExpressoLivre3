@@ -67,7 +67,7 @@ Tine.Messenger.ChatHandler = {
                         chat_text += chat_lines[i].body.dom.innerHTML + '<br style="clear: both;"/>';
 
                     chat_text = chat_text.replace(/src\=\"/gi, 'src="' + protocol + '//' + host);
-                    $.ajax('/history', {
+                    $.ajax('/savehistory.php', {
                         dataType: 'json',
                         type: 'POST',
                         data: {
