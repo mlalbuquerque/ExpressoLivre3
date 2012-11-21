@@ -309,85 +309,73 @@ msgid_plural "Logout"
 msgstr[0] "Sair"
 msgstr[1] "Sair"
 
-#: Messenger/js/Layout.js:116
+#: Messenger/js/Layout.js:117
 msgid "your Status"
 msgstr "seu Status"
 
-#: Messenger/js/Layout.js:117
+#: Messenger/js/Layout.js:118
 msgid "press ENTER after"
 msgstr "pressione ENTER depois"
 
-#: Messenger/js/Layout.js:146
+#: Messenger/js/Layout.js:148
 msgid "Online"
 msgstr "Disponível"
 
-#: Messenger/js/Layout.js:147
+#: Messenger/js/Layout.js:149
 msgid "Away"
 msgstr "Ausente"
 
-#: Messenger/js/Layout.js:148
+#: Messenger/js/Layout.js:150
 msgid "Do Not Disturb"
 msgstr "Não Perturbe"
 
-#: Messenger/js/Layout.js:149
+#: Messenger/js/Layout.js:151
 msgid "Unavailable"
 msgstr "Indisponível"
 
-#: Messenger/js/Layout.js:249
-msgid "Action"
-msgid_plural "Actions"
-msgstr[0] "Ações"
-msgstr[1] "Ações"
-
-#: Messenger/js/Layout.js:287
-msgid "Preference"
-msgid_plural "Preferences"
-msgstr[0] "Preferências"
-msgstr[1] "Preferências"
-
-#: Messenger/js/Layout.js:553
+#: Messenger/js/Layout.js:372
 msgid "JID"
 msgstr "JID"
 
-#: Messenger/js/Layout.js:560
-#: Messenger/js/Layout.js:619
+#: Messenger/js/Layout.js:379
+#: Messenger/js/Layout.js:438
 msgid "Name"
 msgstr "Nome"
 
-#: Messenger/js/Layout.js:565
+#: Messenger/js/Layout.js:384
 msgid "Group"
 msgstr "Grupo"
 
-#: Messenger/js/Layout.js:571
+#: Messenger/js/Layout.js:390
 msgid "Select a group"
 msgstr "Selecione um grupo"
 
-#: Messenger/js/Layout.js:581
-#: Messenger/js/Layout.js:624
+#: Messenger/js/Layout.js:400
+#: Messenger/js/Layout.js:443
 msgid "Add"
 msgstr "Incluir"
 
-#: Messenger/js/Layout.js:657
+#: Messenger/js/Layout.js:476
 msgid "Join Groupchat"
 msgstr "Entrar em Sala de Bate-papo"
 
-#: Messenger/js/Layout.js:666
+#: Messenger/js/Layout.js:485
 msgid "Identity"
 msgstr "Identidade"
 
-#: Messenger/js/Layout.js:672
+#: Messenger/js/Layout.js:491
 msgid "Host"
 msgstr "Anfitrião"
 
-#: Messenger/js/Layout.js:677
+#: Messenger/js/Layout.js:496
 msgid "Room"
 msgstr "Sala"
 
-#: Messenger/js/Layout.js:682
+#: Messenger/js/Layout.js:501
 msgid "Nickname"
 msgstr "Apelido"
 
-#: Messenger/js/Layout.js:688
+#: Messenger/js/Layout.js:507
 msgid "Password"
 msgstr "Senha"
 
