@@ -456,35 +456,45 @@ Tine.Messenger.AddItems = function(_box) {
             //                        },
                         afterrender: function (field) {
                             field.focus(true, 200);
+                            Tine.Messenger.Chat.alreadySentComposing = false;
                         },
                         keypress: function (field, ev) {
                             var chatId = field.ownerCt.id,
                                 type = field.ownerCt.type,
                                 privy = field.ownerCt.privy,
                                 old_id = field.ownerCt.initialConfig.id;
+
                             if(type == 'chat' || privy){
-                                if(type == 'chat')
-                                    Tine.Messenger.ChatHandler.sendState(chatId, 'composing');
-                                if(type == 'groupchat')
-                                    try{
-                                        Tine.Messenger.Groupie.sendState(chatId, 'composing');
-                                    }catch(err){
-                                        Tine.Messenger.Log.error(err);
-                                    }
                                 if (ev.getKey() != ev.ENTER) {
+                                    // Envia apenas na primeira quando começa a digitar                                   
+                                    if(type == 'chat' && !Tine.Messenger.Chat.alreadySentComposing) {
+                                        Tine.Messenger.ChatHandler.sendState(chatId, 'composing');
+                                        Tine.Messenger.Chat.alreadySentComposing = true;
+                                    }
+                                    if(type == 'groupchat' && !Tine.Messenger.Chat.alreadySentComposing) {
+                                        try {
+                                            Tine.Messenger.Groupie.sendState(chatId, 'composing');
+                                        } catch(err) {
+                                            Tine.Messenger.Log.error(err);
+                                        }
+                                        Tine.Messenger.Chat.alreadySentComposing = true;
+                                    }
+                                    // Verifica se parou de digitar
                                     if (Tine.Messenger.Chat.checkPauseInterval)
                                         window.clearTimeout(Tine.Messenger.Chat.checkPauseInterval);
                                     Tine.Messenger.Chat.checkPauseInterval = window.setTimeout(function () {
                                         Tine.Messenger.ChatHandler.sendState(chatId, 'paused');
+                                        Tine.Messenger.Chat.alreadySentComposing = false;
                                     }, 2000);
                                 } else if (field.getValue().trim() != '') {
+                                    window.clearTimeout(Tine.Messenger.Chat.checkPauseInterval);
                                     Tine.Messenger.Chat.checkPauseInterval = null;
+                                    Tine.Messenger.Chat.alreadySentComposing = false;
                                     if(type == 'chat')
                                         Tine.Messenger.ChatHandler.sendMessage(field.getValue(), chatId);
                                     if(type == 'groupchat')
                                         Tine.Messenger.Groupie.sendPrivMessage(field.getValue(), chatId, old_id);
                                     field.setValue("");
-                                    Tine.Messenger.Chat.textToSend = '';
                                 }
                             } else if (ev.getKey() == ev.ENTER && field.getValue().trim() != '') {
                                 if(privy)
