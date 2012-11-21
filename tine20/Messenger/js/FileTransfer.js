@@ -43,7 +43,7 @@ Tine.Messenger.FileTransfer = {
                             } else {
                                 info.attrs({'type': 'chat'})
                                     .c("body")
-                                    .t(_('File sent') + ' :  ' +
+                                    .t(app.i18n._('File sent') + ' :  ' +
                                        Tine.Messenger.FileTransfer.downloadURL(uploadResponse.fileName)
                                     );
                             }
