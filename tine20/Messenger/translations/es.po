@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tine 2.0 Messenger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-21 15:29-0300\n"
-"PO-Revision-Date: 2012-11-21 15:29-0300\n"
+"POT-Creation-Date: 2012-11-21 16:06-0300\n"
+"PO-Revision-Date: 2012-11-21 16:06-0300\n"
 "Last-Translator: Marcio Albuquerque <marcio.lima.albuquerque@gmail.com>\n"
 "Language-Team: SERPRO Expresso <marcio.albuquerque@serpro.gov.br>\n"
 "Language: \n"
@@ -308,7 +308,7 @@ msgstr[1] "Cerrar sesión"
 
 #: Messenger/js/Layout.js:117
 msgid "Type your Status"
-msgstr "su Estado"
+msgstr "Escriba su Estado"
 
 #: Messenger/js/Layout.js:118
 msgid "press ENTER after"
@@ -333,13 +333,13 @@ msgstr "Indisponible"
 #: Messenger/js/Layout.js:251
 msgid "Action"
 msgid_plural "Actions"
-msgstr[0] "Acciones"
+msgstr[0] "Accion"
 msgstr[1] "Acciones"
 
 #: Messenger/js/Layout.js:289
 msgid "Preference"
 msgid_plural "Preferences"
-msgstr[0] "Preferencias"
+msgstr[0] "Preferencia"
 msgstr[1] "Preferencias"
 
 #: Messenger/js/Layout.js:548
@@ -386,7 +386,7 @@ msgstr "Apodo"
 
 #: Messenger/js/Layout.js:683
 msgid "Password"
-msgstr "contraseña"
+msgstr "Contraseña"
 
 #: Messenger/js/Layout.js:687
 msgid "Join"
