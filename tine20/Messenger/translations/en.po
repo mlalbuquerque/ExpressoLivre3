@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tine 2.0 Messenger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-02 14:39-0300\n"
-"PO-Revision-Date: 2012-11-16 14:42-0300\n"
-"Last-Translator: Cassiano Dal Pizzol <cassiano@dalpizzol@serpro.gov.br>\n"
+"POT-Creation-Date: 2012-11-21 11:03-0300\n"
+"PO-Revision-Date: 2012-11-21 11:03-0300\n"
+"Last-Translator: Marcio Albuquerque <marcio.lima.albuquerque@gmail.com>\n"
 "Language-Team: SERPRO Salvador <marcio.albuquerque@serpro.gov.br>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -161,8 +161,8 @@ msgstr "Error sending: "
 #: Messenger/js/ChatHandler.js:109
 #: Messenger/js/Messenger.js:210
 #: Messenger/js/Messenger.js:297
-#: Messenger/js/RosterHandler.js:306
-#: Messenger/js/RosterHandler.js:360
+#: Messenger/js/RosterHandler.js:307
+#: Messenger/js/RosterHandler.js:362
 msgid "Error"
 msgstr "Error"
 
@@ -217,30 +217,41 @@ msgstr "Error downloading Chat History"
 msgid "Your messages will be sent offline"
 msgstr "Your messages will be sent offline"
 
+#: Messenger/js/ChatHandler.js:233
+msgid " stopped typing!"
+msgstr "stopped typing!"
+
+#: Messenger/js/ChatHandler.js:235
+msgid " is typing..."
+msgstr " is typing..."
+
 #: Messenger/js/Window.js:18
 msgid "Group created successfully"
 msgstr "Group created successfully"
 
 #: Messenger/js/Window.js:21
 #: Messenger/js/Layout.js:46
-#: Messenger/js/Layout.js:428
+#: Messenger/js/Layout.js:268
+#: Messenger/js/Layout.js:596
 msgid "Add Group"
-msgstr "Add Group"
+msgid_plural "Add Group"
+msgstr[0] "Add Group"
+msgstr[1] "Add Group"
 
-#: Messenger/js/Window.js:21
+#: Messenger/js/Window.js:22
 msgid "The group already exists"
 msgstr "The group already exists"
 
-#: Messenger/js/Window.js:53
-#: Messenger/js/Window.js:58
+#: Messenger/js/Window.js:54
+#: Messenger/js/Window.js:59
 msgid "Added successfuly"
 msgstr "Added successfuly"
 
-#: Messenger/js/Window.js:60
+#: Messenger/js/Window.js:61
 msgid "Add Buddy"
 msgstr "Add Buddy"
 
-#: Messenger/js/Window.js:60
+#: Messenger/js/Window.js:62
 msgid "Buddy not added"
 msgstr "Buddy not added"
 
@@ -277,85 +288,103 @@ msgid "Actions"
 msgstr "Actions"
 
 #: Messenger/js/Layout.js:38
-#: Messenger/js/Layout.js:352
+#: Messenger/js/Layout.js:259
+#: Messenger/js/Layout.js:520
 msgid "Add Contact"
-msgstr "Add Contact"
+msgid_plural "Add Contact"
+msgstr[0] "Add Contact"
+msgstr[1] "Add Contact"
 
 #: Messenger/js/Layout.js:55
+#: Messenger/js/Layout.js:278
 msgid "Logout"
-msgstr "Logout"
-
-#: Messenger/js/Layout.js:116
-msgid "your Status"
-msgstr "your Status"
+msgid_plural "Logout"
+msgstr[0] "Logout"
+msgstr[1] "Logout"
 
 #: Messenger/js/Layout.js:117
+msgid "Type your Status"
+msgstr "Type your Status"
+
+#: Messenger/js/Layout.js:118
 msgid "press ENTER after"
 msgstr "press ENTER after"
 
-#: Messenger/js/Layout.js:146
+#: Messenger/js/Layout.js:148
 msgid "Online"
 msgstr "Online"
 
-#: Messenger/js/Layout.js:147
+#: Messenger/js/Layout.js:149
 msgid "Away"
 msgstr "Away"
 
-#: Messenger/js/Layout.js:148
+#: Messenger/js/Layout.js:150
 msgid "Do Not Disturb"
 msgstr "Do Not Disturb"
 
-#: Messenger/js/Layout.js:149
+#: Messenger/js/Layout.js:151
 msgid "Unavailable"
 msgstr "Unavailable"
 
-#: Messenger/js/Layout.js:370
+#: Messenger/js/Layout.js:251
+msgid "Action"
+msgid_plural "Actions"
+msgstr[0] "Action"
+msgstr[1] "Actions"
+
+#: Messenger/js/Layout.js:289
+msgid "Preference"
+msgid_plural "Preferences"
+msgstr[0] "Preference"
+msgstr[1] "Preferences"
+
+#: Messenger/js/Layout.js:538
 msgid "JID"
 msgstr "JID"
 
-#: Messenger/js/Layout.js:377
-#: Messenger/js/Layout.js:436
+#: Messenger/js/Layout.js:545
+#: Messenger/js/Layout.js:604
 msgid "Name"
 msgstr "Name"
 
-#: Messenger/js/Layout.js:382
+#: Messenger/js/Layout.js:550
 msgid "Group"
 msgstr "Group"
 
-#: Messenger/js/Layout.js:388
+#: Messenger/js/Layout.js:556
 msgid "Select a group"
 msgstr "Select a group"
 
-#: Messenger/js/Layout.js:398
-#: Messenger/js/Layout.js:441
+#: Messenger/js/Layout.js:566
+#: Messenger/js/Layout.js:609
 msgid "Add"
 msgstr "Add"
 
-#: Messenger/js/Layout.js:474
+#: Messenger/js/Layout.js:642
 msgid "Join Groupchat"
 msgstr "Join Groupchat"
 
-#: Messenger/js/Layout.js:483
+#: Messenger/js/Layout.js:651
 msgid "Identity"
 msgstr "Identity"
 
-#: Messenger/js/Layout.js:489
+#: Messenger/js/Layout.js:657
 msgid "Host"
 msgstr "Host"
 
-#: Messenger/js/Layout.js:494
+#: Messenger/js/Layout.js:662
 msgid "Room"
 msgstr "Room"
 
-#: Messenger/js/Layout.js:499
+#: Messenger/js/Layout.js:667
 msgid "Nickname"
 msgstr "Nickname"
 
-#: Messenger/js/Layout.js:505
+#: Messenger/js/Layout.js:673
 msgid "Password"
 msgstr "Password"
 
-#: Messenger/js/Layout.js:509
+#: Messenger/js/Layout.js:677
 msgid "Join"
 msgstr "Join"
 
@@ -437,8 +466,8 @@ msgstr "Delete Contact"
 
 #: Messenger/js/RosterTree.js:80
 #: Messenger/js/RosterTree.js:179
-msgid "Are you sure to delete "
-msgstr "Are you sure to delete "
+msgid "Are you sure you want to delete "
+msgstr "Are you sure you want to delete "
 
 #: Messenger/js/RosterTree.js:115
 msgid "Empty"
@@ -495,30 +524,30 @@ msgid "Cancel"
 msgstr "Cancel"
 
 #: Messenger/js/RosterHandler.js:50
-#: Messenger/js/RosterHandler.js:357
+#: Messenger/js/RosterHandler.js:359
 msgid "was successfully removed"
 msgstr "was successfully removed"
 
 #: Messenger/js/RosterHandler.js:300
-#: Messenger/js/RosterHandler.js:356
+#: Messenger/js/RosterHandler.js:357
 msgid "Successful"
 msgstr "Successful"
 
 #: Messenger/js/RosterHandler.js:301
-#: Messenger/js/RosterHandler.js:357
-#: Messenger/js/RosterHandler.js:361
+#: Messenger/js/RosterHandler.js:358
+#: Messenger/js/RosterHandler.js:363
 msgid "The group"
 msgstr "The group"
 
-#: Messenger/js/RosterHandler.js:301
+#: Messenger/js/RosterHandler.js:302
 msgid "was successfully renamed to"
 msgstr "was successfully renamed to"
 
-#: Messenger/js/RosterHandler.js:306
+#: Messenger/js/RosterHandler.js:307
 msgid " already exist. It was not renamed."
 msgstr " already exist. It was not renamed."
 
-#: Messenger/js/RosterHandler.js:361
+#: Messenger/js/RosterHandler.js:364
 msgid "was not removed"
 msgstr "was not removed"
 

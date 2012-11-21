@@ -245,6 +245,7 @@ Tine.Messenger.ChatHandler = {
     },
     
     setChatState: function (id, state) {
+        var app = Tine.Tinebase.appMgr.get('Messenger');
         var chat_id = Tine.Messenger.ChatHandler.formatChatId(id),
             chat = Ext.getCmp(chat_id);
        
@@ -255,17 +256,11 @@ Tine.Messenger.ChatHandler = {
                     html = '',
                     type = '';
 
-                if(state == Tine.Messenger.ChatHandler.COMPOSING_STATE){
-                    message = state;
-                } else if(state == Tine.Messenger.ChatHandler.PAUSED_STATE){
-                    message = state;
-                } else {
-                    message = state;
-                }
                 html = Tine.Messenger.ChatHandler.formatChatStateMessage(message, type);
                 node.body.dom.innerHTML = html;
                 node.show();
-                if (state == Tine.Messenger.ChatHandler.PAUSED_STATE) {
+
+                if (app.i18n._(state).search(app.i18n._(Tine.Messenger.ChatHandler.PAUSED_STATE)) >= 0) {
                     Tine.Messenger.ChatHandler.clearPausedStateMessage = setTimeout(
                         function () {
                             node.hide();

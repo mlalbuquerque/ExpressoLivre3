@@ -114,7 +114,7 @@ Tine.Messenger.ClientDialog = function(args){
                         mode: 'local',
                         triggerAction: 'all',
                         id:'messenger-status-box',
-                        emptyText:app.i18n._('your Status') + '...' 
+                        emptyText:app.i18n._('Type your Status') + '...' 
                                                             + '(' + app.i18n._('press ENTER after') + ')',
                         selectOnFocus:true,
                         listeners: {
@@ -472,28 +472,11 @@ Tine.Messenger.AddItems = function(_box) {
                                         Tine.Messenger.Log.error(err);
                                     }
                                 if (ev.getKey() != ev.ENTER) {
-//                                    if (Tine.Messenger.Chat.checkPauseInterval == null) {
-//                                        Tine.Messenger.Chat.checkPauseInterval = setInterval(
-//                                            function () {
-//                                                Tine.Messenger.Log.debug('Set Interval '+Date());
-//        //                                        console.log(Tine.Messenger.Chat.textToSend);
-//                                                if (field.getValue() == Tine.Messenger.Chat.textToSend) {
-//                                                    Tine.Messenger.ChatHandler.sendState(chatId, 'paused');
-//                                                } else {
-//                                                    Tine.Messenger.Chat.textToSend = field.getValue();
-//                                                }
-//                                            },
-//                                            1000
-//                                        );
-//                                            //TODO: rever essa funcao. manda paused direto
-//                                        setTimeout(
-//                                            function(){
-//                                                Tine.Messenger.Log.debug('Set Timeout: '+Date());
-//                                                clearInterval(Tine.Messenger.Chat.checkPauseInterval);
-//                                            },
-//                                            3000
-//                                        );
-//                                    }
+                                    if (Tine.Messenger.Chat.checkPauseInterval)
+                                        window.clearTimeout(Tine.Messenger.Chat.checkPauseInterval);
+                                    Tine.Messenger.Chat.checkPauseInterval = window.setTimeout(function () {
+                                        Tine.Messenger.ChatHandler.sendState(chatId, 'paused');
+                                    }, 2000);
                                 } else if (field.getValue().trim() != '') {
                                     Tine.Messenger.Chat.checkPauseInterval = null;
                                     if(type == 'chat')

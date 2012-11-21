@@ -167,17 +167,17 @@
     background-image: none;
 }
 
-.x-tree-lines .x-tree-elbow {
+.x-tree-lines .messenger-contact .x-tree-elbow {
     background-image: none !important;
     width: 0 !important;
 }
 
-.x-tree-lines .x-tree-elbow-end {
+.x-tree-lines .messenger-contact .x-tree-elbow-end {
     background-image: none !important;
     width: 0 !important;
 }
 
-.x-tree-node-leaf .x-tree-node-icon {
+.messenger-contact .x-tree-node-icon {
     background-image: none !important;
 }
 
