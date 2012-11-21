@@ -17,7 +17,7 @@
  * @subpackage  Controller
  */
 interface Felamimail_Backend_Cache_MessageInterface
-{    
+{  
     /**
      * Search for records matching given filter
      *
