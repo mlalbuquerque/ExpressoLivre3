@@ -11,7 +11,6 @@
  */
 
 class Felamimail_Controller_Cache_Sql_Message extends Felamimail_Controller_Cache_Message_Abstract
-                                                implements Felamimail_Controller_Cache_Message_Interface
 {
     /**
      * holds the instance of the singleton
