@@ -10,8 +10,7 @@
  *
  */
 
-class Felamimail_Controller_Cache_Imap_Folder extends Felamimail_Controller_Cache_Folder_Abstract 
-                                                implements Felamimail_Controller_Cache_Folder_Interface
+class Felamimail_Controller_Cache_Imap_Folder extends Felamimail_Controller_Cache_Folder_Abstract
 {
     /**
      * holds the instance of the singleton
@@ -47,7 +46,7 @@ class Felamimail_Controller_Cache_Imap_Folder extends Felamimail_Controller_Cach
     public static function getInstance() 
     {
         if (self::$_instance === NULL) {
-            self::$_instance = new Felamimail_Controller_Cache_Imap_Folder();
+            self::$_instance = new Felamimail_Controller_Cache_Sql_Folder();
         }
         
         return self::$_instance;
@@ -73,21 +72,21 @@ class Felamimail_Controller_Cache_Imap_Folder extends Felamimail_Controller_Cach
             $result = $this->_getOrCreateFolders($folders, $account, $_folderName);
             
             $hasChildren = (empty($folders) || count($folders) > 0 && count($result) == 0) ? 0 : 1;
-            $this->_updateHasChildrenCache($_accountId, $_folderName, $hasChildren);
+            $this->_updateHasChildren($_accountId, $_folderName, $hasChildren);
             
             if ($_recursive) {
                 $this->_updateRecursive($account, $result);
             }
-            
+
         } catch (Zend_Mail_Protocol_Exception $zmpe) {
             Tinebase_Core::getLogger()->notice(__METHOD__ . '::' . __LINE__ . ' IMAP Protocol Exception: ' . $zmpe->getMessage());
             $result = new Tinebase_Record_RecordSet('Felamimail_Model_Folder');
         } catch (Exception $e) {
        		Tinebase_Core::getLogger()->debug(__METHOD__ . '::' . __LINE__ . ' unexpected Exception: ' . $e->getMessage());
-        
-       
+       		$result = new Tinebase_Record_RecordSet('Felamimail_Model_Folder');
         }
-         return $result;
+        
+        return $result;
     }
     
     /**
@@ -206,57 +205,5 @@ class Felamimail_Controller_Cache_Imap_Folder extends Felamimail_Controller_Cach
         $result = ($_lockFolder) ? $this->_backend->lockFolder($_folder) : TRUE;
         
         return $result;
-    }
-    
-    /**
-     * rename folder
-     *
-     * @param string $_accountId
-     * @param string $_newLocalName
-     * @param string $_oldGlobalName
-     * @return Felamimail_Model_Folder
-     */
-    public function rename($_accountId, $_newLocalName, $_oldGlobalName)
-    {
-       $account = Felamimail_Controller_Account::getInstance()->get($_accountId);
-        $this->_delimiter = $account->delimiter;
-        
-        $newLocalName = $this->_prepareFolderName($_newLocalName);
-        $newGlobalName = $this->_buildNewGlobalName($newLocalName, $_oldGlobalName);
-        
-        if (Tinebase_Core::isLogLevel(Zend_Log::DEBUG))
-        {
-            Tinebase_Core::getLogger()->debug(__METHOD__ . '::' . __LINE__ . 
-                                                          ' Renaming ... ' . $_oldGlobalName . ' -> ' . $newGlobalName);
-        }
-        
-        //$this->_renameFolderOnIMAP($account, $newGlobalName, $_oldGlobalName);
-        //$folder = $this->_renameFolderInCache($account, $newGlobalName, $_oldGlobalName, $newLocalName);
-        
-        
-        
-        //$folder = $this->update($this->get($this->_backend->encodeFolderUid($_oldGlobalName, $_accountId)));
-//Tinebase_Core::getLogger()->alert(__METHOD__ . '#####::#####' . __LINE__ . ' Folder create = $folder ' . print_r($folder,true));
-
-        $this->_renameFolderOnIMAP($account, $newGlobalName, $_oldGlobalName);
-        $folder = $this->get($this->_backend->encodeFolderUid($newGlobalName, $_accountId));
-        
-        
-        //$this->_updateSubfoldersAfterRename($account, $newGlobalName, $_oldGlobalName);
-        
-
-        // reload folder cache of parent
-//        $parentSubs = $this->_cacheController->update($account, $folder->parent);
-//        $folder = $parentSubs->filter('globalname', $globalname)->getFirstRecord();
-            
-Tinebase_Core::getLogger()->alert(__METHOD__ . '#####::#####' . __LINE__ . ' Folder create = $folder ' . print_r($folder->toArray(),true));        
-        
-        
-//        $folder->cache_status = Felamimail_Model_Folder::CACHE_STATUS_INCOMPLETE;
-        //$this->updateFolderStatus($folder);
-        
-        //$this->_updateSubfoldersAfterRename($account, $newGlobalName, $_oldGlobalName);
-        
-        return $folder;
     }
 }

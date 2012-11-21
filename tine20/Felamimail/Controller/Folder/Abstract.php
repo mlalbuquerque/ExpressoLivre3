@@ -48,6 +48,13 @@ abstract class Felamimail_Controller_Folder_Abstract extends Tinebase_Controller
      */
     protected $_backend = NULL;
     
+    /**
+     * cache controller
+     *
+     * @var Felamimail_Controller_Cache_Folder
+     */
+    protected $_cacheController = NULL;
+
     /************************************* public functions *************************************/
     
     /**
@@ -74,7 +81,7 @@ abstract class Felamimail_Controller_Folder_Abstract extends Tinebase_Controller
         $result = $this->_backend->search($filter);
         if (count($result) == 0) {
             // try to get folders from imap server
-            $result = $this->updateCacheFolder($filterValues['account_id'], $filterValues['globalname']);            
+            $result = $this->_cacheController->update($filterValues['account_id'], $filterValues['globalname']);            
         }
 
         Tinebase_Core::getLogger()->debug(__METHOD__ . '::' . __LINE__ . ' folder search result count: ' . count($result) );        
@@ -194,11 +201,11 @@ abstract class Felamimail_Controller_Folder_Abstract extends Tinebase_Controller
             if (Tinebase_Core::isLogLevel(Zend_Log::INFO)) Tinebase_Core::getLogger()->info(__METHOD__ . '::' . __LINE__ . ' Could not create new folder: ' . $globalname . ' (' . $zmse->getMessage() . ')');
             
             // reload folder cache of parent
-//            $parentSubs = $this->_cacheController->update($account, $_parentFolder);
-//            $folder = $parentSubs->filter('globalname', $globalname)->getFirstRecord();
-//            if ($folder === NULL) {
+            $parentSubs = $this->_cacheController->update($account, $_parentFolder);
+            $folder = $parentSubs->filter('globalname', $globalname)->getFirstRecord();
+            if ($folder === NULL) {
                 throw new Felamimail_Exception_IMAPServiceUnavailable($zmse->getMessage());
-//            }
+            }
         }
         
         // update parent (has_children)
@@ -364,28 +371,6 @@ abstract class Felamimail_Controller_Folder_Abstract extends Tinebase_Controller
         $imap = Felamimail_Backend_ImapFactory::factory($_account);
         $return = $imap->getFolderAcls(Felamimail_Model_Folder::encodeFolderName($foldername));
         
-        return $return;
-    }
-    
-            /**
-     * Get Acls for a folder
-     *
-     * @param string $_accountId
-     * @return 
-     */
-    public function getUsersWithSendAsAcl($_accountId)
-    {
-        $_account = Felamimail_Controller_Account::getInstance()->get($_accountId);
-        $this->_delimiter = $_account->delimiter;
-        
-        $filter = new Felamimail_Model_FolderFilter(array(
-            array('field' => 'parent', 'operator' => 'equals',  'value' => 'user'),
-            array('field' => 'account_id', 'operator' => 'equals',  'value' => $_accountId),
-        ));
-        
-        $folders =  $this->_backend->search($filter);
-        $imap = Felamimail_Backend_ImapFactory::factory($_account);
-        $return = $imap->getUsersWithSendAsAcl($folders->toArray());
         return $return;
     }
     
