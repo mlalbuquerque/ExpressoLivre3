@@ -223,12 +223,9 @@ msgstr "Group created successfully"
 
 #: Messenger/js/Window.js:21
 #: Messenger/js/Layout.js:46
-#: Messenger/js/Layout.js:266
-#: Messenger/js/Layout.js:611
+#: Messenger/js/Layout.js:428
 msgid "Add Group"
-msgid_plural "Add Group"
-msgstr[0] "Add Group"
-msgstr[1] "Add Group"
+msgstr "Add Group"
 
 #: Messenger/js/Window.js:21
 msgid "The group already exists"
@@ -280,19 +277,13 @@ msgid "Actions"
 msgstr "Actions"
 
 #: Messenger/js/Layout.js:38
-#: Messenger/js/Layout.js:257
-#: Messenger/js/Layout.js:535
+#: Messenger/js/Layout.js:352
 msgid "Add Contact"
-msgid_plural "Add Contact"
-msgstr[0] "Add Contact"
-msgstr[1] "Add Contact"
+msgstr "Add Contact"
 
 #: Messenger/js/Layout.js:55
-#: Messenger/js/Layout.js:276
 msgid "Logout"
-msgid_plural "Logout"
-msgstr[0] "Logout"
-msgstr[1] "Logout"
+msgstr "Logout"
 
 #: Messenger/js/Layout.js:116
 msgid "your Status"
@@ -318,65 +309,53 @@ msgstr "Do Not Disturb"
 msgid "Unavailable"
 msgstr "Unavailable"
 
-#: Messenger/js/Layout.js:249
-msgid "Action"
-msgid_plural "Actions"
-msgstr[0] "Action"
-msgstr[1] "Actions"
-
-#: Messenger/js/Layout.js:287
-msgid "Preference"
-msgid_plural "Preferences"
-msgstr[0] "Preference"
-msgstr[1] "Preferences"
-
-#: Messenger/js/Layout.js:553
+#: Messenger/js/Layout.js:370
 msgid "JID"
 msgstr "JID"
 
-#: Messenger/js/Layout.js:560
-#: Messenger/js/Layout.js:619
+#: Messenger/js/Layout.js:377
+#: Messenger/js/Layout.js:436
 msgid "Name"
 msgstr "Name"
 
-#: Messenger/js/Layout.js:565
+#: Messenger/js/Layout.js:382
 msgid "Group"
 msgstr "Group"
 
-#: Messenger/js/Layout.js:571
+#: Messenger/js/Layout.js:388
 msgid "Select a group"
 msgstr "Select a group"
 
-#: Messenger/js/Layout.js:581
-#: Messenger/js/Layout.js:624
+#: Messenger/js/Layout.js:398
+#: Messenger/js/Layout.js:441
 msgid "Add"
 msgstr "Add"
 
-#: Messenger/js/Layout.js:657
+#: Messenger/js/Layout.js:474
 msgid "Join Groupchat"
 msgstr "Join Groupchat"
 
-#: Messenger/js/Layout.js:666
+#: Messenger/js/Layout.js:483
 msgid "Identity"
 msgstr "Identity"
 
-#: Messenger/js/Layout.js:672
+#: Messenger/js/Layout.js:489
 msgid "Host"
 msgstr "Host"
 
-#: Messenger/js/Layout.js:677
+#: Messenger/js/Layout.js:494
 msgid "Room"
 msgstr "Room"
 
-#: Messenger/js/Layout.js:682
+#: Messenger/js/Layout.js:499
 msgid "Nickname"
 msgstr "Nickname"
 
-#: Messenger/js/Layout.js:688
+#: Messenger/js/Layout.js:505
 msgid "Password"
 msgstr "Password"
 
-#: Messenger/js/Layout.js:692
+#: Messenger/js/Layout.js:509
 msgid "Join"
 msgstr "Join"
 
