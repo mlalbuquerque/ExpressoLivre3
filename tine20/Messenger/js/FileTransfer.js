@@ -4,6 +4,8 @@ Tine.Messenger.FileTransfer = {
     
     resource: null,
     
+    tmpPath: '/tmp/messenger/',
+    
     sendRequest: function (item) {
         var app = Tine.Tinebase.appMgr.get('Messenger');
         var to = typeof item == 'string' ? item : item.node.attributes.jid,
@@ -163,7 +165,7 @@ Tine.Messenger.FileTransfer = {
         var protocol = window.location.protocol,
             host = window.location.hostname,
             port = window.location.port != 80 ? ':' + window.location.port : '',
-            filePath = '/download/' + fileName;
+            filePath = '/download.php?download=yes&file=' + Tine.Messenger.FileTransfer.tmpPath + fileName;
             
         return protocol + '//' + host + port + filePath;
     },
