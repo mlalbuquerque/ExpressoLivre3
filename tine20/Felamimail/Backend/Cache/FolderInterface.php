@@ -17,8 +17,7 @@
  * @subpackage  Controller
  */
 interface Felamimail_Backend_Cache_FolderInterface
-{
-    
+{  
     /**
      * get folder cache counter like total and unseen
      *
