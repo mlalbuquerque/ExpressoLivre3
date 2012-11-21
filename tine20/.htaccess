@@ -1,10 +1,5 @@
 RewriteEngine On
 RewriteBase /
-<<<<<<< HEAD
 RewriteRule ^download/(.+)$ download.php?download=yes&file=/tmp/messenger/$1 [L]
 RewriteRule ^nodownload/(.+)$ download.php?download=no&file=/tmp/messenger/$1 [L]
 RewriteRule ^history$ savehistory.php [L]
-=======
-RewriteRule ^download/(.+)$ download.php?download=yes&file=/tmp/messenger/$1 [L,R]
-RewriteRule ^history$ savehistory.php [L]
->>>>>>> Resolving conflict with master
