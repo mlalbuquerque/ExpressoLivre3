@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tine 2.0 Messenger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-22 17:05-0300\n"
-"PO-Revision-Date: 2012-11-22 17:05-0300\n"
+"POT-Creation-Date: 2012-11-22 17:29-0300\n"
+"PO-Revision-Date: 2012-11-22 17:30-0300\n"
 "Last-Translator: Marcio Albuquerque <marcio.lima.albuquerque@gmail.com>\n"
 "Language-Team: SERPRO Salvador <marcio.albuquerque@serpro.gov.br>\n"
 "Language: \n"
@@ -387,8 +387,8 @@ msgstr "Join"
 
 #: Messenger/js/FileTransfer.js:31
 #: Messenger/js/FileTransfer.js:56
-#: Messenger/js/FileTransfer.js:90
-#: Messenger/js/FileTransfer.js:145
+#: Messenger/js/FileTransfer.js:96
+#: Messenger/js/FileTransfer.js:151
 msgid "File Transfer"
 msgstr "File Transfer"
 
@@ -405,27 +405,43 @@ msgstr "File sent"
 msgid "File Transfer Error"
 msgstr "File Transfer Error"
 
-#: Messenger/js/FileTransfer.js:94
+#: Messenger/js/FileTransfer.js:69
+msgid "File too big - must be less then 2MB"
+msgstr "File too big - must be less then 2MB"
+
+#: Messenger/js/FileTransfer.js:70
+msgid "File partially uploaded"
+msgstr "File partially uploaded"
+
+#: Messenger/js/FileTransfer.js:71
+msgid "File was not uploaded"
+msgstr "File was not uploaded"
+
+#: Messenger/js/FileTransfer.js:72
+msgid "File transfer error"
+msgstr "File transfer error"
+
+#: Messenger/js/FileTransfer.js:100
 msgid "wants to send you a file:"
 msgstr "wants to send you a file:"
 
-#: Messenger/js/FileTransfer.js:99
+#: Messenger/js/FileTransfer.js:105
 msgid "Do you allow"
 msgstr "Do you allow"
 
-#: Messenger/js/FileTransfer.js:103
+#: Messenger/js/FileTransfer.js:109
 #: Messenger/js/RosterTree.js:76
 #: Messenger/js/RosterTree.js:175
 msgid "Yes"
 msgstr "Yes"
 
-#: Messenger/js/FileTransfer.js:109
+#: Messenger/js/FileTransfer.js:115
 #: Messenger/js/RosterTree.js:77
 #: Messenger/js/RosterTree.js:176
 msgid "No"
 msgstr "No"
 
-#: Messenger/js/FileTransfer.js:153
+#: Messenger/js/FileTransfer.js:159
 msgid " has more than one resource. Choose one!"
 msgstr " has more than one resource. Choose one!"
 
