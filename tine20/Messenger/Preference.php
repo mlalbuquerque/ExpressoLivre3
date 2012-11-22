@@ -122,7 +122,7 @@ class Messenger_Preference extends Tinebase_Preference_Abstract
                 $preference->options    = '<?xml version="1.0" encoding="UTF-8"?>
                     <options>
                         <option>
-                            <label>' . $translate->_('Start and Display Messenger at Expresso loading') . '</label>
+                            <label>' . $translate->_('Start and display Messenger when Expresso loads') . '</label>
                             <value>loading</value>
                         </option>
                         <option>
@@ -130,7 +130,7 @@ class Messenger_Preference extends Tinebase_Preference_Abstract
                             <value>clicking</value>
                         </option>
                         <option>
-                            <label>' . $translate->_('Start Messenger pressing "connect" button at Messenger Window') . '</label>
+                            <label>' . $translate->_('Start Messenger pressing "Connect" button at Messenger Window') . '</label>
                             <value>connect</value>
                         </option>
                     </options>';
