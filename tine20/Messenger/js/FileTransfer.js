@@ -65,6 +65,12 @@ Tine.Messenger.FileTransfer = {
                 } else {
                     Ext.Msg.show({
                         title: app.i18n._('File Transfer Error'),
+                        /**
+                         * _('File too big - must be less then 2MB')
+                         * _('File partially uploaded')
+                         * _('File was not uploaded')
+                         * _('File transfer error')
+                         */
                         msg: app.i18n._(uploadResponse.status) + '!',
                         buttons: Ext.Msg.OK,
                         icon: Ext.MessageBox.ERROR,
