@@ -70,21 +70,6 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
     // Upload XML emoticons information
     xml_raw: null,
     
-    getTitle: function () {
-        return this.i18n.ngettext('Messenger', 'Messengers', 1);
-    },
-    
-    init: function () {
-        // Shows IM window and starts communication
-        this.showMessengerDelayedTask = new Ext.util.DelayedTask(this.showMessenger, this);
-        this.showMessengerDelayedTask.delay(500);
-        this.startMessengerDelayedTask = new Ext.util.DelayedTask(this.startMessenger, this);
-        this.startMessengerDelayedTask.delay(500);
-        
-        // Sets Messenger config panel
-        
-    },
-    
     debugFunction: function () {
         Tine.Messenger.Application.connection.xmlInput = function (xml) {
             console.log('\\/ |\\/| |     |  |\\ |');
@@ -108,20 +93,34 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
         };
     },
     
-    showMessenger: function () {
+    getTitle: function () {
+        return this.i18n.ngettext('Messenger', 'Messengers', 1);
+    },
+    
+    init: function () {
+        // Shows IM window and starts communication
+        this.initMessengerDelayedTask = new Ext.util.DelayedTask(this.initMessenger, this);
+        this.initMessengerDelayedTask.delay(500);
+        if (Tine.Messenger.registry.get('preferences').get('messengerStart') == 'loading') {
+            this.startMessengerDelayedTask = new Ext.util.DelayedTask(this.startMessenger, this);
+            this.startMessengerDelayedTask.delay(1000);
+        }
+    },
+    
+    initMessenger: function () {
+        new Tine.Messenger.ClientDialog();
         Tine.Tinebase.MainScreen.getMainMenu().insert(2, {
             xtype: 'button',
             html: '<span id="messenger">Messenger</span>',
             cls: 'messenger-icon-off',
             listeners: {
                 click: function () {
-                      if(!Ext.getCmp("ClientDialog")){
-                        new Tine.Messenger.ClientDialog();
-                      }
-                      else{
-                        Ext.getCmp("ClientDialog").show();
-                      }
-                }
+                    Ext.getCmp("ClientDialog").show();
+                    if (Tine.Messenger.registry.get('preferences').get('messengerStart') == 'clicking') {
+                        this.startMessenger();
+                    }
+                },
+                scope: this
             }
         });
         Tine.Tinebase.MainScreen.getMainMenu().doLayout();
@@ -139,23 +138,21 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
         });
     },
     
-    stopMessenger: function (reason) {
-        reason = (reason == null) ? "" : ': ' + reason;
-        Tine.Messenger.Log.debug("Stopping Messenger...");
-        Tine.Tinebase.appMgr.get('Messenger').getConnection().disconnect('Leaving Messenger' + reason);
-        Tine.Messenger.Log.debug("Messenger Stopped!");
-    },
-
     startMessenger: function (status, statusText) {
         Tine.Messenger.Log.debug("Starting Messenger...");
         
         this.getPasswordForJabber();
         
-        if(!Ext.getCmp("ClientDialog")){
-            new Tine.Messenger.ClientDialog().show();
-        }
+        Ext.getCmp("ClientDialog").show();
+
         Ext.getCmp('ClientDialog').status = (status != null) ? status : IMConst.ST_AVAILABLE.id;
-//        Ext.getCmp('ClientDialog').statusText = (statusText != null) ? statusText : Ext.getCmp('ClientDialog').statusText;
+    },
+    
+    stopMessenger: function (reason) {
+        reason = (reason == null) ? "" : ': ' + reason;
+        Tine.Messenger.Log.debug("Stopping Messenger...");
+        Tine.Tinebase.appMgr.get('Messenger').getConnection().disconnect('Leaving Messenger' + reason);
+        Tine.Messenger.Log.debug("Messenger Stopped!");
     },
     
     getConnection: function () {

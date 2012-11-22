@@ -10,6 +10,8 @@ class Messenger_Preference extends Tinebase_Preference_Abstract
    
     const NAME = 'name';
     
+    const MESSENGERSTART = 'messengerStart';
+    
     
     /**
      * application
@@ -38,6 +40,7 @@ class Messenger_Preference extends Tinebase_Preference_Abstract
             self::SHOWNOTIFICATIONS,
             self::CHATHISTORY,
             self::NAME,
+            self::MESSENGERSTART,
         );
         
         return $allPrefs;
@@ -55,15 +58,19 @@ class Messenger_Preference extends Tinebase_Preference_Abstract
         $prefDescriptions = array(
             self::SHOWNOTIFICATIONS  => array(
                 'label'         => $translate->_('Show Notifications'),
-                'description'   => $translate->_('Show notifications ...'),
+                'description'   => $translate->_('Show or don\'t show Messenger notifications.'),
             ),
             self::CHATHISTORY  => array(
                 'label'         => $translate->_('Chat History'),
-                'description'   => $translate->_('History of chats ...'),
+                'description'   => $translate->_('How to get chat history.'),
             ),
             self::NAME  => array(
                 'label'         => $translate->_('Custon name'),
-                'description'   => $translate->_('Custon name ...'),
+                'description'   => $translate->_('If you have custom Messenger, what\'s your name (login).'),
+            ),
+            self::MESSENGERSTART  => array(
+                'label'         => $translate->_('Messenger Start'),
+                'description'   => $translate->_('How Messenger should start at Expresso loading.'),
             ),
         );
         
@@ -103,14 +110,30 @@ class Messenger_Preference extends Tinebase_Preference_Abstract
                             <label>' . $translate->_('Download history chat') . '</label>
                             <value>download</value>
                         </option>
-                        <option>
-                            <label>' . $translate->_('Send history chat to e-mail') . '</label>
-                            <value>email</value>
-                        </option>
                     </options>';
                 break;
             case self::NAME:
+                $preference->personal_only  = TRUE;
                 $preference->value = "";
+                break;
+            case self::MESSENGERSTART:
+                $preference->personal_only  = TRUE;
+                $preference->value      = 'connect';
+                $preference->options    = '<?xml version="1.0" encoding="UTF-8"?>
+                    <options>
+                        <option>
+                            <label>' . $translate->_('Start and Display Messenger at Expresso loading') . '</label>
+                            <value>loading</value>
+                        </option>
+                        <option>
+                            <label>' . $translate->_('Start Messenger clicking at Messenger icon at toolbar') . '</label>
+                            <value>clicking</value>
+                        </option>
+                        <option>
+                            <label>' . $translate->_('Start Messenger pressing "connect" button at Messenger Window') . '</label>
+                            <value>connect</value>
+                        </option>
+                    </options>';
                 break;
             default:
                 throw new Tinebase_Exception_NotFound('Default preference with name ' . $_preferenceName . ' not found.');
