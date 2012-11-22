@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tine 2.0 Messenger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-22 16:58-0300\n"
-"PO-Revision-Date: 2012-11-22 16:58-0300\n"
+"POT-Creation-Date: 2012-11-22 17:05-0300\n"
+"PO-Revision-Date: 2012-11-22 17:05-0300\n"
 "Last-Translator: Marcio Albuquerque <marcio.lima.albuquerque@gmail.com>\n"
 "Language-Team: SERPRO Expresso <marcio.albuquerque@serpro.gov.br>\n"
 "Language: \n"
@@ -61,7 +61,7 @@ msgid "Download history chat"
 msgstr "Descarga el historial de chat"
 
 #: Messenger/Preference.php:125
-msgid "Start and Display Messenger at Expresso loading"
+msgid "Start and display Messenger when Expresso loads"
 msgstr "Inicio y Visualización del Messenger cuando Expresso carga"
 
 #: Messenger/Preference.php:129
@@ -69,8 +69,8 @@ msgid "Start Messenger clicking at Messenger icon at toolbar"
 msgstr "Comience Messenger clic en el icono del Messenger en la barra de herramientas"
 
 #: Messenger/Preference.php:133
-msgid "Start Messenger pressing \"connect\" button at Messenger Window"
-msgstr "Comience Messenger presionando el botón \"connect \" que aparece en la ventana del Messenger"
+msgid "Start Messenger pressing \"Connect\" button at Messenger Window"
+msgstr "Comience Messenger presionando el botón \"Connect\" que aparece en la ventana del Messenger"
 
 #: Messenger/js/Groupie.js:250
 msgid " has joined the room as a "
