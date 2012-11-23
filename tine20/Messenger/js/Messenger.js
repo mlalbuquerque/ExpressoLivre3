@@ -104,7 +104,6 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
         if (Tine.Messenger.registry.get('preferences').get('messengerStart') == 'loading') {
             this.startMessengerDelayedTask = new Ext.util.DelayedTask(this.startMessenger, this);
             this.startMessengerDelayedTask.delay(1000);
-            //Ext.getCmp('messenger-logout').systemOn = true;
         }
     },
     
@@ -141,6 +140,8 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
     
     startMessenger: function (status, statusText) {
         Tine.Messenger.Log.debug("Starting Messenger...");
+        // Loading Messenger
+        Ext.getCmp('connectloading').show();
         
         this.getPasswordForJabber();
         
@@ -376,14 +377,17 @@ Tine.Messenger.IM = {
         var displayBt = Ext.getCmp('messenger-show-offline-contacts');
         var i18n = Tine.Tinebase.appMgr.get('Messenger').i18n;
         
-        if (displayBt.showOffline) {
+        //if (displayBt.showOffline) {
+        if (Tine.Messenger.registry.get('preferences').get('offlineContacts') == 'show') {
             $('div.unavailable').show();
             displayBt.setTooltip(i18n._('Hide offline contacts'));
             displayBt.setIcon('images/messenger/hidden_icon_unavailable.png');
+            displayBt.showOffline = true;
         } else {
             $('div.unavailable').hide();
             displayBt.setTooltip(i18n._('Show offline contacts'));
             displayBt.setIcon('images/messenger/icon_unavailable.png');
+            displayBt.showOffline = false;
         }
     },
     changeSystemLogonButton: function (texts) {
