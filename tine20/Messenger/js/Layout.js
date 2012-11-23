@@ -28,39 +28,65 @@ Tine.Messenger.ClientDialog = function(args){
                     cls: 'messenger-client-tbar',
                     items:[
                         {
-                            id: 'messenger-menu-actions',
-                            text: app.i18n._('Actions'),
-                            menu: {
-                                    id: "BuddysMenu",
-                                    items:[{
-                                            id: 'messenger-contact-add',
-                                            icon: '/images/messenger/user_add.png',
-                                            text: app.i18n._('Add Contact'),
-                                            disabled: true,
-                                            handler: function(){
-                                                Tine.Messenger.Window.AddBuddyWindow();
-                                            }
-                                    },
-                                    {
-                                            id: 'messenger-group-mngt-add',
-                                            text: app.i18n._('Add Group'),
-                                            icon: '/images/messenger/group_add.png',
-                                            disabled: true,
-                                            handler: function() {
-                                                new Tine.Messenger.WindowConfig(Tine.Messenger.WindowLayout.Groups).show();
-                                            }
-                                     },
-                                     {
-                                         id: 'messenger-logout',
-                                         text: app.i18n._('Logout'),
-                                         disabled: true,
-                                         handler: function() {
-                                             Tine.Messenger.ChatHandler.disconnect();
-                                         }
-                                     }
-                                    ]
+                                id: 'messenger-contact-add',
+                                xtype: 'button',
+                                icon: '/images/messenger/user_add.png',
+                                tooltip: app.i18n._('Add Contact'),
+                                disabled: true,
+                                handler: function(){
+                                    Tine.Messenger.Window.AddBuddyWindow();
                                 }
-                        }]
+                        },
+                        {
+                                id: 'messenger-group-mngt-add',
+                                xtype: 'button',
+                                tooltip: app.i18n._('Add Group'),
+                                icon: '/images/messenger/group_add.png',
+                                disabled: true,
+                                handler: function() {
+                                    new Tine.Messenger.WindowConfig(Tine.Messenger.WindowLayout.Groups).show();
+                                }
+                         },
+                         {
+                             id: 'messenger-show-offline-contacts',
+                             xtype: 'button',
+                             // _('Show offline contacts')
+                             tooltip: app.i18n._('Hide offline contacts'),
+                             icon: 'images/messenger/hidden_icon_unavailable.png',
+                             showOffline: true,
+                             disabled: true,
+                             handler: function() {
+                                 Tine.Messenger.IM.changeOfflineContactsDisplay();
+                                 this.showOffline = !this.showOffline;
+                             }
+                         },
+                         {
+                             id: 'messenger-logout',
+                             xtype: 'button',
+                             tooltip: app.i18n._('Login'),
+                             icon: 'images/oxygen/16x16/actions/system-run.png',
+                             systemOn: false,
+                             handler: function() {
+                                 if (this.systemOn) {
+                                     Ext.getCmp('connectloading').hide();
+                                     Tine.Messenger.ChatHandler.disconnect();
+                                     Tine.Messenger.IM.changeSystemLogonButton(['run', 'Login']);
+                                 } else {
+                                     Ext.getCmp('connectloading').show();
+                                     Tine.Messenger.ChatHandler.connect();
+                                     Tine.Messenger.IM.changeSystemLogonButton(['shutdown', 'Logout']);
+                                 }
+                                 this.systemOn = !this.systemOn;
+                             }
+                         },
+                         {
+                             id: 'connectloading',
+                             xtype: 'panel',
+                             border: false,
+                             html: '<img src="/images/messenger/loading_animation_liferay.gif" />',
+                             hidden: true
+                         }
+                    ]
             },
             items:[{
 			region:'center',
@@ -68,27 +94,8 @@ Tine.Messenger.ClientDialog = function(args){
                         bodyStyle:'padding:6px 3px 0 3px;',
 			layout:'fit',
                         items: Tine.Messenger._Roster
-                    } 
-                    ,{
-                        id: 'messenger-connect-display',
-                        html: '<img src="/images/messenger/loading_animation_liferay.gif" style="display:none" />',
-                        cls: 'messenger-connect-display',
-                        region:'center',
-                        border: false,
-                        buttons: [
-                                {
-                                    id: 'messenger-connect-cmd',
-                                    text: app.i18n._('Connect'),
-                                    region:'center',
-                                    cls: 'messenger-connect-cmd',
-                                    handler: function() {
-                                        Tine.Messenger.ChatHandler.connect();
-                                    }
-                                }
-                            ]
-                    }
-		]
-            ,bbar:{
+            }],
+            bbar:{
                 id: 'status-container',
                 height: 27,
                 cls: 'messenger-client-tbar',
