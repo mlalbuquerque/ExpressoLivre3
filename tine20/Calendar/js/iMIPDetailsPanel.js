@@ -139,14 +139,14 @@ Tine.Calendar.iMIPDetailsPanel = Ext.extend(Tine.Calendar.EventDetailsPanel, {
      * @param {Object} event
      */
     delegateAttendance: function(event, range) {
-		event = this.iMIPrecord.get('event');
+	event = this.iMIPrecord.get('event');
 
-        //this.getLoadMask().show();
 	event.set('id', this.iMIPrecord.get('existing_event').id);
 	event.set('organizer',this.iMIPrecord.get('existing_event').organizer);
         Ext.each(event.data.attendee, function(attender) {
             Ext.each(this.iMIPrecord.get('existing_event').attendee, function(att) {
                 if (att.user_id == attender.user_id.id) {
+                    attender.status_authkey = att.status_authkey;
                     attender.id = att.id;
                 }
             }, this);
@@ -160,6 +160,8 @@ Tine.Calendar.iMIPDetailsPanel = Ext.extend(Tine.Calendar.EventDetailsPanel, {
             listeners: {
                 scope: this,
                 update: function (eventJson) {
+                    this.getLoadMask().show();
+
                     var updatedEvent = Tine.Calendar.backend.recordReader({responseText: eventJson});
                     updatedEvent.dirty = true;
                     updatedEvent.modified = {};
