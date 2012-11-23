@@ -140,7 +140,7 @@ class Felamimail_Backend_Cache_Imap_Folder extends Felamimail_Backend_Cache_Imap
      * @param Felamimail_Model_Account $_account
      * @return array of folders
      */
-    protected function _getFolder(Felamimail_Model_Account $_account, $_folderName)
+    protected function _getFolder($_folderName)
     {
         $imap = Felamimail_Backend_ImapFactory::factory($_account);
         
@@ -471,7 +471,7 @@ Tinebase_Core::getLogger()->alert(__METHOD__ . '#####::#####' . __LINE__ . ' Fol
      * @param string $_folder
      * @return array 
      */
-    static public function decodeFolderUid($_folder)
+    public function decodeFolderUid($_folder)
     {
         $decoded = base64_decode(str_pad(substr($_folder, 0, -1), substr($_folder, -1), '='));
         list($accountId, $globalName) = explode(';', $decoded);

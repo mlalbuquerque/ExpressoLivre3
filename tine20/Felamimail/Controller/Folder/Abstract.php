@@ -367,7 +367,7 @@ abstract class Felamimail_Controller_Folder_Abstract extends Tinebase_Controller
         return $return;
     }
     
-            /**
+    /**
      * Get Acls for a folder
      *
      * @param string $_accountId

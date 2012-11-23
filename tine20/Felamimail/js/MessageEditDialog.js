@@ -848,8 +848,11 @@ Ext.namespace('Tine.Felamimail');
      * @private
      */
     onRecordUpdate: function() {
-        if (this.record.get('sending_plain')){
-            this.record.set('content_type','text/plain');
+        if (this.record.get('sending_plain')) {
+            this.record.set('display_format','content_type');
+            this.record.set('body_content_type', 'text/plain');
+            this.record.data.body = Ext.util.Format.stripTags(this.record.data.body);
+            Ext.lib.Ajax.setDefaultPostHeader('Content-type: text/plain');
         }
         
         this.record.data.attachments = [];

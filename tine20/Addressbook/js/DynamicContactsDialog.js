@@ -118,11 +118,11 @@ Tine.Addressbook.DynamicContactsDialog = Ext.extend(Tine.widgets.dialog.EditDial
 		            columnWidth: 0.30,
 		            xtype: 'label',
 		            fieldLabel: this.app.i18n._('E-Mail'), 
-		            text: email,
+		            text: email
 		        }, {
 					xtype: 'hidden',
 		            value: email,
-		            name: 'email'+s_index,
+		            name: 'email'+s_index
 		        }, {
 		            columnWidth: 0.23,
 		            fieldLabel: this.app.i18n._('First Name'), 

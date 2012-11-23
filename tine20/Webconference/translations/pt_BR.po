@@ -158,16 +158,21 @@ msgstr "ERRO  (o servidor de webconferência está inacessível)"
 
 #~ msgid "Cancel active webconference"
 #~ msgstr "Cancelar webconferência ativa"
+
 #~ msgid "Quick search"
 #~ msgstr "Quick search"
+
 #~ msgid "Name"
 #~ msgstr "Name"
+
 #~ msgid "Title"
 #~ msgstr "Title"
+
 #~ msgid "Status"
 #~ msgstr "Status"
+
 #~ msgid "Budget"
 #~ msgstr "Budget"
+
 #~ msgid "Show closed"
 #~ msgstr "Show closed"
-
