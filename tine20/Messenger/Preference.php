@@ -130,7 +130,7 @@ class Messenger_Preference extends Tinebase_Preference_Abstract
                             <value>clicking</value>
                         </option>
                         <option>
-                            <label>' . $translate->_('Start Messenger pressing "Connect" button at Messenger Window') . '</label>
+                            <label>' . $translate->_('Start Messenger pressing "Login" button at Messenger Window') . '</label>
                             <value>connect</value>
                         </option>
                     </options>';

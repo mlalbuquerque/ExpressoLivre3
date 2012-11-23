@@ -389,6 +389,10 @@ Tine.Messenger.RosterHandler = {
                 }
             });
         }
+        
+        // Hide loading indicator (Layout.js:82,91)
+        Ext.getCmp('connectloading').hide();
+        
         return true;
     }
     
