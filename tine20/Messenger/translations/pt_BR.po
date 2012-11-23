@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tine 2.0 Messenger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-23 13:17-0300\n"
-"PO-Revision-Date: 2012-11-23 13:17-0300\n"
+"POT-Creation-Date: 2012-11-23 16:03-0300\n"
+"PO-Revision-Date: 2012-11-23 16:03-0300\n"
 "Last-Translator: Marcio Albuquerque <marcio.lima.albuquerque@gmail.com>\n"
 "Language-Team: SERPRO Salvador <marcio.albuquerque@serpro.gov.br>\n"
 "Language: \n"
@@ -18,57 +18,73 @@ msgstr ""
 "X-Poedit-Basepath: ../../\n"
 "X-Poedit-SearchPath-0: Messenger\n"
 
-#: Messenger/Preference.php:60
+#: Messenger/Preference.php:63
 msgid "Show Notifications"
 msgstr "Exibir notificações"
 
-#: Messenger/Preference.php:61
+#: Messenger/Preference.php:64
 msgid "Show or don't show Messenger notifications."
 msgstr "Mostrar ou não mostrar notificações Messenger."
 
-#: Messenger/Preference.php:64
+#: Messenger/Preference.php:67
 msgid "Chat History"
 msgstr "Histórico do Chat"
 
-#: Messenger/Preference.php:65
+#: Messenger/Preference.php:68
 msgid "How to get chat history."
 msgstr "Como obter o histórico do chat."
 
-#: Messenger/Preference.php:68
+#: Messenger/Preference.php:71
 msgid "Custon name"
 msgstr "Nome Personalizado"
 
-#: Messenger/Preference.php:69
+#: Messenger/Preference.php:72
 msgid "If you have custom Messenger, what's your name (login)."
 msgstr "Se você tem o Messenger personalizado, indique é seu nome (login)."
 
-#: Messenger/Preference.php:72
+#: Messenger/Preference.php:75
 msgid "Messenger Start"
 msgstr "Iniciar Messenger"
 
-#: Messenger/Preference.php:73
+#: Messenger/Preference.php:76
 msgid "How Messenger should start at Expresso loading."
 msgstr "Como o Messenger deve iniciar no carregamento do Expresso."
 
-#: Messenger/Preference.php:106
+#: Messenger/Preference.php:79
+msgid "Offline Contacts"
+msgstr "Contatos Offline"
+
+#: Messenger/Preference.php:80
+msgid "Show/Hide offline contacts."
+msgstr "Mostrar/Esconder contatos offline."
+
+#: Messenger/Preference.php:113
 msgid "Don't save history chat"
 msgstr "Não salvar o histórico do chat"
 
-#: Messenger/Preference.php:110
+#: Messenger/Preference.php:117
 msgid "Download history chat"
 msgstr "Fazer o download do histórico do chat"
 
-#: Messenger/Preference.php:125
+#: Messenger/Preference.php:132
 msgid "Start and display Messenger when Expresso loads"
 msgstr "Iniciar e exibir o Messenger no carregamento do Expresso"
 
-#: Messenger/Preference.php:129
+#: Messenger/Preference.php:136
 msgid "Start Messenger clicking at Messenger icon at toolbar"
 msgstr "Inicie o Messenger clicando no ícone do Messenger na barra de ferramentas"
 
-#: Messenger/Preference.php:133
+#: Messenger/Preference.php:140
 msgid "Start Messenger pressing \"Login\" button at Messenger Window"
 msgstr "Inicie o Messenger pressionando o botão \"Login\" na janela do Messenger"
+
+#: Messenger/Preference.php:151
+msgid "Show offline contacts"
+msgstr "Mostrar contatos offline"
+
+#: Messenger/Preference.php:155
+msgid "Don't show offline contacts"
+msgstr "Não mostrar contatos offline"
 
 #: Messenger/js/Groupie.js:250
 msgid " has joined the room as a "
@@ -173,8 +189,8 @@ msgstr "Envio de erro:"
 #: Messenger/js/LogHandler.js:205
 #: Messenger/js/ChatHandler.js:100
 #: Messenger/js/ChatHandler.js:109
-#: Messenger/js/Messenger.js:213
-#: Messenger/js/Messenger.js:300
+#: Messenger/js/Messenger.js:214
+#: Messenger/js/Messenger.js:301
 #: Messenger/js/RosterHandler.js:306
 #: Messenger/js/RosterHandler.js:361
 msgid "Error"
@@ -245,7 +261,7 @@ msgstr "Grupo criado com sucesso"
 
 #: Messenger/js/Window.js:21
 #: Messenger/js/Layout.js:43
-#: Messenger/js/Layout.js:452
+#: Messenger/js/Layout.js:451
 msgid "Add Group"
 msgstr "Adicionar Grupo"
 
@@ -276,27 +292,21 @@ msgid_plural "Messengers"
 msgstr[0] "Messenger"
 msgstr[1] "Messengers"
 
-#: Messenger/js/Messenger.js:204
+#: Messenger/js/Messenger.js:205
 msgid "Connecting"
 msgstr "Conectando"
 
-#: Messenger/js/Messenger.js:214
-#: Messenger/js/Messenger.js:301
+#: Messenger/js/Messenger.js:215
+#: Messenger/js/Messenger.js:302
 msgid "Authentication failed"
 msgstr "Autenticação falhou"
 
-#: Messenger/js/Messenger.js:292
+#: Messenger/js/Messenger.js:293
 msgid "Messenger has been disconnected!"
 msgstr "Messenger foi desconectado!"
 
-#: Messenger/js/Messenger.js:366
-#: Messenger/js/Messenger.js:385
-#: Messenger/js/Layout.js:53
-msgid "Show offline contacts"
-msgstr "Mostrar contatos offline"
-
-#: Messenger/js/Messenger.js:370
-#: Messenger/js/Messenger.js:381
+#: Messenger/js/Messenger.js:371
+#: Messenger/js/Messenger.js:383
 #: Messenger/js/Layout.js:54
 msgid "Hide offline contacts"
 msgstr "Esconder contatos offline"
@@ -306,7 +316,7 @@ msgid "Expresso Messenger"
 msgstr "Expresso Messenger"
 
 #: Messenger/js/Layout.js:34
-#: Messenger/js/Layout.js:376
+#: Messenger/js/Layout.js:375
 msgid "Add Contact"
 msgstr "Adicionar Contato"
 
@@ -315,77 +325,77 @@ msgstr "Adicionar Contato"
 msgid "Login"
 msgstr "Login"
 
-#: Messenger/js/Layout.js:124
+#: Messenger/js/Layout.js:123
 msgid "Type your Status"
 msgstr "Digite seu Status"
 
-#: Messenger/js/Layout.js:125
+#: Messenger/js/Layout.js:124
 msgid "press ENTER after"
 msgstr "pressione ENTER depois"
 
-#: Messenger/js/Layout.js:155
+#: Messenger/js/Layout.js:154
 msgid "Online"
 msgstr "Disponível"
 
-#: Messenger/js/Layout.js:156
+#: Messenger/js/Layout.js:155
 msgid "Away"
 msgstr "Ausente"
 
-#: Messenger/js/Layout.js:157
+#: Messenger/js/Layout.js:156
 msgid "Do Not Disturb"
 msgstr "Não Perturbe"
 
-#: Messenger/js/Layout.js:158
+#: Messenger/js/Layout.js:157
 msgid "Unavailable"
 msgstr "Indisponível"
 
-#: Messenger/js/Layout.js:394
+#: Messenger/js/Layout.js:393
 msgid "JID"
 msgstr "JID"
 
-#: Messenger/js/Layout.js:401
-#: Messenger/js/Layout.js:460
+#: Messenger/js/Layout.js:400
+#: Messenger/js/Layout.js:459
 msgid "Name"
 msgstr "Nome"
 
-#: Messenger/js/Layout.js:406
+#: Messenger/js/Layout.js:405
 msgid "Group"
 msgstr "Grupo"
 
-#: Messenger/js/Layout.js:412
+#: Messenger/js/Layout.js:411
 msgid "Select a group"
 msgstr "Selecione um grupo"
 
-#: Messenger/js/Layout.js:422
-#: Messenger/js/Layout.js:465
+#: Messenger/js/Layout.js:421
+#: Messenger/js/Layout.js:464
 msgid "Add"
 msgstr "Incluir"
 
-#: Messenger/js/Layout.js:498
+#: Messenger/js/Layout.js:497
 msgid "Join Groupchat"
 msgstr "Entrar em Sala de Bate-papo"
 
-#: Messenger/js/Layout.js:507
+#: Messenger/js/Layout.js:506
 msgid "Identity"
 msgstr "Identidade"
 
-#: Messenger/js/Layout.js:513
+#: Messenger/js/Layout.js:512
 msgid "Host"
 msgstr "Anfitrião"
 
-#: Messenger/js/Layout.js:518
+#: Messenger/js/Layout.js:517
 msgid "Room"
 msgstr "Sala"
 
-#: Messenger/js/Layout.js:523
+#: Messenger/js/Layout.js:522
 msgid "Nickname"
 msgstr "Apelido"
 
-#: Messenger/js/Layout.js:529
+#: Messenger/js/Layout.js:528
 msgid "Password"
 msgstr "Senha"
 
-#: Messenger/js/Layout.js:533
+#: Messenger/js/Layout.js:532
 msgid "Join"
 msgstr "Entrar"
 

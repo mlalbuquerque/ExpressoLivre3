@@ -12,6 +12,8 @@ class Messenger_Preference extends Tinebase_Preference_Abstract
     
     const MESSENGERSTART = 'messengerStart';
     
+    const OFFLINECONTACTS = 'offlineContacts';
+    
     
     /**
      * application
@@ -41,6 +43,7 @@ class Messenger_Preference extends Tinebase_Preference_Abstract
             self::CHATHISTORY,
             self::NAME,
             self::MESSENGERSTART,
+            self::OFFLINECONTACTS,
         );
         
         return $allPrefs;
@@ -71,6 +74,10 @@ class Messenger_Preference extends Tinebase_Preference_Abstract
             self::MESSENGERSTART  => array(
                 'label'         => $translate->_('Messenger Start'),
                 'description'   => $translate->_('How Messenger should start at Expresso loading.'),
+            ),
+            self::OFFLINECONTACTS  => array(
+                'label'         => $translate->_('Offline Contacts'),
+                'description'   => $translate->_('Show/Hide offline contacts.'),
             ),
         );
         
@@ -132,6 +139,21 @@ class Messenger_Preference extends Tinebase_Preference_Abstract
                         <option>
                             <label>' . $translate->_('Start Messenger pressing "Login" button at Messenger Window') . '</label>
                             <value>connect</value>
+                        </option>
+                    </options>';
+                break;
+            case self::OFFLINECONTACTS:
+                $preference->personal_only  = TRUE;
+                $preference->value      = 'show';
+                $preference->options    = '<?xml version="1.0" encoding="UTF-8"?>
+                    <options>
+                        <option>
+                            <label>' . $translate->_("Show offline contacts") . '</label>
+                            <value>show</value>
+                        </option>
+                        <option>
+                            <label>' . $translate->_("Don't show offline contacts") . '</label>
+                            <value>dont</value>
                         </option>
                     </options>';
                 break;
