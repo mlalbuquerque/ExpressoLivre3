@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: Tine 2.0 Messenger\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-11-23 16:02-0300\n"
-"PO-Revision-Date: 2012-11-23 16:02-0300\n"
-"Last-Translator: Marcio Albuquerque <marcio.lima.albuquerque@gmail.com>\n"
+"PO-Revision-Date: 2012-11-23 18:05-0300\n"
+"Last-Translator: Cassiano Dal Pizzol <cassiano@dalpizzol@serpro.gov.br>\n"
 "Language-Team: SERPRO Expresso <marcio.albuquerque@serpro.gov.br>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -590,30 +590,22 @@ msgstr "Iniciar chat de vídeo"
 
 #~ msgid "Connect"
 #~ msgstr "Conectar"
-
 #~ msgid "Actions"
 #~ msgstr "Acciones"
-
 #~ msgid "Logout"
 #~ msgstr "Cerrar sesión"
-
 #~ msgid "Show notifications ..."
 #~ msgstr "Mostrar notificaciones ..."
-
 #~ msgid "History of chats ..."
 #~ msgstr "Historial de Cahts ..."
-
 #~ msgid "Custon name ..."
 #~ msgstr "Nombre personalizado ..."
-
 #~ msgid "Action"
-
 #~ msgid_plural "Actions"
 #~ msgstr[0] "Accion"
 #~ msgstr[1] "Acciones"
-
 #~ msgid "Preference"
-
 #~ msgid_plural "Preferences"
 #~ msgstr[0] "Preferencia"
 #~ msgstr[1] "Preferencias"
+
