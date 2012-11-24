@@ -150,10 +150,13 @@ Tine.Felamimail.setTreeContextMenus = function() {
                         this.ctxNode.setText(account.get('name'));
                         this.accountStore.reload();
                         
-                        // reload tree node + remove all folders of this account from store ?
-                        this.folderStore.resetQueryAndRemoveRecords('parent_path', '/' + this.ctxNode.attributes.account_id);
-                        this.ctxNode.reload(function(callback) {
-                        });
+                        if (account.get('type') != 'system')
+                        {
+                            // reload tree node + remove all folders of this account from store ?
+                            this.folderStore.resetQueryAndRemoveRecords('parent_path', '/' + this.ctxNode.attributes.account_id);
+                            this.ctxNode.reload(function(callback) {
+                            });
+                        }
                     }
                 }
             });
