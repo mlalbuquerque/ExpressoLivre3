@@ -1218,7 +1218,10 @@ msgstr "talvez ela já exista."
 msgid "Shared Folders"
 msgstr "Compartilhadas"
 
-#: js/Felamimail.js:906
+#: js/Felamimail.js:909
 msgid "IMAP Backend Warning"
 msgstr "Aviso de IMAP"
 
+#: js/Felamimail.js:910
+msgid "Too much results, please refine your filter!"
+msgstr "Muitos resultados encontrados, por favor refine seu filtro!"
