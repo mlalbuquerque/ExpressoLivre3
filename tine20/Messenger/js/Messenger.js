@@ -2,7 +2,7 @@ Ext.ns('Tine.Messenger');
 
 // Messenger Application constants
 var MESSENGER_CHAT_ID_PREFIX = 'messenger-chat-',
-    MESSENGER_DEBUG = true;
+    MESSENGER_DEBUG = false;
 
 Tine.Messenger.factory={
     statusStore : new Ext.data.SimpleStore({
@@ -376,14 +376,16 @@ Tine.Messenger.IM = {
         // Verify if is showing or hiding
         var displayBt = Ext.getCmp('messenger-show-offline-contacts');
         var i18n = Tine.Tinebase.appMgr.get('Messenger').i18n;
-        
+        console.log('CHEGOU AQUI!!!');
         //if (displayBt.showOffline) {
         if (Tine.Messenger.registry.get('preferences').get('offlineContacts') == 'show') {
+            console.log('MOSTRANDO...');
             $('div.unavailable').show();
             displayBt.setTooltip(i18n._('Hide offline contacts'));
             displayBt.setIcon('images/messenger/hidden_icon_unavailable.png');
             displayBt.showOffline = true;
         } else {
+            console.log('ESCONDENDO...');
             $('div.unavailable').hide();
             displayBt.setTooltip(i18n._('Show offline contacts'));
             displayBt.setIcon('images/messenger/icon_unavailable.png');
@@ -566,5 +568,23 @@ Tine.Messenger.Util = {
             return t[1] - TZ + ":" + t[2] + ":" + t[3];
         }
         return Date().match(/\d{2}\:\d{2}\:\d{2}/)[0];
+    },
+    
+    insertAtCursor: function (myField, myValue) {
+        myField = myField.el.dom;
+        if (document.selection) {
+            myField.focus();
+            var sel = document.selection.createRange();
+            sel.text = myValue;
+        } else if (myField.selectionStart || myField.selectionStart == '0') {
+            var startPos = myField.selectionStart;
+            var endPos = myField.selectionEnd;
+            myField.value = myField.value.substring(0, startPos)
+                          + myValue
+                          + myField.value.substring(endPos, myField.value.length);
+
+        } else {
+            myField.value += myValue;
+        }
     }
 }

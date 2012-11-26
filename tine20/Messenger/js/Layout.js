@@ -287,6 +287,7 @@ Tine.Messenger.AddItems = function(_box) {
                     region: 'south',
                     xtype: 'textfield',
                     height: 30,
+                    name: 'textfield-chat-message',
                     cls:   'text-sender messenger-chat-field',
                     handleMouseEvents: true,
                     enableKeyEvents: true,

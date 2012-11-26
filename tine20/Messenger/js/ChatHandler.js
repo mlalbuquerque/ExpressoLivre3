@@ -338,13 +338,15 @@ Tine.Messenger.ChatHandler = {
         var key = '',
             img = '',
             $xml = $(Tine.Messenger.Application.xml_raw.responseText),
-            $emoticons = $xml.find("emoticon");
+            $emoticons = $xml.find("emoticon"),
+            regexp;
         
         $emoticons.each(function(){ 
             $(this).find("string").each(function(){
                 key = $(this).text().trim();
                 img = $(this).parent().attr("file").trim();
-                message = message.replace(key, "<img src='/images/messenger/emoticons/"+img+".png' alt='"+img+"' />");
+                regexp = new RegExp(key.replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1"), 'g');
+                message = message.replace(regexp, "<img src='/images/messenger/emoticons/"+img+".png' alt='"+img+"' />");
             });
         });
         return message;

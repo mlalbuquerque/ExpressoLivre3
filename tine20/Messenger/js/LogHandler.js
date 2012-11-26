@@ -78,6 +78,7 @@ Tine.Messenger.LogHandler = {
                         if(type == 'unavailable'){
                             status = app.i18n._('is unavailable');
                             Tine.Messenger.RosterTree().updateBuddy(jid, IMConst.ST_UNAVAILABLE);
+                            Tine.Messenger.IM.verifyOfflineContactsDisplay();
                         } else {
                             Tine.Messenger.RosterTree().setResource(from);
                             var show_text = show.text(),
@@ -93,6 +94,7 @@ Tine.Messenger.LogHandler = {
                                 status = app.i18n._('auto status (idle)');
                                 Tine.Messenger.RosterTree().updateBuddy(jid, IMConst.ST_XA, '', status_text);
                             } else {
+                                $('div.available').show();
                                 status = app.i18n._('is on-line');
                                 Tine.Messenger.RosterTree().updateBuddy(jid, IMConst.ST_AVAILABLE, '', status_text);
                             }
