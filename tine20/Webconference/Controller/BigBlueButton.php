@@ -130,10 +130,7 @@ class Webconference_Controller_BigBlueButton {
         $welcomeString = sprintf($translation->_("Welcome to the Webconference %s by %s"), $title, Tinebase_Core::getUser()->accountFullName);      
 	$userEmail = Tinebase_Core::getUser()->accountEmailAddress;
 	$roomName = Tinebase_Core::getUser()->accountLoginName.'_'.time();
-	if ((!isset($title)) || (trim($title) == ""))
-	{
-	    $title = $userName . date(" H:i:s d/m/Y");
-	}
+		
 	$config = $this->_getBigBlueButtonConfigBalance();
 
 	if ($config == null){
