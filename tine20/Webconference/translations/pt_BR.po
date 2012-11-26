@@ -19,8 +19,8 @@ msgid "ERROR (%s): %s"
 msgstr "ERRO (%s): %s"
 
 #: Controler/BigBlueButton.php:119
-msgid "Welcome to the Webconference by %s"
-msgstr "Bem-vindo a Webconferência criada por %s"
+msgid "Welcome to the Webconference %s by %s"
+msgstr "Bem-vindo a Webconferência %s criada por %s "
 
 #: Controler/BigBlueButton.php:247
 msgid "Webconference Invite"
