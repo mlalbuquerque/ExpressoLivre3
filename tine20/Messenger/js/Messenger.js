@@ -587,4 +587,4 @@ Tine.Messenger.Util = {
             myField.value += myValue;
         }
     }
-}
+};
