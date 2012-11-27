@@ -118,11 +118,11 @@ Tine.Addressbook.DynamicContactsDialog = Ext.extend(Tine.widgets.dialog.EditDial
 		            columnWidth: 0.30,
 		            xtype: 'label',
 		            fieldLabel: this.app.i18n._('E-Mail'), 
-		            text: email,
+		            text: email
 		        }, {
 					xtype: 'hidden',
 		            value: email,
-		            name: 'email'+s_index,
+		            name: 'email'+s_index
 		        }, {
 		            columnWidth: 0.23,
 		            fieldLabel: this.app.i18n._('First Name'), 
@@ -292,6 +292,8 @@ Tine.Addressbook.DynamicContactsDialog.openWindow = function (config) {
     var window = Tine.WindowFactory.getWindow({
         width: 720,
         height: 300,
+        closable: false,
+        modal: true,
         name: Tine.Addressbook.DynamicContactsDialog.prototype.windowNamePrefix + id,
         contentPanelConstructor: 'Tine.Addressbook.DynamicContactsDialog',
         contentPanelConstructorConfig: config
