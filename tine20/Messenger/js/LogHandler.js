@@ -144,7 +144,6 @@ Tine.Messenger.LogHandler = {
         
         if (type == IMConst.SB_SUBSCRIBED) {
             Tine.Messenger.LogHandler.status(name, app.i18n._('Accept your subscription'));
-            Tine.Messenger.LogHandler.status(name, _('Accept your subscription'), 'INFO');
             Tine.Messenger.RosterTree().updateBuddy(jid, IMConst.ST_AVAILABLE, IMConst.SB_BOTH);
         }else if(type == IMConst.SB_SUBSCRIBE){
                 var buddy = Tine.Messenger.RosterHandler.getContactElement(jid);
