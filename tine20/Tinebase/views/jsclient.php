@@ -20,7 +20,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=8; IE=7" />
     <meta http-equiv="X-Tine20-Version" content="<?php echo TINE20_PACKAGESTRING ?>" />
     
-    <link rel="icon" href="<?php echo $theme_config[0]; ?>" type="image/x-icon" />
+    <link rel="shortcut icon" href="<?php echo $theme_config[0]; ?>" type="image/x-icon" />
     <link rel="chrome-application-definition" href="chrome_web_app.json" />
 </head>
 <body>
