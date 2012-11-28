@@ -62,6 +62,12 @@ return array(
                 'path' => 'expresso30',
                 'useBlueAsBase' => 1,
             ),
+        2 =>
+            array (
+                'name' => 'Serpro',
+                'path' => 'serpro',
+                'useBlueAsBase' => 1,
+            ),
         ),
     ),
 );

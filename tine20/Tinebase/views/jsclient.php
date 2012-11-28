@@ -9,6 +9,9 @@
  * @copyright   Copyright (c) 2007-2011 Metaways Infosystems GmbH (http://www.metaways.de)
  */
 ?>
+<?php
+    $theme_config = Tinebase_View::getThemeConfig();
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -17,7 +20,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=8; IE=7" />
     <meta http-equiv="X-Tine20-Version" content="<?php echo TINE20_PACKAGESTRING ?>" />
     
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="<?php echo $css_config[0]; ?>" type="image/x-icon" />
     <link rel="chrome-application-definition" href="chrome_web_app.json" />
 </head>
 <body>
@@ -32,13 +35,13 @@
     <!-- EXT JS -->
 
      <?php 
-        $js_config = Tinebase_View::getJSConfig();
-		echo $js_config[0];
-                echo $js_config[1];
+        echo $theme_config[1];
+        echo $theme_config[2];
      ?>
 
     <script type="text/javascript" src="library/ExtJS/adapter/ext/ext-base<?php echo TINE20_BUILDTYPE != 'RELEASE' ? '-debug' : '' ?>.js"></script>
     <script type="text/javascript" src="library/ExtJS/ext-all<?php echo TINE20_BUILDTYPE != 'RELEASE' ? '-debug' : '' ?>.js"></script>
+
     <?php require 'Tinebase/views/includeJsAndCss.php'; ?>
 
     <script type="text/javascript" src="library/ExtJS/plugins/googiespell/AJS.js"></script>

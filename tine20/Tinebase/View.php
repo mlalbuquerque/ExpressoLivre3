@@ -17,11 +17,13 @@
  */
 class Tinebase_View
 {
-	public static function getJSConfig()
+
+        public static function getThemeConfig()
 	{
 		$extJS     = 'ext-all.css';
 		$pathTheme = 'tine20/resources/css/tine20.css';
-		$output = array('','');
+		$output = array('','','');
+                $favicon = 'images/favicon.ico';
 
 		if(isset(Tinebase_Core::getConfig()->themes->default))
 		{
@@ -42,11 +44,16 @@ class Tinebase_View
 				{
 					$extJS = 'ext-all-notheme.css';
 				}
-			}
+                                if (file_exists('themes/' . $pathTheme . '/resources/images/favicon.ico')) 
+                                {
+                                        $favicon = 'themes/' . $pathTheme . '/resources/images/favicon.ico';
+                                }
+                        }
 		}
 		
-		$output[0] =  '<link rel="stylesheet" type="text/css" href="library/ExtJS/resources/css/'.$extJS.'" />';
-		$output[1] =  '<link rel="stylesheet" type="text/css" href="themes/'.$pathTheme.'/resources/css/'.$pathTheme.'.css" />';
+                $output[0] =  $favicon;
+                $output[1] =  '<link rel="stylesheet" type="text/css" href="library/ExtJS/resources/css/'.$extJS.'" />';
+		$output[2] =  '<link rel="stylesheet" type="text/css" href="themes/'.$pathTheme.'/resources/css/'.$pathTheme.'.css" />';
 		return $output;
 	}
 
