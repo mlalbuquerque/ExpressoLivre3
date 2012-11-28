@@ -396,4 +396,4 @@ Tine.Messenger.RosterHandler = {
         return true;
     }
     
-}
+};

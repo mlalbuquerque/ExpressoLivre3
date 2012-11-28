@@ -108,14 +108,15 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
     },
     
     initMessenger: function () {
-        new Tine.Messenger.ClientDialog();
+        var IMwindow = new Tine.Messenger.ClientDialog();
         Tine.Tinebase.MainScreen.getMainMenu().insert(2, {
             xtype: 'button',
-            html: '<span id="messenger">Messenger</span>',
-            cls: 'messenger-icon-off',
+            id: 'messenger',
+            text: 'Messenger',
+            icon: '/images/messenger/talk-balloons-off.png',
             listeners: {
                 click: function () {
-                    Ext.getCmp("ClientDialog").show();
+                    IMwindow.show();
                     if (Tine.Messenger.registry.get('preferences').get('messengerStart') == 'clicking') {
                         this.startMessenger();
                     }
@@ -123,13 +124,16 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
                 scope: this
             }
         });
+
         Tine.Tinebase.MainScreen.getMainMenu().doLayout();
-        $("body").append('<div id="messenger-loghandler-status"></div>')
-                 .append('<iframe id="iframe-upload" src="/upload.html" style="display: none;"></iframe>')
-                 .append('<iframe id="iframe-download" src="" style="display: none;"></iframe>')
-                 .append('<iframe id="iframe-history" src="" style="display: none;"></iframe>');
-        $(window).resize(function(){
-            Tine.Messenger.Window._onMoveWindowAction(Ext.getCmp('ClientDialog'));
+
+        Ext.DomHelper.append(Ext.getBody(), '<div id="messenger-loghandler-status"></div>');
+        Ext.DomHelper.append(Ext.getBody(), '<iframe id="iframe-upload" src="/upload.html" style="display: none;"></iframe>');
+        Ext.DomHelper.append(Ext.getBody(), '<iframe id="iframe-download" src="" style="display: none;"></iframe>');
+        Ext.DomHelper.append(Ext.getBody(), '<iframe id="iframe-history" src="" style="display: none;"></iframe>');
+
+        Ext.EventManager.onWindowResize(function(w, h){
+            Tine.Messenger.Window._onMoveWindowAction(IMwindow);
             // Do to all open chats
             var chats = Ext.query('.messenger-chat-window');
             Ext.each(chats, function (item, index) {
@@ -314,7 +318,7 @@ Tine.Messenger.IM = {
     enableOnConnect: function(){
         console.log('======> CHEGOU EM enableOnConnect');
         // Change IM icon
-        $("#messenger").parent().removeClass("messenger-icon-off").addClass("messenger-icon");
+        Ext.getCmp('messenger').setIcon('/images/messenger/talk-balloons.png');
         
         Ext.getCmp("ClientDialog").setIconClass('messenger-icon');
         Ext.getCmp("ClientDialog").connected = true;
@@ -334,7 +338,7 @@ Tine.Messenger.IM = {
     },
     disableOnDisconnect: function(){
         // Change IM icon
-        $("#messenger").parent().removeClass("messenger-icon").addClass("messenger-icon-off");
+        Ext.getCmp('messenger').setIcon('/images/messenger/talk-balloons-off.png');
         
         Ext.getCmp("ClientDialog").setIconClass('messenger-icon-off');
         Ext.getCmp("ClientDialog").connected = false;
@@ -562,7 +566,7 @@ Tine.Messenger.Util = {
     },
     
     returnTimestamp: function(stamp){
-        const TZ = 3;
+        var TZ = 3;
         if(stamp){
             var t = stamp.match(/(\d{2})\:(\d{2})\:(\d{2})/);
             return t[1] - TZ + ":" + t[2] + ":" + t[3];

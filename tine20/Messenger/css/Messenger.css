@@ -6,7 +6,7 @@
     background: url(/images/messenger/page_go.png);
 }
 
-#messenger {
+#messenger button {
     color: #000000;
     cursor: pointer;
     font-weight: bold;
