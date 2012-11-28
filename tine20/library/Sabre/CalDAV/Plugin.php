@@ -40,6 +40,7 @@ class Sabre_CalDAV_Plugin extends Sabre_DAV_ServerPlugin {
      */
     const CALENDAR_ROOT = 'calendars';
 
+    const TASK_ROOT = 'tasks';
     /**
      * Reference to server object 
      * 

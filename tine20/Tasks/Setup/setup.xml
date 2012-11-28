@@ -57,7 +57,7 @@
                 <field>
                     <name>percent</name>
                     <type>integer</type>
-                    <length>4</length>
+                    <!-- <length>4</length> -->
                 </field>    
                 <field>
                     <name>completed</name>
@@ -67,6 +67,10 @@
                     <name>due</name>
                     <type>datetime</type>
                 </field>            
+                <field>
+                    <name>start_time</name>
+                    <type>datetime</type>
+                </field>
                 <field>
                     <name>class</name>
                     <type>text</type>

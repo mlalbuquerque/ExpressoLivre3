@@ -874,8 +874,9 @@ class Tinebase_Container extends Tinebase_Backend_Sql_Abstract
         if(!$this->hasGrant(Tinebase_Core::getUser(), $containerId, Tinebase_Model_Grants::GRANT_ADMIN)) {
             throw new Tinebase_Exception_AccessDenied('Permission to set color of container denied.');
         }
-        
-        if (! preg_match('/^#[0-9a-fA-F]{6}$/', $_color)) {
+        // modify for thunderbird color
+        $newcolor = substr($_color,0,7); 
+        if (! preg_match('/^#[0-9a-fA-F]{6}$/', $newcolor)) {
             throw new Tinebase_Exception_UnexpectedValue('color is not valid');
         }
         
@@ -884,7 +885,8 @@ class Tinebase_Container extends Tinebase_Backend_Sql_Abstract
         );
         
         $data = array(
-            'color' => $_color
+            //'color' => $_color
+           'color' => $newcolor 
         );
         
         $this->_db->update($this->_tablePrefix . $this->_tableName, $data, $where);

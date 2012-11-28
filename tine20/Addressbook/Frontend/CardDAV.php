@@ -49,10 +49,31 @@ class Addressbook_Frontend_CardDAV extends Sabre_DAV_Collection implements Sabre
         $this->_application = Tinebase_Application::getInstance()->getApplicationByName($this->_applicationName);
     }
     
+    public function createDirectory($Name){
+      $newContainer = new Tinebase_Model_Container(array(
+            'name'              => $Name,
+            'type'              => 'personal',
+            'backend'           => 'Sql',
+            'application_id'    => Tinebase_Application::getInstance()->getApplicationByName($this->_applicationName)->getId() 
+        ));
+
+        if($newContainer->type !== Tinebase_Model_Container::TYPE_PERSONAL and $newContainer->type !== Tinebase_Model_Container::TYPE_SHARED) {
+            throw new Tinebase_Exception_InvalidArgument('Can add personal or shared containers only');
+        }
+                
+        $container = Tinebase_Container::getInstance()->addContainer($newContainer);
+
+        $result = $container->toArray();
+        $result['account_grants'] = Tinebase_Container::getInstance()->getGrantsOfAccount(Tinebase_Core::getUser(), $container->getId())->toArray();
+        $result['path'] = $container->getPath();
+        return $result;
+
+    }
     /**
      * (non-PHPdoc)
      * @see Sabre_DAV_Collection::getChild()
      */
+    
     public function getChild($_name)
     {
         Tinebase_Core::getLogger()->debug(__METHOD__ . '::' . __LINE__ .' path: ' . $this->_path . ' name: ' . $_name);
@@ -64,7 +85,14 @@ class Addressbook_Frontend_CardDAV extends Sabre_DAV_Collection implements Sabre
             # list container
             case 1:
                 try {
-                    $container = $_name instanceof Tinebase_Model_Container ? $_name : Tinebase_Container::getInstance()->getContainerById($_name);
+                    if (is_numeric($_name))
+                        { 
+                          $container = $_name instanceof Tinebase_Model_Container ? $_name : Tinebase_Container::getInstance()->getContainerById($_name);
+                        }
+                       else
+                        {
+                          $container = $_name instanceof Tinebase_Model_Container ? $_name : Tinebase_Container::getInstance()->getContainerByName($this->_applicationName, $_name, Tinebase_Model_Container::TYPE_PERSONAL, Tinebase_Core::getUser());
+                        }
                 } catch (Tinebase_Exception_NotFound $tenf) {
                     throw new Sabre_DAV_Exception_FileNotFound('Directory not found');
                 } catch (Tinebase_Exception_InvalidArgument $teia) {
@@ -90,7 +118,16 @@ class Addressbook_Frontend_CardDAV extends Sabre_DAV_Collection implements Sabre
     
         
     }
-    
+
+
+    function otherusernode($id) {
+
+       //Tinebase_Core::getLogger()->debug(__METHOD__ . '::' . __LINE__ .' Other users:' . $this->_application->name . ' User ADR:' . $id);
+       Tinebase_Core::getLogger()->debug(__METHOD__ . '::' . __LINE__ .' FLAAAAAAAAA aplicacao:' . $this->_application->name . ' Usuarios ADR:' . $id);   
+       $instuser = Tinebase_User::getInstance()->getFullUserById($id);
+       return  $instuser->getOtherUsersContainer($this->_applicationName,Tinebase_Model_Grants::GRANT_READ);
+    }
+   
     /**
      * Returns an array with all the child nodes
      *
@@ -116,19 +153,29 @@ class Addressbook_Frontend_CardDAV extends Sabre_DAV_Collection implements Sabre
                         // skip child => no read permissions
                     }
                 }
-            
-                $containers = Tinebase_Container::getInstance()->getSharedContainer(Tinebase_Core::getUser(), $this->_application->name, Tinebase_Model_Grants::GRANT_SYNC);
+                $containers = Tinebase_Container::getInstance()->getSharedContainer(Tinebase_Core::getUser(), $this->_application->name, Tinebase_Model_Grants::GRANT_READ);
                 foreach ($containers as $container) {
+                  Tinebase_Core::getLogger()->debug(__METHOD__ . '::' . __LINE__ .' SHARE: ');
+
                     try {
                         $children[] = $this->getChild($container);
                     } catch (Sabre_DAV_Exception_FileNotFound $sdavfnf) {
                         // skip child => no read permissions
                     }
                 }
-                
+
+                $containers = Tinebase_Container::getInstance()->getOtherUsersContainer(Tinebase_Core::getUser(), $this->_application->name, Tinebase_Model_Grants::GRANT_READ);
+                foreach ($containers as $container) {
+                   Tinebase_Core::getLogger()->debug(__METHOD__ . '::' . __LINE__ .' OUTROS: ');
+
+                    try {
+                        $children[] = $this->getChild($container);
+                    } catch (Sabre_DAV_Exception_FileNotFound $sdavfnf) {
+                        // skip child => no read permissions
+                    }
+                }
                 break;
         }
-                
         return $children;
         
     }

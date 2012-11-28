@@ -65,9 +65,9 @@ class Tasks_Frontend_Json extends Tinebase_Frontend_Json_Abstract
      */
     public function getTask($id, $containerId = -1, $relatedApp = '')
     {
-        if(strlen($id) == 40) {
+        //if(strlen($id) == 40) {
             $task = Tasks_Controller_Task::getInstance()->get($id);
-        } else {
+        if (!($task instanceof Tasks_Model_Task)){
             $task = new Tasks_Model_Task(array(
                 'container_id' => $containerId
             ), true);

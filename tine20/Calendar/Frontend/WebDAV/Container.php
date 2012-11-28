@@ -80,6 +80,15 @@ class Calendar_Frontend_WebDAV_Container extends Tinebase_WebDav_Container_Abstr
         return new $objectClass($this->_container, $object);
     }
     
+    function otherusernode($id) {
+
+       Tinebase_Core::getLogger()->debug(__METHOD__ . '::' . __LINE__ .' Other users:' . $this->_application->name . ' Usuarios ADR:' . $id);
+    
+       $instuser = Tinebase_User::getInstance()->getFullUserById($id);
+       return  $instuser->getOtherUsersContainer($this->_applicationName,Tinebase_Model_Grants::GRANT_READ);
+    }
+
+    
     /**
      * Returns an array with all the child nodes
      *
@@ -129,11 +138,18 @@ class Calendar_Frontend_WebDAV_Container extends Tinebase_WebDav_Container_Abstr
     public function getProperties($requestedProperties) 
     {
         $displayName = $this->_container->type == Tinebase_Model_Container::TYPE_SHARED ? $this->_container->name . ' (shared)' : $this->_container->name;
-        
         $ctags = Tinebase_Container::getInstance()->getContentSequence($this->_container);
-        
+
+        if ( Tinebase_Application::getInstance()->getApplicationByName('Tasks')->getid() == $this->_container->application_id)
+          {
+                $type = "VTODO";
+           }
+         else
+          { $type = "VEVENT";
+         }
+
         $properties = array(
-            '{http://calendarserver.org/ns/}getctag' => $ctags,
+            '{http://calendarserver.org/ns/}getctag' => $ctags?$ctags:1,
             'id'                => $this->_container->getId(),
             'uri'               => $this->_useIdAsName == true ? $this->_container->getId() : $this->_container->name,
         	'{DAV:}resource-id'	=> 'urn:uuid:' . $this->_container->getId(),
@@ -142,7 +158,7 @@ class Calendar_Frontend_WebDAV_Container extends Tinebase_WebDav_Container_Abstr
             '{DAV:}displayname' => $displayName,
             '{http://apple.com/ns/ical/}calendar-color' => (empty($this->_container->color)) ? '#000000' : $this->_container->color,
             
-            '{' . Sabre_CalDAV_Plugin::NS_CALDAV . '}supported-calendar-component-set' => new Sabre_CalDAV_Property_SupportedCalendarComponentSet(array('VEVENT')),
+            '{' . Sabre_CalDAV_Plugin::NS_CALDAV . '}supported-calendar-component-set' => new Sabre_CalDAV_Property_SupportedCalendarComponentSet(array($type)),
         	'{' . Sabre_CalDAV_Plugin::NS_CALDAV . '}supported-calendar-data'          => new Sabre_CalDAV_Property_SupportedCalendarData(),
         	'{' . Sabre_CalDAV_Plugin::NS_CALDAV . '}calendar-description'		       => 'Calendar ' . $displayName,
     		'{' . Sabre_CalDAV_Plugin::NS_CALDAV . '}calendar-timezone'                => $this->_getCalendarVTimezone()
@@ -187,4 +203,14 @@ class Calendar_Frontend_WebDAV_Container extends Tinebase_WebDav_Container_Abstr
         // Taking out \r to not screw up the xml output
         return str_replace("\r","", $vcalendar->serialize());
     }
+    public function delete()
+    {
+       Tinebase_Core::getLogger()->debug(__METHOD__ . '::' . __LINE__ .' Delete Collection:' . $this->_container->getId());
+ 
+        $_controller = Tinebase_Container::getInstance();
+        $_controller->deleteContainer($this->_container->getId());
+
+        return true;
+    }
+
 }

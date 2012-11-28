@@ -52,7 +52,8 @@ class Tasks_Model_Task extends Tinebase_Record_Abstract
         'deleted_time'         => array('allowEmpty' => true         ),
         'deleted_by'           => array('allowEmpty' => true         ),
         // task only fields
-        'id'                   => array('allowEmpty' => true, 'Alnum'),
+        //'id'                   => array('allowEmpty' => true, 'Alnum'),
+        'id'                   => array('allowEmpty' => true         ),
         'percent'              => array('allowEmpty' => true, 'default' => 0),
         'completed'            => array('allowEmpty' => true         ),
         'due'                  => array('allowEmpty' => true         ),
@@ -68,7 +69,9 @@ class Tasks_Model_Task extends Tinebase_Record_Abstract
         'originator_tz'        => array('allowEmpty' => true         ),
         'priority'             => array('allowEmpty' => true, 'default' => 1),
         'status'               => array('allowEmpty' => true         ),
-        'summary'              => array('presence' => 'required'     ),
+        //'summary'              => array('presence' => 'required'     ),
+        'start_time'           => array('allowEmpty' => true         ),
+        'summary'              => array('alowwEmpty' => true         ),
         'url'                  => array('allowEmpty' => true         ),
         // ical common fields with multiple appearance
         'attach'                => array('allowEmpty' => true        ),
@@ -105,6 +108,7 @@ class Tasks_Model_Task extends Tinebase_Record_Abstract
         'deleted_time', 
         'completed', 
         'dtstart', 
+        'start_time',
         'due', 
         'exdate', 
         'rdate'

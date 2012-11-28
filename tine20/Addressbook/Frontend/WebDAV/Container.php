@@ -37,7 +37,7 @@ class Addressbook_Frontend_WebDAV_Container extends Tinebase_WebDav_Container_Ab
         $ctags = Tinebase_Container::getInstance()->getContentSequence($this->_container);
         
         $properties = array(
-            '{http://calendarserver.org/ns/}getctag' => $ctags,
+            '{http://calendarserver.org/ns/}getctag' => $ctags? $ctags : 1 ,
             'id'                                     => $this->_container->getId(),
             'uri'                                    => $this->_useIdAsName == true ? $this->_container->getId() : $this->_container->name,
             '{DAV:}resource-id'                      => 'urn:uuid:' . $this->_container->getId(),
@@ -59,4 +59,19 @@ class Addressbook_Frontend_WebDAV_Container extends Tinebase_WebDav_Container_Ab
         
         return $response;
     }
+   public function otherusernode($id) {
+        $instuser = Tinebase_User::getInstance()->getFullUserById($id);
+        return  $instuser->getOtherUsersContainer($_applicationName,Tinebase_Model_Grants::GRANT_READ);
+     }
+
+     public function delete()
+     {
+        Tinebase_Core::getLogger()->debug(__METHOD__ . '::' . __LINE__ .' Delete Collection:' . $this->_container->getId());
+
+         $_controller = Tinebase_Container::getInstance();
+         $_controller->deleteContainer($this->_container->getId());
+
+         return true;
+     }
+
 }

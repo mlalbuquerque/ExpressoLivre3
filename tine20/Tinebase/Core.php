@@ -203,7 +203,9 @@ class Tinebase_Core
          * RewriteRule ^/principals   /index.php?frontend=webdav [E=REMOTE_USER:%{HTTP:Authorization},L,QSA]
          * RewriteRule ^/webdav       /index.php?frontend=webdav [E=REMOTE_USER:%{HTTP:Authorization},L,QSA]
          */
-        } elseif(isset($_GET['frontend']) && $_GET['frontend'] == 'webdav') {
+        //} elseif(isset($_GET['frontend']) && $_GET['frontend'] == 'webdav') {
+        //    $server = new Tinebase_Server_WebDAV();
+        } elseif(isset($_SERVER['REDIRECT_WEBDAV']) && $_SERVER['REDIRECT_WEBDAV'] == 'true') {
             $server = new Tinebase_Server_WebDAV();
 
             

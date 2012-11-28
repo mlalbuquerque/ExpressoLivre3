@@ -202,6 +202,12 @@ Ext.namespace('Tine.Tasks');
                             name: 'organizer',
                             allowEmpty: true
                         })
+                    ], [new Ext.ux.form.DateTimeField({
+                            allowBlank: true,
+                            defaultTime: '12:00',
+                            fieldLabel: this.app.i18n._('Start date'),
+                            name: 'start_time'
+                       })
                     ], [{
                         columnWidth: 1,
                         fieldLabel: this.app.i18n._('Notes'),
@@ -276,7 +282,7 @@ Tine.Tasks.TaskEditDialog.openWindow = function (config) {
     var id = (config.record && config.record.id) ? config.record.id : 0;
     var window = Tine.WindowFactory.getWindow({
         width: 900,
-        height: 490,
+        height: 540,
         name: Tine.Tasks.TaskEditDialog.prototype.windowNamePrefix + id,
         contentPanelConstructor: 'Tine.Tasks.TaskEditDialog',
         contentPanelConstructorConfig: config

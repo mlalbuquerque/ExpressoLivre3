@@ -30,6 +30,10 @@ class Tinebase_WebDav_Root extends Sabre_DAV_SimpleCollection
             $caldavChildren[] = new Calendar_Frontend_CalDAV();
         }
 
+        if(Tinebase_Core::getUser()->hasRight('Tasks', Tinebase_Acl_Rights::RUN)) {
+             $caldavTaskChildren[] = new Tasks_Frontend_CalDAV();
+        }
+
         if(Tinebase_Core::getUser()->hasRight('Addressbook', Tinebase_Acl_Rights::RUN)) {
             $carddavChildren[] = new Addressbook_Frontend_CardDAV();
         }
@@ -44,6 +48,7 @@ class Tinebase_WebDav_Root extends Sabre_DAV_SimpleCollection
         parent::__construct('root', array(
             new Sabre_DAV_SimpleCollection(Sabre_CardDAV_Plugin::ADDRESSBOOK_ROOT, $carddavChildren),
             new Sabre_DAV_SimpleCollection(Sabre_CalDAV_Plugin::CALENDAR_ROOT, $caldavChildren),
+            new Sabre_DAV_SimpleCollection(Sabre_CalDAV_Plugin::TASK_ROOT, $caldavTaskChildren),
             new Sabre_DAV_SimpleCollection('webdav', 
                 $webdavChildren
             ),

@@ -146,7 +146,6 @@ class Tinebase_Model_Filter_Container extends Tinebase_Model_Filter_Abstract imp
     public function appendFilterSql($_select, $_backend)
     {
         $this->_resolve();
-        
         $_select->where($this->_getQuotedFieldName($_backend) .  ' IN (?)', empty($this->_containerIds) ? 0 : $this->_containerIds);
     }
     

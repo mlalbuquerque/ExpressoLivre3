@@ -612,7 +612,9 @@ class Calendar_Model_Attender extends Tinebase_Record_Abstract
         
         // resolve display containers
         if ($_resolveDisplayContainers) {
-            $displaycontainerIds = array_diff($allAttendee->displaycontainer_id, array(''));
+            // Problems with array_diff comparing empty array.
+            // $displaycontainerIds = array_diff($allAttendee->displaycontainer_id, array(''));
+            $displaycontainerIds = $allAttendee->displaycontainer_id;
             if (! empty($displaycontainerIds)) {
                 Tinebase_Container::getInstance()->getGrantsOfRecords($allAttendee, Tinebase_Core::getUser(), 'displaycontainer_id');
             }

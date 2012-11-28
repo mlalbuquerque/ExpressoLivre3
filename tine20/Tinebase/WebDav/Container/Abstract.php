@@ -242,8 +242,15 @@ abstract class Tinebase_WebDav_Container_Abstract extends Sabre_DAV_Collection i
                     'protected' => true,
                 );
             }
+            if($grant[Tinebase_Model_Grants::GRANT_ADMIN] == true) {
+                 $acl[] = array(
+                     'privilege' => '{DAV:}write',
+                     'principal' => $principal,
+                     'protected' => true,
+                 );
+            }
         }
-
+           
         if (Tinebase_Core::isLogLevel(Zend_Log::TRACE)) Tinebase_Core::getLogger()->trace(__METHOD__ . '::' . __LINE__ . ' webdav acl ' . print_r($acl, true));
         
         return $acl;
@@ -323,11 +330,28 @@ abstract class Tinebase_WebDav_Container_Abstract extends Sabre_DAV_Collection i
      */
     public function updateProperties($mutations) 
     {
-        return false;
+        try {
+
+          foreach($mutations as $propertyName=>$value) {
+          if (Tinebase_Core::isLogLevel(Zend_Log::TRACE)) Tinebase_Core::getLogger()->trace(__METHOD__ . '::' . __LINE__ . ' propriedades :' . $propertyName .' container id :' . $this->getName());
+
+             if($propertyName == '{DAV:}displayname')  {
+                $container = Tinebase_Container::getInstance()->setContainerName($this->getName(), $value);
+             }
+             else if ($propertyName == "{http://apple.com/ns/ical/}calendar-color"){
+                $container = Tinebase_Container::getInstance()->setContainerColor($this->getName(), $value);
+             }
+          }
+         } catch (Tinebase_Exception $e) {
+             throw new Tinebase_Exception('Problems updating Container!');
+             return false;
+         }
+
+         return true;
     }
-    
+
     /**
-     * 
+     *
      * @return Tinebase_Controller_Record_Interface
      */
     protected function _getController()

@@ -59,6 +59,7 @@ Tine.Tasks.TaskArray = Tine.Tinebase.Model.genericFields.concat([
     { name: 'percent', header: 'Percent' },
     { name: 'completed', type: 'date', dateFormat: Date.patterns.ISO8601Long },
     { name: 'due', type: 'date', dateFormat: Date.patterns.ISO8601Long },
+    { name: 'start_time', type: 'date', dateFormat: Date.patterns.ISO8601Long },  
     // ical common fields
     { name: 'class' },
     { name: 'description' },
@@ -146,6 +147,7 @@ Tine.Tasks.Task.getFilterModel = function() {
         {label: _('Quick search'),                  field: 'query',    operators: ['contains']},
         {filtertype: 'tine.widget.container.filtermodel', app: app, recordClass: Tine.Tasks.Task},
         {label: app.i18n._('Summary'),         field: 'summary' },
+        {label: app.i18n._('Start Date'),        field: 'start_time', valueType: 'date', operators: ['within', 'before', 'after']},
         {label: app.i18n._('Due Date'),        field: 'due', valueType: 'date', operators: ['within', 'before', 'after']},
         {
             label: app.i18n._('Status'),

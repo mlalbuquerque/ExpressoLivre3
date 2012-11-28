@@ -132,6 +132,16 @@ msgstr "Mostrar Fechados"
 msgid "You have to supply a due date, because an alarm ist set!"
 msgstr "Você tem de informar uma data de conclusão, porque um alarme foi solicitado!"
 
+#: js/TaskEditDialog.js:208
+#: Model/Task.php:190
+msgid "Start date"
+msgstr "Data de Inicio"
+
+#js/GridPanel.js:122
+#js/Tasks.js:150
+msgid "Start Date"
+msgstr "Data de Inicio"
+
 #: js/TaskEditDialog.js:187
 msgid "Due date"
 msgstr "Data de conclusão"
