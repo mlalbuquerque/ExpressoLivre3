@@ -593,6 +593,9 @@ abstract class Felamimail_Controller_Message_Abstract extends Tinebase_Controlle
         $messageBody = '';
         
         foreach ($bodyParts as $partId => $partStructure) {
+            if($partStructure['disposition']['type'] == 'ATTACHMENT')
+                continue;
+            
             $bodyPart = $this->getMessagePart($_message, $partId, TRUE);
             
             $body = $this->_getDecodedBodyContent($bodyPart, $partStructure);
