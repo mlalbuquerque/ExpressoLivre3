@@ -21,7 +21,7 @@ class Tinebase_View
         public static function getThemeConfig()
 	{
 		$extJS     = 'ext-all.css';
-		$pathTheme = 'tine20/resources/css/tine20.css';
+		$pathTheme = 'tine20';
 		$output = array('','','');
                 $favicon = 'images/favicon.ico';
 

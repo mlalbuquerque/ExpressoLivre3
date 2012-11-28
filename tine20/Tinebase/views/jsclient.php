@@ -30,15 +30,11 @@
     if(isset(Tinebase_Core::getConfig()->captcha->count) && Tinebase_Core::getConfig()->captcha->count != 0)
     {
         echo "\n".'    <span id="useCaptcha" />'."\n";
-    }    
+    }
+    echo $theme_config[1] . "\n";
+    echo $theme_config[2] . "\n";
     ?>
     <!-- EXT JS -->
-
-     <?php 
-        echo $theme_config[1];
-        echo $theme_config[2];
-     ?>
-
     <script type="text/javascript" src="library/ExtJS/adapter/ext/ext-base<?php echo TINE20_BUILDTYPE != 'RELEASE' ? '-debug' : '' ?>.js"></script>
     <script type="text/javascript" src="library/ExtJS/ext-all<?php echo TINE20_BUILDTYPE != 'RELEASE' ? '-debug' : '' ?>.js"></script>
 
