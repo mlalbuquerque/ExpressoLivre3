@@ -286,7 +286,8 @@ Tine.Messenger.Groupie.handlers = {
 
 Tine.Messenger.Groupie.Roster = function() {
     var chat = Tine.Messenger.Groupie.chat_room,
-        rootNode = chat.getComponent('messenger-chat-table')
+        //rootNode = chat.getComponent('messenger-chat-table')
+	rootNode = chat.getComponent('messenger-chat-textchat').getComponent('messenger-chat-table')
                             .getComponent('messenger-chat-body-roster')
                                .initialConfig.items.getRootNode();
     var default_groups = ['Moderators'

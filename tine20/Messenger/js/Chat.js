@@ -141,14 +141,17 @@ Tine.Messenger.Chat = Ext.extend(Ext.Window, {
             },
             move: function(_box){
                 Tine.Messenger.Window._onMoveWindowAction(_box);
-            }
+            },
+	    beforehide: function(_box){
+		Tine.Messenger.VideoChat.hangup(_box);
+	    }
         }
   });
         Tine.Messenger.Chat.superclass.constructor.apply(this, arguments);
     },
     
     setTextfieldFocus: function () {
-        this.getComponent(2).focus(false, 200); // foco no textfield
+	this.getComponent('messenger-chat-textchat').getComponent(2).focus(false, 200); 
     }
     
 });
