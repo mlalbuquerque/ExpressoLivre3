@@ -547,8 +547,8 @@ class Felamimail_Controller_Message_Send extends Felamimail_Controller_Message_A
                 }
                 
                 $part->disposition = Zend_Mime::DISPOSITION_ATTACHMENT;
-                $part->filename = $name;
-                $part->type = $type . '; name="' . $name . '"';
+                $part->filename = Zend_Mime::encodeQuotedPrintableHeader($name, "UTF-8"); // RFC2047 encode
+                $part->type = $type . '; name="' . Zend_Mime::encodeQuotedPrintableHeader($name, "UTF-8") . '"';
                 
                 $_mail->addAttachment($part);
             }
