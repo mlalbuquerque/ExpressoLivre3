@@ -493,3 +493,8 @@ background-color: #bebebe;
 background-color: #fff;
 padding: 0 5px;
 }
+
+.x-grid3-hd-row td, .x-grid3-row td, .x-grid3-summary-row td 
+{
+font-size: 12px;
+}
