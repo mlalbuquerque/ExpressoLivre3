@@ -152,8 +152,7 @@ class Felamimail_Backend_Cache_Imap_Message extends Felamimail_Backend_Cache_Ima
                     $folder->globalname, $_parent.self::IMAPDELIMITER. $folder->id), $return);                
             }
             
-            // TODO: verify if this test isn't too specific for Cyrus Imapd.
-            if ($folder->globalname !== 'user')
+            if ($folder->is_selectable) // don't return a not selectable folder
             {
                 $return = array_merge(array($_parent.self::IMAPDELIMITER.$folder->id), $return);
             }
