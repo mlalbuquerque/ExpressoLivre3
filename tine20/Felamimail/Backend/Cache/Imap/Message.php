@@ -656,10 +656,16 @@ Tinebase_Core::getLogger()->alert(__METHOD__ . '#####::#####' . __LINE__ . ' Mes
         }else{
             
             $ids = $this->_getIds($imapFilters, $_pagination);
-
+            $maxresults = Tinebase_Config::getInstance()->getConfig('IMAPAdapterMaxSearchResults');
+            
             // get Summarys and merge results
             foreach ($ids as $folderId => $idsInFolder)
             {
+                if (count($ids) !== 1 && count($messages) > $maxresults->value) // when searching more than one folder, break on 1000 records
+                {
+                    throw new Felamimail_Exception_IMAPCacheTooMuchResults();
+                }
+                
                 $folder = Felamimail_Controller_Folder::getInstance()->get($folderId);
 
                 $imap = Felamimail_Backend_ImapFactory::factory($folder->account_id);
@@ -681,11 +687,6 @@ Tinebase_Core::getLogger()->alert(__METHOD__ . '#####::#####' . __LINE__ . ' Mes
                 }
                 
                 $messages = array_merge($messages, $messagesInFolder);
-                
-                if (count($ids) !== 1 && count($messages) > 1000) // when searching more than one folder, break on 1000 records
-                {
-                    throw new Felamimail_Exception_IMAPCacheTooMuchResults();
-                }
                 
             }
             

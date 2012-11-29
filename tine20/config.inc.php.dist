@@ -6,6 +6,7 @@
 
 // minimal configuration
 return array(
+    'IMAPAdapterMaxSearchResults' => 1000,
     'messagecache' => 'sql',
     'captcha' => array('count'=>1),
 	'database' => array(
