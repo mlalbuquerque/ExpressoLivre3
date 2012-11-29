@@ -13,7 +13,7 @@ Ext.ns('Tine.Webconference');
  * MENU: The user start/activate the application via the main menu.
  * EMAIL: The user start/activate the application via an invitation received by email.
  */
-const WebconferenceOrigin = {
+var WebconferenceOrigin = {
     MENU : 0,
     EMAIL : 1
 }
