@@ -8,7 +8,7 @@
 
 Ext.ns('Tine.Webconference');
 
-const WebconferenceRole = {
+var WebconferenceRole = {
     'M' : 'Moderator',
     'A' : 'Attendee',
     'O' : 'Owner'
