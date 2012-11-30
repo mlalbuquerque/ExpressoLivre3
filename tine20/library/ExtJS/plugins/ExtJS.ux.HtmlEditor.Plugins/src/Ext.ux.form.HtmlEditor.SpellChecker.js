@@ -51,6 +51,7 @@ Ext.ux.form.HtmlEditor.SpellChecker = Ext.extend(Ext.util.Observable, {
 								scope: this
 						}],
 						handler: function(){
+                    this.onShow();
 								if (this.btn.pressed)
 										this.spellchecker.spellCheck();
 								else
@@ -68,9 +69,12 @@ Ext.ux.form.HtmlEditor.SpellChecker = Ext.extend(Ext.util.Observable, {
 					Ext.getCmp('spellchecker_button').toggle();
 					Ext.MessageBox.alert(_('Errors'), _('No spelling errors found.'));
 				};
+        
         this.spellchecker.show_change_lang_pic = false;
         this.spellchecker.lang_chck_spell = "";
 				this.spellchecker.setCurrentLanguage("pt");
+    },
+    onShow: function(){
 				this.spellchecker.setIsHTML(this.cmp.getEditorBody());
         this.spellchecker.setEditor(this.cmp);
         this.spellchecker.setTextarea(this.cmp.getEditorBody());
