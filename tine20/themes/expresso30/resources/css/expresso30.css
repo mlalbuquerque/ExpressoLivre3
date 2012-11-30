@@ -450,6 +450,7 @@ background-image: url(../images/oxygen-flat/16x16/actions/system-shutdown.png) !
 .tine-favicon {
 color: transparent !important;
 background-image: none !important;
+visibility: hidden;
 }
 .tw-ftb-filterstructure-treepanel .x-panel-tbar-noborder .x-toolbar,
 .tw-ftb-filterstructure-treepanel .x-panel-body,

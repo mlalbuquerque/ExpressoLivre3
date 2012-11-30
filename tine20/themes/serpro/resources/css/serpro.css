@@ -450,6 +450,7 @@ body {
 .tine-favicon {
 	color: transparent !important;
 	background-image: none !important;
+        visibility: hidden;
 	min-width: 130px !important;
 }
 .tw-ftb-filterstructure-treepanel .x-panel-tbar-noborder .x-toolbar, 
