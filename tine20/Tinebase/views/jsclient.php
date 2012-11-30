@@ -31,10 +31,13 @@
     {
         echo "\n".'    <span id="useCaptcha" />'."\n";
     }
-    echo $theme_config[1] . "\n";
-    echo $theme_config[2] . "\n";
     ?>
     <!-- EXT JS -->
+
+     <?php 
+    echo $theme_config[1] . "\n";
+    ?>
+
     <script type="text/javascript" src="library/ExtJS/adapter/ext/ext-base<?php echo TINE20_BUILDTYPE != 'RELEASE' ? '-debug' : '' ?>.js"></script>
     <script type="text/javascript" src="library/ExtJS/ext-all<?php echo TINE20_BUILDTYPE != 'RELEASE' ? '-debug' : '' ?>.js"></script>
 
@@ -50,6 +53,7 @@
     <script type="text/javascript" src="library/ExtJS/plugins/ExtJS.ux.HtmlEditor.Plugins/src/Ext.ux.form.HtmlEditor.UploadImage.js"></script>
     
      <?php 
+    echo $theme_config[2] . "\n";
 
         $aux0 = explode(',',$_SERVER['HTTP_ACCEPT_LANGUAGE']);
         $aux1 = explode('-',$aux0[0]);
