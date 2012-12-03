@@ -18,6 +18,7 @@ Tine.Messenger.factory={
         })
 };
 
+
 Tine.Messenger.Credential = {
     
     myJid: function(){
