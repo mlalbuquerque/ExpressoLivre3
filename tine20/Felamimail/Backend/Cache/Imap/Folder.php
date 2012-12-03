@@ -287,12 +287,25 @@ Tinebase_Core::getLogger()->alert(__METHOD__ . '#####::#####' . __LINE__ . ' Fol
                 $systemFolders = in_array(strtolower($folder[$folderDecoded['globalName']]['localName']), 
                                                        Felamimail_Controller_Folder::getInstance()->getSystemFolders($folderDecoded['accountId']));
             }
+            $localName = Felamimail_Model_Folder::decodeFolderName($folder[$folderDecoded['globalName']]['localName']);
             
+            if(ereg("^user/[0-9]{11}$",Felamimail_Model_Folder::decodeFolderName($folder[$folderDecoded['globalName']]['globalName'])))
+            {        
+                    try
+                    {
+                        $aux = Tinebase_User::getInstance()->getFullUserByLoginName($localName)->toArray();
+                    }
+                    catch(Exception $exc)
+                    {
+                        
+                    }
+                    $localName = $aux["accountFullName"];
+            }
             
             return new Felamimail_Model_Folder(array(
                     'id' => $_id,
                     'account_id' => $folderDecoded['accountId'],
-                    'localname' => Felamimail_Model_Folder::decodeFolderName($folder[$folderDecoded['globalName']]['localName']),
+                    'localname' => $localName,
                     'globalname' => Felamimail_Model_Folder::decodeFolderName($folder[$folderDecoded['globalName']]['globalName']),
                     'parent' => $folder[$folderDecoded['globalName']]['parent'],
                     'delimiter' => $folder[$folderDecoded['globalName']]['delimiter'],
