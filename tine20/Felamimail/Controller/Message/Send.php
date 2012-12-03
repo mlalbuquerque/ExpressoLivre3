@@ -328,6 +328,21 @@ class Felamimail_Controller_Message_Send extends Felamimail_Controller_Message_A
             $embeddedImages = $_mail->processEmbeddedImagesInHtmlBody($_message->body);
             // now checking embedded signature base64 image
             $base64Images = $_mail->processEmbeddedImageSignatureInHtmlBody($_message->body);
+            //now checking embed images for reply/forward
+            $embeddedImagesReply = $_mail->processEmbeddedImagesInHtmlBodyForReply($_message->body);
+            
+            $cid = array();
+            
+            if(count($embeddedImagesReply)>0)
+            {
+               foreach($embeddedImagesReply as $index => $embeddedImage )
+               { 
+                    $cid[$index] = $_mail->createCid($embeddedImage['messageId']);
+                    $_message->body = str_replace($embeddedImage['match'], '<img alt="'.$embeddedImage['alt'].'" src="cid:'.$cid[$index].'"/>', $_message->body);
+               }
+            }
+                   
+            
             if(count($embeddedImages)>0){
                 $_message->body = str_ireplace('src="index.php?method=Felamimail.showTempImage&amp;tempImageId=','src="cid:', $_message->body);
             }
@@ -348,6 +363,16 @@ class Felamimail_Controller_Message_Send extends Felamimail_Controller_Message_A
                 // again, there should be only one image in the signature
                 $image = base64_decode($base64Images[0][1]);
                 $_mail->createHtmlRelatedAttachment($image,$signature_cid,'image/jpg',Zend_Mime::DISPOSITION_INLINE,Zend_Mime::ENCODING_BASE64,$base64Images[0][0]);
+            }
+            
+            if(count($embeddedImagesReply)>0)
+            {
+               foreach($embeddedImagesReply as $index => $embeddedImage )
+               { 
+                    $part = Felamimail_Controller_Message::getInstance()->getMessagePart($embeddedImage['messageId'], $embeddedImage['messagePart']);
+                    $image = $part->getDecodedStream();
+                    $_mail->createHtmlRelatedAttachment($image,$cid[$index],'image/jpg',Zend_Mime::DISPOSITION_INLINE,Zend_Mime::ENCODING_BASE64,$embeddedImage['alt']);
+               }    
             }
 
             if (Tinebase_Core::isLogLevel(Zend_Log::TRACE)) Tinebase_Core::getLogger()->trace(__METHOD__ . '::' . __LINE__ . ' ' . $_mail->getBodyHtml(TRUE));
