@@ -129,7 +129,7 @@ class Felamimail_Backend_Cache_Imap_Folder extends Felamimail_Backend_Cache_Imap
         
         if (Tinebase_Core::isLogLevel(Zend_Log::INFO)) Tinebase_Core::getLogger()->info(__METHOD__ . '::' . __LINE__ 
             . ' Get subfolders of root for account ' . $_account->getId());
-        $result = $imap->getFolders('', '%');
+        $result = $imap->getFolders('', '%', $_account);
         
         return $result;
     }
@@ -168,7 +168,7 @@ class Felamimail_Backend_Cache_Imap_Folder extends Felamimail_Backend_Cache_Imap
 
             $imap = Felamimail_Backend_ImapFactory::factory($_account);
             $result = $imap->getFolders(
-                                   Felamimail_Model_Folder::encodeFolderName($_folderName) . self::IMAPDELIMITER , '%');
+                                   Felamimail_Model_Folder::encodeFolderName($_folderName) . self::IMAPDELIMITER , '%', $_account);
             
             // remove folder if self
             if (in_array($_folderName, array_keys($result))) {
@@ -233,7 +233,8 @@ Tinebase_Core::getLogger()->alert(__METHOD__ . '#####::#####' . __LINE__ . ' Fol
    
             try {
                 $imap = Felamimail_Backend_ImapFactory::factory($folderDecoded['accountId']);
-                $folder = $imap->getFolders('',$folderDecoded['globalName']);
+                $folder = $imap->getFolders('',$folderDecoded['globalName'],
+                    Felamimail_Controller_Account::getInstance()->get($folderDecoded['accountId']));
                 $counter = $imap->examineFolder($folderDecoded['globalName']);
                 $status = $imap->getFolderStatus($folderDecoded['globalName']);
                 $quota = $imap->getQuota($folderDecoded['globalName']);
@@ -287,12 +288,25 @@ Tinebase_Core::getLogger()->alert(__METHOD__ . '#####::#####' . __LINE__ . ' Fol
                 $systemFolders = in_array(strtolower($folder[$folderDecoded['globalName']]['localName']), 
                                                        Felamimail_Controller_Folder::getInstance()->getSystemFolders($folderDecoded['accountId']));
             }
+            $localName = Felamimail_Model_Folder::decodeFolderName($folder[$folderDecoded['globalName']]['localName']);
             
+            if(ereg("^user/[0-9]{11}$",Felamimail_Model_Folder::decodeFolderName($folder[$folderDecoded['globalName']]['globalName'])))
+            {        
+                    try
+                    {
+                        $aux = Tinebase_User::getInstance()->getFullUserByLoginName($localName)->toArray();
+                    }
+                    catch(Exception $exc)
+                    {
+                        
+                    }
+                    $localName = $aux["accountFullName"];
+            }
             
             return new Felamimail_Model_Folder(array(
                     'id' => $_id,
                     'account_id' => $folderDecoded['accountId'],
-                    'localname' => Felamimail_Model_Folder::decodeFolderName($folder[$folderDecoded['globalName']]['localName']),
+                    'localname' => $localName,
                     'globalname' => Felamimail_Model_Folder::decodeFolderName($folder[$folderDecoded['globalName']]['globalName']),
                     'parent' => $folder[$folderDecoded['globalName']]['parent'],
                     'delimiter' => $folder[$folderDecoded['globalName']]['delimiter'],

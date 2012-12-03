@@ -152,7 +152,8 @@ class Felamimail_Backend_Cache_Imap_Message extends Felamimail_Backend_Cache_Ima
                     $folder->globalname, $_parent.self::IMAPDELIMITER. $folder->id), $return);                
             }
             
-            if ($folder->is_selectable) // don't return a not selectable folder
+            // TODO: verify if this test isn't too specific for Cyrus Imapd.
+            if (if ($folder->is_selectable))
             {
                 $return = array_merge(array($_parent.self::IMAPDELIMITER.$folder->id), $return);
             }
@@ -178,8 +179,6 @@ class Felamimail_Backend_Cache_Imap_Message extends Felamimail_Backend_Cache_Ima
      *
      * @param type $paths
      * @return type 
-     * 
-     * @todo Get all folders when path is in form /accountID
      */
     protected function _getFoldersInfo($paths)
     {
@@ -210,31 +209,31 @@ class Felamimail_Backend_Cache_Imap_Message extends Felamimail_Backend_Cache_Ima
      * @param array $_pathFilters
      * @return array
      * 
+     * @todo implement not in
+     * @todo what happens when path is empty???? is the same as /allinboxes???
      */
     protected function _processPathFilters($_pathFilters)
-    {   
+    {
         $paths = array();
         foreach ($_pathFilters as $pathFilter)
         {
-//            if (empty($pathFilter['value']) || (is_array($pathFilter['value']) && empty($pathFilter['value'][0]))) // get allfolders from all accounts
-//            {
-//                $pathFilter['value'] = $this->_getAllFolders();
-//            }
-            if ($this->_searchNestedArray((Array)$pathFilter['value'], Felamimail_Model_MessageFilter::PATH_ALLINBOXES)) // get all INBOX from all accounts
+            if (empty($pathFilter['value'])) // get allfolders from all accounts
             {
-                $paths = $this->_getAllInboxes();
+                $pathFilter['value'] = $this->_getAllFolders();
+            }
+            else if ($pathFilter['value'] ===  Felamimail_Model_MessageFilter::PATH_ALLINBOXES) // get all INBOX from all accounts
+            {
+                $pathFilter['value'] = $this->_getAllInboxes();
             }
             else if (($pathFilter['operator'] === 'notin'))
             {
-                $paths = array_diff($this->_getAllFolders(), $pathFilter['value']);
+                $pathFilter['value'] = array_diff($this->_getAllFolders(), $pathFilter['value']);
             }
-            else if (($pathFilter['operator'] === 'in') && !empty($pathFilter['value'][0]))
-            {
-                $paths = $pathFilter['value'];
-            }
+            
+            $paths = array_merge($paths,  $pathFilter['value']);
         }
         
-        return $this->_getFoldersInfo(array_unique($paths));
+        return $this->_getFoldersInfo($paths);
     }
     
     /**
@@ -537,7 +536,7 @@ class Felamimail_Backend_Cache_Imap_Message extends Felamimail_Backend_Cache_Ima
                     break;
                 case 'received' :
                     $sort = $_pagination->dir === 'ASC' ?
-                         array('ARRIVAL') : array('REVERSE ARRIVAL');
+                         array('ARRIVAL') : array('REVERSE DATE');
                     break;
                 case 'sent' :
                     $sort = $_pagination->dir === 'ASC' ?
@@ -637,35 +636,33 @@ Tinebase_Core::getLogger()->alert(__METHOD__ . '#####::#####' . __LINE__ . ' Mes
         $messages = array();
         $filterObjects = $_filter->getFilterObjects();
         $imapFilters = $this->_parseFilterGroup($_filter, $_pagination);
-        $pagination = !$_pagination ? new Tinebase_Model_Pagination(NULL, TRUE) : $_pagination;
-        
-        if (empty($imapFilters['paths']))
-        {
-            $paths = $this->_getAllFolders();
-            $imapFilters['paths'] = $this->_getFoldersInfo($paths);
-        }
+        $pagination = !$_pagination ? new Tinebase_Model_Pagination(NULL, TRUE) : $_pagination;       
         
         // TODO: do pagination on $ids and return after getMultiple
-         if($imapFilters['filters'] == 'Id'){
+        if($imapFilters['filters'] == 'Id'){
             $ids = $filterObjects[0]->getValue();
-            $ids = $this->_doPagination((Array)$ids, $pagination);
-            if($_cols === TRUE)
-                return empty($ids) ? array() : $ids;
-            else
-                return empty($ids) ? $this->_rawDataToRecordSet(array()) : $this->getMultiple($ids);
+            $ids = $this->_doPagination($ids, $_pagination);
+            return empty($ids) ? $this->_rawDataToRecordSet(array()) : $this->getMultiple($ids);
         }else{
             
             $ids = $this->_getIds($imapFilters, $_pagination);
-            $maxresults = Tinebase_Config::getInstance()->getConfig('IMAPAdapterMaxSearchResults');
-            
+            if(count($ids) === 1 && count($_cols) == 2 && $_cols[0] == '_id_' && $_cols[1] == 'messageuid')
+            {
+                $return = array();
+                foreach ($ids as $folderId => $idsInFolder)
+                {
+                    $aux = Felamimail_Backend_Cache_Imap_Folder::decodeFolderUid($folderId);
+                    foreach ($idsInFolder as $value)
+                    {
+                        $messageId = Felamimail_Backend_Cache_Imap_Message::createMessageId($aux['accountId'], $folderId, $value);
+                        $return[$messageId] = $value;
+                    } 
+                }
+                return $return;
+            }
             // get Summarys and merge results
             foreach ($ids as $folderId => $idsInFolder)
             {
-                if (count($ids) !== 1 && count($messages) > $maxresults->value) // when searching more than one folder, break on 1000 records
-                {
-                    throw new Felamimail_Exception_IMAPCacheTooMuchResults();
-                }
-                
                 $folder = Felamimail_Controller_Folder::getInstance()->get($folderId);
 
                 $imap = Felamimail_Backend_ImapFactory::factory($folder->account_id);
@@ -688,7 +685,7 @@ Tinebase_Core::getLogger()->alert(__METHOD__ . '#####::#####' . __LINE__ . ' Mes
                 
                 $messages = array_merge($messages, $messagesInFolder);
                 
-            }
+            }            
             
             if ((count($ids) === 1 && !in_array($pagination->sort, $this->_imapSortParams)) ||
                     count($ids) > 1) // do not sort
@@ -833,6 +830,7 @@ Tinebase_Core::getLogger()->alert(__METHOD__ . '#####::#####' . __LINE__ . ' Mes
       */
     public function delete($_id) 
     {
+        $_id = ($_id instanceof Felamimail_Model_Message) ? array($_id->getId()) : $_id;
         if(is_array($_id)){
             foreach($_id as $id){
                 $decodedIds = self::decodeMessageId($id);

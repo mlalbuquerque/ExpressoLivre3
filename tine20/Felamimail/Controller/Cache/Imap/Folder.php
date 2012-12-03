@@ -259,4 +259,19 @@ Tinebase_Core::getLogger()->alert(__METHOD__ . '#####::#####' . __LINE__ . ' Fol
         
         return $folder;
     }
+    
+    /**
+     * sort folder record set
+     * - begin with INBOX + other standard/system folders, add other folders
+     *
+     * @param Tinebase_Record_RecordSet $_folders
+     * @param string $_parentFolder
+     * @return Tinebase_Record_RecordSet
+     * 
+     * @todo do all the sorting here
+     */
+    protected function _sortFolders(Tinebase_Record_RecordSet $_folders, $_parentFolder)
+    {
+        return $_folders; // folder recordset is sorted already on ImapAdapter.
+    }
 }

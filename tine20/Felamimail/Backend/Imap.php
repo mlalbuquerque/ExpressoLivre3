@@ -347,14 +347,17 @@ class Felamimail_Backend_Imap extends Zend_Mail_Storage_Imap
      * @throws Zend_Mail_Storage_Exception
      * @throws Zend_Mail_Protocol_Exception
      */
-    public function getFolders($reference = '', $mailbox = '*')
+    public function getFolders($reference = '', $mailbox = '*', Felamimail_Model_Account $_account = NULL)
     {
         $folders = $this->_protocol->listMailbox((string)$reference, $mailbox);
         if (!$folders) {
             throw new Zend_Mail_Storage_Exception('folder not found');
         }
 
-        ksort($folders, SORT_STRING);
+        // change the sort function
+        $callback = new Felamimail_Backend_Cache_Imap_FolderComparator($_account);
+        uksort($folders, array($callback, 'compare'));
+        //ksort($folders, SORT_STRING);
         
         $result = array();
         
@@ -1017,4 +1020,3 @@ class Felamimail_Backend_Imap extends Zend_Mail_Storage_Imap
     
     
 }
-
