@@ -16,7 +16,6 @@
 class Felamimail_Backend_Cache_Imap_Message extends Felamimail_Backend_Cache_Imap_Abstract
                                                 implements Felamimail_Backend_Cache_MessageInterface
 {
-    
        // Probably we'll never use this attribute
 //    /**
 //     * Table name without prefix
