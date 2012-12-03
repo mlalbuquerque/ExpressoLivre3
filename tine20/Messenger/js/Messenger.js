@@ -176,9 +176,12 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
         if (MESSENGER_DEBUG)
             Tine.Tinebase.appMgr.get('Messenger').debugFunction();
         
+        var textToSend = Tine.Tinebase.registry.get('currentAccount').accountId +
+                         ':' +
+                         Tine.Tinebase.registry.get('currentAccount').accountEmailAddress;
         Tine.Messenger.Application.connection.connect(
             Tine.Messenger.Util.getJidFromConfig(),
-            base64.encode(Tine.Tinebase.registry.get('currentAccount').contact_id),
+            base64.encode(textToSend),
             Tine.Tinebase.appMgr.get('Messenger').connectionHandler
         );
     },
