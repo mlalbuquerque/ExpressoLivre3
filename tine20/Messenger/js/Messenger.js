@@ -147,7 +147,7 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
         // Loading Messenger
         Ext.getCmp('connectloading').show();
         
-        this.getPasswordForJabber();
+        this.connectToJabber();
         
         Ext.getCmp("ClientDialog").show();
 
@@ -170,35 +170,17 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
         return Tine.Messenger.Application.connection;
     },
     
-    getPasswordForJabber: function () {
-        Ext.Ajax.request({
-            params: {
-                method: Tine.Messenger.IM.getLocalServerInfo,
-                login: Tine.Tinebase.registry.get('currentAccount').accountLoginName
-            },
-            
-            failure: function () {
-                
-            },
-            
-            success: function (response, request) {
-                Tine.Tinebase.registry.add('messengerAccount', {
-                    JID: Tine.Messenger.Util.getJidFromConfig(),
-                    PWD: base64.encode(response.responseText)
-                });
-
-                Tine.Messenger.Application.connection = new Strophe.Connection("/http-bind");
-                
-                if (MESSENGER_DEBUG)
-                    Tine.Tinebase.appMgr.get('Messenger').debugFunction();
-                
-                Tine.Messenger.Application.connection.connect(
-                    Tine.Tinebase.registry.get('messengerAccount').JID,
-                    Tine.Tinebase.registry.get('messengerAccount').PWD,
-                    Tine.Tinebase.appMgr.get('Messenger').connectionHandler
-                );
-            }
-        });
+    connectToJabber: function () {
+        Tine.Messenger.Application.connection = new Strophe.Connection("/http-bind");
+        
+        if (MESSENGER_DEBUG)
+            Tine.Tinebase.appMgr.get('Messenger').debugFunction();
+        
+        Tine.Messenger.Application.connection.connect(
+            Tine.Messenger.Util.getJidFromConfig(),
+            base64.encode(Tine.Tinebase.registry.get('currentAccount').contact_id),
+            Tine.Tinebase.appMgr.get('Messenger').connectionHandler
+        );
     },
     
     connectionHandler: function (status) {
