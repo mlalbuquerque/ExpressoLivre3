@@ -295,12 +295,12 @@ Tinebase_Core::getLogger()->alert(__METHOD__ . '#####::#####' . __LINE__ . ' Fol
                     try
                     {
                         $aux = Tinebase_User::getInstance()->getFullUserByLoginName($localName)->toArray();
+                        $localName = $aux["accountFullName"];
                     }
                     catch(Exception $exc)
                     {
                         
                     }
-                    $localName = $aux["accountFullName"];
             }
             
             return new Felamimail_Model_Folder(array(
