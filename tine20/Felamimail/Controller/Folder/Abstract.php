@@ -384,7 +384,7 @@ abstract class Felamimail_Controller_Folder_Abstract extends Tinebase_Controller
         ));
         
         $folders =  $this->_backend->search($filter);
-        $imap = Felamimail_Backend_ImapFactory::factory($_account);
+        $imap = Felamimail_Backend_ImapFactory::factory($_account->id);
         $return = $imap->getUsersWithSendAsAcl($folders->toArray());
         return $return;
     }
