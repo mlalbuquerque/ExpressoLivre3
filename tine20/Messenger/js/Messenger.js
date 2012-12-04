@@ -176,7 +176,7 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
         if (MESSENGER_DEBUG)
             Tine.Tinebase.appMgr.get('Messenger').debugFunction();
         
-        var textToSend = Tine.Tinebase.registry.get('currentAccount').accountId +
+        var textToSend = Tine.Tinebase.registry.get('currentAccount').contact_id +
                          ':' +
                          Tine.Tinebase.registry.get('currentAccount').accountEmailAddress;
         Tine.Messenger.Application.connection.connect(
