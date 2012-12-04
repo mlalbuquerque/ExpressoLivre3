@@ -16,7 +16,7 @@ Tine.Messenger.ClientDialog = function(args){
             closeAction: 'hide', //'close' - destroy the component
             collapsible: true,
             plain: true,
-            autoScroll:   true,
+            autoScroll: true,
             border: false,
             layout: 'border', // 'fit'
             listeners: {
@@ -185,6 +185,7 @@ Tine.Messenger._Roster =
                                     loader:       new Ext.tree.TreeLoader(),
                                     border:       false,
                                     cls:          'messenger-treeview',
+                                    autoScroll:   true,
                                     rootVisible:  false,
                                     root: new Ext.tree.AsyncTreeNode({
                                         expanded: true,
@@ -550,7 +551,9 @@ Tine.Messenger.WindowConfig = function(window, args) {
         }
     };
     
-    var config = {};
+    var config = {
+        autoScroll: true
+    };
     
     switch(window){
         case Tine.Messenger.WindowLayout.Buddy:

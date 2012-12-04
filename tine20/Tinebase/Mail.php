@@ -231,6 +231,29 @@ class Tinebase_Mail extends Zend_Mail
         return $return;
     }
     
+     /**
+     * Find and process Embedded imagens in HTML body for a reply/forward
+     *
+     * @param  string|Zend_Mime_Part    $html
+     * @return array
+     */
+    public function processEmbeddedImagesInHtmlBodyForReply($html)
+    {
+   //todo achar tudo no formato <img alt="'+data.name+'" src="index.php?method=Felamimail.showTempImage&tempImageId='+data.url+'"/>, criar as partes multipart/related e substituir o src por CID:cid
+        $exp = '/<img alt="([^\"]+)"[ \t\n\r\f\v]src="index.php\?method=Felamimail\.downloadAttachment&amp;messageId=([a-z0-9A-Z]+)&amp;partId=([0-9\.]+)">/';
+       //a-z0-9A-Z. _-
+        preg_match_all($exp, $html, $result);
+        $return = array();
+        foreach($result[0] as $key => $embeddedImage){
+            $return[$key]["match"] = $result[0][$key];
+            $return[$key]["alt"] = $result[1][$key];
+            $return[$key]["messageId"] = $result[2][$key];
+            $return[$key]["messagePart"] = $result[3][$key];
+        }
+        
+        return $return;
+    }
+    
     /**
      * Find and process Embedded imagens in HTML body.
      *

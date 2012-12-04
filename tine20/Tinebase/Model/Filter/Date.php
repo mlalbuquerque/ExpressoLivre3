@@ -99,6 +99,7 @@ class Tinebase_Model_Filter_Date extends Tinebase_Model_Filter_Abstract implemen
         // prepare value
         $value = (array) $this->_getDateValues($this->_operator, $this->_value);
         $timezone = array_value('timezone', $this->_options);
+        $timezone = $timezone ? $timezone : Tinebase_Core::get('userTimeZone');
         foreach ($value as &$date)
         {
             $date = new Tinebase_DateTime($date); // should be in user timezone
