@@ -299,10 +299,10 @@ class Felamimail_Protocol_Imap extends Zend_Mail_Protocol_Imap
      */
     public function getUsersWithSendAsAcl($boxes)
     {
-        $currentUser = Tinebase_Core::getUser()->toArray();
+        $results = Array();
         foreach ($boxes as $box)
         {
-            $this->sendRequest("GETACL", array($this->escapeString($box['globalname'])), $tag);
+            $this->sendRequest("MYRIGHTS", array($this->escapeString($box['globalname'])), $tag);
 
             $result = array();
             while (!$this->readLine($tokens, $tag))
@@ -316,16 +316,11 @@ class Felamimail_Protocol_Imap extends Zend_Mail_Protocol_Imap
             }
             else
             {
-                $results = Array();
-                list(,$boxusername) = explode(Felamimail_Backend_Cache_Imap_Abstract::IMAPDELIMITER,$box['globalname']);
-                for($i = 2; $i < count($result); $i = $i+2)
-                {
-                    if($currentUser['accountLoginName'] != $result[$i]) continue;
-                    
-                    if(stristr($result[$i + 1],'p'))
-                    {
-                        try
+                
+                if(stristr($result[2],'p')){
+                    try
                         {
+                            list(,$boxusername) = explode(Felamimail_Backend_Cache_Imap_Abstract::IMAPDELIMITER,$box['globalname']);
                             $aux = Tinebase_User::getInstance()->getFullUserByLoginName($boxusername)->toArray();   
                         }
                         catch (Tinebase_Exception_NotFound $e)
@@ -336,7 +331,6 @@ class Felamimail_Protocol_Imap extends Zend_Mail_Protocol_Imap
                             Tinebase_Core::getLogger()->debug(__METHOD__ . '::' . __LINE__. ' ' . $e);
                         }                        
                         $results[] = $aux;
-                    }
                 }
             }
         }
@@ -387,13 +381,11 @@ class Felamimail_Protocol_Imap extends Zend_Mail_Protocol_Imap
                 $login = $user['account_id'];
             }
             foreach($folderList as $folder => $value){
-//                $currentUser = Tinebase_Core::getUser()->toArray();
-//                $this->setACL($folder, $currentUser['accountId'], 'lrswipcda');
                 if($user['sendacl']){
-                    $setACL = $this->setACL($folder, $login, 'lrswipcd');
+                    $setACL = $this->setACL($folder, $login, 'lrswikxtep');
                     }
                 elseif($user['writeacl']){
-                    $setACL = $this->setACL($folder, $login, 'lrswicd');
+                    $setACL = $this->setACL($folder, $login, 'lrswikxte');
                     }
                 elseif($user['readacl']){
                     $setACL = $this->setACL($folder, $login, 'lrs');

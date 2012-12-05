@@ -16,7 +16,6 @@
 class Felamimail_Backend_Cache_Imap_Message extends Felamimail_Backend_Cache_Imap_Abstract
                                                 implements Felamimail_Backend_Cache_MessageInterface
 {
-    
        // Probably we'll never use this attribute
 //    /**
 //     * Table name without prefix
@@ -646,6 +645,8 @@ Tinebase_Core::getLogger()->alert(__METHOD__ . '#####::#####' . __LINE__ . ' Mes
         }else{
             
             $ids = $this->_getIds($imapFilters, $_pagination);
+            $maxresults = Tinebase_Config::getInstance()->getConfig('IMAPAdapterMaxSearchResults');
+            
             if(count($ids) === 1 && count($_cols) == 2 && $_cols[0] == '_id_' && $_cols[1] == 'messageuid')
             {
                 $return = array();
@@ -663,6 +664,12 @@ Tinebase_Core::getLogger()->alert(__METHOD__ . '#####::#####' . __LINE__ . ' Mes
             // get Summarys and merge results
             foreach ($ids as $folderId => $idsInFolder)
             {
+                
+                if (count($ids) !== 1 && count($messages) > $maxresults->value) // when searching more than one folder, break on 1000 records
+                {
+                    throw new Felamimail_Exception_IMAPCacheTooMuchResults();
+                }
+                
                 $folder = Felamimail_Controller_Folder::getInstance()->get($folderId);
 
                 $imap = Felamimail_Backend_ImapFactory::factory($folder->account_id);
