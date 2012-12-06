@@ -70,7 +70,7 @@ Tine.Messenger.ClientDialog = function(args){
                                  if (this.systemOn) {
                                      Ext.getCmp('connectloading').hide();
                                      Tine.Messenger.ChatHandler.disconnect();
-                                     Tine.Messenger.IM.changeSystemLogonButton(['run', 'Login']);
+                                     Tine.Messenger.IM.changeSystemLogonButton(['startup', 'Login']);
                                  } else {
                                      Tine.Messenger.ChatHandler.connect();
                                      Tine.Messenger.IM.changeSystemLogonButton(['shutdown', 'Logout']);
