@@ -4,6 +4,11 @@ Tine.Messenger.ChatHandler = {
     // Chat State Messages
     COMPOSING_STATE: " is typing...",
     PAUSED_STATE: " stopped typing!",
+    // for blinking title
+    blinking: false,
+    original_title: null,
+    blink_title: '=== ' + Tine.Tinebase.appMgr.get('Messenger').i18n._("IM Message") + '! ===',
+    blink_timer: null,
     
     formatChatId: function (jid) {
         return (jid.indexOf('@') >= 0) ? 
@@ -208,8 +213,6 @@ Tine.Messenger.ChatHandler = {
         chat_area.doLayout();
         
         chat_area.body.scroll('down', 500); 
-//        $(panel_id).scrollTop($(panel_id).get(0).scrollHeight);
-//        Tine.Messenger.Log.debug(((flow) ? 'Incoming: ' : 'Outgo: ') + msg);
     },
     
     onIncomingMessage: function (message) {
@@ -240,6 +243,8 @@ Tine.Messenger.ChatHandler = {
             // Set received chat message
             Tine.Messenger.ChatHandler.setChatMessage(jid, body.text(), name, 'messenger-receive');
             Tine.Messenger.ChatHandler.setChatState(jid);
+            // If in another tab, it will blink!
+            Tine.Messenger.ChatHandler.blinkTitle();
         }
         
         return true;
@@ -404,6 +409,20 @@ Tine.Messenger.ChatHandler = {
     
     connect: function(status, statusText) {
         messengerLogin(status, statusText);
+    },
+    
+    blinkTitle: function () {
+        Tine.Messenger.ChatHandler.original_title = document.title;
+        
+        if (Tine.Messenger.isBlurred && !Tine.Messenger.ChatHandler.blinking) {
+            Tine.Messenger.ChatHandler.blink_timer = window.setInterval(function () {
+                var title = Tine.Messenger.ChatHandler.original_title,
+                    blink = Tine.Messenger.ChatHandler.blink_title;
+
+                    document.title = document.title == blink ? title : blink;
+            }, 1000);
+            Tine.Messenger.ChatHandler.blinking = true;
+        }
     }
     
 };
