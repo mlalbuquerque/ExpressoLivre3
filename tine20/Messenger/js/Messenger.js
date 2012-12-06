@@ -59,6 +59,9 @@ var IMConst = {
     
 };
 
+// Indicates if the window where Messenger is have focus (false) or not (true)
+Tine.Messenger.isBlurred = false;
+
 Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
     // Tinebase.Application configs
     hasMainScreen: false,
@@ -185,6 +188,23 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
             base64.encode(textToSend),
             Tine.Messenger.Util.callbackWrapper(Tine.Tinebase.appMgr.get('Messenger').connectionHandler)
         );
+            
+        window.onblur = function () {
+            Tine.Messenger.isBlurred = true;
+            console.log('Is Blurred!');
+            console.log(Tine.Messenger.isBlurred);
+            console.log('Blinking: ' + Tine.Messenger.ChatHandler.blinking);
+        };
+        
+        window.onfocus = function () {
+            document.title = Tine.Messenger.ChatHandler.original_title;
+            window.clearInterval(Tine.Messenger.ChatHandler.blink_timer);
+            Tine.Messenger.isBlurred = false;
+            Tine.Messenger.ChatHandler.blinking = false;
+            console.log('NOT Blurred!');
+            console.log(Tine.Messenger.isBlurred);
+            console.log('Blinking: ' + Tine.Messenger.ChatHandler.blinking);
+        };
     },
     
     connectionHandler: function (status, e) {

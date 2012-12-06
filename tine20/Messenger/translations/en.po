@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tine 2.0 Messenger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-05 15:32-0300\n"
-"PO-Revision-Date: 2012-12-06 15:22-0300\n"
-"Last-Translator: Lavoisier Vieira <lavoisier.vieira@serpro.gov.br>\n"
+"POT-Creation-Date: 2012-12-10 17:41-0300\n"
+"PO-Revision-Date: 2012-12-10 17:41-0300\n"
+"Last-Translator: Marcio Albuquerque <marcio.lima.albuquerque@gmail.com>\n"
 "Language-Team: SERPRO Salvador <marcio.albuquerque@serpro.gov.br>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -112,7 +112,7 @@ msgid "Role"
 msgstr "Role"
 
 #: Messenger/js/LogHandler.js:79
-#: Messenger/js/ChatHandler.js:126
+#: Messenger/js/ChatHandler.js:131
 msgid "is unavailable"
 msgstr "is unavailable"
 
@@ -186,12 +186,12 @@ msgid "Error sending: "
 msgstr "Error sending: "
 
 #: Messenger/js/LogHandler.js:206
-#: Messenger/js/ChatHandler.js:100
-#: Messenger/js/ChatHandler.js:109
-#: Messenger/js/Messenger.js:204
-#: Messenger/js/Messenger.js:301
-#: Messenger/js/Messenger.js:311
-#: Messenger/js/Messenger.js:322
+#: Messenger/js/ChatHandler.js:105
+#: Messenger/js/ChatHandler.js:114
+#: Messenger/js/Messenger.js:224
+#: Messenger/js/Messenger.js:321
+#: Messenger/js/Messenger.js:331
+#: Messenger/js/Messenger.js:342
 #: Messenger/js/RosterHandler.js:306
 #: Messenger/js/RosterHandler.js:361
 msgid "Error"
@@ -219,40 +219,44 @@ msgid "Cancel 503: Service unavailable."
 msgstr "Cancel 503: Service unavailable."
 
 #: Messenger/js/LogHandler.js:246
-#: Messenger/js/ChatHandler.js:126
-#: Messenger/js/ChatHandler.js:127
+#: Messenger/js/ChatHandler.js:131
+#: Messenger/js/ChatHandler.js:132
 msgid "Info"
 msgstr "Info"
 
-#: Messenger/js/ChatHandler.js:18
+#: Messenger/js/ChatHandler.js:10
+msgid "IM Message"
+msgstr "IM Message"
+
+#: Messenger/js/ChatHandler.js:23
 msgid "Group chat in room"
 msgstr "Group chat in room"
 
-#: Messenger/js/ChatHandler.js:20
+#: Messenger/js/ChatHandler.js:25
 msgid "Chat with"
 msgstr "Chat with"
 
-#: Messenger/js/ChatHandler.js:84
+#: Messenger/js/ChatHandler.js:89
 msgid "You chose to download the every chat history"
 msgstr "You chose to download the every chat history"
 
-#: Messenger/js/ChatHandler.js:85
+#: Messenger/js/ChatHandler.js:90
 msgid "Do you want to download this chat"
 msgstr "Do you want to download this chat"
 
-#: Messenger/js/ChatHandler.js:101
+#: Messenger/js/ChatHandler.js:106
 msgid "Error downloading Chat History"
 msgstr "Error downloading Chat History"
 
-#: Messenger/js/ChatHandler.js:127
+#: Messenger/js/ChatHandler.js:132
 msgid "Your messages will be sent offline"
 msgstr "Your messages will be sent offline"
 
-#: Messenger/js/ChatHandler.js:233
+#: Messenger/js/ChatHandler.js:237
 msgid " stopped typing!"
 msgstr " stopped typing!"
 
-#: Messenger/js/ChatHandler.js:235
+#: Messenger/js/ChatHandler.js:239
 msgid " is typing..."
 msgstr " is typing..."
 
@@ -262,7 +266,7 @@ msgstr "Group created successfully"
 
 #: Messenger/js/Window.js:21
 #: Messenger/js/Layout.js:43
-#: Messenger/js/Layout.js:453
+#: Messenger/js/Layout.js:455
 msgid "Add Group"
 msgstr "Add Group"
 
@@ -287,39 +291,39 @@ msgstr "Buddy not added"
 msgid "ME"
 msgstr "ME"
 
-#: Messenger/js/Messenger.js:98
+#: Messenger/js/Messenger.js:101
 msgid "Messenger"
 msgid_plural "Messengers"
 msgstr[0] "Messenger"
 msgstr[1] "Messengers"
 
-#: Messenger/js/Messenger.js:195
+#: Messenger/js/Messenger.js:215
 msgid "Connecting"
 msgstr "Connecting"
 
-#: Messenger/js/Messenger.js:205
-#: Messenger/js/Messenger.js:312
+#: Messenger/js/Messenger.js:225
+#: Messenger/js/Messenger.js:332
 msgid "Can't connect to server"
 msgstr "Can't connect to server"
 
-#: Messenger/js/Messenger.js:292
+#: Messenger/js/Messenger.js:312
 msgid "Messenger has been disconnected!"
 msgstr "Messenger has been disconnected!"
 
-#: Messenger/js/Messenger.js:302
+#: Messenger/js/Messenger.js:322
 msgid "Authentication failed"
 msgstr "Authentication failed"
 
-#: Messenger/js/Messenger.js:308
+#: Messenger/js/Messenger.js:328
 msgid "Disconnecting"
 msgstr "Disconnecting"
 
-#: Messenger/js/Messenger.js:323
+#: Messenger/js/Messenger.js:343
 msgid "Unknown error"
 msgstr "Unknown error"
 
-#: Messenger/js/Messenger.js:396
-#: Messenger/js/Messenger.js:409
+#: Messenger/js/Messenger.js:416
+#: Messenger/js/Messenger.js:429
 #: Messenger/js/Layout.js:54
 msgid "Hide offline contacts"
 msgstr "Hide offline contacts"
@@ -329,7 +333,7 @@ msgid "Expresso Messenger"
 msgstr "Expresso Messenger"
 
 #: Messenger/js/Layout.js:34
-#: Messenger/js/Layout.js:377
+#: Messenger/js/Layout.js:379
 msgid "Add Contact"
 msgstr "Add Contact"
 
@@ -362,53 +366,53 @@ msgstr "Do Not Disturb"
 msgid "Unavailable"
 msgstr "Unavailable"
 
-#: Messenger/js/Layout.js:395
+#: Messenger/js/Layout.js:397
 msgid "JID"
 msgstr "JID"
 
-#: Messenger/js/Layout.js:402
-#: Messenger/js/Layout.js:461
+#: Messenger/js/Layout.js:404
+#: Messenger/js/Layout.js:463
 msgid "Name"
 msgstr "Name"
 
-#: Messenger/js/Layout.js:407
+#: Messenger/js/Layout.js:409
 msgid "Group"
 msgstr "Group"
 
-#: Messenger/js/Layout.js:413
+#: Messenger/js/Layout.js:415
 msgid "Select a group"
 msgstr "Select a group"
 
-#: Messenger/js/Layout.js:423
-#: Messenger/js/Layout.js:466
+#: Messenger/js/Layout.js:425
+#: Messenger/js/Layout.js:468
 msgid "Add"
 msgstr "Add"
 
-#: Messenger/js/Layout.js:499
+#: Messenger/js/Layout.js:501
 msgid "Join Groupchat"
 msgstr "Join Groupchat"
 
-#: Messenger/js/Layout.js:508
+#: Messenger/js/Layout.js:510
 msgid "Identity"
 msgstr "Identity"
 
-#: Messenger/js/Layout.js:514
+#: Messenger/js/Layout.js:516
 msgid "Host"
 msgstr "Host"
 
-#: Messenger/js/Layout.js:519
+#: Messenger/js/Layout.js:521
 msgid "Room"
 msgstr "Room"
 
-#: Messenger/js/Layout.js:524
+#: Messenger/js/Layout.js:526
 msgid "Nickname"
 msgstr "Nickname"
 
-#: Messenger/js/Layout.js:530
+#: Messenger/js/Layout.js:532
 msgid "Password"
 msgstr "Password"
 
-#: Messenger/js/Layout.js:534
+#: Messenger/js/Layout.js:536
 msgid "Join"
 msgstr "Join"
 
@@ -610,24 +614,33 @@ msgstr "Can't get Emoticons"
 
 #~ msgid "Options"
 #~ msgstr "Options"
+
 #~ msgid "Connect"
 #~ msgstr "Connect"
+
 #~ msgid "Actions"
 #~ msgstr "Actions"
+
 #~ msgid "Logout"
 #~ msgstr "Logout"
+
 #~ msgid "Show notifications ..."
 #~ msgstr "Show notifications ..."
+
 #~ msgid "History of chats ..."
 #~ msgstr "History of chats ..."
+
 #~ msgid "Custon name ..."
 #~ msgstr "Custon name ..."
+
 #~ msgid "Action"
+
 #~ msgid_plural "Actions"
 #~ msgstr[0] "Action"
 #~ msgstr[1] "Actions"
+
 #~ msgid "Preference"
+
 #~ msgid_plural "Preferences"
 #~ msgstr[0] "Preference"
 #~ msgstr[1] "Preferences"
-
