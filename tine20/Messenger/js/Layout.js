@@ -64,7 +64,7 @@ Tine.Messenger.ClientDialog = function(args){
                              id: 'messenger-logout',
                              xtype: 'button',
                              tooltip: app.i18n._('Login'),
-                             icon: 'images/oxygen/16x16/actions/system-run.png',
+                             icon: 'images/messenger/startup.png',
                              systemOn: false,
                              handler: function() {
                                  if (this.systemOn) {
