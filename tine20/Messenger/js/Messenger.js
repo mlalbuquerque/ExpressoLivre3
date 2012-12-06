@@ -59,9 +59,6 @@ var IMConst = {
     
 };
 
-// Indicates if the window where Messenger is have focus (false) or not (true)
-Tine.Messenger.isBlurred = false;
-
 Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
     // Tinebase.Application configs
     hasMainScreen: false,
@@ -109,6 +106,12 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
             this.startMessengerDelayedTask = new Ext.util.DelayedTask(this.startMessenger, this);
             this.startMessengerDelayedTask.delay(1000);
         }
+        
+        this.isBlurred = false;
+        this.blinking = false;
+        this.windowOriginalTitle = null;
+        this.blinkTitle = "IM Message"; // _('IM Message')
+        this.blinkTimer = null;
     },
     
     initMessenger: function () {
@@ -190,20 +193,16 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
         );
             
         window.onblur = function () {
-            Tine.Messenger.isBlurred = true;
-            console.log('Is Blurred!');
-            console.log(Tine.Messenger.isBlurred);
-            console.log('Blinking: ' + Tine.Messenger.ChatHandler.blinking);
+            Tine.Tinebase.appMgr.get('Messenger').isBlurred = true;
         };
         
         window.onfocus = function () {
-            document.title = Tine.Messenger.ChatHandler.original_title;
-            window.clearInterval(Tine.Messenger.ChatHandler.blink_timer);
-            Tine.Messenger.isBlurred = false;
-            Tine.Messenger.ChatHandler.blinking = false;
-            console.log('NOT Blurred!');
-            console.log(Tine.Messenger.isBlurred);
-            console.log('Blinking: ' + Tine.Messenger.ChatHandler.blinking);
+            if (Tine.Tinebase.appMgr.get('Messenger').isBlurred && Tine.Tinebase.appMgr.get('Messenger').blinking) {
+                document.title = Tine.Tinebase.appMgr.get('Messenger').windowOriginalTitle;
+                window.clearInterval(Tine.Tinebase.appMgr.get('Messenger').blinkTimer);
+                Tine.Tinebase.appMgr.get('Messenger').isBlurred = false;
+                Tine.Tinebase.appMgr.get('Messenger').blinking = false;
+            }
         };
     },
     
