@@ -421,7 +421,7 @@ Tine.Messenger.IM = {
         var pn = Ext.getCmp('messenger-logout'),
             i18n = Tine.Tinebase.appMgr.get('Messenger').i18n;
         
-        pn.setIcon('images/oxygen/16x16/actions/system-' + texts[0] + '.png');
+        pn.setIcon('images/messenger/' + texts[0] + '.png');
         pn.setTooltip(i18n._(texts[1]));
     }
 };
