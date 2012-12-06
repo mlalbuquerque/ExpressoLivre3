@@ -164,7 +164,7 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
         Tine.Messenger.Log.debug("Stopping Messenger...");
         Tine.Tinebase.appMgr.get('Messenger').getConnection().disconnect('Leaving Messenger' + reason);
         Tine.Messenger.Log.debug("Messenger Stopped!");
-        Tine.Messenger.IM.changeSystemLogonButton(['run', 'Login']);
+        Tine.Messenger.IM.changeSystemLogonButton(['startup', 'Login']);
     },
     
     getConnection: function () {
