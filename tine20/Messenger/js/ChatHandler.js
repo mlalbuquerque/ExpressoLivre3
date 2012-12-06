@@ -4,11 +4,6 @@ Tine.Messenger.ChatHandler = {
     // Chat State Messages
     COMPOSING_STATE: " is typing...",
     PAUSED_STATE: " stopped typing!",
-    // for blinking title
-    blinking: false,
-    original_title: null,
-    blink_title: '=== ' + Tine.Tinebase.appMgr.get('Messenger').i18n._("IM Message") + '! ===',
-    blink_timer: null,
     
     formatChatId: function (jid) {
         return (jid.indexOf('@') >= 0) ? 
@@ -412,16 +407,18 @@ Tine.Messenger.ChatHandler = {
     },
     
     blinkTitle: function () {
-        Tine.Messenger.ChatHandler.original_title = document.title;
-        
-        if (Tine.Messenger.isBlurred && !Tine.Messenger.ChatHandler.blinking) {
-            Tine.Messenger.ChatHandler.blink_timer = window.setInterval(function () {
-                var title = Tine.Messenger.ChatHandler.original_title,
-                    blink = Tine.Messenger.ChatHandler.blink_title;
+        Tine.Tinebase.appMgr.get('Messenger').windowOriginalTitle = document.title;
+
+        if (Tine.Tinebase.appMgr.get('Messenger').isBlurred &&
+            !Tine.Tinebase.appMgr.get('Messenger').blinking) {
+            Tine.Tinebase.appMgr.get('Messenger').blinkTimer = window.setInterval(function () {
+                var i18n = Tine.Tinebase.appMgr.get('Messenger').i18n,
+                    title = Tine.Tinebase.appMgr.get('Messenger').windowOriginalTitle,
+                    blink = "=== " + i18n._(Tine.Tinebase.appMgr.get('Messenger').blinkTitle) + "! ===";
 
                     document.title = document.title == blink ? title : blink;
-            }, 1000);
-            Tine.Messenger.ChatHandler.blinking = true;
+            }, 500);
+            Tine.Tinebase.appMgr.get('Messenger').blinking = true;
         }
     }
     
