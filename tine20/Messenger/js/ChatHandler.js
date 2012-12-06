@@ -197,6 +197,7 @@ Tine.Messenger.ChatHandler = {
             chat_table = Ext.getCmp(chat_id).getComponent('messenger-chat-table'),
             chat_area = chat_table.getComponent('messenger-chat-body');
             
+        msg = Tine.Messenger.ChatHandler.replaceLinks(msg);
         var msg_with_emotions = Tine.Messenger.ChatHandler.replaceEmotions(msg);
         
         chat_area.add({
@@ -350,6 +351,10 @@ Tine.Messenger.ChatHandler = {
             });
         });
         return message;
+    },
+    
+    replaceLinks: function(message) {
+        return message.replace(/(http|https|ftp|ftps):\/\/([\S]+)/gi, '<a href="$1://$2" target="_blank">$1://$2</a>');
     },
     
     disconnect: function() {
