@@ -447,7 +447,8 @@ class Sabre_DAV_Server {
             'COPY',
             'MOVE',
             'REPORT',
-            'POST'
+            'POST' 
+            
         );
 
         if (in_array($method,$internalMethods)) {
@@ -990,8 +991,8 @@ class Sabre_DAV_Server {
 
         $body = $this->httpRequest->getBody(true);
         $dom = Sabre_DAV_XMLUtil::loadDOMDocument($body);
-
         $reportName = Sabre_DAV_XMLUtil::toClarkNotation($dom->firstChild);
+        if (Tinebase_Core::isLogLevel(Zend_Log::DEBUG)) Tinebase_Core::getLogger()->debug(__METHOD__ . '::' . __LINE__ . " REPORT  :" . $reportName );
 
         if ($this->broadcastEvent('report',array($reportName,$dom, $uri))) {
 
@@ -1002,25 +1003,32 @@ class Sabre_DAV_Server {
 
     }
     
-    /*POST
-     */
-   
-     protected function httpPost($uri) {
-
-        $body = $this->httpRequest->getBody(true);
-        $dom = Sabre_DAV_XMLUtil::loadDOMDocument($body);
-
-        $reportName = Sabre_DAV_XMLUtil::toClarkNotation($dom->firstChild);
-
-        if ($this->broadcastEvent('report',array($reportName,$dom, $uri))) {
+    /* POST method
+    */
+    protected function httpPost($uri) {
+       if ( preg_match("/schedule-outbox/", $uri) )
+         {
+            if (Tinebase_Core::isLogLevel(Zend_Log::DEBUG)) Tinebase_Core::getLogger()->debug(__METHOD__ . '::' . __LINE__ . " POST  :" . $uri);
+            if ($this->broadcastEvent('unknownMethod',array("POST", $uri))) {
+                // Unsupported method
+                throw new Sabre_DAV_Exception_NotImplemented();
+            }
+         }
+        else
+          {    $body = $this->httpRequest->getBody(true);
+               $dom = Sabre_DAV_XMLUtil::loadDOMDocument($body);
+               $reportName = Sabre_DAV_XMLUtil::toClarkNotation($dom->firstChild);
+               if (Tinebase_Core::isLogLevel(Zend_Log::DEBUG)) Tinebase_Core::getLogger()->debug(__METHOD__ . '::' . __LINE__ . " POST  :" . $reportName);
+               if ($this->broadcastEvent('report',array($reportName,$dom,$uri))) {
 
             // If broadcastEvent returned true, it means the report was not supported
-            throw new Sabre_DAV_Exception_ReportNotImplemented();
+                      throw new Sabre_DAV_Exception_ReportNotImplemented();
 
-        }
+                  }
 
+          }
     }
-
+  
     // }}}
     // {{{ HTTP/WebDAV protocol helpers 
 

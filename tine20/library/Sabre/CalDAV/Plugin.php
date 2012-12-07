@@ -25,6 +25,8 @@ class Sabre_CalDAV_Plugin extends Sabre_DAV_ServerPlugin {
     const NS_CALENDARSERVER = 'http://calendarserver.org/ns/';
 
     const NS_INVERSE = 'urn:inverse:params:xml:ns:inverse-dav';
+ 
+    const NS_DAV = 'DAV:';
 
     /**
      * The following constants are used to differentiate
@@ -122,7 +124,7 @@ class Sabre_CalDAV_Plugin extends Sabre_DAV_ServerPlugin {
             return array(
                  '{' . self::NS_CALDAV . '}calendar-multiget',
                  '{' . self::NS_CALDAV . '}calendar-query',
-                 '{' . self::NS_CALDAV . '}principal-match',
+                 '{' . self::NS_DAV . '}principal-match',
                  '{' . self::NS_INVERSE . '}acl-query',
                  '{' . self::NS_INVERSE . '}user-query',
              
@@ -211,7 +213,7 @@ class Sabre_CalDAV_Plugin extends Sabre_DAV_ServerPlugin {
             case '{'.self::NS_CALDAV.'}calendar-query' :
                 $this->calendarQueryReport($dom);
                 return false;
-            case '{'.self::NS_CALDAV.'}principal-match' :
+            case '{'.self::NS_DAV.'}principal-match' :
                 $this->calendarPrincipalMatch($dom);
                 return false;
             case '{'.self::NS_INVERSE.'}acl-query' :
@@ -449,23 +451,13 @@ class Sabre_CalDAV_Plugin extends Sabre_DAV_ServerPlugin {
     /* Implementing Principal Match */   
  
     public function  calendarPrincipalMatch($dom){
-
-        $self = $dom->getElementsByTagNameNS('urn:inverse:params:xml:ns:inverse-dav','self');
-        if ($self->length==1) {
-             $user = Tinebase_Core::getUser()->getId();
-             $domout = new DOMDocument('1.0','utf-8');
-             
-             $domout->formatOutput = true;
-             $response = $domout->createElement('D:Response');
-             $domout->appendChild($response);
-             $response->appendChild(new DOMElement('D:href', '/principal/users/'.$user));
-             $response->appendChild(new DOMElement('D:status', 'HTTP/1.1 200 ok'));
-
-        }
-          $this->server->httpResponse->sendStatus(207);
-          $this->server->httpResponse->setHeader('Content-Type','application/xml; charset=utf-8');
-          $this->server->httpResponse->sendBody($this->server->generateMultiStatus($response));
-
+        $newProperties = array();
+        $user = Tinebase_Core::getUser()->contact_id;
+        $newProperties['href'] = 'principals/users/'.$user; 
+        $xml[]=$newProperties;
+        $this->server->httpResponse->sendStatus(207);
+        $this->server->httpResponse->setHeader('Content-Type','application/xml; charset=utf-8');
+        $this->server->httpResponse->sendBody($this->server->generateMultiStatus($xml));
     }
 
     /* ACEs for sogo integrator */
