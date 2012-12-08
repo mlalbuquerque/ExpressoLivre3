@@ -719,7 +719,7 @@ Ext.extend(Tine.widgets.grid.FilterToolbar, Ext.Panel, {
      * deletes a filter
      * @param {Ext.Record} filter to delete
      */
-    deleteFilter: function(filter) {
+    deleteFilter: function(filter) {        
         var fRow = this.bwrap.child('tr[id=tw-ftb-frowid-' + filter.id + ']');
         //var isLast = this.filterStore.getAt(this.filterStore.getCount()-1).id == filter.id;
         var isLast = this.filterStore.getCount() == 1,
@@ -747,10 +747,12 @@ Ext.extend(Tine.widgets.grid.FilterToolbar, Ext.Panel, {
         fRow.remove();
         
         this.onFilterRowsChange();
+        this.supressEvents = this.dontRefreshOnDeleteFilter ? true : false;
         
         if (!this.supressEvents) {
             this.onFiltertrigger();
         }
+        this.supressEvents = false;
     },
     
     /**
