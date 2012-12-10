@@ -88,8 +88,7 @@ class Tinebase_Model_Filter_Date extends Tinebase_Model_Filter_Abstract implemen
     
     /**
      *
-     * @return type 
-     * @todo fix method setFromArray()
+     * @return type
      */
     public function getFilterImap()
     {
@@ -110,6 +109,7 @@ class Tinebase_Model_Filter_Date extends Tinebase_Model_Filter_Abstract implemen
         {
             case 'within' :
             case 'inweek' :
+                $value[1]->add(new DateInterval('P1D')); // before is not inclusive, so we have to add a day
                 $return = "SINCE {$value[0]->format($format)} BEFORE {$value[1]->format($format)}";
                 break;
             case 'before' :
@@ -118,7 +118,7 @@ class Tinebase_Model_Filter_Date extends Tinebase_Model_Filter_Abstract implemen
             case 'after' :
                 $return = "SINCE {$value[0]->format($format)}";
                 break;
-            case 'equals' : // errado
+            case 'equals' :
                 $return = "ON {$value[0]->format($format)}";
         }
         
