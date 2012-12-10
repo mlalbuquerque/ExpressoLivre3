@@ -67,50 +67,64 @@ Tine.Messenger.ChatHandler = {
                         chat_text += chat_lines[i].body.dom.innerHTML + '<br style="clear: both;"/>';
 
                     chat_text = chat_text.replace(/src\=\"/gi, 'src="' + protocol + '//' + host);
-                    $.ajax('/savehistory.php', {
-                        dataType: 'json',
-                        type: 'POST',
-                        data: {
-                            "chat_conversation": chat_text,
-                            "chat_id": chat.id,
-                            "chat_title": chat.title
+                    
+                    Ext.Ajax.request({
+                        method: 'post',
+                        params: {
+                            method: 'Messenger.saveChatHistory',
+                            id: chat.id,
+                            title: chat.title,
+                            content: chat_text
                         },
-                        success: function (response) {
-                            if (response.code == 0) {
+                        success: function (result, request) {
+                            var response = JSON.parse(result.responseText);
+                            
+                            if (response.status == 'OK') {
                                 switch (Tine.Messenger.registry.get('preferences').get('chatHistory')) {
-                                    case 'download': 
+                                    case 'download':
                                         Ext.Msg.confirm(
                                             app.i18n._('Chat History'),
                                             app.i18n._('You chose to download the every chat history') + '.<br>' +
                                             app.i18n._('Do you want to download this chat') + '?',
                                             function (id) {
-                                                if (id == 'yes')
-                                                    $('#iframe-history').attr('src', '/download.php?download=yes&file=' + Tine.Messenger.FileTransfer.tmpPath + response.fileName);
-                                                else
-                                                    $('#iframe-history').attr('src', '/download.php?download=no&file=' + Tine.Messenger.FileTransfer.tmpPath + response.fileName);
+                                                var downloader = new Ext.ux.file.Download({
+                                                    params: {
+                                                        method: 'Messenger.getFile',
+                                                        name: response.fileName,
+                                                        tmpfile: response.filePath,
+                                                        downloadOption: id // 'yes' or 'no'
+                                                    }
+                                                });
+                                                downloader.start();
                                             }
                                         );
                                         break;
                                     case 'email':
-                                        Tine.Messenger.saveForFile();
+                                        // Send the file as an e-mail attachment
                                         break;
                                 }
+                            } else if (response.status == 'NO_FILE') {
+                                Ext.Msg.show({
+                                    title: app.i18n._('File Transfer'),
+                                    msg: app.i18n._('Chat has no content') + '!',
+                                    buttons: Ext.Msg.OK,
+                                    icon: Ext.MessageBox.INFO,
+                                    width: 300
+                                });
                             } else {
                                 Ext.Msg.show({
-                                    title: app.i18n._('Error'),
-                                    msg: app.i18n._('Error downloading Chat History')+'!',
+                                    title: app.i18n._('File Transfer Error'),
+                                    msg: app.i18n._('Error creating chat history file') + '!',
                                     buttons: Ext.Msg.OK,
-                                    icon: Ext.MessageBox.ERROR
+                                    icon: Ext.MessageBox.ERROR,
+                                    width: 300
                                 });
                             }
                         },
-                        error: function (xhr, status, err) {
-                            Ext.Msg.show({
-                                title: _('Error'),
-                                msg: app.i18n._(status) + ': ' + app.i18n._(err) + '!',
-                                buttons: Ext.Msg.OK,
-                                icon: Ext.MessageBox.ERROR
-                            });
+                        failure: function (err, details) {
+                            console.log(err);
+                            console.log(details);
+                            Tine.Messenger.Log.error(app.i18n._('Temporary files not deleted'));
                         }
                     });
                 }

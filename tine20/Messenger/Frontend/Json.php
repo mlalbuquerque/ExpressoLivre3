@@ -44,4 +44,9 @@ class Messenger_Frontend_Json extends Tinebase_Frontend_Json_Abstract
        return $this->_controller->removeTempFiles($files);
    }
    
+   public function saveChatHistory($id, $title, $content)
+   {
+       return $this->_controller->saveChatHistory($id, $title, $content);
+   }
+   
 }
