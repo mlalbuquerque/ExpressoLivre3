@@ -18,18 +18,23 @@ Tine.Messenger.Chat = Ext.extend(Ext.Window, {
         tbar: {
             items:[
                 {
+                    xtype: 'button',
+                    plugins: [new Ext.ux.file.BrowsePlugin({
+                        //multiple: true
+                    })],
                     itemId: 'messenger-chat-send',
                     icon: '/images/messenger/page_go.png',
                     tooltip: app.i18n._('Send file'),
-                    handler: function(){
-                        var window_chat = this.ownerCt.ownerCt,
+                    handler: function(filebrowser) { // has second argument: EventObject (optional)
+                        var window_chat = filebrowser.component.ownerCt.ownerCt,
                             id = window_chat.id.substr(MESSENGER_CHAT_ID_PREFIX.length),
                             jid = Tine.Messenger.Util.idToJid(id);
 
-                        Tine.Messenger.FileTransfer.sendRequest(jid);
+                        Tine.Messenger.FileTransfer.sendRequest(jid, filebrowser);
                     }
                 },
                 {
+                    xtype: 'button',
                     itemId: 'messenger-chat-video',
                     icon: '/images/messenger/webcam.png',
                     tooltip: app.i18n._('Start video chat'),
@@ -39,6 +44,7 @@ Tine.Messenger.Chat = Ext.extend(Ext.Window, {
                     }
                  },
                  {
+                    xtype: 'button',
                     itemId: 'messenger-chat-emoticons',
                     icon: '/images/messenger/emoticons/smile.png',
                     tooltip: app.i18n._('Choose a Emoticon'),
@@ -48,7 +54,7 @@ Tine.Messenger.Chat = Ext.extend(Ext.Window, {
                             var mainChatWindow = this;
                             
                             // Show emoticon loading image
-                            Ext.getCmp('emoticon-connectloading').show();
+                            //Ext.getCmp('emoticon-connectloading').show();
                             
                             Ext.Ajax.request({
                                 params: {
@@ -58,7 +64,7 @@ Tine.Messenger.Chat = Ext.extend(Ext.Window, {
 
                                 failure: function (err, details) {
                                     // Hide emoticon loading image
-                                    Ext.getCmp('emoticon-connectloading').hide();
+                                    //Ext.getCmp('emoticon-connectloading').hide();
                                     
                                     Ext.Msg.show({
                                         title: app.i18n._('Emoticons'),
@@ -73,7 +79,7 @@ Tine.Messenger.Chat = Ext.extend(Ext.Window, {
                                     var response = JSON.parse(result.responseText);
                                     
                                     // Hide emoticon loading image
-                                    Ext.getCmp('emoticon-connectloading').hide();
+                                    //Ext.getCmp('emoticon-connectloading').hide();
 
                                     var emoticonWindow = new Ext.Window({
                                         layout: {
@@ -113,14 +119,6 @@ Tine.Messenger.Chat = Ext.extend(Ext.Window, {
                             });
                         }
                     }
-                 },
-                 {
-                    id: 'emoticon-connectloading',
-                    name: 'emoticon-loading',
-                    xtype: 'panel',
-                    border: false,
-                    html: '<img src="/images/messenger/loading_animation_liferay.gif" />',
-                    hidden: true
                  }
             ]
         },

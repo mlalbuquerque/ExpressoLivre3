@@ -44,13 +44,12 @@ Tine.Messenger.RosterTree = function(iq){
                 text: app.i18n._('Send file'),
                 node: _node,
                 icon: '/images/messenger/page_go.png',
-                //plugins: [new Ext.ux.file.BrowsePlugin({})],
-                handler: Tine.Messenger.FileTransfer.sendRequest
-//                handler: function (fileSelector, item) {
-//                    var files = fileSelector.getFileList();
-//                    console.log(files);
-//                    console.log(item);
-//                }
+                plugins: [new Ext.ux.file.BrowsePlugin({})],
+                //handler: Tine.Messenger.FileTransfer.sendRequest
+                handler: function (filebrowser) {
+                    filebrowser.component.ownerCt.hide();
+                    Tine.Messenger.FileTransfer.sendRequest(filebrowser.component.node.id, filebrowser);
+                }
             });
             var menu = new Ext.menu.Menu({
                             items: items

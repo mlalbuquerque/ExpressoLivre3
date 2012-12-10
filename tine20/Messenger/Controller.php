@@ -83,4 +83,15 @@ class Messenger_Controller extends Tinebase_Controller_Event
         );
     }
     
+    public function removeTempFiles($_files)
+    {
+        $value = true;
+        foreach ($_files as $file)
+            $value = $value && unlink($file);
+        
+        return array(
+            'status' => $value
+        );
+    }
+    
 }

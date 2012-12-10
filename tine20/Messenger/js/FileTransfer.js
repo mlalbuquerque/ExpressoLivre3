@@ -4,65 +4,109 @@ Tine.Messenger.FileTransfer = {
     
     resource: null,
     
-    tmpPath: '/tmp/messenger/',
-    
-    sendRequest: function (item) {
+    sendRequest: function (item, filebrowser) {
         var app = Tine.Tinebase.appMgr.get('Messenger');
-        var to = typeof item == 'string' ? item : item.node.attributes.jid,
-            iFrame = $('#iframe-upload'),
-            inputFile = iFrame.contents().find('#sendfile');
+        var to = typeof item == 'string' ? item : item.node.attributes.jid;
 
-        inputFile.click();
-        inputFile.one('change', function () {
-            var form = $(this).parent('form');
-            form.submit();
-        });
+        Tine.Messenger.FileTransfer.chooseResourceAndSend(to, function () {
+            if (Tine.Messenger.FileTransfer.resource == null) {
+                Ext.Msg.show({
+                    title: app.i18n._('File Transfer'),
+                    msg: app.i18n._('You must choose a resource') + '!',
+                    buttons: Ext.Msg.OK,
+                    icon: Ext.MessageBox.INFO,
+                    width: '300px'
+                });
+            } else {
+                var fileName = filebrowser.files[0].name,
+                    fileSize = filebrowser.files[0].size,
+                    htmlText = '<p class="file_transfer_progress">' +
+                               app.i18n._('Sending file') + '...' +
+                               '<span>' + fileName + ' (' + fileSize + ' bytes)</span>' +
+                               '</p>';
 
-        iFrame.one('load', function () {
-            var location = $(this).contents().get(0).location.href,
-                src = location.substring(location.lastIndexOf('/'));
-
-            if (src != '/upload.html') {
-                var uploadResponse = JSON.parse($(this).contents().find('body').text());
-                if (!uploadResponse.error) {
-                    Tine.Messenger.FileTransfer.chooseResourceAndSend(to, function () {
-                        if (Tine.Messenger.FileTransfer.resource == null) {
-                            Ext.Msg.show({
-                                title: app.i18n._('File Transfer'),
-                                msg: app.i18n._('You must choose a resource') + '!',
-                                buttons: Ext.Msg.OK,
-                                icon: Ext.MessageBox.INFO
-                            });
-                        } else {
-                            var info = $msg({'to': to + '/' + Tine.Messenger.FileTransfer.resource});
-                            if (Tine.Messenger.FileTransfer.resource == Tine.Tinebase.registry.get('messenger').messenger.resource) {
-                                info.attrs({'type': 'filetransfer'})
-                                    .c("file", {
-                                        'name': uploadResponse.fileName,
-                                        'path': uploadResponse.path,
-                                        'size': uploadResponse.fileSize
-                                    });
-                            } else {
-                                info.attrs({'type': 'chat'})
-                                    .c("body")
-                                    .t(app.i18n._('File sent') + ' :  ' +
-                                       Tine.Messenger.FileTransfer.downloadURL(uploadResponse.fileName)
-                                    );
-                            }
-                            Tine.Messenger.Application.connection.send(info);
+                var progress = new Ext.Window({
+                    title: app.i18n._('File Transfer'),
+                    items: [
+                        {
+                            html: htmlText,
+                            border: false,
+                            frame: false,
+                            bodyStyle: 'background: transparent'
+                        },
+                        {
+                            xtype: 'progress',
+                            id: 'file-transfer-progress'
                         }
+                    ]
+                });
 
-                        Ext.Msg.show({
-                            title: app.i18n._('File Transfer'),
-                            msg: app.i18n._('File sent') +
-                                 '!<h6 style="padding: 5px 0; width: 300px;">' +
-                                 uploadResponse.fileName +
-                                 ' (' + uploadResponse.fileSize + ' bytes)</h6>',
-                            buttons: Ext.Msg.OK,
-                            icon: Ext.MessageBox.INFO
-                        });
+                var upload = new Ext.ux.file.Upload({
+                    file: filebrowser.files[0],
+                    fileSelector: filebrowser
+                });
+
+                upload.on('uploadcomplete', function (upload, file) {
+                    progress.close();
+
+                    var temps = new Array();
+                    Ext.each(upload.tempFiles, function (item) {
+                        temps.push(item.path);
                     });
-                } else {
+
+                    Ext.Ajax.request({
+                        params: {
+                            method: 'Messenger.removeTempFiles',
+                            files: temps
+                        },
+                        failure:  function (err, details) {
+                            console.log(err);
+                            console.log(details);
+                            Tine.Messenger.Log.error(app.i18n._('Temporary files not deleted'));
+                        },
+                        success: function (result, request) {
+                            var response = JSON.parse(result.responseText);
+                            if (response.status)
+                                Tine.Messenger.Log.info(app.i18n._('Temporary files deleted'));
+                            else
+                                Tine.Messenger.Log.error(app.i18n._('Temporary files not deleted'));
+                        }
+                    });
+                    
+                    var info = $msg({'to': to + '/' + Tine.Messenger.FileTransfer.resource});
+                    if (Tine.Messenger.FileTransfer.resource == Tine.Tinebase.registry.get('messenger').messenger.resource) {
+                        info.attrs({'type': 'filetransfer'})
+                            .c("file", {
+                                'name': file.data.name,
+                                'path': file.data.tempFile.path,
+                                'size': file.data.size
+                            });
+                    } else {
+                        info.attrs({'type': 'chat'})
+                            .c("body")
+                            .t(app.i18n._('File sent') + ' :  ' +
+                               Tine.Messenger.FileTransfer.downloadURL(file.data.name, file.data.tempFile.path)
+                            );
+                    }
+                    Tine.Messenger.Application.connection.send(info);
+                    
+                    Ext.Msg.show({
+                        title: app.i18n._('File Transfer'),
+                        msg: app.i18n._('File sent') +
+                             '!<h6 style="padding: 5px 0; width: 300px;">' +
+                             file.data.name +
+                             ' (' + file.data.size + ' bytes)</h6>',
+                        buttons: Ext.Msg.OK,
+                        icon: Ext.MessageBox.INFO,
+                        width: '300px'
+                    });
+                });
+
+                upload.on('uploadfailure', function (upload, file) {
+                    progress.close();
+
+                    console.log(upload);
+                    console.log(file);
                     Ext.Msg.show({
                         title: app.i18n._('File Transfer Error'),
                         /**
@@ -71,13 +115,17 @@ Tine.Messenger.FileTransfer = {
                          * _('File was not uploaded')
                          * _('File transfer error')
                          */
-                        msg: app.i18n._(uploadResponse.status) + '!',
+                        msg: app.i18n._('Error uploading file') + '!',
                         buttons: Ext.Msg.OK,
                         icon: Ext.MessageBox.ERROR,
                         width: 300
                     });
-                }
-                $(this).attr('src', '/upload.html');
+                });
+
+                progress.getComponent('file-transfer-progress').wait();
+                progress.show();
+                var uploadKey = Tine.Tinebase.uploadManager.queueUpload(upload);
+                Tine.Tinebase.uploadManager.upload(uploadKey); // returns uploaded file
             }
         });
     },
@@ -89,6 +137,7 @@ Tine.Messenger.FileTransfer = {
             file = $(msg).find('file'),
             fileName = file.attr('name'),
             fileSize = file.attr('size'),
+            filePath = file.attr('path'),
             ext = Tine.Messenger.FileTransfer.getExtension(fileName),
             contact = Tine.Messenger.RosterHandler.getContactElement(jid);
 
@@ -108,13 +157,13 @@ Tine.Messenger.FileTransfer = {
                 {
                     text: app.i18n._('Yes'),
                     handler: function() {
-                        Tine.Messenger.FileTransfer.downloadHandler(file, 'yes', confirm)
+                        Tine.Messenger.FileTransfer.downloadHandler(fileName, filePath, 'yes', confirm)
                     }
                 },
                 {
                     text: app.i18n._('No'),
                     handler: function() {
-                        Tine.Messenger.FileTransfer.downloadHandler(file, 'no', confirm)
+                        Tine.Messenger.FileTransfer.downloadHandler(fileName, filePath, 'no', confirm)
                     }
                 }
             ],
@@ -167,19 +216,33 @@ Tine.Messenger.FileTransfer = {
         }
     },
     
-    downloadURL: function (fileName) {
+    downloadURL: function (fileName, filePath) {
         var protocol = window.location.protocol,
             host = window.location.hostname,
             port = window.location.port != 80 ? ':' + window.location.port : '',
-            filePath = '/download.php?download=yes&file=' + Tine.Messenger.FileTransfer.tmpPath + fileName;
+            script = '/index.php',
+            params = '?method=Messenger.getFile'
+                   + '&name=' + fileName
+                   + '&tmpfile=' + filePath
+                   + '&downloadOption=yes';
             
-        return protocol + '//' + host + port + filePath;
+        return protocol + '//' + host + port + script + params;
     },
 
-    downloadHandler: function(file, download, window) {
-        window.close()
-        var filePath = file.attr('path') + file.attr('name');
-        $('#iframe-download').attr('src', '/download.php?file=' + filePath + '&download=' + download);
+    downloadHandler: function(fileName, filePath, download, window) {
+        window.close();
+        
+        var downloader = new Ext.ux.file.Download({
+            params: {
+                method: 'Messenger.getFile',
+                name: fileName,
+                tmpfile: filePath,
+                downloadOption: download
+            }
+        });
+        downloader.start();
+//        var filePath = file.attr('path') + file.attr('name');
+//        $('#iframe-download').attr('src', '/download.php?file=' + filePath + '&download=' + download);
     },
     
     getExtension: function(fileName) {

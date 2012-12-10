@@ -395,3 +395,13 @@
 .emoticon-button {
     margin: 5px 0 0 5px;
 }
+
+p.file_transfer_progress {
+    padding: 10px;
+}
+
+p.file_transfer_progress span {
+    display: block;
+    font-weight: bold;
+    padding: 5px 0 0 20px;
+}

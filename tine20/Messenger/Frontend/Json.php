@@ -39,4 +39,9 @@ class Messenger_Frontend_Json extends Tinebase_Frontend_Json_Abstract
        return $this->_controller->getEmoticons($chatID);
    }
    
+   public function removeTempFiles($files)
+   {
+       return $this->_controller->removeTempFiles($files);
+   }
+   
 }
