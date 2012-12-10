@@ -135,7 +135,6 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
         Tine.Tinebase.MainScreen.getMainMenu().doLayout();
 
         Ext.DomHelper.append(Ext.getBody(), '<div id="messenger-loghandler-status"></div>');
-        Ext.DomHelper.append(Ext.getBody(), '<iframe id="iframe-history" src="" style="display: none;"></iframe>');
 
         Ext.EventManager.onWindowResize(function(w, h){
             Tine.Messenger.Window._onMoveWindowAction(IMwindow);
