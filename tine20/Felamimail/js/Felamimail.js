@@ -774,13 +774,13 @@ Tine.Felamimail.getSignature = function(id) {
 };
 
 /**
- * get email string (n_fileas <email@host.tld>) from contact
+ * get email string (n_fn <email@host.tld>) from contact
  * 
  * @param {Tine.Addressbook.Model.Contact} contact
  * @return {String}
  */
 Tine.Felamimail.getEmailStringFromContact = function(contact) {
-    var result = contact.get('n_fileas') + ' <';
+    var result = contact.get('n_fn') + ' <';
     if (contact.get('email') != '') {
         result += contact.get('email');
     } else {

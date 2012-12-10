@@ -410,4 +410,22 @@ class Tinebase_Setup_Update_Release5 extends Setup_Update_Abstract
         $this->_backend->createTable($declaration, 'Tinebase', 'container_content');
         $this->setApplicationVersion('Tinebase', '5.10');
     }
+
+    /**
+    * update to 5.11
+    * - add ldapSettings (name, host, account, ...) for container
+    */
+    public function update_10()
+    {
+        $declaration = new Setup_Backend_Schema_Field_Xml('
+                <field>
+                    <name>backend_options</name>
+                    <type>text</type>
+                    <default>NULL</default>
+                </field>
+        ');
+        $this->_backend->addCol('container', $declaration);        
+        $this->setTableVersion('container', '6', TRUE);
+        $this->setApplicationVersion('Tinebase', '5.11');
+    }
 }

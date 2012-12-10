@@ -41,6 +41,16 @@ class Tinebase_Model_Container extends Tinebase_Record_Abstract
     const TYPE_OTHERUSERS = 'otherUsers';
     
     /**
+     * type for SQL backends
+     */
+    const BACKEND_SQL = 'Sql';
+
+    /**
+     * type for LDAP backends
+     */
+    const BACKEND_LDAP = 'Ldap';
+
+    /**
      * key in $_validators/$_properties array for the filed which 
      * represents the identifier
      * 
@@ -62,10 +72,8 @@ class Tinebase_Model_Container extends Tinebase_Record_Abstract
      *
      * @var array
      */
-    protected $_filters = array(
-        'name'              => 'StringTrim'
-    );
-    
+    protected $_filters = array('name' => 'StringTrim');
+       
     /**
      * list of zend validator
      * 
@@ -73,28 +81,57 @@ class Tinebase_Model_Container extends Tinebase_Record_Abstract
      *
      * @var array
      */
-    protected $_validators = array(
-        'id'                => array('Digits', 'allowEmpty' => true),
-        'name'              => array('presence' => 'required'),
-        'type'              => array(array('InArray', array(self::TYPE_PERSONAL, self::TYPE_SHARED))),
-        'backend'           => array('presence' => 'required'),
-        'color'             => array('allowEmpty' => true, array('regex', '/^#[0-9a-fA-F]{6}$/')),
-        'application_id'    => array('Alnum', 'presence' => 'required'),
-        'account_grants'    => array('allowEmpty' => true), // non persistent
-        'owner_id'          => array('allowEmpty' => true), // non persistent + only set for personal folders
-        'path'              => array('allowEmpty' => true), // non persistent
+    protected $_validators =  array(
+        'id'               => array('Digits', 'allowEmpty' => true),
+        'name'             => array('presence' => 'required'),
+        'type'             => array(array('InArray', array(self::TYPE_PERSONAL, self::TYPE_SHARED))),
+        'backend'          => array(array('InArray', array(self::BACKEND_LDAP, self::BACKEND_SQL))),
+        'color'            => array('allowEmpty' => true, array('regex', '/^#[0-9a-fA-F]{6}$/')),
+        'application_id'   => array('Alnum', 'presence' => 'required'),
+        'account_grants'   => array('allowEmpty' => true), // non persistent
+        'owner_id'         => array('allowEmpty' => true), // non persistent + only set for personal folders
+        'path'             => array('allowEmpty' => true), // non persistent
+        'backend_options'  => array('allowEmpty' => true),
+        
+//        'ldapName'         => array('allowEmpty' => true),
+//        'ldapHost'         => array('allowEmpty' => true),
+//        'ldapPort'         => array('allowEmpty' => true),
+//        'ldapDn'           => array('allowEmpty' => true),
+//        'ldapAccount'      => array('allowEmpty' => true),
+//        'ldapObjectClass'  => array('allowEmpty' => true),
+//        'ldapBranch'       => array('allowEmpty' => true),
+//        'ldapPassword'     => array('allowEmpty' => true),
+//        'ldapQuickSearch'  => array(array('InArray', array(0, 1))),
+//        'ldapMaxResults'   => array('allowEmpty' => true),
+//        'ldapRecursive'    => array(array('InArray', array(0, 1))),
+        
+        /* Further implementation 
+        'ldapUseSsl'       => array('allowEmpty' => true),
+        'ldapUsername'     => array('allowEmpty' => true),
+        'ldapPassword'     => array('allowEmpty' => true),
+        'ldapBindRequiresDn' => array('allowEmpty' => true),
+        'ldapBaseDn'         => array('allowEmpty' => true),
+        'ldapAccountCanonicalForm'   => array('allowEmpty' => true),
+        'ldapAccountDomainName'      => array('allowEmpty' => true),
+        'ldapAccountDomainNameShort' => array('allowEmpty' => true),
+        'ldapAccountFilterFormat'    => array('allowEmpty' => true),
+        'ldapAllowEmptyPassword'     => array('allowEmpty' => true),
+        'ldapuseStartTls'            => array('allowEmpty' => true),
+        'ldapOptReferrals'           => array('allowEmpty' => true),
+        'ldapTryUsernameSplit'       => array('allowEmpty' => true),
+        */
         
     // only gets updated in increaseContentSequence() + readonly in normal record context
         'content_seq'       => array('allowEmpty' => true),
     
     // modlog fields
-        'created_by'             => array('allowEmpty' => true),
-        'creation_time'          => array('allowEmpty' => true),
-        'last_modified_by'       => array('allowEmpty' => true),
-        'last_modified_time'     => array('allowEmpty' => true),
-        'is_deleted'             => array('allowEmpty' => true),
-        'deleted_time'           => array('allowEmpty' => true),
-        'deleted_by'             => array('allowEmpty' => true),    
+        'created_by'         => array('allowEmpty' => true),
+        'creation_time'      => array('allowEmpty' => true),
+        'last_modified_by'   => array('allowEmpty' => true),
+        'last_modified_time' => array('allowEmpty' => true),
+        'is_deleted'         => array('allowEmpty' => true),
+        'deleted_time'       => array('allowEmpty' => true),
+        'deleted_by'         => array('allowEmpty' => true),    
     );
     
     /**
@@ -114,6 +151,24 @@ class Tinebase_Model_Container extends Tinebase_Record_Abstract
     * @var array
     */
     protected $_readOnlyFields = array('content_seq');
+    
+    /**
+     * 
+     * Container Constructor, decodes the backend options
+     * 
+     * @param mixed $_data
+     * @param bool $bypassFilters sets {@see this->bypassFilters}
+     * @param mixed $convertDates sets {@see $this->convertDates} and optionaly {@see $this->$dateConversionFormat}
+     * @return void
+     * @throws Tinebase_Exception_Record_DefinitionFailure
+     */
+    public function __construct($_data = NULL, $_bypassFilters = false, $_convertDates = true)
+    {
+        parent::__construct($_data, $_bypassFilters, $_convertDates);
+        
+    }
+    
+    
     
     /**
      * converts a int, string or Tinebase_Model_Container to a containerid
@@ -294,5 +349,69 @@ class Tinebase_Model_Container extends Tinebase_Record_Abstract
     public function __toString()
     {
         return $this->name;
+    }
+    
+    /**
+     * Decode and return the array of backendOptions
+     * @return array
+     */
+    public function decodeBackendOptions()
+    {
+        return Zend_Json::decode($this->backend_options);
+    }
+    
+    /**
+     *Encode and set the backend_options value
+     * 
+     * @param array $_backendOptions 
+     */
+    public function encodeBackendOptions($_backendOptions)
+    {
+//            $host           = '10.200.24.11';
+//            $port           = '';
+//            //$dn           = 'ou=regpae,dc=serpro,dc=gov,dc=br';
+//            $dn             = 'dc=serpro,dc=gov,dc=br';
+//            $acc            = 'cn=usernolimits,ou=expressolivre,ou=corp,dc=serpro,dc=gov,dc=br';
+//            $pw             = 'serpro';        
+//            //define o que vai ser mostrado (filtro)
+//            $obj = '(&(phpgwaccounttype=l)(mail=*)(!(phpgwAccountVisible=-1)))';
+//            
+//            //$obj            = '(&(objectclass=posixaccount)(phpgwaccounttype=u))';
+//            $recursive      = 'true';        
+//            $maxResults     = '99';
+//
+//
+//            if ($recursive)
+//            {
+//                $recursive = Zend_Ldap::SEARCH_SCOPE_SUB;
+//            }
+//            else
+//            {
+//                $recursive = Zend_Ldap::SEARCH_SCOPE_BASE;
+//            }
+//            $arrOptions = array(
+//                'host'                      => $host,
+//                'port'                      => $port,
+//                'useSsl'                    => null,
+//                'username'                  => $acc,
+//                'password'                  => $pw,
+//                'bindRequiresDn'            => null,
+//                'baseDn'                    => $dn,
+//                'accountCanonicalForm'      => null,
+//                'accountDomainName'         => null,
+//                'accountDomainNameShort'    => null,
+//                'accountFilterFormat'       => null,
+//                'allowEmptyPassword'        => null,
+//                'useStartTls'               => null,
+//                'optReferrals'              => null,
+//                'tryUsernameSplit'          => null,
+//                'filter'                    => $obj,
+//                'scope'                     => $recursive,
+//                'maxResults'                => $maxResults,
+//                'container'                 => $container->id,
+//                'attributes'                => array(),
+//            );
+        
+        $this->backend_options = Zend_Json::encode($_backendOptions);
     }
 }
