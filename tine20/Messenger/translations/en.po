@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tine 2.0 Messenger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-10 17:43-0300\n"
-"PO-Revision-Date: 2012-12-11 10:47-0300\n"
-"Last-Translator: Lavoisier Vieira <lavoisier.vieira@serpro.gov.br>\n"
+"POT-Creation-Date: 2012-12-11 16:07-0300\n"
+"PO-Revision-Date: 2012-12-11 16:07-0300\n"
+"Last-Translator: Marcio Albuquerque <marcio.lima.albuquerque@gmail.com>\n"
 "Language-Team: SERPRO Salvador <marcio.albuquerque@serpro.gov.br>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -186,10 +186,10 @@ msgid "Error sending: "
 msgstr "Error sending: "
 
 #: Messenger/js/LogHandler.js:206
-#: Messenger/js/Messenger.js:220
-#: Messenger/js/Messenger.js:317
-#: Messenger/js/Messenger.js:327
-#: Messenger/js/Messenger.js:338
+#: Messenger/js/Messenger.js:227
+#: Messenger/js/Messenger.js:324
+#: Messenger/js/Messenger.js:334
+#: Messenger/js/Messenger.js:345
 #: Messenger/js/RosterHandler.js:306
 #: Messenger/js/RosterHandler.js:361
 msgid "Error"
@@ -309,43 +309,74 @@ msgstr "Buddy not added"
 msgid "ME"
 msgstr "ME"
 
-#: Messenger/js/Messenger.js:98
+#: Messenger/js/Messenger.js:44
+msgid "Available"
+msgstr "Available"
+
+#: Messenger/js/Messenger.js:45
+#: Messenger/js/Layout.js:157
+msgid "Unavailable"
+msgstr "Unavailable"
+
+#: Messenger/js/Messenger.js:46
+#: Messenger/js/Layout.js:155
+msgid "Away"
+msgstr "Away"
+
+#: Messenger/js/Messenger.js:47
+msgid "Auto Status (idle)"
+msgstr "Auto Status (idle)"
+
+#: Messenger/js/Messenger.js:48
+#: Messenger/js/Layout.js:156
+msgid "Do Not Disturb"
+msgstr "Do Not Disturb"
+
+#: Messenger/js/Messenger.js:105
 msgid "Messenger"
 msgid_plural "Messengers"
 msgstr[0] "Messenger"
 msgstr[1] "Messengers"
 
-#: Messenger/js/Messenger.js:113
+#: Messenger/js/Messenger.js:120
 msgid "IM Message"
 msgstr "IM Message"
 
-#: Messenger/js/Messenger.js:211
+#: Messenger/js/Messenger.js:218
 msgid "Connecting"
 msgstr "Connecting"
 
-#: Messenger/js/Messenger.js:221
-#: Messenger/js/Messenger.js:328
+#: Messenger/js/Messenger.js:228
+#: Messenger/js/Messenger.js:335
 msgid "Can't connect to server"
 msgstr "Can't connect to server"
 
+#: Messenger/js/Messenger.js:303
+msgid "Leave page"
+msgstr "Leave page"
+
 #: Messenger/js/Messenger.js:308
+msgid "Close window"
+msgstr "Close window"
+
+#: Messenger/js/Messenger.js:315
 msgid "Messenger has been disconnected!"
 msgstr "Messenger has been disconnected!"
 
-#: Messenger/js/Messenger.js:318
+#: Messenger/js/Messenger.js:325
 msgid "Authentication failed"
 msgstr "Authentication failed"
 
-#: Messenger/js/Messenger.js:324
+#: Messenger/js/Messenger.js:331
 msgid "Disconnecting"
 msgstr "Disconnecting"
 
-#: Messenger/js/Messenger.js:339
+#: Messenger/js/Messenger.js:346
 msgid "Unknown error"
 msgstr "Unknown error"
 
-#: Messenger/js/Messenger.js:412
-#: Messenger/js/Messenger.js:425
+#: Messenger/js/Messenger.js:419
+#: Messenger/js/Messenger.js:432
 #: Messenger/js/Layout.js:54
 msgid "Hide offline contacts"
 msgstr "Hide offline contacts"
@@ -375,18 +406,6 @@ msgstr "press ENTER after"
 #: Messenger/js/Layout.js:154
 msgid "Online"
 msgstr "Online"
-
-#: Messenger/js/Layout.js:155
-msgid "Away"
-msgstr "Away"
-
-#: Messenger/js/Layout.js:156
-msgid "Do Not Disturb"
-msgstr "Do Not Disturb"
-
-#: Messenger/js/Layout.js:157
-msgid "Unavailable"
-msgstr "Unavailable"
 
 #: Messenger/js/Layout.js:397
 msgid "JID"
@@ -637,24 +656,33 @@ msgstr "Can't get Emoticons"
 
 #~ msgid "Options"
 #~ msgstr "Options"
+
 #~ msgid "Connect"
 #~ msgstr "Connect"
+
 #~ msgid "Actions"
 #~ msgstr "Actions"
+
 #~ msgid "Logout"
 #~ msgstr "Logout"
+
 #~ msgid "Show notifications ..."
 #~ msgstr "Show notifications ..."
+
 #~ msgid "History of chats ..."
 #~ msgstr "History of chats ..."
+
 #~ msgid "Custon name ..."
 #~ msgstr "Custon name ..."
+
 #~ msgid "Action"
+
 #~ msgid_plural "Actions"
 #~ msgstr[0] "Action"
 #~ msgstr[1] "Actions"
+
 #~ msgid "Preference"
+
 #~ msgid_plural "Preferences"
 #~ msgstr[0] "Preference"
 #~ msgstr[1] "Preferences"
-

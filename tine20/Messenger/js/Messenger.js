@@ -40,6 +40,13 @@ Tine.Messenger.Credential = {
 
 var IMConst = {
    // Status constants
+   /*
+    * _("Available")
+    * _("Unavailable")
+    * _("Away")
+    * _("Auto Status (idle)")
+    * _("Do Not Disturb")
+    */
     ST_AVAILABLE : {id:"available", text:"Available"},
     ST_UNAVAILABLE : {id:"unavailable", text:"Unavailable"},
     ST_AWAY : {id:"away", text:"Away"},
@@ -293,19 +300,19 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
         
             // Start unload events
             window.onbeforeunload = function () {
-                Tine.Tinebase.appMgr.get('Messenger').stopMessenger('Leave page!');
+                Tine.Tinebase.appMgr.get('Messenger').stopMessenger(Tine.Tinebase.appMgr.get('Messenger').i18n._('Leave page') + '!');
             }
 
             // Leaving the page cause disconnection
             window.onunload = function () {
-                Tine.Tinebase.appMgr.get('Messenger').stopMessenger('Close window!');
+                Tine.Tinebase.appMgr.get('Messenger').stopMessenger(Tine.Tinebase.appMgr.get('Messenger').i18n._('Close window') + '!');
             }
         } else if (status === Strophe.Status.DISCONNECTED) {  // Status = 6
             Tine.Messenger.RosterHandler.clearRoster();
             // Disable components
             Tine.Messenger.IM.disableOnDisconnect();
             
-            Ext.Msg.alert('Expresso Messenger', _('Messenger has been disconnected!'));
+            Ext.Msg.alert('Expresso Messenger', Tine.Tinebase.appMgr.get('Messenger').i18n._('Messenger has been disconnected!'));
             window.onbeforeunload = null;
             window.onunload = null;
         } else if (status === Strophe.Status.AUTHFAIL || status === Strophe.Status.DISCONNECTING) {  // Status = 4 or 7
@@ -314,18 +321,18 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
             Tine.Messenger.IM.disableOnDisconnect();
             if (status == Strophe.Status.AUTHFAIL)
                 Ext.Msg.show({
-                    title: _('Error'),
-                    msg: _('Authentication failed') + '!',
+                    title: Tine.Tinebase.appMgr.get('Messenger').i18n._('Error'),
+                    msg: Tine.Tinebase.appMgr.get('Messenger').i18n._('Authentication failed') + '!',
                     buttons: Ext.Msg.OK,
                     icon: Ext.MessageBox.ERROR
                 });
             else {
                 if (Tine.Tinebase.appMgr.get('Messenger').getConnection().connected)
-                    Ext.Msg.alert('Expresso Messenger', _('Disconnecting') + '...');
+                    Ext.Msg.alert('Expresso Messenger', Tine.Tinebase.appMgr.get('Messenger').i18n._('Disconnecting') + '...');
                 else
                     Ext.Msg.show({
-                        title: _('Error'),
-                        msg: _('Can\'t connect to server') + '!',
+                        title: Tine.Tinebase.appMgr.get('Messenger').i18n._('Error'),
+                        msg: Tine.Tinebase.appMgr.get('Messenger').i18n._('Can\'t connect to server') + '!',
                         buttons: Ext.Msg.OK,
                         icon: Ext.MessageBox.ERROR
                     });
@@ -335,8 +342,8 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
             // Disable components
             Tine.Messenger.IM.disableOnDisconnect();
             Ext.Msg.show({
-                title: _('Error'),
-                msg: _('Unknown error') + '!',
+                title: Tine.Tinebase.appMgr.get('Messenger').i18n._('Error'),
+                msg: Tine.Tinebase.appMgr.get('Messenger').i18n._('Unknown error') + '!',
                 buttons: Ext.Msg.OK,
                 icon: Ext.MessageBox.ERROR
             });
