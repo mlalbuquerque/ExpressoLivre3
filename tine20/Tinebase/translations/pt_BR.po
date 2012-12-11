@@ -2054,7 +2054,7 @@ msgstr "Mostrando registros {0} - {1} de {2}"
 
 #: js/widgets/grid/GridPanel.js:835
 msgid "No {0} to display"
-msgstr "Nenhum {0} para mostrar"
+msgstr "Não há {0} para mostrar"
 
 #: js/widgets/grid/GridPanel.js:1055
 msgid "New..."

@@ -106,8 +106,8 @@ Tine.Webconference.Model.Room = Tine.Tinebase.data.Record.create(Tine.Tinebase.M
     idProperty: 'id',
     titleProperty: 'title',
     
-    recordName: 'room',
-    recordsName: 'rooms',
+    recordName: 'Room',
+    recordsName: 'Rooms',
     containerProperty: 'container_id',
     
     containerName: 'room list',
