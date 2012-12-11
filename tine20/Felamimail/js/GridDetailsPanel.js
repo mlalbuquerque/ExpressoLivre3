@@ -537,20 +537,42 @@ Ext.ns('Tine.Felamimail');
                 var account = this.app.getActiveAccount();
                 
                 //var id = Ext.id() + ':' + email;
-                
-                Tine.Felamimail.rulesBackend.getRules(account.id, {
-                    scope: this,
-                    success: function(record) {
-                            this.blockSender();
-                            this.purgeListeners();
+                Ext.MessageBox.confirm(
+                    this.app.i18n._('Block Sender'),
+                    this.app.i18n._('Block incoming messages from this sender?'),
+                    function (button) {
+                        if (button == 'yes') {
+                            Tine.Felamimail.rulesBackend.getRules(account.id, {
+                                scope: this,
+                                success: function(record) {
+                                        this.blockSender();
+                                        this.purgeListeners();
+                                },
+                                failure: Tine.Felamimail.handleRequestException.createSequence(function() {
+                                    this.loadMask.hide();
+                                }, this),
+                                timeout: 6000,
+                                parts: parts[1]
+
+                            });
+                        }
                     },
-                    failure: Tine.Felamimail.handleRequestException.createSequence(function() {
-                        this.loadMask.hide();
-                    }, this),
-                    timeout: 6000,
-                    parts: parts[1]
-                    
-                });
+                    this
+                );
+                
+//                Tine.Felamimail.rulesBackend.getRules(account.id, {
+//                    scope: this,
+//                    success: function(record) {
+//                            this.blockSender();
+//                            this.purgeListeners();
+//                    },
+//                    failure: Tine.Felamimail.handleRequestException.createSequence(function() {
+//                        this.loadMask.hide();
+//                    }, this),
+//                    timeout: 6000,
+//                    parts: parts[1]
+//                    
+//                });
                 
                 break;
                 
