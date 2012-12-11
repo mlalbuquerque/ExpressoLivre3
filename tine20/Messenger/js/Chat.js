@@ -33,16 +33,21 @@ Tine.Messenger.Chat = Ext.extend(Ext.Window, {
                         Tine.Messenger.FileTransfer.sendRequest(jid, filebrowser);
                     }
                 },
-//                {
-//                    xtype: 'button',
-//                    itemId: 'messenger-chat-video',
-//                    icon: '/images/messenger/webcam.png',
-//                    tooltip: app.i18n._('Start video chat'),
-//                    disabled: true,
-//                    handler: function() {
-//
-//                    }
-//                 },
+                {
+                    xtype: 'button',
+                    itemId: 'messenger-chat-video',
+                    icon: '/images/messenger/webcam.png',
+                    tooltip: app.i18n._('Start video chat'),
+                    hidden: true,
+                    handler: function() {
+						var window_chat = this.ownerCt.ownerCt,
+						id = window_chat.id.substr(MESSENGER_CHAT_ID_PREFIX.length),
+                        jid = Tine.Messenger.Util.idToJid(id);
+
+						Tine.Messenger.VideoChat.startVideo(window_chat, id, jid);
+                  
+                    }
+                 },
                  {
                     xtype: 'button',
                     itemId: 'messenger-chat-emoticons',
@@ -143,7 +148,10 @@ Tine.Messenger.Chat = Ext.extend(Ext.Window, {
                 Tine.Messenger.Window._onMoveWindowAction(_box);
             },
 	    beforehide: function(_box){
-		Tine.Messenger.VideoChat.hangup(_box);
+		// only if the chat being closed is the one using videochat
+		if(Tine.Messenger.VideoChat.jid != null && Tine.Messenger.VideoChat.getChatWindow(Tine.Messenger.VideoChat.jid).id == _box.id){
+		    Tine.Messenger.VideoChat.hangup(_box);
+		}
 	    }
         }
   });

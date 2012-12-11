@@ -1,0 +1,161 @@
+<html>
+<title>Testes de Video Messenger</title>
+
+<script type="text/javascript">
+			/*
+			* Recupera o nome da aplicação Flash de acordo com o navegador 
+			*/
+			function thisMovie(movieName) {
+			 if (navigator.appName.indexOf("Microsoft") != -1) {
+				 return window[movieName];
+				 } else {
+				 return document[movieName];
+				 }
+			}
+
+			/*
+			 * Função que será chamada pelo Flash
+			 * Na realidade qualquer função JS pode ser chamada pelo Flash.
+			 */
+			function myId(strMessage)
+			{
+				document.getElementById('myId').innerHTML=strMessage;
+			}
+
+			/*
+			 * Função que será chamada pelo Flash
+			 * Na realidade qualquer função JS pode ser chamada pelo Flash.
+			 */
+			function callStarted(strMessage)
+			{
+				document.getElementById('status').innerHTML="Chamada iniciada com: " + strMessage;
+			}
+
+			/*
+			 * Função que será chamada pelo Flash
+			 * Na realidade qualquer função JS pode ser chamada pelo Flash.
+			 */
+			function callEnded()
+			{
+				document.getElementById('status').innerHTML="Chamada encerrada";
+			}
+
+			/*
+			 * Função que será chamada pelo Flash
+			 * Na realidade qualquer função JS pode ser chamada pelo Flash.
+			 */
+			function appLoaded()
+			{
+				document.getElementById('status').innerHTML="Aplicação carregada";
+			}
+			/*
+			 * Envia uma mensagem para o Flash, chamando uma função interna.
+			 */
+			function sendData(strMessage)
+			{
+				console.text=strMessage;
+				movie = thisMovie("videomessenger"); 
+				movie.asCallBack(strMessage);
+			}
+			
+			/*
+			 * Inicia o aplicativo
+			 */
+			function startApp()
+			{
+				movie = thisMovie("videomessenger"); 
+				movie.startApp("rtmfp://10.200.118.61", document.getElementById("username").value);
+			}
+			
+			/*
+			 * Aceita uma chamada de um usuário
+			 */
+			function acceptCallFrom()
+			{
+				movie = thisMovie("videomessenger"); 
+				movie.acceptCallFrom(document.getElementById("userfrom").value);
+			}
+
+			/*
+			 * Realiza a conexão como usuário
+			 */
+			function onConnect()
+			{
+				movie = thisMovie("videomessenger"); 
+				movie.connect(document.getElementById("username").value);
+			}
+
+			/*
+			 * Realiza a desconexão do aplicativo
+			 */
+			function onDisconnect()
+			{
+				movie = thisMovie("videomessenger"); 
+				movie.endApp();
+			}
+			
+			/*
+			 * Chama um usuário
+			 */ 
+			function onCall()
+			{
+				movie = thisMovie("videomessenger"); 
+				//movie.onCallJS(document.getElementById("userCall").value);
+				movie.placeCall("", document.getElementById("userCall").value);
+			}
+
+			/*
+			 * Desconecta a ligação
+			 */ 
+			function onHangup()
+			{
+				movie = thisMovie("videomessenger"); 
+				movie.hangup();
+			}
+
+			/*
+			 * Desconecta a ligação
+			 */ 
+			function onGetId()
+			{
+				movie = thisMovie("videomessenger"); 
+				id=movie.getId();
+				document.getElementById('myId').innerHTML=id;
+			}			
+			
+</script>
+
+<script type="text/javascript" src="src/swfobject.js"></script>
+<body>
+<div id="flashContent"> 
+<script type="text/javascript">
+        	swfobject.embedSWF("ExpressoVideoChat.swf", 
+        		"alt", "800", "600", "10.0.0", 
+        		"swfobject/expressInstall.swf", 
+        		{}, 
+        		{wmode:"transparent", menu:"false"}, 
+        		{id:"videomessenger", allowScriptAcess:"sameDomain"});
+        </script>
+  <div id="alt"> <a href="http://www.adobe.com/go/getflash"> <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /> </a> </div>
+  <div>
+
+
+
+<button id="aaa" name="aaa" onclick="sendData('Minha mensagem como parâmetro')">Envia Mensagem</button>
+<button id="init" name="startApp" onclick="startApp()">Start App()</button>
+Nome do usuário: <input type="text" name="username" id="username"><br>
+<button id="init" name="init" onclick="onConnect()">Conecta</button>
+<button id="init" name="init" onclick="onDisconnect()">Desconecta</button>
+Nome do usuário a chamar: <input type="text" name="userCall" id="userCall"><br>
+<button id="onCall" name="onCall" onclick="onCall()">Chamar</button>
+<button id="onHangup" name="onHangup" onclick="onHangup()">Desligar</button>
+<button id="getId" name="onGetId" onclick="onGetId()">Meu ID</button>
+<br>
+<button id="acceptCallFrom" name="acceptCallFrom" onclick="acceptCallFrom()">Accept Call From: </button>
+Nome do usuário que vai chamar: <input type="text" name="userfrom" id="userfrom"><br>
+<div id="myId">0</div>
+<div id="status"></div>
+
+
+</body>
+</html>

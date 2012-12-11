@@ -157,6 +157,11 @@ Tine.Messenger.ChatHandler = {
             Tine.Messenger.ChatHandler.setChatMessage(jid, name + ' ' + app.i18n._('is unavailable'), app.i18n._("Info"), 'messenger-notify');
             Tine.Messenger.ChatHandler.setChatMessage(jid, app.i18n._('Your messages will be sent offline'), app.i18n._('Info'), 'messenger-notify');
         }
+	
+	chat.getTopToolbar().getComponent('messenger-chat-video').setVisible(
+	    !Tine.Messenger.RosterHandler.isContactUnavailable(jid)
+	);
+	
     
         return chat;
     },
