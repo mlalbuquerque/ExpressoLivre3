@@ -267,6 +267,12 @@ Ext.extend(Tine.Felamimail.TreePanel, Ext.tree.TreePanel, {
             
             // set ftb filters according to tree selection
             var filter = this.getFilterPlugin().getFilter();
+            
+            if (filter.field == 'path' && Ext.isEmpty(filter.value))
+            {
+                return;
+            }
+            
             ftb.addFilter(new ftb.record(filter));
         
             ftb.onFiltertrigger();
