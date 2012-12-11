@@ -211,6 +211,7 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
     },
     
     connectionHandler: function (status, e) {
+        if (e) console.log(e);
         console.log('STATUS: ' + status);
         if (status === Strophe.Status.CONNECTING) {  // Status = 1
             Tine.Messenger.Log.debug("Connecting...");

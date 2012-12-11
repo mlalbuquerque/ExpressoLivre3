@@ -464,6 +464,8 @@ Tine.Messenger.RosterTree = function(iq){
                 
                 status_text = status_text ? status_text : '';
                 message = message ? message : '';
+                // TODO: Possible problem => _buddy.ui.textNode undefined
+                // ERROR: Cannot call method 'setAttribute' of undefined
                 _buddy.ui.textNode.setAttribute('status', app.i18n._(status.text));
                 _buddy.ui.textNode.setAttribute('status_text', status_text);
                 _buddy.ui.textNode.setAttribute('subscription', subscription);
