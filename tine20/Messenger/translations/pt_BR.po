@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tine 2.0 Messenger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-10 17:45-0300\n"
-"PO-Revision-Date: 2012-12-11 10:46-0300\n"
-"Last-Translator: Lavoisier Vieira <lavoisier.vieira@serpro.gov.br>\n"
+"POT-Creation-Date: 2012-12-11 16:07-0300\n"
+"PO-Revision-Date: 2012-12-11 16:07-0300\n"
+"Last-Translator: Marcio Albuquerque <marcio.lima.albuquerque@gmail.com>\n"
 "Language-Team: SERPRO Salvador <marcio.albuquerque@serpro.gov.br>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -186,10 +186,10 @@ msgid "Error sending: "
 msgstr "Envio de erro:"
 
 #: Messenger/js/LogHandler.js:206
-#: Messenger/js/Messenger.js:220
-#: Messenger/js/Messenger.js:317
-#: Messenger/js/Messenger.js:327
-#: Messenger/js/Messenger.js:338
+#: Messenger/js/Messenger.js:227
+#: Messenger/js/Messenger.js:324
+#: Messenger/js/Messenger.js:334
+#: Messenger/js/Messenger.js:345
 #: Messenger/js/RosterHandler.js:306
 #: Messenger/js/RosterHandler.js:361
 msgid "Error"
@@ -309,43 +309,74 @@ msgstr "Contato não adicionado"
 msgid "ME"
 msgstr "EU"
 
-#: Messenger/js/Messenger.js:98
+#: Messenger/js/Messenger.js:44
+msgid "Available"
+msgstr "Disponível"
+
+#: Messenger/js/Messenger.js:45
+#: Messenger/js/Layout.js:157
+msgid "Unavailable"
+msgstr "Indisponível"
+
+#: Messenger/js/Messenger.js:46
+#: Messenger/js/Layout.js:155
+msgid "Away"
+msgstr "Ausente"
+
+#: Messenger/js/Messenger.js:47
+msgid "Auto Status (idle)"
+msgstr "Status Auto (ocioso)"
+
+#: Messenger/js/Messenger.js:48
+#: Messenger/js/Layout.js:156
+msgid "Do Not Disturb"
+msgstr "Não Perturbe"
+
+#: Messenger/js/Messenger.js:105
 msgid "Messenger"
 msgid_plural "Messengers"
 msgstr[0] "Messenger"
 msgstr[1] "Messengers"
 
-#: Messenger/js/Messenger.js:113
+#: Messenger/js/Messenger.js:120
 msgid "IM Message"
 msgstr "Mensagem de IM"
 
-#: Messenger/js/Messenger.js:211
+#: Messenger/js/Messenger.js:218
 msgid "Connecting"
 msgstr "Conectando"
 
-#: Messenger/js/Messenger.js:221
-#: Messenger/js/Messenger.js:328
+#: Messenger/js/Messenger.js:228
+#: Messenger/js/Messenger.js:335
 msgid "Can't connect to server"
 msgstr "Não conseguiu conectar no servidor"
 
+#: Messenger/js/Messenger.js:303
+msgid "Leave page"
+msgstr "Deixar a página"
+
 #: Messenger/js/Messenger.js:308
+msgid "Close window"
+msgstr "Fechar janela"
+
+#: Messenger/js/Messenger.js:315
 msgid "Messenger has been disconnected!"
 msgstr "Messenger foi desconectado!"
 
-#: Messenger/js/Messenger.js:318
+#: Messenger/js/Messenger.js:325
 msgid "Authentication failed"
 msgstr "Autenticação falhou"
 
-#: Messenger/js/Messenger.js:324
+#: Messenger/js/Messenger.js:331
 msgid "Disconnecting"
 msgstr "Desconectando"
 
-#: Messenger/js/Messenger.js:339
+#: Messenger/js/Messenger.js:346
 msgid "Unknown error"
 msgstr "Erro desconhecido"
 
-#: Messenger/js/Messenger.js:412
-#: Messenger/js/Messenger.js:425
+#: Messenger/js/Messenger.js:419
+#: Messenger/js/Messenger.js:432
 #: Messenger/js/Layout.js:54
 msgid "Hide offline contacts"
 msgstr "Esconder contatos offline"
@@ -375,18 +406,6 @@ msgstr "pressione ENTER depois"
 #: Messenger/js/Layout.js:154
 msgid "Online"
 msgstr "Disponível"
-
-#: Messenger/js/Layout.js:155
-msgid "Away"
-msgstr "Ausente"
-
-#: Messenger/js/Layout.js:156
-msgid "Do Not Disturb"
-msgstr "Não Perturbe"
-
-#: Messenger/js/Layout.js:157
-msgid "Unavailable"
-msgstr "Indisponível"
 
 #: Messenger/js/Layout.js:397
 msgid "JID"
@@ -637,40 +656,55 @@ msgstr "Não é possível obter Emoticons"
 
 #~ msgid "Options"
 #~ msgstr "Opções"
+
 #~ msgid "Connect"
 #~ msgstr "Conectar"
+
 #~ msgid "Actions"
 #~ msgstr "Ações"
+
 #~ msgid "Logout"
 #~ msgstr "Sair"
+
 #~ msgid "Show notifications ..."
 #~ msgstr "Exibir notificações"
+
 #~ msgid "History of chats ..."
 #~ msgstr "Histórico dos chats ..."
+
 #~ msgid "Custon name ..."
 #~ msgstr "Nome Personalizado ..."
+
 #~ msgid "Action"
+
 #~ msgid_plural "Actions"
 #~ msgstr[0] "Ação"
 #~ msgstr[1] "Ações"
+
 #~ msgid "Preference"
+
 #~ msgid_plural "Preferences"
 #~ msgstr[0] "Preferência"
 #~ msgstr[1] "Preferências"
+
 #~ msgid "Account"
+
 #~ msgid_plural "Accounts"
 #~ msgstr[0] "Conta"
 #~ msgstr[1] "Contas"
+
 #~ msgid "Email Accounts"
+
 #~ msgid_plural "Email Accounts"
 #~ msgstr[0] "Conta de E-mail"
 #~ msgstr[1] "Contas de E-mail"
+
 #~ msgid ""
 #~ "You're logged in Messenger. If you leave the page, Messenger will "
 #~ "disconnect!"
 #~ msgstr ""
 #~ "Você está conectado no Messenger. Se sair da página, o Messenger será "
 #~ "desconectado!"
+
 #~ msgid " was successfully removed!"
 #~ msgstr " foi excluído com sucesso!"
-

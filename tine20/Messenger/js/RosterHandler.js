@@ -164,13 +164,13 @@ Tine.Messenger.RosterHandler = {
                 var presence = $pres().c('show').t(status).up().c('status').t(statusText);
                 switch(status){
                     case IMConst.ST_AVAILABLE.id:
-                        statusValue = IMConst.ST_AVAILABLE.text;
+                        statusValue = Tine.Tinebase.appMgr.get('Messenger').i18n._(IMConst.ST_AVAILABLE.text);
                         break;
                     case IMConst.ST_AWAY.id:
-                        statusValue = IMConst.ST_AWAY.text;
+                        statusValue = Tine.Tinebase.appMgr.get('Messenger').i18n._(IMConst.ST_AWAY.text);
                         break;
                     case IMConst.ST_DONOTDISTURB.id:
-                        statusValue = IMConst.ST_DONOTDISTURB.text;
+                        statusValue = Tine.Tinebase.appMgr.get('Messenger').i18n._(IMConst.ST_DONOTDISTURB.text);
                         break;
                     case IMConst.ST_UNAVAILABLE.id:
                         Tine.Messenger.ChatHandler.disconnect();
