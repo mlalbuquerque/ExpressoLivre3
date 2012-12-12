@@ -379,8 +379,8 @@ Tine.Felamimail.GridPanel = Ext.extend(Tine.widgets.grid.GridPanel, {
         });
         this.filterToolbar.criteriaIgnores = [
             {field: 'query',     operator: 'contains',     value: ''},
-            {field: 'id' },
-            {field: 'path' }
+            {field: 'id'},
+            {field: 'path'}
         ];
     },    
     
@@ -770,18 +770,30 @@ Tine.Felamimail.GridPanel = Ext.extend(Tine.widgets.grid.GridPanel, {
         var account = this.app.getActiveAccount(),
         trashId = (account) ? account.getTrashFolderId() : null,
         trash = trashId ? this.app.getFolderStore().getById(trashId) : null
-        trashConfigured = (account.get('trash_folder')); 
+        trashConfigured = (account.get('trash_folder'));
+        var panel = this;
         if(Tine.Felamimail.registry.get('preferences').get('confirmDelete') == '1')
-            {
-                Ext.MessageBox.confirm('', this.app.i18n._('Confirm Delete') + ' ?', function(btn) {
-                    if(btn == 'yes') { 
-                        return (Tine.Felamimail.registry.get('preferences').get('confirmUseTrash') == '1' && (trash && ! trash.isCurrentSelection()) || (! trash && trashConfigured)) ? this.moveSelectedMessages(trash, true) : this.deleteSelectedMessages();
-                }}, this);
-            }
+        {
+            Ext.MessageBox.confirm('', this.app.i18n._('Confirm Delete') + ' ?', function(btn) {
+                if(btn == 'yes') { 
+                    return (Tine.Felamimail.registry.get('preferences').get('confirmUseTrash') == '1' && (trash && ! trash.isCurrentSelection()) || (! trash && trashConfigured)) ? this.moveSelectedMessages(trash, true) : this.deleteSelectedMessages();
+                }
+                panel.focusSelectedMessage();
+            }, this);
+            
+        }
         else
             {
                 return (Tine.Felamimail.registry.get('preferences').get('confirmUseTrash') == '1' && (trash && ! trash.isCurrentSelection()) || (! trash && trashConfigured)) ? this.moveSelectedMessages(trash, true) : this.deleteSelectedMessages();
             }
+    },
+    
+    focusSelectedMessage: function(){
+        
+        // Return focus to grid
+        var record = this.getGrid().getSelectionModel().getSelected();
+        this.getGrid().getView().focusRow(this.getGrid().store.indexOf(record));
+      
     },
 
     /**
@@ -872,6 +884,7 @@ Tine.Felamimail.GridPanel = Ext.extend(Tine.widgets.grid.GridPanel, {
                 callback: callbackFn
             });
         }
+        this.focusSelectedMessage();
     },
 
     /**
