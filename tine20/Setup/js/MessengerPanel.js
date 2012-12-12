@@ -115,6 +115,21 @@ Tine.Setup.MessengerPanel = Ext.extend(Tine.Tinebase.widgets.form.ConfigPanel, {
                                ]     
                            }
                        ]
+                   },
+                   {
+                       xtype: 'fieldset',
+                       autoHeight: 'auto',
+                       defaults: {width: 300},
+                       title: this.app.i18n._('Messenger Videochat'),
+                       id: 'setup-messenger-videochat',
+                       items: [
+                           {
+                               allowBlank: true,
+                               name: 'messenger_rtmfpServerUrl',
+                               fieldLabel: this.app.i18n._('Videochat Server address'),
+                               xtype: 'textfield'
+                           }
+                       ]
                    }
                ];
     },
