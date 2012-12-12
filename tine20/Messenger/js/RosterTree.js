@@ -464,24 +464,25 @@ Tine.Messenger.RosterTree = function(iq){
                 
                 status_text = status_text ? status_text : '';
                 message = message ? message : '';
-                // TODO: Possible problem => _buddy.ui.textNode undefined
+                // TODO: Possible problem => _buddy.ui.textNode undefined (TEST)
                 // ERROR: Cannot call method 'setAttribute' of undefined
-                _buddy.ui.textNode.setAttribute('status', app.i18n._(status.text));
-                _buddy.ui.textNode.setAttribute('status_text', status_text);
-                _buddy.ui.textNode.setAttribute('subscription', subscription);
-                
-                _buddy.attributes.status = status.id;
-                _buddy.attributes.status_text = status_text;
-                _buddy.attributes.subscription = subscription;
-                
-                _buddy.ui.textNode.setAttribute('qtip', "JID : "+jid+"<br>"+
-                                                app.i18n._('Status')+" : "
-                                                + app.i18n._(status.text) +"<br>"
-                                                + app.i18n._('Subscription')+" : "
-                                                + app.i18n._(subscription) +
-                                                (status_text.trim() ? '<br>'+status_text : '') +
-                                                (message.trim() ? '<br>'+message : ''));
-                
+                if (_buddy.ui.textNode) {
+                    _buddy.ui.textNode.setAttribute('status', app.i18n._(status.text));
+                    _buddy.ui.textNode.setAttribute('status_text', status_text);
+                    _buddy.ui.textNode.setAttribute('subscription', subscription);
+
+                    _buddy.attributes.status = status.id;
+                    _buddy.attributes.status_text = status_text;
+                    _buddy.attributes.subscription = subscription;
+
+                    _buddy.ui.textNode.setAttribute('qtip', "JID : "+jid+"<br>"+
+                                                    app.i18n._('Status')+" : "
+                                                    + app.i18n._(status.text) +"<br>"
+                                                    + app.i18n._('Subscription')+" : "
+                                                    + app.i18n._(subscription) +
+                                                    (status_text.trim() ? '<br>'+status_text : '') +
+                                                    (message.trim() ? '<br>'+message : ''));
+                }
             } else {
                 Tine.Messenger.Log.error('Error while updating '+jid+". Jid not found or class not found can be the cause.");
             }

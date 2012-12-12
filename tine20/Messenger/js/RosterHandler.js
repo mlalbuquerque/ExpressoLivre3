@@ -3,9 +3,6 @@ Ext.ns('Tine.Messenger');
 Tine.Messenger.RosterHandler = {
     
     _onStartRoster: function(iq) {
-        console.log('======> CHEGOU EM _onStartRoster');
-        Tine.Messenger.Log.info("Getting roster...");
-        
         try {
             // Send user presence
             Tine.Tinebase.appMgr.get('Messenger').getConnection().send($pres());
@@ -20,8 +17,6 @@ Tine.Messenger.RosterHandler = {
             alert('Something went wrong!\n'+e.getMessage());
             console.log(e);
         }
-        
-        Tine.Messenger.Log.info("ROSTER OK");
         
         return true;
     },

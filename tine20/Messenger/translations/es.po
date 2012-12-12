@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tine 2.0 Messenger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-11 16:07-0300\n"
-"PO-Revision-Date: 2012-12-13 15:09-0300\n"
-"Last-Translator: Cassiano Dal Pizzol <cassiano@dalpizzol@serpro.gov.br>\n"
+"POT-Creation-Date: 2012-12-13 15:15-0300\n"
+"PO-Revision-Date: 2012-12-13 15:15-0300\n"
+"Last-Translator: Marcio Albuquerque <marcio.lima.albuquerque@gmail.com>\n"
 "Language-Team: SERPRO Expresso <marcio.albuquerque@serpro.gov.br>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -104,7 +104,7 @@ msgstr " ha salido de la sala."
 #: Messenger/js/Groupie.js:538
 #: Messenger/js/RosterTree.js:219
 #: Messenger/js/RosterTree.js:292
-#: Messenger/js/RosterTree.js:476
+#: Messenger/js/RosterTree.js:479
 msgid "Status"
 msgstr "Estado"
 
@@ -188,12 +188,12 @@ msgid "Error sending: "
 msgstr "Error de envío:"
 
 #: Messenger/js/LogHandler.js:206
-#: Messenger/js/Messenger.js:227
-#: Messenger/js/Messenger.js:324
-#: Messenger/js/Messenger.js:334
-#: Messenger/js/Messenger.js:345
-#: Messenger/js/RosterHandler.js:306
-#: Messenger/js/RosterHandler.js:361
+#: Messenger/js/Messenger.js:147
+#: Messenger/js/Messenger.js:288
+#: Messenger/js/Messenger.js:382
+#: Messenger/js/Messenger.js:400
+#: Messenger/js/RosterHandler.js:301
+#: Messenger/js/RosterHandler.js:356
 msgid "Error"
 msgstr "Error"
 
@@ -334,51 +334,66 @@ msgstr "Status Auto (inactivo)"
 msgid "Do Not Disturb"
 msgstr "No molestar"
 
-#: Messenger/js/Messenger.js:105
+#: Messenger/js/Messenger.js:134
+msgid "Access to server is forbidden"
+msgstr "El acceso al servidor está prohibido"
+
+#: Messenger/js/Messenger.js:135
+msgid "Server does not exist"
+msgstr "Servidor no existe"
+
+#: Messenger/js/Messenger.js:136
+msgid "Server error"
+msgstr "Error del servidor"
+
+#: Messenger/js/Messenger.js:137
+msgid "Server does not support the method"
+msgstr "El servidor no admite el método"
+
+#: Messenger/js/Messenger.js:138
+msgid "Server received invalid response from proxy"
+msgstr "Servidor recibido respuesta no válida de proxy"
+
+#: Messenger/js/Messenger.js:139
+msgid "Server is unavailable"
+msgstr "Servidor no está disponible"
+
+#: Messenger/js/Messenger.js:160
 msgid "Messenger"
 msgid_plural "Messengers"
 msgstr[0] "Messenger"
 msgstr[1] "Messengers"
 
-#: Messenger/js/Messenger.js:120
+#: Messenger/js/Messenger.js:175
 msgid "IM Message"
 msgstr "Mensaje de IM"
 
-#: Messenger/js/Messenger.js:218
+#: Messenger/js/Messenger.js:279
 msgid "Connecting"
 msgstr "Conexión"
 
-#: Messenger/js/Messenger.js:228
-#: Messenger/js/Messenger.js:335
+#: Messenger/js/Messenger.js:289
 msgid "Can't connect to server"
 msgstr "No se puede conectar con el servidor"
 
-#: Messenger/js/Messenger.js:303
+#: Messenger/js/Messenger.js:363
 msgid "Leave page"
 msgstr "Dejar página"
 
-#: Messenger/js/Messenger.js:308
+#: Messenger/js/Messenger.js:368
 msgid "Close window"
 msgstr "Cerrar ventana"
 
-#: Messenger/js/Messenger.js:315
-msgid "Messenger has been disconnected!"
-msgstr "Messenger se ha desconectado!"
-
-#: Messenger/js/Messenger.js:325
+#: Messenger/js/Messenger.js:383
 msgid "Authentication failed"
 msgstr "Error de autenticación"
 
-#: Messenger/js/Messenger.js:331
-msgid "Disconnecting"
-msgstr "Desconexión"
-
-#: Messenger/js/Messenger.js:346
+#: Messenger/js/Messenger.js:401
 msgid "Unknown error"
 msgstr "Error desconocido"
 
-#: Messenger/js/Messenger.js:419
-#: Messenger/js/Messenger.js:432
+#: Messenger/js/Messenger.js:473
+#: Messenger/js/Messenger.js:485
 #: Messenger/js/Layout.js:54
 msgid "Hide offline contacts"
 msgstr "Ocultar contactos desconectados"
@@ -575,7 +590,7 @@ msgstr "Eliminar grupo"
 
 #: Messenger/js/RosterTree.js:221
 #: Messenger/js/RosterTree.js:293
-#: Messenger/js/RosterTree.js:478
+#: Messenger/js/RosterTree.js:481
 msgid "Subscription"
 msgstr "Suscripción"
 
@@ -611,31 +626,31 @@ msgstr "Guardar"
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: Messenger/js/RosterHandler.js:49
-#: Messenger/js/RosterHandler.js:358
+#: Messenger/js/RosterHandler.js:44
+#: Messenger/js/RosterHandler.js:353
 msgid "was successfully removed"
 msgstr "se ha eliminado correctamente"
 
-#: Messenger/js/RosterHandler.js:299
-#: Messenger/js/RosterHandler.js:356
+#: Messenger/js/RosterHandler.js:294
+#: Messenger/js/RosterHandler.js:351
 msgid "Successful"
 msgstr "Exitoso"
 
-#: Messenger/js/RosterHandler.js:300
+#: Messenger/js/RosterHandler.js:295
+#: Messenger/js/RosterHandler.js:352
 #: Messenger/js/RosterHandler.js:357
-#: Messenger/js/RosterHandler.js:362
 msgid "The group"
 msgstr "El grupo"
 
-#: Messenger/js/RosterHandler.js:301
+#: Messenger/js/RosterHandler.js:296
 msgid "was successfully renamed to"
 msgstr "fue renombrada con éxito para"
 
-#: Messenger/js/RosterHandler.js:306
+#: Messenger/js/RosterHandler.js:301
 msgid " already exist. It was not renamed."
 msgstr " ya existen. No se ha cambiado el nombre."
 
-#: Messenger/js/RosterHandler.js:363
+#: Messenger/js/RosterHandler.js:358
 msgid "was not removed"
 msgstr "no fue eliminado"
 
@@ -656,26 +671,41 @@ msgstr "Emoticonos"
 msgid "Can't get Emoticons"
 msgstr "No se puede obtener Emoticones"
 
+#~ msgid "Messenger has been disconnected!"
+#~ msgstr "Messenger se ha desconectado!"
+
+#~ msgid "Disconnecting"
+#~ msgstr "Desconexión"
+
 #~ msgid "Options"
 #~ msgstr "Opciones"
+
 #~ msgid "Connect"
 #~ msgstr "Conectar"
+
 #~ msgid "Actions"
 #~ msgstr "Acciones"
+
 #~ msgid "Logout"
 #~ msgstr "Cerrar sesión"
+
 #~ msgid "Show notifications ..."
 #~ msgstr "Mostrar notificaciones ..."
+
 #~ msgid "History of chats ..."
 #~ msgstr "Historial de Cahts ..."
+
 #~ msgid "Custon name ..."
 #~ msgstr "Nombre personalizado ..."
+
 #~ msgid "Action"
+
 #~ msgid_plural "Actions"
 #~ msgstr[0] "Accion"
 #~ msgstr[1] "Acciones"
+
 #~ msgid "Preference"
+
 #~ msgid_plural "Preferences"
 #~ msgstr[0] "Preferencia"
 #~ msgstr[1] "Preferencias"
-

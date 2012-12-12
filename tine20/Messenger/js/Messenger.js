@@ -2,7 +2,7 @@ Ext.ns('Tine.Messenger');
 
 // Messenger Application constants
 var MESSENGER_CHAT_ID_PREFIX = 'messenger-chat-',
-    MESSENGER_DEBUG = true;
+    MESSENGER_DEBUG = false;
 
 Tine.Messenger.factory={
     statusStore : new Ext.data.SimpleStore({
@@ -78,6 +78,9 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
     // Upload XML emoticons information
     xml_raw: null,
     
+    // Shows if an HTTP error occured
+    http_error: false,
+    
     debugFunction: function () {
         Tine.Messenger.Application.connection.xmlInput = function (xml) {
             console.log('\\/ |\\/| |     |  |\\ |');
@@ -99,6 +102,58 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
                 console.log(response.text());
             console.log('============================');
         };
+    },
+    
+    debugStrophe: function (level, message) {
+        if (MESSENGER_DEBUG)
+            switch (level) {
+                case Strophe.LogLevel.DEBUG:
+                    console.log('Strophe debug: ' + message);
+                    break;
+                case Strophe.LogLevel.INFO:
+                    console.log('Strophe info: ' + message);
+                    break;
+                case Strophe.LogLevel.WARN:
+                    console.log('Strophe warning: ' + message);
+                    break;
+                case Strophe.LogLevel.ERROR:
+                    console.log('Strophe error: ' + message);
+                    break;
+                case Strophe.LogLevel.FATAL:
+                    console.log('Strophe fatal error: ' + message);
+                    break;
+                default:
+                    console.log('STROPHE LOG!!');
+            }
+    },
+    
+    handleHttpErrors: function (level, message) {
+        if (level >= Strophe.LogLevel.WARN) {
+            var app = Tine.Tinebase.appMgr.get('Messenger');
+            var httpStatuses = [
+                {status: 403, error: app.i18n._('Access to server is forbidden') + '!'},
+                {status: 404, error: app.i18n._('Server does not exist') + '!'},
+                {status: 500, error: app.i18n._('Server error') + '!'},
+                {status: 501, error: app.i18n._('Server does not support the method') + '!'},
+                {status: 502, error: app.i18n._('Server received invalid response from proxy') + '!'},
+                {status: 503, error: app.i18n._('Server is unavailable') + '!'}
+            ];
+            
+            for (var i = 0; i < httpStatuses.length; i++) {
+                var regex = new RegExp(httpStatuses[i].status);
+                if (regex.test(message)) {
+                    Tine.Tinebase.Application.http_error = true;
+                    Ext.Msg.show({
+                        title: Tine.Tinebase.appMgr.get('Messenger').i18n._('Error'),
+                        msg: httpStatuses[i].error,
+                        buttons: Ext.Msg.OK,
+                        icon: Ext.MessageBox.ERROR
+                    });
+                    app.stopMessenger();
+                    break;
+                }
+            }
+        }
     },
     
     getTitle: function () {
@@ -151,6 +206,12 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
                 Tine.Messenger.Window._onMoveWindowAction(Ext.getCmp(item.id));
             });
         });
+        
+        // Redefining Strophe log
+        Strophe.log = function (level, msg) {
+            Tine.Tinebase.appMgr.get('Messenger').handleHttpErrors(level, msg);
+            Tine.Tinebase.appMgr.get('Messenger').debugStrophe(level, msg);
+        };
     },
     
     startMessenger: function (status, statusText) {
@@ -169,10 +230,9 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
         Ext.getCmp('messenger-logout').systemOn = true;
     },
     
-    stopMessenger: function (reason) {
-        reason = (reason == null) ? "" : ': ' + reason;
+    stopMessenger: function () {
         Tine.Messenger.Log.debug("Stopping Messenger...");
-        Tine.Tinebase.appMgr.get('Messenger').getConnection().disconnect('Leaving Messenger' + reason);
+        Tine.Tinebase.appMgr.get('Messenger').getConnection().disconnect();
         Tine.Messenger.Log.debug("Messenger Stopped!");
         Tine.Messenger.IM.changeSystemLogonButton(['startup', 'Login']);
     },
@@ -183,7 +243,7 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
     
     connectToJabber: function () {
         Tine.Messenger.Application.connection = new Strophe.Connection("/http-bind");
-        
+
         if (MESSENGER_DEBUG)
             Tine.Tinebase.appMgr.get('Messenger').debugFunction();
         
@@ -236,7 +296,6 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
         } else if (status === Strophe.Status.CONNECTED || status == Strophe.Status.ATTACHED) {  // Status = 5 or 8
             Tine.Messenger.Log.debug("Connected!");
             var XMPPConnection = Tine.Tinebase.appMgr.get('Messenger').getConnection();
-            console.log(XMPPConnection);
             // Enable components
             Tine.Messenger.IM.enableOnConnect();
             
@@ -313,30 +372,25 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
             // Disable components
             Tine.Messenger.IM.disableOnDisconnect();
             
-            Ext.Msg.alert('Expresso Messenger', Tine.Tinebase.appMgr.get('Messenger').i18n._('Messenger has been disconnected!'));
+            Tine.Tinebase.Application.http_error = false;
+
             window.onbeforeunload = null;
             window.onunload = null;
-        } else if (status === Strophe.Status.AUTHFAIL || status === Strophe.Status.DISCONNECTING) {  // Status = 4 or 7
+        } else if (status === Strophe.Status.AUTHFAIL) {  // Status = 4
             //Tine.Messenger.RosterHandler.clearRoster();
+            Ext.Msg.show({
+                title: Tine.Tinebase.appMgr.get('Messenger').i18n._('Error'),
+                msg: Tine.Tinebase.appMgr.get('Messenger').i18n._('Authentication failed') + '!',
+                buttons: Ext.Msg.OK,
+                icon: Ext.MessageBox.ERROR
+            });
             // Disable components
             Tine.Messenger.IM.disableOnDisconnect();
-            if (status == Strophe.Status.AUTHFAIL)
-                Ext.Msg.show({
-                    title: Tine.Tinebase.appMgr.get('Messenger').i18n._('Error'),
-                    msg: Tine.Tinebase.appMgr.get('Messenger').i18n._('Authentication failed') + '!',
-                    buttons: Ext.Msg.OK,
-                    icon: Ext.MessageBox.ERROR
-                });
-            else {
-                if (Tine.Tinebase.appMgr.get('Messenger').getConnection().connected)
-                    Ext.Msg.alert('Expresso Messenger', Tine.Tinebase.appMgr.get('Messenger').i18n._('Disconnecting') + '...');
-                else
-                    Ext.Msg.show({
-                        title: Tine.Tinebase.appMgr.get('Messenger').i18n._('Error'),
-                        msg: Tine.Tinebase.appMgr.get('Messenger').i18n._('Can\'t connect to server') + '!',
-                        buttons: Ext.Msg.OK,
-                        icon: Ext.MessageBox.ERROR
-                    });
+        } else if (status === Strophe.Status.DISCONNECTING) {// Status = 7
+            Tine.Messenger.IM.disableOnDisconnect();
+            if (Tine.Tinebase.Application.http_error) {
+                Tine.Tinebase.appMgr.get('Messenger').getConnection()._onDisconnectTimeout();
+                Tine.Tinebase.Application.http_error = false;
             }
         } else {
             //Tine.Messenger.RosterHandler.clearRoster();
@@ -357,7 +411,6 @@ Tine.Messenger.IM = {
     getLocalServerInfo: 'Messenger.getLocalServerInfo',
     
     enableOnConnect: function(){
-        console.log('======> CHEGOU EM enableOnConnect');
         // Change IM icon
         Ext.getCmp('messenger').setIcon('/images/messenger/talk-balloons.png');
         
@@ -425,16 +478,14 @@ Tine.Messenger.IM = {
         // Verify if is showing or hiding
         var displayBt = Ext.getCmp('messenger-show-offline-contacts');
         var i18n = Tine.Tinebase.appMgr.get('Messenger').i18n;
-        console.log('CHEGOU AQUI!!!');
+
         //if (displayBt.showOffline) {
         if (Tine.Messenger.registry.get('preferences').get('offlineContacts') == 'show') {
-            console.log('MOSTRANDO...');
             $('div.unavailable').show();
             displayBt.setTooltip(i18n._('Hide offline contacts'));
             displayBt.setIcon('images/messenger/hidden_icon_unavailable.png');
             displayBt.showOffline = true;
         } else {
-            console.log('ESCONDENDO...');
             $('div.unavailable').hide();
             displayBt.setTooltip(i18n._('Show offline contacts'));
             displayBt.setIcon('images/messenger/icon_unavailable.png');
