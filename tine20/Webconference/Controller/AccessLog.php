@@ -67,9 +67,12 @@ class Webconference_Controller_AccessLog extends Tinebase_Controller_Record_Abst
     }
     
     public function regLogoff($_idAccess){
-	$record = $this->get($_idAccess);
-	$record->setFromArray(array("logout" => time()));
-	return $this->update($record);
+	if ($_idAccess)
+	{
+	    $record = $this->get($_idAccess);
+	    $record->setFromArray(array("logout" => time()));
+	    return $this->update($record);
+	}
    }
     
 }

@@ -269,8 +269,12 @@ class Webconference_Controller_BigBlueButton {
 	}  catch (Tinebase_Exception_NotFound $e){
 	    return false;
 	}
-	$config = Webconference_Controller_Config::getInstance()->get($room->webconference_config_id);
-        return $this->_backend->getMeetingIsActive($room->room_name, MODERATOR_PW, $config->url, $config->salt);
+	try {
+	    $config = Webconference_Controller_Config::getInstance()->get($room->webconference_config_id);
+	    return $this->_backend->getMeetingIsActive($room->room_name, MODERATOR_PW, $config->url, $config->salt);
+	}  catch (Exception $e){
+	    return false;
+	}
     }
 
     /**
