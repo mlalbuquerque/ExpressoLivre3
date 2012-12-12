@@ -231,7 +231,7 @@ class Felamimail_Model_Message extends Tinebase_Record_Abstract
             }
         }
         
-        $this->importance = (isset($_headers['importance']) && $_headers['importance'] === 'high') ? true : false;
+        $this->importance = (isset($_headers['importance']) && strtolower($_headers['importance']) === 'high') ? true : false;
         $this->subject = (isset($_headers['subject'])) ? Felamimail_Message::convertText($_headers['subject']) : null;
         
         if (array_key_exists('date', $_headers)) {
