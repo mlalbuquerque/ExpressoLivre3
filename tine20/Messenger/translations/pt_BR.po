@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: Tine 2.0 Messenger\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-11 16:07-0300\n"
-"PO-Revision-Date: 2012-12-11 16:07-0300\n"
-"Last-Translator: Marcio Albuquerque <marcio.lima.albuquerque@gmail.com>\n"
+"PO-Revision-Date: 2012-12-13 15:09-0300\n"
+"Last-Translator: Cassiano Dal Pizzol <cassiano@dalpizzol@serpro.gov.br>\n"
 "Language-Team: SERPRO Salvador <marcio.albuquerque@serpro.gov.br>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -656,55 +656,40 @@ msgstr "Não é possível obter Emoticons"
 
 #~ msgid "Options"
 #~ msgstr "Opções"
-
 #~ msgid "Connect"
 #~ msgstr "Conectar"
-
 #~ msgid "Actions"
 #~ msgstr "Ações"
-
 #~ msgid "Logout"
 #~ msgstr "Sair"
-
 #~ msgid "Show notifications ..."
 #~ msgstr "Exibir notificações"
-
 #~ msgid "History of chats ..."
 #~ msgstr "Histórico dos chats ..."
-
 #~ msgid "Custon name ..."
 #~ msgstr "Nome Personalizado ..."
-
 #~ msgid "Action"
-
 #~ msgid_plural "Actions"
 #~ msgstr[0] "Ação"
 #~ msgstr[1] "Ações"
-
 #~ msgid "Preference"
-
 #~ msgid_plural "Preferences"
 #~ msgstr[0] "Preferência"
 #~ msgstr[1] "Preferências"
-
 #~ msgid "Account"
-
 #~ msgid_plural "Accounts"
 #~ msgstr[0] "Conta"
 #~ msgstr[1] "Contas"
-
 #~ msgid "Email Accounts"
-
 #~ msgid_plural "Email Accounts"
 #~ msgstr[0] "Conta de E-mail"
 #~ msgstr[1] "Contas de E-mail"
-
 #~ msgid ""
 #~ "You're logged in Messenger. If you leave the page, Messenger will "
 #~ "disconnect!"
 #~ msgstr ""
 #~ "Você está conectado no Messenger. Se sair da página, o Messenger será "
 #~ "desconectado!"
-
 #~ msgid " was successfully removed!"
 #~ msgstr " foi excluído com sucesso!"
+
