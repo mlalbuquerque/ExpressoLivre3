@@ -31,7 +31,7 @@ class Felamimail_Controller_Sieve extends Tinebase_Controller_Abstract
      * 
      * @var string
      */
-    protected $_oldScriptName = '03436989789';
+    protected $_oldScriptName = 'felamimail';
     
     /**
      * application name (is needed in checkRight())
