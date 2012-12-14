@@ -747,8 +747,12 @@ Ext.extend(Tine.widgets.grid.FilterToolbar, Ext.Panel, {
         fRow.remove();
         
         this.onFilterRowsChange();
-        this.supressEvents = this.dontRefreshOnDeleteFilter ? true : false;
-        
+        this.supressEvents = true;
+        if(typeof this.dontRefreshOnDeleteFilter != "undefined")
+        {
+            this.supressEvents = this.dontRefreshOnDeleteFilter ? true : false;
+        }
+
         if (!this.supressEvents) {
             this.onFiltertrigger();
         }
