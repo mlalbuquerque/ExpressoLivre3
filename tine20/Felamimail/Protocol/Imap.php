@@ -382,10 +382,13 @@ class Felamimail_Protocol_Imap extends Zend_Mail_Protocol_Imap
             }
             foreach($folderList as $folder => $value){
                 if($user['sendacl']){
-                    $setACL = $this->setACL($folder, $login, 'lrswikxtep');
+                    //$setACL = $this->setACL($folder, $login, 'lrswikxtep'); 
+                    // Old ACl, for expresso V2 compatibility.
+                    $setACL = $this->setACL($folder, $login, 'lrswidap');
                     }
                 elseif($user['writeacl']){
-                    $setACL = $this->setACL($folder, $login, 'lrswikxte');
+                    //$setACL = $this->setACL($folder, $login, 'lrswikxte');
+                    $setACL = $this->setACL($folder, $login, 'lrswid');
                     }
                 elseif($user['readacl']){
                     $setACL = $this->setACL($folder, $login, 'lrs');
