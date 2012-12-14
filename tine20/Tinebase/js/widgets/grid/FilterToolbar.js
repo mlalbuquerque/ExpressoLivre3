@@ -747,16 +747,14 @@ Ext.extend(Tine.widgets.grid.FilterToolbar, Ext.Panel, {
         fRow.remove();
         
         this.onFilterRowsChange();
-        this.supressEvents = true;
         if(typeof this.dontRefreshOnDeleteFilter != "undefined")
         {
-            this.supressEvents = this.dontRefreshOnDeleteFilter ? true : false;
+            this.supressEvents = this.dontRefreshOnDeleteFilter;
         }
 
         if (!this.supressEvents) {
             this.onFiltertrigger();
         }
-        this.supressEvents = false;
     },
     
     /**
@@ -769,7 +767,11 @@ Ext.extend(Tine.widgets.grid.FilterToolbar, Ext.Panel, {
             this.deleteFilter(filter);
         },this);
         
-        this.supressEvents = this.dontRefreshOnDeleteFilter ? true : false;
+        this.supressEvents = false;
+        if(typeof this.dontRefreshOnDeleteFilter != "undefined")
+        {
+            this.supressEvents = this.dontRefreshOnDeleteFilter;
+        }
         this.onFiltertrigger();
         this.supressEvents = false;
         this.onFilterRowsChange();
