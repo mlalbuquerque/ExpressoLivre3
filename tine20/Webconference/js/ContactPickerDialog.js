@@ -191,7 +191,8 @@ Tine.Webconference.ContactPickerDialog.openWindow = function (config) {
         height: 600, 
         name: Tine.Webconference.ContactPickerDialog.prototype.windowNamePrefix + Ext.id(),
         contentPanelConstructor: 'Tine.Webconference.ContactPickerDialog',
-        contentPanelConstructorConfig: config
+        contentPanelConstructorConfig: config,
+	modal:true
     });
     return window;
 };
