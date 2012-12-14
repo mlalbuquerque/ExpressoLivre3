@@ -3,12 +3,7 @@ Ext.ns('Tine.Messenger');
 Tine.Messenger.RosterHandler = {
     
     _onStartRoster: function(iq) {
-        console.log('======> CHEGOU EM _onStartRoster');
-        Tine.Messenger.Log.info("Getting roster...");
-        
         try {
-            // Send user presence
-            Tine.Tinebase.appMgr.get('Messenger').getConnection().send($pres());
             // Modify Main Menu status
             Tine.Tinebase.MainScreen.getMainMenu().onlineStatus.setStatus('online');
             
@@ -151,7 +146,9 @@ Tine.Messenger.RosterHandler = {
     },
     
     setStatus: function(status, text) {
-        var presence = $pres().c('show').t(status).up().c('status').t(text);
+        var presence = $pres().c('show').t(status).up()
+                              .c('status').t(text).up()
+                              .c('priority').t('10');
         Tine.Messenger.Application.connection.send(presence);
     },
     
@@ -161,7 +158,9 @@ Tine.Messenger.RosterHandler = {
                 Tine.Messenger.ChatHandler.connect(status, statusText);
             } else {
                 var statusValue = '';
-                var presence = $pres().c('show').t(status).up().c('status').t(statusText);
+                var presence = $pres().c('show').t(status).up()
+                                      .c('status').t(statusText).up()
+                                      .c('priority').t('10');
                 switch(status){
                     case IMConst.ST_AVAILABLE.id:
                         statusValue = Tine.Tinebase.appMgr.get('Messenger').i18n._(IMConst.ST_AVAILABLE.text);
