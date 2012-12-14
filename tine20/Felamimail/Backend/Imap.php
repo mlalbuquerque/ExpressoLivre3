@@ -354,6 +354,15 @@ class Felamimail_Backend_Imap extends Zend_Mail_Storage_Imap
             throw new Zend_Mail_Storage_Exception('folder not found');
         }
 
+        if($reference == "INBOX/")
+        {
+            if(!array_key_exists("INBOX/Templates", $folders))
+            {
+                $this->createFolder("Templates", "INBOX", "/");
+            }
+            $folders = $this->_protocol->listMailbox((string)$reference, $mailbox);
+        }
+        
         // change the sort function
         $callback = new Felamimail_Backend_Cache_Imap_FolderComparator($_account);
         uksort($folders, array($callback, 'compare'));
