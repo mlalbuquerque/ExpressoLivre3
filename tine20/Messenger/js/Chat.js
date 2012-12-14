@@ -33,16 +33,16 @@ Tine.Messenger.Chat = Ext.extend(Ext.Window, {
                         Tine.Messenger.FileTransfer.sendRequest(jid, filebrowser);
                     }
                 },
-                {
-                    xtype: 'button',
-                    itemId: 'messenger-chat-video',
-                    icon: '/images/messenger/webcam.png',
-                    tooltip: app.i18n._('Start video chat'),
-                    disabled: true,
-                    handler: function() {
-
-                    }
-                 },
+//                {
+//                    xtype: 'button',
+//                    itemId: 'messenger-chat-video',
+//                    icon: '/images/messenger/webcam.png',
+//                    tooltip: app.i18n._('Start video chat'),
+//                    disabled: true,
+//                    handler: function() {
+//
+//                    }
+//                 },
                  {
                     xtype: 'button',
                     itemId: 'messenger-chat-emoticons',
@@ -51,61 +51,40 @@ Tine.Messenger.Chat = Ext.extend(Ext.Window, {
                     listeners: {
                         scope: this,
                         click: function() {
-                            var mainChatWindow = this;
-                            
-                            // Show emoticon loading image
-                            //Ext.getCmp('emoticon-connectloading').show();
-                            
-                            Ext.Ajax.request({
-                                params: {
-                                    method: 'Messenger.getEmoticons',
-                                    chatID: mainChatWindow.id
-                                },
+                            var emoticonWindow,
+                                mainChatWindow = this,
+                                emoticonsPath = '/images/messenger/emoticons',
+                                check = [];
+                                
+                            if (Ext.getCmp('emoticon-window-choose')) {
+                                emoticonWindow = Ext.getCmp('emoticon-window-choose');
+                            } else {
+                                emoticonWindow = new Ext.Window({
+                                    id: 'emoticon-window-choose',
+                                    autoScroll: true,
+                                    closeAction: 'hide',
+                                    layout: {
+                                        type: 'table',
+                                        columns: 10
+                                    },
+                                    margins: {
+                                        top: 5,
+                                        left: 5
+                                    },
+                                    height: 175,
+                                    width: 290,
+                                    title: app.i18n._('Choose a Emoticon')
+                                });
 
-                                failure: function (err, details) {
-                                    // Hide emoticon loading image
-                                    //Ext.getCmp('emoticon-connectloading').hide();
-                                    
-                                    Ext.Msg.show({
-                                        title: app.i18n._('Emoticons'),
-                                        msg: app.i18n._("Can't get Emoticons") + '!',
-                                        buttons: Ext.Msg.OK,
-                                        icon: Ext.MessageBox.ERROR,
-                                        width: 300
-                                    });
-                                },
-
-                                success: function (result, request) {
-                                    var response = JSON.parse(result.responseText);
-                                    
-                                    // Hide emoticon loading image
-                                    //Ext.getCmp('emoticon-connectloading').hide();
-
-                                    var emoticonWindow = new Ext.Window({
-                                        layout: {
-                                            type: 'table',
-                                            columns: 10
-                                        },
-                                        margins: {
-                                            top: 5,
-                                            left: 5
-                                        },
-                                        height: 175,
-                                        width: 290,
-                                        title: app.i18n._('Choose a Emoticon')
-                                    });
-
-                                    for (var i = 0; i < response.emoticons.length; i++) {
-                                        var name = response.emoticons[i].name.replace('_', ' ').toUpperCase(),
-                                            file = response.emoticons[i].file,
-                                            text = response.emoticons[i].text;
-
+                                Ext.each(EMOTICON.emoticons, function (item, index) {
+                                    if (check.indexOf(EMOTICON.translates[index]) < 0) {
+                                        check.push(EMOTICON.translates[index]);
                                         emoticonWindow.add({
                                             xtype: 'button',
-                                            icon: file,
+                                            icon: emoticonsPath + '/' + EMOTICON.translates[index] + '.png',
                                             cls: 'emoticon-button',
-                                            tooltip: name,
-                                            emoticon: text,
+                                            tooltip: EMOTICON.translates[index].toUpperCase(),
+                                            emoticon: item,
                                             handler: function () {
                                                 var textfield = mainChatWindow.find('name', 'textfield-chat-message')[0];
                                                 Tine.Messenger.Util.insertAtCursor(textfield, this.emoticon)
@@ -113,10 +92,10 @@ Tine.Messenger.Chat = Ext.extend(Ext.Window, {
                                             }
                                         });
                                     }
-
-                                    emoticonWindow.show();
-                                }
-                            });
+                                });
+                            }
+                            
+                            emoticonWindow.show();
                         }
                     }
                  }

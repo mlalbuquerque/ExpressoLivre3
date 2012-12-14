@@ -24,108 +24,118 @@ Tine.Messenger.FileTransfer = {
                                app.i18n._('Sending file') + '...' +
                                '<span>' + fileName + ' (' + fileSize + ' bytes)</span>' +
                                '</p>';
-
-                var progress = new Ext.Window({
-                    title: app.i18n._('File Transfer'),
-                    items: [
-                        {
-                            html: htmlText,
-                            border: false,
-                            frame: false,
-                            bodyStyle: 'background: transparent'
-                        },
-                        {
-                            xtype: 'progress',
-                            id: 'file-transfer-progress'
-                        }
-                    ]
-                });
-
-                var upload = new Ext.ux.file.Upload({
-                    file: filebrowser.files[0],
-                    fileSelector: filebrowser
-                });
-
-                upload.on('uploadcomplete', function (upload, file) {
-                    progress.close();
-
-                    var temps = new Array();
-                    Ext.each(upload.tempFiles, function (item) {
-                        temps.push(item.path);
-                    });
-
-                    Ext.Ajax.request({
-                        params: {
-                            method: 'Messenger.removeTempFiles',
-                            files: temps
-                        },
-                        failure:  function (err, details) {
-                            console.log(err);
-                            console.log(details);
-                            Tine.Messenger.Log.error(app.i18n._('Temporary files not deleted'));
-                        },
-                        success: function (result, request) {
-                            var response = JSON.parse(result.responseText);
-                            if (response.status)
-                                Tine.Messenger.Log.info(app.i18n._('Temporary files deleted'));
-                            else
-                                Tine.Messenger.Log.error(app.i18n._('Temporary files not deleted'));
-                        }
-                    });
-                    
-                    var info = $msg({'to': to + '/' + Tine.Messenger.FileTransfer.resource});
-                    if (Tine.Messenger.FileTransfer.resource == Tine.Tinebase.registry.get('messenger').messenger.resource) {
-                        info.attrs({'type': 'filetransfer'})
-                            .c("file", {
-                                'name': file.data.name,
-                                'path': file.data.tempFile.path,
-                                'size': file.data.size
-                            });
-                    } else {
-                        info.attrs({'type': 'chat'})
-                            .c("body")
-                            .t(app.i18n._('File sent') + ' :  ' +
-                               Tine.Messenger.FileTransfer.downloadURL(file.data.name, file.data.tempFile.path)
-                            );
-                    }
-                    Tine.Messenger.Application.connection.send(info);
-                    
+                if (fileSize > 104857600) {
+                    var error = Tine.Tinebase.appMgr.get('Messenger').i18n._('Maximum file size: 100MB') + '! ' +
+                                fileName + ': ' + (fileSize/1024) + 'MB';
                     Ext.Msg.show({
+                        title: Tine.Tinebase.appMgr.get('Messenger').i18n._('Error'),
+                        msg: error,
+                        buttons: Ext.Msg.OK,
+                        icon: Ext.MessageBox.ERROR
+                    });
+                } else {
+                    var progress = new Ext.Window({
                         title: app.i18n._('File Transfer'),
-                        msg: app.i18n._('File sent') +
-                             '!<h6 style="padding: 5px 0; width: 300px;">' +
-                             file.data.name +
-                             ' (' + file.data.size + ' bytes)</h6>',
-                        buttons: Ext.Msg.OK,
-                        icon: Ext.MessageBox.INFO,
-                        width: '300px'
+                        items: [
+                            {
+                                html: htmlText,
+                                border: false,
+                                frame: false,
+                                bodyStyle: 'background: transparent'
+                            },
+                            {
+                                xtype: 'progress',
+                                id: 'file-transfer-progress'
+                            }
+                        ]
                     });
-                });
 
-                upload.on('uploadfailure', function (upload, file) {
-                    progress.close();
-
-                    console.log(upload);
-                    console.log(file);
-                    Ext.Msg.show({
-                        title: app.i18n._('File Transfer Error'),
-                        /**
-                         * _('File too big - must be less then 2MB')
-                         * _('File partially uploaded')
-                         * _('File was not uploaded')
-                         * _('File transfer error')
-                         */
-                        msg: app.i18n._('Error uploading file') + '!',
-                        buttons: Ext.Msg.OK,
-                        icon: Ext.MessageBox.ERROR,
-                        width: 300
+                    var upload = new Ext.ux.file.Upload({
+                        file: filebrowser.files[0],
+                        fileSelector: filebrowser
                     });
-                });
 
-                progress.getComponent('file-transfer-progress').wait();
-                progress.show();
-                var uploadKey = Tine.Tinebase.uploadManager.queueUpload(upload);
-                Tine.Tinebase.uploadManager.upload(uploadKey); // returns uploaded file
+                    upload.on('uploadcomplete', function (upload, file) {
+                        progress.close();
+
+                        var temps = new Array();
+                        Ext.each(upload.tempFiles, function (item) {
+                            temps.push(item.path);
+                        });
+
+                        Ext.Ajax.request({
+                            params: {
+                                method: 'Messenger.removeTempFiles',
+                                files: temps
+                            },
+                            failure:  function (err, details) {
+                                console.log(err);
+                                console.log(details);
+                                Tine.Messenger.Log.error(app.i18n._('Temporary files not deleted'));
+                            },
+                            success: function (result, request) {
+                                var response = JSON.parse(result.responseText);
+                                if (response.status)
+                                    Tine.Messenger.Log.info(app.i18n._('Temporary files deleted'));
+                                else
+                                    Tine.Messenger.Log.error(app.i18n._('Temporary files not deleted'));
+                            }
+                        });
+
+                        var info = $msg({'to': to + '/' + Tine.Messenger.FileTransfer.resource});
+                        if (Tine.Messenger.FileTransfer.resource == Tine.Tinebase.registry.get('messenger').messenger.resource) {
+                            info.attrs({'type': 'filetransfer'})
+                                .c("file", {
+                                    'name': file.data.name,
+                                    'path': file.data.tempFile.path,
+                                    'size': file.data.size
+                                });
+                        } else {
+                            info.attrs({'type': 'chat'})
+                                .c("body")
+                                .t(app.i18n._('File sent') + ' :  ' +
+                                   Tine.Messenger.FileTransfer.downloadURL(file.data.name, file.data.tempFile.path)
+                                );
+                        }
+                        Tine.Messenger.Application.connection.send(info);
+
+                        Ext.Msg.show({
+                            title: app.i18n._('File Transfer'),
+                            msg: app.i18n._('File sent') +
+                                 '!<h6 style="padding: 5px 0; width: 300px;">' +
+                                 file.data.name +
+                                 ' (' + file.data.size + ' bytes)</h6>',
+                            buttons: Ext.Msg.OK,
+                            icon: Ext.MessageBox.INFO,
+                            width: '300px'
+                        });
+                    });
+
+                    upload.on('uploadfailure', function (upload, file) {
+                        progress.close();
+
+                        console.log(upload);
+                        console.log(file);
+                        Ext.Msg.show({
+                            title: app.i18n._('File Transfer Error'),
+                            /**
+                             * _('File too big - must be less then 2MB')
+                             * _('File partially uploaded')
+                             * _('File was not uploaded')
+                             * _('File transfer error')
+                             */
+                            msg: app.i18n._('Error uploading file') + '!',
+                            buttons: Ext.Msg.OK,
+                            icon: Ext.MessageBox.ERROR,
+                            width: 300
+                        });
+                    });
+
+                    progress.getComponent('file-transfer-progress').wait();
+                    progress.show();
+                    var uploadKey = Tine.Tinebase.uploadManager.queueUpload(upload);
+                    Tine.Tinebase.uploadManager.upload(uploadKey); // returns uploaded file
+                }
             }
         });
     },
