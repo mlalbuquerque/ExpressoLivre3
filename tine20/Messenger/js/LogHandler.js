@@ -65,7 +65,7 @@ Tine.Messenger.LogHandler = {
             jid = Strophe.getBareJidFromJid(from),
             show = $(presence).find('show'),
             resource;
-
+console.log('GET PRESENCE 0');
         if (type !== 'error'){
             if(to !== from){
                 if (type != null && type.match(/subscribe/i)) {
@@ -82,7 +82,7 @@ Tine.Messenger.LogHandler = {
                             if (contact.attributes.resources.length == 1)
                                 Tine.Messenger.RosterTree().updateBuddy(jid, IMConst.ST_UNAVAILABLE);
                             resource = Tine.Messenger.RosterTree().removeResource(from);
-                            Tine.Messenger.IM.verifyOfflineContactsDisplay();
+                            Tine.Messenger.IM.verifyOfflineContactsDisplay(true);
                         } else {
                             resource = Tine.Messenger.RosterTree().setResource(from);
                             var show_text = show.text(),
@@ -98,10 +98,12 @@ Tine.Messenger.LogHandler = {
                                 status = app.i18n._('auto status (idle)');
                                 Tine.Messenger.RosterTree().updateBuddy(jid, IMConst.ST_XA, '', status_text + " (" + resource + ")");
                             } else {
-                                $('div.available').show();
+                                console.log('GET PRESENCE 10');
+                                $('div.unavailable').show();
                                 available = true;
                                 status = app.i18n._('is on-line');
                                 Tine.Messenger.RosterTree().updateBuddy(jid, IMConst.ST_AVAILABLE, '', status_text + " (" + resource + ")");
+                                Tine.Messenger.IM.verifyOfflineContactsDisplay(true);
                             }
                         }
                         if(status && (show.length > 0 || type == 'unavailable' || available)){

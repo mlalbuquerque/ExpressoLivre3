@@ -98,7 +98,7 @@ class Messenger_Preference extends Tinebase_Preference_Abstract
         switch($_preferenceName) {
             case self::SHOWNOTIFICATIONS:
                 $preference->personal_only  = TRUE;
-                $preference->value      = 1;
+                $preference->value      = 0;
                 $preference->options    = '<?xml version="1.0" encoding="UTF-8"?>
                     <options>
                         <special>' . Tinebase_Preference_Abstract::YES_NO_OPTIONS . '</special>
@@ -144,7 +144,7 @@ class Messenger_Preference extends Tinebase_Preference_Abstract
                 break;
             case self::OFFLINECONTACTS:
                 $preference->personal_only  = TRUE;
-                $preference->value      = 'show';
+                $preference->value      = 'dont';
                 $preference->options    = '<?xml version="1.0" encoding="UTF-8"?>
                     <options>
                         <option>

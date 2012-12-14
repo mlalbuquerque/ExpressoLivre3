@@ -474,13 +474,18 @@ Tine.Messenger.IM = {
             displayBt.setIcon('images/messenger/hidden_icon_unavailable.png');
         }
     },
-    verifyOfflineContactsDisplay: function () {
+    verifyOfflineContactsDisplay: function (by_display_button) {
+        by_display_button = by_display_button || false;
         // Verify if is showing or hiding
-        var displayBt = Ext.getCmp('messenger-show-offline-contacts');
-        var i18n = Tine.Tinebase.appMgr.get('Messenger').i18n;
+        var displayBt = Ext.getCmp('messenger-show-offline-contacts'),
+            i18n = Tine.Tinebase.appMgr.get('Messenger').i18n,
+            comparison;
+        
+        comparison = by_display_button ?
+            displayBt.showOffline :
+            Tine.Messenger.registry.get('preferences').get('offlineContacts') == 'show';
 
-        //if (displayBt.showOffline) {
-        if (Tine.Messenger.registry.get('preferences').get('offlineContacts') == 'show') {
+        if (comparison) {
             $('div.unavailable').show();
             displayBt.setTooltip(i18n._('Hide offline contacts'));
             displayBt.setIcon('images/messenger/hidden_icon_unavailable.png');
