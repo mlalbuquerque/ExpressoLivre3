@@ -178,14 +178,10 @@ msgid "Click to join"
 msgstr ""
 
 #: js/Model.js:109
-#msgid "Room"
-#msgid_plural "Rooms"
-#msgstr[0] ""
-#msgstr[1] ""
-
-#: js/Model.js:109
 msgid "Room"
-msgstr ""
+msgid_plural "Rooms"
+msgstr[0] ""
+msgstr[1] ""
 
 #: js/Model.js:110
 msgid "Rooms"
@@ -198,6 +194,9 @@ msgid_plural "room lists"
 msgstr[0] ""
 msgstr[1] ""
 
+#: js/Model.js:113
+msgid "room lists"
+msgstr ""
 
 #: js/MainScreenCenterPanel:151
 msgid "Webconference Role"

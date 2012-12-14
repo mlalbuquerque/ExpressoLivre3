@@ -192,9 +192,10 @@ msgid "Click to join"
 msgstr "Clique para acessar"
 
 #: js/Model.js:109
-#, fuzzy
 msgid "Room"
-msgstr "Sala"
+msgid_plural "Rooms"
+msgstr[0] "Sala"
+msgstr[1] "Salas"
 
 #: js/Model.js:110
 msgid "Rooms"
@@ -205,6 +206,10 @@ msgid "room list"
 msgid_plural "room lists"
 msgstr[0] "Lista de salas"
 msgstr[1] "Listas de salas"
+
+#: js/Model.js:113
+msgid "room lists"
+msgstr "lista de salas"
 
 #: js/MainScreenCenterPanel:151
 msgid "Webconference Role"
