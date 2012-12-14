@@ -25,11 +25,12 @@ Tine.Messenger.Log = {
 
 Tine.Messenger.LogHandler = {
     
-    status: function(title, message, type){
-        var showNotfications = 1;
+    status: function(title, message, type, resource){
+        var showNotfications = showNotfications = Tine.Messenger.registry.get('preferences').get('showNotifications');
         
-        title   = "<span class='title'>"+title+"</span>";
-        message = "<span class='body'>"+message+"</span>";
+        resource = resource ? " (" + resource + ")" : "";
+        title   = "<span class='title'>" + title + "</span>";
+        message = "<span class='body'>" + message + resource + "</span>";
         
         if(type == 'STATUS'){
             showNotfications = Tine.Messenger.registry.get('preferences').get('showNotifications');
@@ -62,11 +63,11 @@ Tine.Messenger.LogHandler = {
             from = $(presence).attr("from"),
             to = $(presence).attr("to"),
             jid = Strophe.getBareJidFromJid(from),
-            show = $(presence).find('show');
+            show = $(presence).find('show'),
+            resource;
 
         if (type !== 'error'){
             if(to !== from){
-
                 if (type != null && type.match(/subscribe/i)) {
                     Tine.Messenger.LogHandler._subscriptionResponse(presence);
                 } else {
@@ -74,34 +75,38 @@ Tine.Messenger.LogHandler = {
                     if(contact){
                         var title = contact.text || jid;
                         var status = "";
+                        var available = false;
                         
                         if(type == 'unavailable'){
                             status = app.i18n._('is unavailable');
-                            Tine.Messenger.RosterTree().updateBuddy(jid, IMConst.ST_UNAVAILABLE);
+                            if (contact.attributes.resources.length == 1)
+                                Tine.Messenger.RosterTree().updateBuddy(jid, IMConst.ST_UNAVAILABLE);
+                            resource = Tine.Messenger.RosterTree().removeResource(from);
                             Tine.Messenger.IM.verifyOfflineContactsDisplay();
                         } else {
-                            Tine.Messenger.RosterTree().setResource(from);
+                            resource = Tine.Messenger.RosterTree().setResource(from);
                             var show_text = show.text(),
                                 status_text = $(presence).find('status').text() ? 
                                               app.i18n._('Status text')+': '+ $(presence).find('status').text() : '';
                             if(show_text == 'away') {
                                 status = app.i18n._('is away');
-                                Tine.Messenger.RosterTree().updateBuddy(jid, IMConst.ST_AWAY, '', status_text);
+                                Tine.Messenger.RosterTree().updateBuddy(jid, IMConst.ST_AWAY, '', status_text + " (" + resource + ")");
                             }else if(show_text == 'dnd'){
                                 status = app.i18n._('is busy');
-                                Tine.Messenger.RosterTree().updateBuddy(jid, IMConst.ST_DONOTDISTURB, '', status_text);
+                                Tine.Messenger.RosterTree().updateBuddy(jid, IMConst.ST_DONOTDISTURB, '', status_text + " (" + resource + ")");
                             } else if(show_text == 'xa'){
                                 status = app.i18n._('auto status (idle)');
-                                Tine.Messenger.RosterTree().updateBuddy(jid, IMConst.ST_XA, '', status_text);
+                                Tine.Messenger.RosterTree().updateBuddy(jid, IMConst.ST_XA, '', status_text + " (" + resource + ")");
                             } else {
                                 $('div.available').show();
+                                available = true;
                                 status = app.i18n._('is on-line');
-                                Tine.Messenger.RosterTree().updateBuddy(jid, IMConst.ST_AVAILABLE, '', status_text);
+                                Tine.Messenger.RosterTree().updateBuddy(jid, IMConst.ST_AVAILABLE, '', status_text + " (" + resource + ")");
                             }
                         }
-                        if(status && (show.length > 0 || type == 'unavailable')){
-                            Tine.Messenger.LogHandler.status(title, status, 'STATUS');
-                            Tine.Messenger.LogHandler.onChatStatusChange(from, title+" "+status);
+                        if(status && (show.length > 0 || type == 'unavailable' || available)){
+                            Tine.Messenger.LogHandler.status(title, status, 'STATUS', resource);
+                            Tine.Messenger.LogHandler.onChatStatusChange(from, title + " " + status);
                         }
                     }
                 }
@@ -184,12 +189,11 @@ Tine.Messenger.LogHandler = {
      *                      or <b>unsubscribe</b> or <b>unsubscribed</b>
      */
     sendSubscribeMessage: function(jid, type){
-        
         if(type == 'subscribe' || type == 'subscribed' || 
            type == 'unsubscribe' || type == 'unsubscribed')
         {
             var conn = Tine.Tinebase.appMgr.get('Messenger').getConnection();
-            conn.send($pres({to: jid, type: type}));
+            conn.send($pres({to: jid, type: type}).c('priority').t('10'));
         }
     },
     
@@ -240,10 +244,11 @@ Tine.Messenger.LogHandler = {
     onChatStatusChange: function(raw_jid, status){
         var app = Tine.Tinebase.appMgr.get('Messenger');
         var jid = Strophe.getBareJidFromJid(raw_jid);
+        var resource = Strophe.getResourceFromJid(raw_jid);
         var chat_id = Tine.Messenger.ChatHandler.formatChatId(jid);
         
         if(Ext.getCmp(chat_id)){
-            Tine.Messenger.ChatHandler.setChatMessage(jid, status, app.i18n._('Info'), 'messenger-notify');
+            Tine.Messenger.ChatHandler.setChatMessage(jid, status + ' (' + resource + ')', app.i18n._('Info'), 'messenger-notify');
         }
         
         return true;

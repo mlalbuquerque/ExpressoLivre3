@@ -424,6 +424,23 @@ Tine.Messenger.RosterTree = function(iq){
             
             if (contact.attributes.resources.indexOf(resource) < 0)
                 contact.attributes.resources.push(resource);
+            
+            return resource;
+        },
+        
+        removeResource: function(fullJID) {
+            var jid = Strophe.getBareJidFromJid(fullJID),
+                resource = Strophe.getResourceFromJid(fullJID),
+                contact = Tine.Messenger.RosterHandler.getContactElement(jid),
+                removedResource;
+                
+            if (contact.attributes.hasOwnProperty('resources')) {
+                var index = contact.attributes.resources.indexOf(resource);
+                if (index >= 0)
+                    removedResource = contact.attributes.resources.splice(index, 1);
+            }
+            
+            return removedResource.length > 0 ? removedResource[0] : null;
         },
         
        /**
