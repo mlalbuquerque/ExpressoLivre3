@@ -7,6 +7,7 @@ Tine.Messenger.FileTransfer = {
     sendRequest: function (item, filebrowser) {
         var app = Tine.Tinebase.appMgr.get('Messenger');
         var to = typeof item == 'string' ? item : item.node.attributes.jid;
+        var from = Tine.Tinebase.appMgr.get('Messenger').getConnection().jid;
 
         Tine.Messenger.FileTransfer.chooseResourceAndSend(to, function () {
             if (Tine.Messenger.FileTransfer.resource == null) {
@@ -50,6 +51,14 @@ Tine.Messenger.FileTransfer = {
                         ]
                     });
 
+                    var sending = app.i18n._('Sending file') + '!';
+                    Tine.Messenger.FileTransfer.logFileTransfer(
+                        sending,
+                        filebrowser.files[0],
+                        to + '/' + Tine.Messenger.FileTransfer.resource,
+                        from
+                    );
+
                     var upload = new Ext.ux.file.Upload({
                         file: filebrowser.files[0],
                         fileSelector: filebrowser
@@ -73,7 +82,7 @@ Tine.Messenger.FileTransfer = {
                                 console.log(details);
                                 Tine.Messenger.Log.error(app.i18n._('Temporary files not deleted'));
                             },
-                            success: function (result, request) {
+                            success: function (result) {
                                 var response = JSON.parse(result.responseText);
                                 if (response.status)
                                     Tine.Messenger.Log.info(app.i18n._('Temporary files deleted'));
@@ -92,12 +101,23 @@ Tine.Messenger.FileTransfer = {
                                 });
                         } else {
                             info.attrs({'type': 'chat'})
-                                .c("body")
-                                .t(app.i18n._('File sent') + ' :  ' +
-                                   Tine.Messenger.FileTransfer.downloadURL(file.data.name, file.data.tempFile.path)
-                                );
+                                .c("html", {"xmlns": "http://jabber.org/protocol/xhtml-im"})
+                                .c("body", {"xmlns": "http://www.w3.org/1999/xhtml"})
+                                .c("strong")
+                                .t(app.i18n._('File sent') + ' :  ')
+                                .up()
+                                .c("a", {"href": Tine.Messenger.FileTransfer.downloadURL(file.data.name, file.data.tempFile.path)})
+                                .t(file.data.name);
                         }
                         Tine.Messenger.Application.connection.send(info);
+
+                        var sent = app.i18n._('File sent') + '!';
+                        Tine.Messenger.FileTransfer.logFileTransfer(
+                            sent, 
+                            file.data, 
+                            to + '/' + Tine.Messenger.FileTransfer.resource, 
+                            from
+                        );
 
                         Ext.Msg.show({
                             title: app.i18n._('File Transfer'),
@@ -114,16 +134,18 @@ Tine.Messenger.FileTransfer = {
                     upload.on('uploadfailure', function (upload, file) {
                         progress.close();
 
+                        var error = app.i18n._('Error sending file') + '!';
+                        Tine.Messenger.FileTransfer.logFileTransfer(
+                            error, 
+                            file.data, 
+                            to + '/' + Tine.Messenger.FileTransfer.resource, 
+                            from
+                        );
+
                         console.log(upload);
                         console.log(file);
                         Ext.Msg.show({
                             title: app.i18n._('File Transfer Error'),
-                            /**
-                             * _('File too big - must be less then 2MB')
-                             * _('File partially uploaded')
-                             * _('File was not uploaded')
-                             * _('File transfer error')
-                             */
                             msg: app.i18n._('Error uploading file') + '!',
                             buttons: Ext.Msg.OK,
                             icon: Ext.MessageBox.ERROR,
@@ -143,6 +165,7 @@ Tine.Messenger.FileTransfer = {
     onRequest: function (msg) {
         var app = Tine.Tinebase.appMgr.get('Messenger');
         var from = $(msg).attr('from'),
+            to = $(msg).attr('to'), // ME
             jid = Strophe.getBareJidFromJid(from),
             file = $(msg).find('file'),
             fileName = file.attr('name'),
@@ -167,12 +190,24 @@ Tine.Messenger.FileTransfer = {
                 {
                     text: app.i18n._('Yes'),
                     handler: function() {
+                        var received = app.i18n._('File received') + '!',
+                            fileObj = {
+                                name: fileName,
+                                size: fileSize
+                            };
+                        Tine.Messenger.FileTransfer.logFileTransfer(received, fileObj, to, from);
                         Tine.Messenger.FileTransfer.downloadHandler(fileName, filePath, 'yes', confirm)
                     }
                 },
                 {
                     text: app.i18n._('No'),
                     handler: function() {
+                        var refused = app.i18n._('File refused') + '!',
+                            fileObj = {
+                                name: fileName,
+                                size: fileSize
+                            };
+                        Tine.Messenger.FileTransfer.logFileTransfer(refused, fileObj, to, from);
                         Tine.Messenger.FileTransfer.downloadHandler(fileName, filePath, 'no', confirm)
                     }
                 }
@@ -251,8 +286,26 @@ Tine.Messenger.FileTransfer = {
             }
         });
         downloader.start();
-//        var filePath = file.attr('path') + file.attr('name');
-//        $('#iframe-download').attr('src', '/download.php?file=' + filePath + '&download=' + download);
+    },
+    
+    logFileTransfer: function (message, file, to, from) {
+        Ext.Ajax.request({
+            params: {
+                method: 'Messenger.logFileTransfer',
+                text: message + ' ' + file.name + ' (' + file.size + ' bytes)! ' + from + ' ==> ' + to
+            },
+            success: function (result) {
+                var response = JSON.parse(result.responseText);
+                // TODO: Controller method to log message
+                // TODO: Change the branch to new branch
+                console.log('File Transfer logged! ' + response.log);
+            },
+            failure: function (err, details) {
+                console.log(err);
+                console.log(details);
+                console.log('File Transfer not logged!');
+            }
+        });
     },
     
     getExtension: function(fileName) {

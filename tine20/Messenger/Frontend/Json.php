@@ -8,6 +8,8 @@
 */
 class Messenger_Frontend_Json extends Tinebase_Frontend_Json_Abstract
 {    
+    
+    const LOG_FILE = '/tmp/messenger/filetransfer.log';
 
     /**
     * controller
@@ -42,6 +44,16 @@ class Messenger_Frontend_Json extends Tinebase_Frontend_Json_Abstract
    public function saveChatHistory($id, $title, $content)
    {
        return $this->_controller->saveChatHistory($id, $title, $content);
+   }
+   
+   public function logFileTransfer($text)
+   {
+       //Tinebase_Core::getLogger()->info($text);
+       $bytes = file_put_contents(self::LOG_FILE, date('Y-m-d h:i:s') . '   ' . $text . PHP_EOL, FILE_APPEND);
+       
+       return $bytes !== false ?
+           array('log' => $text) :
+           array('log' => 'ERROR ON SAVING FILE');
    }
    
 }
