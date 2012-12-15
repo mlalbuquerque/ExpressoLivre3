@@ -2,7 +2,8 @@ Ext.ns('Tine.Messenger');
 
 // Messenger Application constants
 var MESSENGER_CHAT_ID_PREFIX = 'messenger-chat-',
-    MESSENGER_DEBUG = false;
+    MESSENGER_DEBUG = false,
+    PAGE_RELOAD = false;
 
 Tine.Messenger.factory={
     statusStore : new Ext.data.SimpleStore({
@@ -454,7 +455,10 @@ Tine.Messenger.IM = {
         // Close all chats
         var chats = Ext.query('.messenger-chat-window');
         Ext.each(chats, function (item, index) {
-            Ext.getCmp(item.id).close();
+            var chat = Ext.getCmp(item.id);
+            
+            PAGE_RELOAD = true;
+            chat.destroy();
         });
 
         Ext.getCmp('connectloading').hide();
