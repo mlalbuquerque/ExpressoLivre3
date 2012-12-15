@@ -1000,7 +1000,8 @@ Tine.Felamimail.GridPanel = Ext.extend(Tine.widgets.grid.GridPanel, {
         var win = Tine.Felamimail.MessageEditDialog.openWindow({
             accountId: activeAccount ? activeAccount.id : null,
             listeners: {
-                'update': this.onAfterCompose.createDelegate(this, ['compose', []], 1)
+                'update': this.onAfterCompose.createDelegate(this, ['compose', []], 1),
+                'destroy': this.focusSelectedMessage.createDelegate(this)
             }
         });
     },
@@ -1019,7 +1020,8 @@ Tine.Felamimail.GridPanel = Ext.extend(Tine.widgets.grid.GridPanel, {
             var win = Tine.Felamimail.MessageEditDialog.openWindow({
                 forwardMsgs : Ext.encode(msgsData),
                 listeners: {
-                    'update': this.onAfterCompose.createDelegate(this, ['forward', msgs], 1)
+                    'update': this.onAfterCompose.createDelegate(this, ['forward', msgs], 1),
+                    'destroy': this.focusSelectedMessage.createDelegate(this)
                 }
             });
         }
@@ -1038,7 +1040,8 @@ Tine.Felamimail.GridPanel = Ext.extend(Tine.widgets.grid.GridPanel, {
             replyTo : Ext.encode(msg.data),
             replyToAll: toAll,
             listeners: {
-                'update': this.onAfterCompose.createDelegate(this, ['reply', [msg]], 1)
+                'update' : this.onAfterCompose.createDelegate(this, ['reply', [msg]], 1),
+                'destroy': this.focusSelectedMessage.createDelegate(this)
             }
         });
     },
