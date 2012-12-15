@@ -62,7 +62,7 @@ Tine.Messenger.ChatHandler = {
                 var chat_text = '',
                     host = window.location.host,
                     protocol = window.location.protocol;
-                if (chat_lines.length > 0 && Tine.Messenger.registry.get('preferences').get('chatHistory') != 'dont') {
+                if (!PAGE_RELOAD && chat_lines.length > 0 && Tine.Messenger.registry.get('preferences').get('chatHistory') != 'dont') {
                     for (var i = 0; i < chat_lines.length; i++)
                         chat_text += chat_lines[i].body.dom.innerHTML + '<br style="clear: both;"/>';
 
