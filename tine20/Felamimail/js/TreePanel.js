@@ -740,8 +740,8 @@ Ext.extend(Tine.Felamimail.TreePanel, Ext.tree.TreePanel, {
                     '<tr>',
                         '<td>', this.app.i18n._('Your quota'), '</td>',
                         '<td nowrap>',String.format(this.app.i18n._('{0} available (total: {1})'), 
-                    Ext.util.Format.fileSize(left * 1024),
-                    Ext.util.Format.fileSize(limit * 1024)
+                    isNaN(left * 1024) ? "-" : Ext.util.Format.fileSize(left * 1024),
+                    isNaN(limit * 1024) ? "-" : Ext.util.Format.fileSize(limit * 1024)
                 ), '</td>',
                     '</tr>',                    
                     '<tr>',
