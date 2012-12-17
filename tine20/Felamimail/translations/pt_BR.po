@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tine 2.0 - Felamimail\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-12-14 18:05-0300\n"
+"PO-Revision-Date: 2012-12-17 15:22-0300\n"
 "Last-Translator: Cassiano Dal Pizzol <cassiano@dalpizzol@serpro.gov.br>\n"
 "Language-Team: Tine 2.0 Translators <rommel.cysne@serpro.gov.br>\n"
 "MIME-Version: 1.0\n"
@@ -1234,5 +1234,4 @@ msgstr "Aviso de IMAP"
 #: js/Felamimail.js:818
 msgid "You don't have permission for this operation in this shared folder!"
 msgstr "Você não possui permissão para esta operação na pasta compartilhada!"
-
 
