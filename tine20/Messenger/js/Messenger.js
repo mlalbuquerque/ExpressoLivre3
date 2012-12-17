@@ -136,7 +136,7 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
                 {status: 404, error: app.i18n._('Server does not exist') + '!'},
                 {status: 500, error: app.i18n._('Server error') + '!'},
                 {status: 501, error: app.i18n._('Server does not support the method') + '!'},
-                {status: 502, error: app.i18n._('Server received invalid response from proxy') + '!'},
+                //{status: 502, error: app.i18n._('Server received invalid response from proxy') + '!'},
                 {status: 503, error: app.i18n._('Server is unavailable') + '!'}
             ];
             
@@ -355,9 +355,6 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
                 Tine.Messenger.Util.callbackWrapper(Tine.Messenger.LogHandler._getPresence),
                 'jabber:client', 'presence'
             );
-
-            // Load emoticons.xml
-            Tine.Messenger.Application.xml_raw = $.get("/images/messenger/emoticons/emoticons.xml",{dataType: "xml"});
         
             // Start unload events
             window.onbeforeunload = function () {
