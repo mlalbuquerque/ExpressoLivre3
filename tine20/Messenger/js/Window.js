@@ -68,20 +68,22 @@ Tine.Messenger.Window._addBuddyAction = function(jid, name, group){
 };
 
 Tine.Messenger.Window._onMoveWindowAction = function (_dialog){
-    var pos_X = _dialog.x,
-        pos_Y = _dialog.y,
-        win_X = _dialog.container.dom.clientWidth,
-        win_Y = _dialog.container.dom.clientHeight;
-        
-    var new_X = pos_X,
-        new_Y = pos_Y;
-        
-    new_X = (pos_X < 0) ? 5 : new_X;
-    new_X = (win_X < pos_X + 30) ? win_X - 50 : new_X;
+    if (_dialog && _dialog.x && _dialog.y && _dialog.container) {
+        var pos_X = _dialog.x,
+            pos_Y = _dialog.y,
+            win_X = _dialog.container.dom.clientWidth,
+            win_Y = _dialog.container.dom.clientHeight;
 
-    new_Y = (pos_Y < 0) ? 5 : new_Y;
-    new_Y = (win_Y < pos_Y + 30) ? win_Y - 50 : new_Y;
+        var new_X = pos_X,
+            new_Y = pos_Y;
 
-    if(pos_X != new_X || pos_Y != new_Y)
-        _dialog.setPagePosition(new_X, new_Y);
+        new_X = (pos_X < 0) ? 5 : new_X;
+        new_X = (win_X < pos_X + 30) ? win_X - 50 : new_X;
+
+        new_Y = (pos_Y < 0) ? 5 : new_Y;
+        new_Y = (win_Y < pos_Y + 30) ? win_Y - 50 : new_Y;
+
+        if(pos_X != new_X || pos_Y != new_Y)
+            _dialog.setPagePosition(new_X, new_Y);
+    }
 };
