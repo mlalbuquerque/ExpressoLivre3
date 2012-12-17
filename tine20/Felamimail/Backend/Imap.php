@@ -193,7 +193,7 @@ class Felamimail_Backend_Imap extends Zend_Mail_Storage_Imap
              * @see Zend_Mail_Storage_Exception
              */
             require_once 'Zend/Mail/Storage/Exception.php';
-            throw new Zend_Mail_Storage_Exception($translate->_('cannot create folder') . ' ' . $folder . ', ' . $translate->_('perhaps it already exists.'));
+            throw new Zend_Mail_Storage_Exception($translate->_('cannot create folder') . ' ' . $folder . ', ' . $translate->_('it already exists.'));
         }
     }
     

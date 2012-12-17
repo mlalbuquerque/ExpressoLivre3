@@ -197,7 +197,7 @@ abstract class Felamimail_Controller_Folder_Abstract extends Tinebase_Controller
 //            $parentSubs = $this->_cacheController->update($account, $_parentFolder);
 //            $folder = $parentSubs->filter('globalname', $globalname)->getFirstRecord();
 //            if ($folder === NULL) {
-                throw new Felamimail_Exception_IMAPServiceUnavailable($zmse->getMessage());
+                throw new Felamimail_Exception_IMAPFolderDuplicated($zmse->getMessage());
 //            }
         }
         
