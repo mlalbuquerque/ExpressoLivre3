@@ -88,8 +88,8 @@ class Tasks_Frontend_CalDAV extends Calendar_Frontend_Caldav
                         throw new Sabre_DAV_Exception_FileNotFound('Directory not found');
                     }
                     
-                    if (!Tinebase_Core::getUser()->hasGrant($container, Tinebase_Model_Grants::GRANT_READ) || !Tinebase_Core::getUser()->hasGrant($container, Tinebase_Model_Grants::GRANT_SYNC)) {
-                        throw new Sabre_DAV_Exception_FileNotFound('Directory not found');
+                    if (!Tinebase_Core::getUser()->hasGrant($container, Tinebase_Model_Grants::GRANT_READ) && !Tinebase_Core::getUser()->hasGrant($container, Tinebase_Model_Grants::GRANT_SYNC)) {
+                        throw new Sabre_DAV_Exception_FileNotFound('Directory permissions mismatch');
                     }
                     $objectClass = $this->_application->name . '_Frontend_WebDAV_Container';
 
