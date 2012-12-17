@@ -70,6 +70,10 @@
         {
           "text": "Emoticons.js",
           "path": "js/"
+        },
+        {
+          "text": "Priority.js",
+          "path": "js/"
         }
       ]
     },

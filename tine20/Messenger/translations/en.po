@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tine 2.0 Messenger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-17 09:27-0300\n"
-"PO-Revision-Date: 2012-12-17 15:22-0300\n"
-"Last-Translator: Cassiano Dal Pizzol <cassiano@dalpizzol@serpro.gov.br>\n"
+"POT-Creation-Date: 2012-12-18 10:54-0300\n"
+"PO-Revision-Date: 2012-12-18 10:54-0300\n"
+"Last-Translator: Marcio Albuquerque <marcio.lima.albuquerque@gmail.com>\n"
 "Language-Team: SERPRO Salvador <marcio.albuquerque@serpro.gov.br>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -111,6 +111,47 @@ msgstr "Status"
 msgid "Role"
 msgstr "Role"
 
+#: Messenger/js/Priority.js:7
+msgid "Priority settings"
+msgstr "Priority settings"
+
+#: Messenger/js/Priority.js:16
+msgid "Priority"
+msgstr "Priority"
+
+#: Messenger/js/Priority.js:35
+msgid "Negative values do not receive messages"
+msgstr "Negative values do not receive messages"
+
+#: Messenger/js/Priority.js:38
+msgid "Pidgin priority"
+msgstr "Pidgin priority"
+
+#: Messenger/js/Priority.js:41
+msgid "PSI priority"
+msgstr "PSI priority"
+
+#: Messenger/js/Priority.js:44
+msgid "Gaijm priority"
+msgstr "Gaijm priority"
+
+#: Messenger/js/Priority.js:54
+msgid "The highest the priority more likely this client to receive the message"
+msgstr "The highest the priority more likely this client to receive the message"
+
+#: Messenger/js/Priority.js:58
+msgid "Examples: PSI priority = 5. Pidgin priority = 1"
+msgstr "Examples: PSI priority = 5. Pidgin priority = 1"
+
+#: Messenger/js/Priority.js:64
+msgid "Change"
+msgstr "Change"
+
+#: Messenger/js/Priority.js:76
+#: Messenger/js/ConfigWindow.js:92
+msgid "Cancel"
+msgstr "Cancel"
+
 #: Messenger/js/LogHandler.js:81
 #: Messenger/js/ChatHandler.js:140
 msgid "is unavailable"
@@ -186,13 +227,13 @@ msgid "Error sending: "
 msgstr "Error sending: "
 
 #: Messenger/js/LogHandler.js:212
-#: Messenger/js/Messenger.js:147
-#: Messenger/js/Messenger.js:288
-#: Messenger/js/Messenger.js:382
-#: Messenger/js/Messenger.js:400
-#: Messenger/js/FileTransfer.js:31
-#: Messenger/js/RosterHandler.js:303
-#: Messenger/js/RosterHandler.js:358
+#: Messenger/js/Messenger.js:148
+#: Messenger/js/Messenger.js:289
+#: Messenger/js/Messenger.js:380
+#: Messenger/js/Messenger.js:398
+#: Messenger/js/FileTransfer.js:32
+#: Messenger/js/RosterHandler.js:305
+#: Messenger/js/RosterHandler.js:360
 msgid "Error"
 msgstr "Error"
 
@@ -240,11 +281,11 @@ msgid "Do you want to download this chat"
 msgstr "Do you want to download this chat"
 
 #: Messenger/js/ChatHandler.js:108
-#: Messenger/js/FileTransfer.js:14
-#: Messenger/js/FileTransfer.js:38
-#: Messenger/js/FileTransfer.js:103
-#: Messenger/js/FileTransfer.js:155
-#: Messenger/js/FileTransfer.js:210
+#: Messenger/js/FileTransfer.js:15
+#: Messenger/js/FileTransfer.js:39
+#: Messenger/js/FileTransfer.js:123
+#: Messenger/js/FileTransfer.js:178
+#: Messenger/js/FileTransfer.js:245
 msgid "File Transfer"
 msgstr "File Transfer"
 
@@ -253,7 +294,7 @@ msgid "Chat has no content"
 msgstr "Chat has no content"
 
 #: Messenger/js/ChatHandler.js:116
-#: Messenger/js/FileTransfer.js:120
+#: Messenger/js/FileTransfer.js:148
 msgid "File Transfer Error"
 msgstr "File Transfer Error"
 
@@ -262,8 +303,8 @@ msgid "Error creating chat history file"
 msgstr "Error creating chat history file"
 
 #: Messenger/js/ChatHandler.js:127
-#: Messenger/js/FileTransfer.js:74
-#: Messenger/js/FileTransfer.js:81
+#: Messenger/js/FileTransfer.js:83
+#: Messenger/js/FileTransfer.js:90
 msgid "Temporary files not deleted"
 msgstr "Temporary files not deleted"
 
@@ -285,7 +326,7 @@ msgstr "Group created successfully"
 
 #: Messenger/js/Window.js:21
 #: Messenger/js/Layout.js:43
-#: Messenger/js/Layout.js:455
+#: Messenger/js/Layout.js:474
 msgid "Add Group"
 msgstr "Add Group"
 
@@ -306,93 +347,93 @@ msgstr "Add Buddy"
 msgid "Buddy not added"
 msgstr "Buddy not added"
 
-#: Messenger/js/Messenger.js:28
+#: Messenger/js/Messenger.js:29
 msgid "ME"
 msgstr "ME"
 
-#: Messenger/js/Messenger.js:44
+#: Messenger/js/Messenger.js:45
 msgid "Available"
 msgstr "Available"
 
-#: Messenger/js/Messenger.js:45
-#: Messenger/js/Layout.js:157
+#: Messenger/js/Messenger.js:46
+#: Messenger/js/Layout.js:176
 msgid "Unavailable"
 msgstr "Unavailable"
 
-#: Messenger/js/Messenger.js:46
-#: Messenger/js/Layout.js:155
+#: Messenger/js/Messenger.js:47
+#: Messenger/js/Layout.js:174
 msgid "Away"
 msgstr "Away"
 
-#: Messenger/js/Messenger.js:47
+#: Messenger/js/Messenger.js:48
 msgid "Auto Status (idle)"
 msgstr "Auto Status (idle)"
 
-#: Messenger/js/Messenger.js:48
-#: Messenger/js/Layout.js:156
+#: Messenger/js/Messenger.js:49
+#: Messenger/js/Layout.js:175
 msgid "Do Not Disturb"
 msgstr "Do Not Disturb"
 
-#: Messenger/js/Messenger.js:134
+#: Messenger/js/Messenger.js:135
 msgid "Access to server is forbidden"
 msgstr "Access to server is forbidden"
 
-#: Messenger/js/Messenger.js:135
+#: Messenger/js/Messenger.js:136
 msgid "Server does not exist"
 msgstr "Server does not exist"
 
-#: Messenger/js/Messenger.js:136
+#: Messenger/js/Messenger.js:137
 msgid "Server error"
 msgstr "Server error"
 
-#: Messenger/js/Messenger.js:137
+#: Messenger/js/Messenger.js:138
 msgid "Server does not support the method"
 msgstr "Server does not support the method"
 
-#: Messenger/js/Messenger.js:138
+#: Messenger/js/Messenger.js:139
 msgid "Server received invalid response from proxy"
 msgstr "Server received invalid response from proxy"
 
-#: Messenger/js/Messenger.js:139
+#: Messenger/js/Messenger.js:140
 msgid "Server is unavailable"
 msgstr "Server is unavailable"
 
-#: Messenger/js/Messenger.js:160
+#: Messenger/js/Messenger.js:161
 msgid "Messenger"
 msgid_plural "Messengers"
 msgstr[0] "Messenger"
 msgstr[1] "Messengers"
 
-#: Messenger/js/Messenger.js:175
+#: Messenger/js/Messenger.js:176
 msgid "IM Message"
 msgstr "IM Message"
 
-#: Messenger/js/Messenger.js:279
+#: Messenger/js/Messenger.js:280
 msgid "Connecting"
 msgstr "Connecting"
 
-#: Messenger/js/Messenger.js:289
+#: Messenger/js/Messenger.js:290
 msgid "Can't connect to server"
 msgstr "Can't connect to server"
 
-#: Messenger/js/Messenger.js:363
+#: Messenger/js/Messenger.js:361
 msgid "Leave page"
 msgstr "Leave page"
 
-#: Messenger/js/Messenger.js:368
+#: Messenger/js/Messenger.js:366
 msgid "Close window"
 msgstr "Close window"
 
-#: Messenger/js/Messenger.js:383
+#: Messenger/js/Messenger.js:381
 msgid "Authentication failed"
 msgstr "Authentication failed"
 
-#: Messenger/js/Messenger.js:401
+#: Messenger/js/Messenger.js:399
 msgid "Unknown error"
 msgstr "Unknown error"
 
-#: Messenger/js/Messenger.js:473
-#: Messenger/js/Messenger.js:490
+#: Messenger/js/Messenger.js:480
+#: Messenger/js/Messenger.js:497
 #: Messenger/js/Layout.js:54
 msgid "Hide offline contacts"
 msgstr "Hide offline contacts"
@@ -402,139 +443,141 @@ msgid "Expresso Messenger"
 msgstr "Expresso Messenger"
 
 #: Messenger/js/Layout.js:34
-#: Messenger/js/Layout.js:379
+#: Messenger/js/Layout.js:398
 msgid "Add Contact"
 msgstr "Add Contact"
 
 #: Messenger/js/Layout.js:66
+msgid "Priority setting"
+msgstr "Priority setting"
+
+#: Messenger/js/Layout.js:85
 #: Messenger/js/ConfigWindow.js:75
 msgid "Login"
 msgstr "Login"
 
-#: Messenger/js/Layout.js:123
+#: Messenger/js/Layout.js:142
 msgid "Type your Status"
 msgstr "Type your Status"
 
-#: Messenger/js/Layout.js:124
+#: Messenger/js/Layout.js:143
 msgid "press ENTER after"
 msgstr "press ENTER after"
 
-#: Messenger/js/Layout.js:154
+#: Messenger/js/Layout.js:173
 msgid "Online"
 msgstr "Online"
 
-#: Messenger/js/Layout.js:397
+#: Messenger/js/Layout.js:416
 msgid "JID"
 msgstr "JID"
 
-#: Messenger/js/Layout.js:404
-#: Messenger/js/Layout.js:463
+#: Messenger/js/Layout.js:423
+#: Messenger/js/Layout.js:482
 msgid "Name"
 msgstr "Name"
 
-#: Messenger/js/Layout.js:409
+#: Messenger/js/Layout.js:428
 msgid "Group"
 msgstr "Group"
 
-#: Messenger/js/Layout.js:415
+#: Messenger/js/Layout.js:434
 msgid "Select a group"
 msgstr "Select a group"
 
-#: Messenger/js/Layout.js:425
-#: Messenger/js/Layout.js:468
+#: Messenger/js/Layout.js:444
+#: Messenger/js/Layout.js:487
 msgid "Add"
 msgstr "Add"
 
-#: Messenger/js/Layout.js:501
+#: Messenger/js/Layout.js:520
 msgid "Join Groupchat"
 msgstr "Join Groupchat"
 
-#: Messenger/js/Layout.js:510
+#: Messenger/js/Layout.js:529
 msgid "Identity"
 msgstr "Identity"
 
-#: Messenger/js/Layout.js:516
+#: Messenger/js/Layout.js:535
 msgid "Host"
 msgstr "Host"
 
-#: Messenger/js/Layout.js:521
+#: Messenger/js/Layout.js:540
 msgid "Room"
 msgstr "Room"
 
-#: Messenger/js/Layout.js:526
+#: Messenger/js/Layout.js:545
 msgid "Nickname"
 msgstr "Nickname"
 
-#: Messenger/js/Layout.js:532
+#: Messenger/js/Layout.js:551
 msgid "Password"
 msgstr "Password"
 
-#: Messenger/js/Layout.js:536
+#: Messenger/js/Layout.js:555
 msgid "Join"
 msgstr "Join"
 
-#: Messenger/js/FileTransfer.js:15
+#: Messenger/js/FileTransfer.js:16
 msgid "You must choose a resource"
 msgstr "You must choose a resource"
 
-#: Messenger/js/FileTransfer.js:24
+#: Messenger/js/FileTransfer.js:25
+#: Messenger/js/FileTransfer.js:54
 msgid "Sending file"
 msgstr "Sending file"
 
-#: Messenger/js/FileTransfer.js:28
+#: Messenger/js/FileTransfer.js:29
 msgid "Maximum file size: 200MB"
 msgstr "Maximum file size: 200MB"
 
-#: Messenger/js/FileTransfer.js:79
+#: Messenger/js/FileTransfer.js:88
 msgid "Temporary files deleted"
 msgstr "Temporary files deleted"
 
-#: Messenger/js/FileTransfer.js:96
-#: Messenger/js/FileTransfer.js:104
+#: Messenger/js/FileTransfer.js:107
+#: Messenger/js/FileTransfer.js:114
+#: Messenger/js/FileTransfer.js:124
 msgid "File sent"
 msgstr "File sent"
 
-#: Messenger/js/FileTransfer.js:122
-msgid "File too big - must be less then 2MB"
-msgstr "File too big - must be less then 2MB"
+#: Messenger/js/FileTransfer.js:137
+msgid "Error sending file"
+msgstr "Error sending file"
 
-#: Messenger/js/FileTransfer.js:123
-msgid "File partially uploaded"
-msgstr "File partially uploaded"
-
-#: Messenger/js/FileTransfer.js:124
-msgid "File was not uploaded"
-msgstr "File was not uploaded"
-
-#: Messenger/js/FileTransfer.js:125
-msgid "File transfer error"
-msgstr "File transfer error"
-
-#: Messenger/js/FileTransfer.js:127
+#: Messenger/js/FileTransfer.js:149
 msgid "Error uploading file"
 msgstr "Error uploading file"
 
-#: Messenger/js/FileTransfer.js:159
+#: Messenger/js/FileTransfer.js:182
 msgid "wants to send you a file:"
 msgstr "wants to send you a file:"
 
-#: Messenger/js/FileTransfer.js:164
+#: Messenger/js/FileTransfer.js:187
 msgid "Do you allow"
 msgstr "Do you allow"
 
-#: Messenger/js/FileTransfer.js:168
+#: Messenger/js/FileTransfer.js:191
 #: Messenger/js/RosterTree.js:81
 #: Messenger/js/RosterTree.js:180
 msgid "Yes"
 msgstr "Yes"
 
-#: Messenger/js/FileTransfer.js:174
+#: Messenger/js/FileTransfer.js:193
+msgid "File received"
+msgstr "File received"
+
+#: Messenger/js/FileTransfer.js:203
 #: Messenger/js/RosterTree.js:82
 #: Messenger/js/RosterTree.js:181
 msgid "No"
 msgstr "No"
 
-#: Messenger/js/FileTransfer.js:218
+#: Messenger/js/FileTransfer.js:205
+msgid "File refused"
+msgstr "File refused"
+
+#: Messenger/js/FileTransfer.js:253
 msgid " has more than one resource. Choose one!"
 msgstr " has more than one resource. Choose one!"
 
@@ -625,35 +668,31 @@ msgstr "Custom Name"
 msgid "Save"
 msgstr "Save"
 
-#: Messenger/js/ConfigWindow.js:92
-msgid "Cancel"
-msgstr "Cancel"
-
 #: Messenger/js/RosterHandler.js:42
-#: Messenger/js/RosterHandler.js:355
+#: Messenger/js/RosterHandler.js:357
 msgid "was successfully removed"
 msgstr "was successfully removed"
 
-#: Messenger/js/RosterHandler.js:296
-#: Messenger/js/RosterHandler.js:353
+#: Messenger/js/RosterHandler.js:298
+#: Messenger/js/RosterHandler.js:355
 msgid "Successful"
 msgstr "Successful"
 
-#: Messenger/js/RosterHandler.js:297
-#: Messenger/js/RosterHandler.js:354
-#: Messenger/js/RosterHandler.js:359
+#: Messenger/js/RosterHandler.js:299
+#: Messenger/js/RosterHandler.js:356
+#: Messenger/js/RosterHandler.js:361
 msgid "The group"
 msgstr "The group"
 
-#: Messenger/js/RosterHandler.js:298
+#: Messenger/js/RosterHandler.js:300
 msgid "was successfully renamed to"
 msgstr "was successfully renamed to"
 
-#: Messenger/js/RosterHandler.js:303
+#: Messenger/js/RosterHandler.js:305
 msgid " already exist. It was not renamed."
 msgstr " already exist. It was not renamed."
 
-#: Messenger/js/RosterHandler.js:360
+#: Messenger/js/RosterHandler.js:362
 msgid "was not removed"
 msgstr "was not removed"
 
@@ -666,34 +705,59 @@ msgstr "Start video chat"
 msgid "Choose a Emoticon"
 msgstr "Choose a Emoticon"
 
+#~ msgid "File too big - must be less then 2MB"
+#~ msgstr "File too big - must be less then 2MB"
+
+#~ msgid "File partially uploaded"
+#~ msgstr "File partially uploaded"
+
+#~ msgid "File was not uploaded"
+#~ msgstr "File was not uploaded"
+
+#~ msgid "File transfer error"
+#~ msgstr "File transfer error"
+
 #~ msgid "Emoticons"
 #~ msgstr "Emoticons"
+
 #~ msgid "Can't get Emoticons"
 #~ msgstr "Can't get Emoticons"
+
 #~ msgid "Messenger has been disconnected!"
 #~ msgstr "Messenger has been disconnected!"
+
 #~ msgid "Disconnecting"
 #~ msgstr "Disconnecting"
+
 #~ msgid "Options"
 #~ msgstr "Options"
+
 #~ msgid "Connect"
 #~ msgstr "Connect"
+
 #~ msgid "Actions"
 #~ msgstr "Actions"
+
 #~ msgid "Logout"
 #~ msgstr "Logout"
+
 #~ msgid "Show notifications ..."
 #~ msgstr "Show notifications ..."
+
 #~ msgid "History of chats ..."
 #~ msgstr "History of chats ..."
+
 #~ msgid "Custon name ..."
 #~ msgstr "Custon name ..."
+
 #~ msgid "Action"
+
 #~ msgid_plural "Actions"
 #~ msgstr[0] "Action"
 #~ msgstr[1] "Actions"
+
 #~ msgid "Preference"
+
 #~ msgid_plural "Preferences"
 #~ msgstr[0] "Preference"
 #~ msgstr[1] "Preferences"
-

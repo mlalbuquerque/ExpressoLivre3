@@ -61,6 +61,25 @@ Tine.Messenger.ClientDialog = function(args){
                              }
                          },
                          {
+                             id: 'messenger-change-priority',
+                             xtype: 'button',
+                             tooltip: app.i18n._('Priority setting'),
+                             icon: 'images/messenger/warning.png',
+                             showOffline: true,
+                             disabled: true,
+                             handler: function() {
+                                 var priorityWindow;
+                                 
+                                 if (Ext.getCmp('messenger-priority-window')) {
+                                     priorityWindow = Ext.getCmp('messenger-priority-window');
+                                 } else {
+                                     priorityWindow = new Tine.Messenger.Priority({});
+                                 }
+                                 
+                                 priorityWindow.show();
+                             }
+                         },
+                         {
                              id: 'messenger-logout',
                              xtype: 'button',
                              tooltip: app.i18n._('Login'),

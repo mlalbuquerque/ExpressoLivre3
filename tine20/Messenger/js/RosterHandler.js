@@ -143,14 +143,16 @@ Tine.Messenger.RosterHandler = {
         return null;
     },
     
-    setStatus: function(status, text) {
+    setStatus: function(status, text, priority) {
         var presence = $pres().c('show').t(status).up()
                               .c('status').t(text).up()
-                              .c('priority').t('10');
+                              .c('priority').t(priority);
         Tine.Messenger.Application.connection.send(presence);
     },
     
-    changeStatus: function(status, statusText, firstTime) {
+    changeStatus: function(status, statusText, firstTime, priority) {
+        priority = priority || '10';
+        console.log('PRIORITY: ' + priority);
         if(Ext.getCmp("ClientDialog").status != status || Ext.getCmp("ClientDialog").statusText != statusText || firstTime){
             if(status != IMConst.ST_UNAVAILABLE.id && !Ext.getCmp('ClientDialog').connected){
                 Tine.Messenger.ChatHandler.connect(status, statusText);
@@ -158,7 +160,7 @@ Tine.Messenger.RosterHandler = {
                 var statusValue = '';
                 var presence = $pres().c('show').t(status).up()
                                       .c('status').t(statusText).up()
-                                      .c('priority').t('10');
+                                      .c('priority').t(priority);
                 switch(status){
                     case IMConst.ST_AVAILABLE.id:
                         statusValue = Tine.Tinebase.appMgr.get('Messenger').i18n._(IMConst.ST_AVAILABLE.text);
