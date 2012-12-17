@@ -528,18 +528,19 @@ Tine.Messenger.Groupie.Roster = function() {
                 
                 status_text = status_text ? status_text : '';
                 message = message ? message : '';
-                _participant.ui.textNode.setAttribute('status', status.id);
-                _participant.ui.textNode.setAttribute('status_text', status_text);
-                
-                _participant.attributes.status = status.id;
-                _participant.attributes.status_text = status_text;
-                
-                _participant.ui.textNode.setAttribute('qtip', "JID : "+jid+"<br>"+
-                                                _('Status')+" : "+ _(status.text) +"<br>"+
-                                                _('Role')+" : "+ _(role) +
-                                                (status_text.trim() ? '<br>'+status_text : '') +
-                                                (message.trim() ? '<br>'+message : ''));
-                
+                if (_participant.ui && _participant.ui.textNode) {
+                    _participant.ui.textNode.setAttribute('status', status.id);
+                    _participant.ui.textNode.setAttribute('status_text', status_text);
+
+                    _participant.attributes.status = status.id;
+                    _participant.attributes.status_text = status_text;
+
+                    _participant.ui.textNode.setAttribute('qtip', "JID : "+jid+"<br>"+
+                                                    _('Status')+" : "+ _(status.text) +"<br>"+
+                                                    _('Role')+" : "+ _(role) +
+                                                    (status_text.trim() ? '<br>'+status_text : '') +
+                                                    (message.trim() ? '<br>'+message : ''));
+                }
             } else {
                 Tine.Messenger.Log.error('Error while updating '+jid+". Jid not found or class not found can be the cause.");
             }

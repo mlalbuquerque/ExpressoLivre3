@@ -248,7 +248,9 @@ Tine.Messenger.RosterTree = function(iq){
                         }
                         addOrderedOnTreeNodeLevel(_buddy, rootNode.childNodes[node]);
                     }
-                    _buddy.ui.textNode.setAttribute('status', status);
+                    
+                    if (_buddy.ui && _buddy.ui.textNode)
+                        _buddy.ui.textNode.setAttribute('status', status);
                 }
             });
     }
@@ -483,7 +485,7 @@ Tine.Messenger.RosterTree = function(iq){
                 message = message ? message : '';
                 // TODO: Possible problem => _buddy.ui.textNode undefined (TEST)
                 // ERROR: Cannot call method 'setAttribute' of undefined
-                if (_buddy.ui.textNode) {
+                if (_buddy.ui && _buddy.ui.textNode) {
                     _buddy.ui.textNode.setAttribute('status', app.i18n._(status.text));
                     _buddy.ui.textNode.setAttribute('status_text', status_text);
                     _buddy.ui.textNode.setAttribute('subscription', subscription);
