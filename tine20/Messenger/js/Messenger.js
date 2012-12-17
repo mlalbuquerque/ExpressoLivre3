@@ -426,7 +426,10 @@ Tine.Messenger.IM = {
         // Enable Show/Hide offline contacts
         Ext.getCmp('messenger-show-offline-contacts').enable();
         var delayed = new Ext.util.DelayedTask(Tine.Messenger.IM.verifyOfflineContactsDisplay, this);
-        delayed.delay(500);        
+        delayed.delay(500);
+        
+        // Enable Priority settings
+        Ext.getCmp('messenger-change-priority').enable();
     },
     disableOnDisconnect: function(){
         // Change IM icon
@@ -446,8 +449,11 @@ Tine.Messenger.IM = {
         Ext.getCmp('messenger-change-status-button')
             .setIcon('/images/messenger/user_unavailable.png');
 
-        // Enable Show/Hide offline contacts
+        // Disable Show/Hide offline contacts
         Ext.getCmp('messenger-show-offline-contacts').disable();
+        
+        // Disable Priority settings
+        Ext.getCmp('messenger-change-priority').disable();
 
         // Close all chats
         var chats = Ext.query('.messenger-chat-window');
