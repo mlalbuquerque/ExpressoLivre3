@@ -117,21 +117,31 @@ class Tinebase_Model_Container extends Tinebase_Record_Abstract
     protected $_readOnlyFields = array('content_seq');
     
     /**
-     * 
-     * Container Constructor, decodes the backend options
-     * 
-     * @param mixed $_data
-     * @param bool $bypassFilters sets {@see this->bypassFilters}
-     * @param mixed $convertDates sets {@see $this->convertDates} and optionaly {@see $this->$dateConversionFormat}
-     * @return void
-     * @throws Tinebase_Exception_Record_DefinitionFailure
+     * Name of the fields stored in the backend_options
+     * @var type 
      */
-    public function __construct($_data = NULL, $_bypassFilters = false, $_convertDates = true)
-    {
-        parent::__construct($_data, $_bypassFilters, $_convertDates);
-        
-    }
-    
+    protected static $_mapBackendOptions = array(
+        'host'                      => array('ldapHost', null),
+        'port'                      => array('ldapPort', null),
+        'useSsl'                    => array(null, null),
+        'username'                  => array('ldapAccount', null),
+        'password'                  => array('ldapPassword', null),
+        'bindRequiresDn'            => array(null, null),
+        'baseDn'                    => array('ldapDn', null),
+        'accountCanonicalForm'      => array(null, null),
+        'accountDomainName'         => array(null, null),
+        'accountDomainNameShort'    => array(null, null),
+        'accountFilterFormat'       => array(null, null),
+        'allowEmptyPassword'        => array(null, null),
+        'useStartTls'               => array(null, null),
+        'optReferrals'              => array(null, null),
+        'tryUsernameSplit'          => array(null, null),
+        'ldapQuickSearch'           => array(null, false),
+        'filter'                    => array('ldapObjectClass', null),
+        'maxResults'                => array('ldapMaxResults', null),
+        'scope'                     => array('ldapRecursive', false),
+        'attributes'                => array(null, null),
+    );
     
     
     /**
@@ -317,65 +327,47 @@ class Tinebase_Model_Container extends Tinebase_Record_Abstract
     
     /**
      * Decode and return the array of backendOptions
+     * @param array $_backendOptions 
      * @return array
      */
-    public function decodeBackendOptions()
+    public static function decodeBackendOptions($_backendOptions)
     {
-        return Zend_Json::decode($this->backend_options);
+        return Zend_Json::decode($_backendOptions);
     }
     
     /**
      *Encode and set the backend_options value
      * 
      * @param array $_backendOptions 
+     * @return string
      */
-    public function encodeBackendOptions($_backendOptions)
+    public static function encodeBackendOptions($_backendOptions)
+    {   
+        return Zend_Json::encode($_backendOptions);
+    }
+    
+    /**
+     * Resolve the Backend Options to save and retrive
+     * 
+     * @param type $_backendOptions
+     * @param bool $_reverse false to save, true to retrieve
+     * @return type Tinebase_Record_Interface
+     */
+    public static function resolveBackendOptions($_backendOptions, $_reverse = FALSE)
     {
-//            $host           = '10.200.24.11';
-//            $port           = '';
-//            //$dn           = 'ou=regpae,dc=serpro,dc=gov,dc=br';
-//            $dn             = 'dc=serpro,dc=gov,dc=br';
-//            $acc            = 'cn=usernolimits,ou=expressolivre,ou=corp,dc=serpro,dc=gov,dc=br';
-//            $pw             = 'serpro';        
-//            //define o que vai ser mostrado (filtro)
-//            $obj = '(&(phpgwaccounttype=l)(mail=*)(!(phpgwAccountVisible=-1)))';
-//            
-//            //$obj            = '(&(objectclass=posixaccount)(phpgwaccounttype=u))';
-//            $recursive      = 'true';        
-//            $maxResults     = '99';
-//
-//
-//            if ($recursive)
-//            {
-//                $recursive = Zend_Ldap::SEARCH_SCOPE_SUB;
-//            }
-//            else
-//            {
-//                $recursive = Zend_Ldap::SEARCH_SCOPE_BASE;
-//            }
-//            $arrOptions = array(
-//                'host'                      => $host,
-//                'port'                      => $port,
-//                'useSsl'                    => null,
-//                'username'                  => $acc,
-//                'password'                  => $pw,
-//                'bindRequiresDn'            => null,
-//                'baseDn'                    => $dn,
-//                'accountCanonicalForm'      => null,
-//                'accountDomainName'         => null,
-//                'accountDomainNameShort'    => null,
-//                'accountFilterFormat'       => null,
-//                'allowEmptyPassword'        => null,
-//                'useStartTls'               => null,
-//                'optReferrals'              => null,
-//                'tryUsernameSplit'          => null,
-//                'filter'                    => $obj,
-//                'scope'                     => $recursive,
-//                'maxResults'                => $maxResults,
-//                'container'                 => $container->id,
-//                'attributes'                => array(),
-//            );
-        
-        $this->backend_options = Zend_Json::encode($_backendOptions);
+        $recordData = $_backendOptions;
+        foreach (self::$_mapBackendOptions as $key=>$value)
+        {
+            if ($_reverse)
+            {
+                $recordData[$value[0]] = $recordData['backend_options'][$key];
+            }
+            else
+            {
+                $recordData['backend_options'][$key] = (!(is_null($_backendOptions[$value[0]])))?
+                                                                                  $_backendOptions[$value[0]]:$value[1];
+            }
+        }
+        return $recordData;
     }
 }

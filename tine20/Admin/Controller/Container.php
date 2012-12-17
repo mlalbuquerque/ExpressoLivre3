@@ -25,6 +25,13 @@ class Admin_Controller_Container extends Tinebase_Controller_Record_Abstract
     protected $_containerController = NULL;
     
     /**
+     * Decides if it is to decode or not the backend options (used mostrly to the update function)
+     * 
+     * @var boolean
+     */
+    protected $_decodeBackendOptions = TRUE;
+    
+    /**
      * the constructor
      *
      * don't use the constructor. use the singleton 
@@ -87,9 +94,11 @@ class Admin_Controller_Container extends Tinebase_Controller_Record_Abstract
         $this->_checkRight('get');
         
         $container = $this->_containerController->getContainerById($_id);
-        $container->backend_options = $container->decodeBackendOptions();
+        if ($this->_decodeBackendOptions)
+        {
+            $container->backend_options = Tinebase_Model_container::decodeBackendOptions($container->backend_options);
+        }
         $container->account_grants = $this->_containerController->getGrantsOfContainer($_id, TRUE);
-        
         return $container;
     }
     
@@ -107,7 +116,7 @@ class Admin_Controller_Container extends Tinebase_Controller_Record_Abstract
         Tinebase_Container::getInstance()->checkContainerOwner($_record);
 
         Tinebase_Timemachine_ModificationLog::setRecordMetaData($_record, 'create');
-        
+        $_record->backend_options = Tinebase_Model_container::encodeBackendOptions($_record->backend_options);
         $container = $this->_containerController->addContainer($_record, $_record->account_grants, TRUE);
         $container->account_grants = $this->_containerController->getGrantsOfContainer($container, TRUE);
         
@@ -138,7 +147,10 @@ class Admin_Controller_Container extends Tinebase_Controller_Record_Abstract
      */
     public function update(Tinebase_Record_Interface $_record, $_additionalArguments = array())
     {
+        $_record->backend_options = Tinebase_Model_container::encodeBackendOptions($_record->backend_options);
+        $this->_decodeBackendOptions = FALSE;
         $container = parent::update($_record);
+        $this->_decodeBackendOptions = TRUE;
         
         if ($container->type === Tinebase_Model_Container::TYPE_PERSONAL) {
             $this->_sendNotification($container, (array_key_exists('note', $_additionalArguments)) ? $_additionalArguments['note'] : '');

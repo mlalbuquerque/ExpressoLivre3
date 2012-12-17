@@ -75,7 +75,7 @@ class Addressbook_Backend_AddressbookProxy
         if (!(is_null($container)))
         {
             $backendType = $container->backend;
-            $arrOptions = $container->decodeBackendOptions();
+            $arrOptions = Tinebase_Model_container::decodeBackendOptions($container->backend_options);
             $arrOptions['container'] = $container->id;
             $_SESSION[$this->_lastUserBackend] = array(
                 'backendtype' => $backendType,

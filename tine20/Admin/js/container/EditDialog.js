@@ -186,7 +186,7 @@ Tine.Admin.ContainerEditDialog = Ext.extend(Tine.widgets.dialog.EditDialog, {
                             xtype: 'combo',
                             name: 'backend',
                             fieldLabel: this.app.i18n._('Backend'),
-                            store: [['Sql', this.app.i18n._('Sql')], ['Ldap', this.app.i18n._('Ldap')]],
+                            store: [['sql', this.app.i18n._('Sql')], ['ldap', this.app.i18n._('Ldap')]],
                             mode: 'local',
                             allowBlank: false,
                             forceSelection: true,
@@ -194,14 +194,16 @@ Tine.Admin.ContainerEditDialog = Ext.extend(Tine.widgets.dialog.EditDialog, {
                                 scope: this, 
                                 select: function (combo, record) {
                                     var Form = this.getForm();
-                                    Form.findField('ldapHost').setDisabled(record.data.field1 === 'Sql');
-                                    Form.findField('ldapDn').setDisabled(record.data.field1 === 'Sql');
-                                    Form.findField('ldapAccount').setDisabled(record.data.field1 === 'Sql');
-                                    Form.findField('ldapObjectClass').setDisabled(record.data.field1 === 'Sql');
-                                    Form.findField('ldapPassword').setDisabled(record.data.field1 === 'Sql');
-                                    Form.findField('ldapQuickSearch').setDisabled(record.data.field1 === 'Sql');
-                                    Form.findField('ldapMaxResults').setDisabled(record.data.field1 === 'Sql');
-                                    Form.findField('ldapRecursive').setDisabled(record.data.field1 === 'Sql');
+                                    Form.findField('ldapHost').setDisabled(record.data.field1 === 'sql');
+                                    Form.findField('ldapPort').setDisabled(record.data.field1 === 'sql');
+                                    Form.findField('ldapDn').setDisabled(record.data.field1 === 'sql');
+                                    Form.findField('ldapAccount').setDisabled(record.data.field1 === 'sql');
+                                    Form.findField('ldapObjectClass').setDisabled(record.data.field1 === 'sql');
+                                    Form.findField('ldapPassword').setDisabled(record.data.field1 === 'sql');
+                                    //disabled for now
+                                    //Form.findField('ldapQuickSearch').setDisabled(record.data.field1 === 'sql');
+                                    Form.findField('ldapMaxResults').setDisabled(record.data.field1 === 'sql');
+                                    Form.findField('ldapRecursive').setDisabled(record.data.field1 === 'sql');
                                 }
                             },
                             //anchor: '100%',
@@ -210,35 +212,35 @@ Tine.Admin.ContainerEditDialog = Ext.extend(Tine.widgets.dialog.EditDialog, {
                             xtype: 'textfield',
                             name: 'ldapHost',
                             fieldLabel: this.app.i18n._('Host'),
-                            disabled: this.record.get('backend') == 'Sql',
+                            disabled: this.record.get('backend') == 'sql',
                             allowBlank: false,
                             columnWidth: 0.6
                         }, {
                             xtype: 'textfield',
                             name: 'ldapPort',
                             fieldLabel: this.app.i18n._('Port'),
-                            disabled: this.record.get('backend') == 'Sql',
+                            disabled: this.record.get('backend') == 'sql',
                             maxLength: 5,
                             columnWidth: 0.4
                         },{
                             xtype: 'textfield',
                             name: 'ldapDn',
                             fieldLabel: this.app.i18n._('Distinguished Name'),
-                            disabled: this.record.get('backend') == 'Sql',
+                            disabled: this.record.get('backend') == 'sql',
                             allowBlank: false,
                             columnWidth: 1
                         }, {
                             xtype: 'textfield',
                             name: 'ldapObjectClass',
                             fieldLabel: this.app.i18n._('Search Filter'),
-                            disabled: this.record.get('backend') == 'Sql',
+                            disabled: this.record.get('backend') == 'sql',
                             allowBlank: false,
                             columnWidth: 1
                         }, {
                             xtype: 'textfield',
                             name: 'ldapAccount',
                             fieldLabel: this.app.i18n._('Account'),
-                            disabled: this.record.get('backend') == 'Sql',
+                            disabled: this.record.get('backend') == 'sql',
                             allowBlank: false,
                             columnWidth: 0.6
                         }, {
@@ -246,14 +248,13 @@ Tine.Admin.ContainerEditDialog = Ext.extend(Tine.widgets.dialog.EditDialog, {
                             inputType: 'password',
                             name: 'ldapPassword',
                             fieldLabel: this.app.i18n._('Password'),
-                            disabled: this.record.get('backend') == 'Sql',
+                            disabled: this.record.get('backend') == 'sql',
                             allowBlank: false,
                             columnWidth: 0.4
                         }, {
                             xtype: 'combo',
                             name: 'ldapQuickSearch',                                
                             fieldLabel: this.app.i18n._('Quick Search'),
-                            disabled: this.record.get('backend') == 'Sql',
                             disabled: true,
                             mode: 'local',
                             store: [[0, this.app.i18n._('false')], [1, this.app.i18n._('true')]],
@@ -262,7 +263,7 @@ Tine.Admin.ContainerEditDialog = Ext.extend(Tine.widgets.dialog.EditDialog, {
                             xtype: 'numberfield',
                             name: 'ldapMaxResults',
                             fieldLabel: this.app.i18n._('Max Result'),
-                            disabled: this.record.get('backend') == 'Sql',
+                            disabled: this.record.get('backend') == 'sql',
                             allowBlank: false,
                             style: 'text-align: right',
                             maxLength: 4,
@@ -271,7 +272,7 @@ Tine.Admin.ContainerEditDialog = Ext.extend(Tine.widgets.dialog.EditDialog, {
                             xtype: 'combo',
                             name: 'ldapRecursive',        
                             fieldLabel: this.app.i18n._('Recursive'), 
-                            disabled: this.record.get('backend') == 'Sql',
+                            disabled: this.record.get('backend') == 'sql',
                             store: [[0, this.app.i18n._('false')], [1, this.app.i18n._('true')]],
                             allowBlank: false,
                             forceSelection: true,

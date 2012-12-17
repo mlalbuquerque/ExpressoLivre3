@@ -1047,18 +1047,8 @@ class Admin_Frontend_Json extends Tinebase_Frontend_Json_Abstract
     public function getContainer($id)
     {
         $containerData = $this->_get($id, Admin_Controller_Container::getInstance());
-        
-        
-        $containerData['ldapHost']          = $containerData['backend_options']['host'];
-        $containerData['ldapPort']          = $containerData['backend_options']['port'];
-        $containerData['ldapDn']            = $containerData['backend_options']['baseDn'];
-        $containerData['ldapAccount']       = $containerData['backend_options']['username'];
-        $containerData['ldapObjectClass']   = $containerData['backend_options']['filter'];
-        $containerData['ldapPassword']      = $containerData['backend_options']['password'];
-        $containerData['ldapQuickSearch']   = false;//$containerData['backend_options']['host'];
-        $containerData['ldapMaxResults']    = $containerData['backend_options']['maxResults'];
-        $containerData['ldapRecursive']     = $containerData['backend_options']['scope'];
-        
+        $containerData['backend'] = strtolower($containerData['backend']);
+        $containerData = Tinebase_Model_Container::resolveBackendOptions($containerData, TRUE);
         return $containerData;
     }
 
@@ -1071,20 +1061,8 @@ class Admin_Frontend_Json extends Tinebase_Frontend_Json_Abstract
      */
     public function saveContainer($recordData)
     {
-        $additionalArguments = (array_key_exists('note', $recordData)) ? array(array('note' => $recordData['note'])) : array();
-        
-        $recordData['backend_options']['host']              = $recordData['ldapHost'];
-        $recordData['backend_options']['port']              = $recordData['ldapPort'];
-        $recordData['backend_options']['baseDn']            = $recordData['ldapDn'];
-        $recordData['backend_options']['username']          = $recordData['ldapAccount'];
-        $recordData['backend_options']['filter']            = $recordData['ldapObjectClass'];
-        $recordData['backend_options']['password']          = $recordData['ldapPassword'];
-        $recordData['backend_options']['ldapQuickSearch']   = false;
-        $recordData['backend_options']['maxResults']        = $recordData['ldapMaxResults'];
-        $recordData['backend_options']['scope']             = $recordData['ldapRecursive'];
-        $recordData['backend_options']['attributes']        = array();
-        $recordData['backend_options'] = Zend_Json::encode($recordData['backend_options']);
-
+        $additionalArguments =(array_key_exists('note', $recordData)) ? array(array('note' => $recordData['note'])) : array();
+        $recordData = Tinebase_Model_Container::resolveBackendOptions($recordData);
         return $this->_save($recordData, Admin_Controller_Container::getInstance(), 'Tinebase_Model_Container', 'id', $additionalArguments);
     }
     
