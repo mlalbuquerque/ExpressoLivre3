@@ -813,6 +813,14 @@ Tine.Felamimail.handleRequestException = function(exception) {
     
     switch(exception.code) {
         case 910: // Felamimail_Exception_IMAP
+            Ext.Msg.show({
+               title:   app.i18n._('IMAP Error'),
+               msg:     app.i18n._("You don't have permission for this operation in this shared folder!"),
+               icon:    Ext.MessageBox.ERROR,
+               buttons: Ext.Msg.OK
+            });
+            break;
+
         case 911: // Felamimail_Exception_IMAPServiceUnavailable
             Ext.Msg.show({
                title:   app.i18n._('IMAP Error'),

@@ -140,6 +140,7 @@ class Felamimail_Controller_Message_Move extends Felamimail_Controller_Message_A
         
         $result = TRUE;
         if ($_targetFolder === Felamimail_Model_Folder::FOLDER_TRASH) {
+            
             $result = $this->_moveMessagesToTrash($messagesInFolder, $_folderId);
         } else if ($_folderId === $_targetFolder->getId()) {
             // no need to move
@@ -280,10 +281,12 @@ class Felamimail_Controller_Message_Move extends Felamimail_Controller_Message_A
         if (Tinebase_Core::isLogLevel(Zend_Log::DEBUG)) Tinebase_Core::getLogger()->debug(__METHOD__ . '::' . __LINE__ 
             . ' Move ' . count($_uids) . ' messages to folder ' . $_targetFolderName . ' on imap server');
         try {
-            $_imap->copyMessage($_uids, Felamimail_Model_Folder::encodeFolderName($_targetFolderName));
             $_imap->addFlags($_uids, array(Zend_Mail_Storage::FLAG_DELETED));
-        } catch (Felamimail_Exception_IMAP $fei) {
-            if (Tinebase_Core::isLogLevel(Zend_Log::NOTICE)) Tinebase_Core::getLogger()->notice(__METHOD__ . '::' . __LINE__ . ' ' . $fei->getMessage()); 
+            $_imap->copyMessage($_uids, Felamimail_Model_Folder::encodeFolderName($_targetFolderName));
+           
+        } catch (Zend_Mail_Storage_Exception $zmse) {
+            if (Tinebase_Core::isLogLevel(Zend_Log::NOTICE)) Tinebase_Core::getLogger()->notice(__METHOD__ . '::' . __LINE__ . ' ' . $zmse->getMessage());
+            throw new Felamimail_Exception_IMAP($zmse->getMessage());
+        }
         }
     }
-}

@@ -1231,3 +1231,8 @@ msgstr "Muitos resultados na consulta, por favor refine seu filtro!"
 msgid "IMAP Backend Warning"
 msgstr "Aviso de IMAP"
 
+#: js/Felamimail.js:818
+msgid "You don't have permission for this operation in this shared folder!"
+msgstr "Você não possui permissão para esta operação na pasta compartilhada!"
+
+
