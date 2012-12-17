@@ -286,8 +286,8 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
             Tine.Messenger.IM.disableOnDisconnect();
             Tine.Messenger.Log.error("Connection failed!");
             Ext.Msg.show({
-                title: _('Error'),
-                msg: _('Can\'t connect to server')+'!',
+                title: Tine.Tinebase.appMgr.get('Messenger').i18n._('Error'),
+                msg: Tine.Tinebase.appMgr.get('Messenger').i18n._('Can\'t connect to server')+'!',
                 buttons: Ext.Msg.OK,
                 icon: Ext.MessageBox.ERROR
             });

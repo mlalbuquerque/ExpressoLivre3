@@ -25,8 +25,8 @@ Tine.Messenger.FileTransfer = {
                                app.i18n._('Sending file') + '...' +
                                '<span>' + fileName + ' (' + fileSize + ' bytes)</span>' +
                                '</p>';
-                if (fileSize > 104857600) {
-                    var error = Tine.Tinebase.appMgr.get('Messenger').i18n._('Maximum file size: 100MB') + '! ' +
+                if (fileSize > 209715200) {
+                    var error = Tine.Tinebase.appMgr.get('Messenger').i18n._('Maximum file size: 200MB') + '! ' +
                                 fileName + ': ' + (fileSize/1024) + 'MB';
                     Ext.Msg.show({
                         title: Tine.Tinebase.appMgr.get('Messenger').i18n._('Error'),
