@@ -58,8 +58,12 @@ Tine.Messenger.FileTransfer = {
                         to + '/' + Tine.Messenger.FileTransfer.resource,
                         from
                     );
-
-                    var upload = new Ext.ux.file.Upload({
+                        
+//                    var upload = new Ext.ux.file.Upload({
+//                        file: filebrowser.files[0],
+//                        fileSelector: filebrowser
+//                    });
+                    var upload = new Tine.Messenger.Upload({
                         file: filebrowser.files[0],
                         fileSelector: filebrowser
                     });
