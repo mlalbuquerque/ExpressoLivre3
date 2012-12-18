@@ -71,4 +71,4 @@ var EMOTICON = {
         'wilted_rose', 'wilted_rose', 
         'wink', 'wink'
     ]
-}
+};
