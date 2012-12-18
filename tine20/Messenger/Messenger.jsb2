@@ -74,6 +74,10 @@
         {
           "text": "Priority.js",
           "path": "js/"
+        },
+        {
+          "text": "Upload.js",
+          "path": "js/"
         }
       ]
     },
