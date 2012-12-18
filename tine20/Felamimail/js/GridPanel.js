@@ -1247,7 +1247,7 @@ Tine.Felamimail.GridPanel = Ext.extend(Tine.widgets.grid.GridPanel, {
         }
         var treex = this.app.getMainScreen().getTreePanel(),
                 selectedNodes = (treex) ? treex.getSelectionModel().getSelectedNodes() : null;       
-        if(selectedNodes) {
+        if(!Ext.isEmpty(selectedNodes)) {
             var accountInbox = this.app.getFolderStore().queryBy(function(folder) {
                 if(folder.get('id') == selectedNodes[0].id) return folder;
             }, this).first();

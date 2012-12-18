@@ -186,7 +186,7 @@ class Felamimail_Backend_Cache_Imap_Message extends Felamimail_Backend_Cache_Ima
         $return = array();
         foreach ($paths as $tmp)
         {
-            $tmp = explode(self::IMAPDELIMITER, $tmp);
+            $tmp = is_array($tmp) ? explode(self::IMAPDELIMITER, $tmp['path']) : explode(self::IMAPDELIMITER, $tmp);
             
             if (empty($tmp[0]))
             {
