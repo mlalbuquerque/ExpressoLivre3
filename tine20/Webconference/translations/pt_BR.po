@@ -56,6 +56,10 @@ msgstr "Sair"
 msgid "Close"
 msgstr "Fechar"
 
+#: js/EmailDetailsPanel.js:198
+msgid "Room Title"
+msgstr "Título da sala"
+
 #: js/AdminPanel.js:81
 msgid "Apply"
 msgstr "Aplicar"

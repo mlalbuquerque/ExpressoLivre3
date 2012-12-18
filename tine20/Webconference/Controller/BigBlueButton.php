@@ -357,7 +357,7 @@ class Webconference_Controller_BigBlueButton {
                 $view->translate    = $translate;
                 //$view->timezone     = $timezone;
 
-                $view->url        = $url;
+                $view->url        = $room->bbbUrl;
                 $view->fullUser   = $fullUser;
 
                 $method = 'Webconference';
@@ -391,7 +391,8 @@ class Webconference_Controller_BigBlueButton {
     }
 
     public function getLogoutUrl() {
-        $protocol =  (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? 'https' : 'http';
+        //$protocol =  (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? 'https' : 'http';
+	$protocol = 'https';
         $host = $_SERVER['HTTP_HOST'];
         $base = substr($_SERVER['REQUEST_URI'], 0, strrpos($_SERVER['REQUEST_URI'], '/'));
         return $protocol.'://'.$host.$base.'/Webconference/views/logoutPage.html';

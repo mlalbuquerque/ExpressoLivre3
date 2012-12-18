@@ -40,6 +40,9 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
+#: js/EmailDetailsPanel.js:198
+msgid "Room Title"
+msgstr ""
 
 #: js/AdminPanel.js:81
 msgid "Apply"
@@ -205,3 +208,4 @@ msgstr ""
 #: js/Webconference.js:350
 msgid "Do you want to create a new webconference room with title: {0}"
 msgstr ""
+
