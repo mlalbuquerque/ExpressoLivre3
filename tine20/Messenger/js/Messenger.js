@@ -254,7 +254,8 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
         Tine.Messenger.Application.connection.connect(
             Tine.Messenger.Util.getJidFromConfig(),
             base64.encode(textToSend),
-            Tine.Messenger.Util.callbackWrapper(Tine.Tinebase.appMgr.get('Messenger').connectionHandler)
+            Tine.Messenger.Util.callbackWrapper(Tine.Tinebase.appMgr.get('Messenger').connectionHandler),
+            20
         );
             
         window.onblur = function () {
