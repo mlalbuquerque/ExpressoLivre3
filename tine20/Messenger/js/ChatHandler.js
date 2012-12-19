@@ -242,11 +242,7 @@ Tine.Messenger.ChatHandler = {
         }
 
         // Typing events
-        if (paused.length > 0) {
-            Tine.Messenger.ChatHandler.setChatState(jid, name + app.i18n._(' stopped typing!'));
-        } else if (composing.length > 0) {
-            Tine.Messenger.ChatHandler.setChatState(jid, name + app.i18n._(' is typing...'));
-        } else if (body.length > 0){
+        if (body.length > 0){
             // Shows the specific chat window
             Tine.Messenger.ChatHandler.showChatWindow(jid, name, type);
             // Set received chat message
@@ -254,6 +250,14 @@ Tine.Messenger.ChatHandler = {
             Tine.Messenger.ChatHandler.setChatState(jid);
             // If in another tab, it will blink!
             Tine.Messenger.ChatHandler.blinkTitle();
+        } else if ($(message).find('thread') || $(message).find('x')) { // Expresso V2 special case
+            $(message).children('thread').remove();
+            $(message).children('x').remove();
+            body = $(message).text();
+        } else if (composing.length > 0) {
+            Tine.Messenger.ChatHandler.setChatState(jid, name + app.i18n._(' is typing...'));
+        } else if (paused.length > 0) {
+            Tine.Messenger.ChatHandler.setChatState(jid, name + app.i18n._(' stopped typing!'));
         }
         
         return true;
