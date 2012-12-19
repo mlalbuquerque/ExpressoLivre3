@@ -158,7 +158,8 @@ Tine.Felamimail.Model.Message.getFilterModel = function() {
     
     return [
         {filtertype: 'tine.felamimail.folder.filtermodel', app: app},
-        {label: app.i18n._('Subject/From'),field: 'query',         operators: ['contains']},
+        // {label: app.i18n._('Subject/From'),field: 'query',         operators: ['contains']},
+        {label: app.i18n._('Subject/From/CC/Body'),field: 'query',         operators: ['contains']},
         {label: app.i18n._('Subject'),     field: 'subject',       operators: ['contains']},
         {label: app.i18n._('From (Email)'),field: 'from_email',    operators: ['contains']},
         {label: app.i18n._('From (Name)'), field: 'from_name',     operators: ['contains']},

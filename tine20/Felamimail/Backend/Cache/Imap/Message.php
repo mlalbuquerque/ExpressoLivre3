@@ -282,7 +282,8 @@ class Felamimail_Backend_Cache_Imap_Message extends Felamimail_Backend_Cache_Ima
                     case 'query' :
                         if (!empty($value))
                         {
-                            $return[] = "OR SUBJECT $value FROM $value";
+                            // make it compatible with ExpressoMail
+                            $return[] = "OR OR OR SUBJECT $value FROM $value CC $value BODY $value";
                         }
                         break;
                     case 'subject' :
