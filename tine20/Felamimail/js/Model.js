@@ -154,6 +154,7 @@ Tine.Felamimail.Model.Message.getDefaultData = function() {
  * @return {Object} filterModel definition
  */ 
 Tine.Felamimail.Model.Message.getFilterModel = function() {
+    // TODO: test if we're using sql cache or Imap directly to enable body Filters
     var app = Tine.Tinebase.appMgr.get('Felamimail');
     
     return [
@@ -161,6 +162,7 @@ Tine.Felamimail.Model.Message.getFilterModel = function() {
         // {label: app.i18n._('Subject/From'),field: 'query',         operators: ['contains']},
         {label: app.i18n._('Subject/From/CC/Body'),field: 'query',         operators: ['contains']},
         {label: app.i18n._('Subject'),     field: 'subject',       operators: ['contains']},
+        {label: app.i18n._('Body'),        field: 'body',          operators: ['contains']},
         {label: app.i18n._('From (Email)'),field: 'from_email',    operators: ['contains']},
         {label: app.i18n._('From (Name)'), field: 'from_name',     operators: ['contains']},
         {label: app.i18n._('To'),          field: 'to',            operators: ['contains']},

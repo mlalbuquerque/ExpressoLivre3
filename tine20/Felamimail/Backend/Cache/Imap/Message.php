@@ -292,6 +292,12 @@ class Felamimail_Backend_Cache_Imap_Message extends Felamimail_Backend_Cache_Ima
                             $return[] = "SUBJECT $value";
                         }
                         break;
+                    case 'body' :
+                        if (!empty($value))
+                        {
+                            $return[] = "BODY $value";
+                        }
+                        break;
                     case 'from_name' : // we can't diferentiate with imap filters
                     case 'from_email' :
                         if (!empty($value))
