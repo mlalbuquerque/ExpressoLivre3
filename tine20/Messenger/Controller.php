@@ -6,7 +6,7 @@ class Messenger_Controller extends Tinebase_Controller_Event
     /*
      * path to save chat history temporarily
      */
-    const PATH = '/tmp/messenger';
+    const PATH = '/var/tmp/apache2/tine20im';
 
     /**
      * holds the instance of the singleton
