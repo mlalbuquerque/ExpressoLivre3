@@ -110,13 +110,19 @@ Tine.Messenger.VideoChat = {
 	var startcall = $(msg).find('startcall'),
 	id = startcall.attr('id'),
 	user = startcall.attr('user');
+	
+	var app = Tine.Tinebase.appMgr.get('Messenger');
 		
 	if(Tine.Messenger.VideoChat.state == VideoChatStates.IDLE){
 	    Tine.Messenger.VideoChat.state = VideoChatStates.CALL_RINGING;
 		
 	    Tine.Messenger.VideoChat.invite = Ext.MessageBox.show({
-		title: _('Videochat'), 
-		msg: user + ' is inviting you to a videochat. Do you Accept'+ ' ?',
+		title: 'Video chat', 
+		msg: String.format(
+		    app.i18n._('{0} is inviting you to a video chat. Do you Accept?'), 
+		    user
+		),
+		
 		buttons: Ext.Msg.YESNO, 
 		icon: Ext.MessageBox.QUESTION,
 		modal: false,
@@ -150,7 +156,10 @@ Tine.Messenger.VideoChat = {
 	var app = Tine.Tinebase.appMgr.get('Messenger');
 	Tine.Messenger.ChatHandler.setChatMessage(
 	    Tine.Messenger.VideoChat.jid, 
-	    user + ' rejected your videochat call', 
+	    String.format(
+		app.i18n._('{0} rejected your video chat call'), 
+		user
+	    ),
 	    app.i18n._('Info'),
 	    'messenger-notify'
 	    );
@@ -168,7 +177,10 @@ Tine.Messenger.VideoChat = {
 	var app = Tine.Tinebase.appMgr.get('Messenger');
 	Tine.Messenger.ChatHandler.setChatMessage(
 	    Tine.Messenger.VideoChat.jid, 
-	    user + ' is busy for videochat', 
+	    String.format(
+		app.i18n._('{0} is busy for video chat'), 
+		user
+	    ),
 	    app.i18n._('Info'),
 	    'messenger-notify'
 	    );
@@ -185,7 +197,10 @@ Tine.Messenger.VideoChat = {
 	    var app = Tine.Tinebase.appMgr.get('Messenger');
 	    Tine.Messenger.ChatHandler.setChatMessage(
 		user, 
-		'One videochat call missed from '+ user, 
+		String.format(
+		    app.i18n._('One video chat call missed from {0}'), 
+		    user
+		),
 		app.i18n._('Info'),
 		'messenger-notify'
 	    );
@@ -232,7 +247,7 @@ Tine.Messenger.VideoChat = {
 		var app = Tine.Tinebase.appMgr.get('Messenger');
 		Tine.Messenger.ChatHandler.setChatMessage(
 		    jid, 
-		    app.i18n._('You are already in a videochat'), 
+		    app.i18n._('You are already in a video chat'), 
 		    app.i18n._('Info'),
 		    'messenger-notify'
 		);
@@ -385,8 +400,8 @@ Tine.Messenger.VideoChat = {
 	    {
 		xtype: 'button',
 		//icon: 'images/messenger/icon_cancel.png',
-		text: 'End',
-		tooltip: app.i18n._('Close video chat'),
+		text: app.i18n._('End'),
+		tooltip: app.i18n._('End video chat'),
 		handler : function() { 
 		    Tine.Messenger.VideoChat.hangup(
 			Tine.Messenger.VideoChat.getChatWindow(Tine.Messenger.VideoChat.jid)
