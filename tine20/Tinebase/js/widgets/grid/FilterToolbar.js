@@ -746,15 +746,17 @@ Ext.extend(Tine.widgets.grid.FilterToolbar, Ext.Panel, {
         }
         fRow.remove();
         
-        this.onFilterRowsChange();
+        var savedSupressEvents = this.supressEvents;
         if(typeof this.dontRefreshOnDeleteFilter != "undefined")
         {
             this.supressEvents = this.dontRefreshOnDeleteFilter;
         }
-
+        
         if (!this.supressEvents) {
             this.onFiltertrigger();
         }
+        this.supressEvents = savedSupressEvents;
+        this.onFilterRowsChange();
     },
     
     /**
