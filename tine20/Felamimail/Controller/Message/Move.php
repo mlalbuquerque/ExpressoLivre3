@@ -281,10 +281,9 @@ class Felamimail_Controller_Message_Move extends Felamimail_Controller_Message_A
         if (Tinebase_Core::isLogLevel(Zend_Log::DEBUG)) Tinebase_Core::getLogger()->debug(__METHOD__ . '::' . __LINE__ 
             . ' Move ' . count($_uids) . ' messages to folder ' . $_targetFolderName . ' on imap server');
         try {
-            $_imap->addFlags($_uids, array(Zend_Mail_Storage::FLAG_DELETED));
-            $_imap->clearFlags($_uids, array(Zend_Mail_Storage::FLAG_DELETED));
+            $_imap->clearFlags($_uids, array(Zend_Mail_Storage::FLAG_DELETED));       
             $_imap->copyMessage($_uids, Felamimail_Model_Folder::encodeFolderName($_targetFolderName));
-           
+            $_imap->addFlags($_uids, array(Zend_Mail_Storage::FLAG_DELETED));
         } catch (Zend_Mail_Storage_Exception $zmse) {
             if (Tinebase_Core::isLogLevel(Zend_Log::NOTICE)) Tinebase_Core::getLogger()->notice(__METHOD__ . '::' . __LINE__ . ' ' . $zmse->getMessage());
             throw new Felamimail_Exception_IMAP($zmse->getMessage());
