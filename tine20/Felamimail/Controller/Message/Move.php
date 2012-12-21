@@ -282,6 +282,7 @@ class Felamimail_Controller_Message_Move extends Felamimail_Controller_Message_A
             . ' Move ' . count($_uids) . ' messages to folder ' . $_targetFolderName . ' on imap server');
         try {
             $_imap->addFlags($_uids, array(Zend_Mail_Storage::FLAG_DELETED));
+            $_imap->clearFlags($_uids, array(Zend_Mail_Storage::FLAG_DELETED));
             $_imap->copyMessage($_uids, Felamimail_Model_Folder::encodeFolderName($_targetFolderName));
            
         } catch (Zend_Mail_Storage_Exception $zmse) {
