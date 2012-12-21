@@ -51,6 +51,19 @@ Tine.Messenger.RosterTree = function(iq){
                     Tine.Messenger.FileTransfer.sendRequest(filebrowser.component.node.id, filebrowser);
                 }
             });
+            items.push({
+                text: app.i18n._('Show contact history'),
+                node: _node,
+                icon: '/images/messenger/folder.png',
+                handler: function () {
+                    var history_window = new Tine.Messenger.HistoryWindow({
+                        jid: Strophe.getBareJidFromJid(Tine.Tinebase.appMgr.get('Messenger').getConnection().jid),
+                        contact: _node.id
+                    });
+
+                    history_window.show();
+                }
+            });
             var menu = new Ext.menu.Menu({
                             items: items
                     });

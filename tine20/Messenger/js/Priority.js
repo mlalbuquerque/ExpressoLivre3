@@ -8,7 +8,7 @@ Tine.Messenger.Priority = function (config) {
             layout: 'form',
             labelSeparator: '',
             width: 400,
-            height: 100,
+            height: 250,
             items: [
                 {
                     xtype: 'label',

@@ -98,6 +98,28 @@ Tine.Messenger.Chat = Ext.extend(Ext.Window, {
                             emoticonWindow.show();
                         }
                     }
+                 },
+                 {
+                     xtype: 'button',
+                     itemId: 'messenger-history',
+                     icon: '/images/messenger/folder.png',
+                     tooltip: app.i18n._('Contact Chat History'),
+                     listeners: {
+                         scope: this,
+                         click: function (button) {
+                             var mainChatWindow = this,
+                                 id = mainChatWindow.id.substr(MESSENGER_CHAT_ID_PREFIX.length),
+                                 contact_jid = Tine.Messenger.Util.idToJid(id),
+                                 jid = Strophe.getBareJidFromJid(Tine.Tinebase.appMgr.get('Messenger').getConnection().jid);
+                                 
+                             var history_window = new Tine.Messenger.HistoryWindow({
+                                 jid: jid,
+                                 contact: contact_jid
+                             });
+                             
+                             history_window.show();
+                         }
+                     }
                  }
             ]
         },

@@ -31,6 +31,31 @@ class Messenger_Frontend_Http extends Tinebase_Frontend_Http_Abstract
         unlink($tmpfile);
     }
     
+    public function downloadHistory($jid, $contact, $date)
+    {
+        $filename = $date . '.json';
+        $file = Messenger_Controller::HISTORY_PATH . '/' . $jid . '/' . $contact . '/' . $filename;
+        
+        if (file_exists($file)) {
+            $filename = str_replace('@', '_', $jid) . '--' . str_replace('@', '_', $contact) . '--' . $date . '.txt';
+            
+            header('Content-Description: File Transfer');
+            header('Cache-Control: private, max-age=0');
+            header("Expires: -1");
+            header("Pragma: cache");
+            header('Content-Disposition: attachment; filename="' . $filename . '"');
+            //readfile($filename);
+            
+            $lines = explode("\n", file_get_contents($file));
+            foreach ($lines as $line)
+            {
+                $history = json_decode($line);
+                $user = $history->dir == to ? $contact : Tinebase_Translation::getTranslation('Messenger')->_('ME');
+                echo $user . ' (' . $history->time . ') ==> ' . $history->msg . "\n";
+            }
+        }
+    }
+    
     public function uploadTempFile()
     {
         try {

@@ -8,6 +8,11 @@ class Messenger_Controller extends Tinebase_Controller_Event
      */
     const PATH = '/var/tmp/apache2/tine20im';
 
+    /*
+     * path to save contact history
+     */
+    const HISTORY_PATH = '/var/tmp/apache2/tine20im/history';
+
     /**
      * holds the instance of the singleton
      *
@@ -66,10 +71,80 @@ class Messenger_Controller extends Tinebase_Controller_Event
         );
     }
     
+    public function listHistory($jid, $contact)
+    {
+        $response = null;
+        $path = self::HISTORY_PATH . '/' . $jid . '/' . $contact;
+        if (!file_exists($path)) {
+            $response = array(
+                'status'  => false,
+                'content' => ''
+            );
+        } else {
+            $dir = new DirectoryIterator($path);
+            $dates = array();
+            foreach ($dir as $file)
+            {
+                if (!$file->isDot())
+                    $dates[] = $file->getBasename('.json');
+            }
+            
+            rsort($dates);
+            
+            $response = array(
+                'status'  => true,
+                'content' => $dates
+            );
+        }
+        return $response;
+    }
+    
+    public function getHistory($jid, $contact, $date)
+    {
+        $response = null;
+        $filename = self::HISTORY_PATH . '/' . $jid . '/' . $contact . '/' . $date . '.json';
+        if (!file_exists($filename)) {
+            $response = array(
+                'status' => 'false',
+                'content' => ''
+            );
+        } else {
+            $lines = explode("\n", file_get_contents($filename));
+            $content = array();
+            foreach ($lines as $line)
+                $content[] = $line;
+            
+            $response = array(
+                'status' => 'true',
+                'content' => $content
+            );
+        }
+        
+        return $response;
+    }
+
+    public function saveHistory($jid, $contact, $direction, $message, $time)
+    {
+        $path = self::HISTORY_PATH . '/' . $jid . '/' . $contact . '/';
+        if (!file_exists($path))
+            mkdir($path, 0777, true);
+        
+        $filename = date('Y-m-d') . '.json';
+        $data = json_encode(array(
+            'time' => $time,
+            'dir'  => $direction,
+            'msg'  => $message
+        ));
+        
+        $result = file_put_contents($path . $filename, $data . PHP_EOL, FILE_APPEND);
+        
+        return array('status' => $result, 'what' => 'history', 'file' => $path . $filename);
+    }
+    
     public function saveChatHistory($id, $title, $content)
     {
         if (!file_exists(self::PATH))
-            mkdir(self::PATH);
+            mkdir(self::PATH, 0777, true);
 
         $length = strlen($content);
         $status = null;

@@ -221,7 +221,7 @@ Tine.Messenger.ChatHandler = {
         });
         chat_area.doLayout();
         
-        chat_area.body.scroll('down', 500); 
+        chat_area.body.scroll('down', 500);
     },
     
     onIncomingMessage: function (message) {
@@ -259,6 +259,8 @@ Tine.Messenger.ChatHandler = {
         } else if (paused.length > 0) {
             Tine.Messenger.ChatHandler.setChatState(jid, name + app.i18n._(' stopped typing!'));
         }
+        
+        Tine.Messenger.ChatHandler.saveHistory(message);
         
         return true;
     },
@@ -330,12 +332,15 @@ Tine.Messenger.ChatHandler = {
     
     sendMessage: function (msg, id) {
         var myNick = Tine.Messenger.Credential.myNick();
-        Tine.Messenger.Application.connection.send($msg({
+        var message = $msg({
             "to": Tine.Messenger.Util.idToJid(id),
-            "type": 'chat'})
-          .c("body").t(msg).up()
-          .c("active", {xmlns: "http://jabber.org/protocol/chatstates"}));
+            "type": 'chat'
+        }).c("body").t(msg).up()
+          .c("active", {xmlns: "http://jabber.org/protocol/chatstates"});
+        Tine.Messenger.Application.connection.send(message);
         Tine.Messenger.ChatHandler.setChatMessage(id, msg, myNick);
+        
+        Tine.Messenger.ChatHandler.saveHistory(message.nodeTree);
         
         return true;
     },
@@ -429,6 +434,53 @@ Tine.Messenger.ChatHandler = {
                     document.title = document.title == blink ? title : blink;
             }, 500);
             Tine.Tinebase.appMgr.get('Messenger').blinking = true;
+        }
+    },
+    
+    saveHistory: function (message) {
+        var jid = Strophe.getBareJidFromJid(Tine.Tinebase.appMgr.get('Messenger').getConnection().jid),
+            from = $(message).attr('from') ? Strophe.getBareJidFromJid($(message).attr('from')) : jid,
+            to = Strophe.getBareJidFromJid($(message).attr('to')),
+            body = $(message).find("html > body"),
+            contact = jid == from ? to : from,
+            direction = jid == from ? 'from' : 'to',
+            msg;
+        
+        if (body.length === 0) {
+            body = $(message).find("body");
+            if (body.length === 0) {
+                $(message).children('thread').remove();
+                $(message).children('x').remove();
+                msg = $(message).text();
+            }
+        }
+        
+        if (!msg)
+            msg = body.text();
+        
+        if (msg) {
+            Ext.Ajax.request({
+                method: 'post',
+                params: {
+                    method: 'Messenger.saveHistory',
+                    jid: Strophe.getBareJidFromJid(jid),
+                    contact: Strophe.getBareJidFromJid(contact),
+                    direction: direction,
+                    message: msg,
+                    time: Tine.Messenger.Util.returnTimestamp()
+                },
+                success: function (response) {
+                    console.log(response);
+                },
+                failure: function (err, details) {
+                    // Save in cookie or localStorage.
+                    // Try again until can save.
+                    // When successful sends
+                    //   and cleans cookie or localStorage.
+                    console.log(err);
+                    console.log(details);
+                }
+            });
         }
     }
     
