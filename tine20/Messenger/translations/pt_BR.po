@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tine 2.0 Messenger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-18 10:54-0300\n"
-"PO-Revision-Date: 2012-12-21 15:31-0300\n"
-"Last-Translator: Cassiano Dal Pizzol <cassiano@dalpizzol@serpro.gov.br>\n"
+"POT-Creation-Date: 2012-12-21 16:02-0300\n"
+"PO-Revision-Date: 2012-12-21 16:02-0300\n"
+"Last-Translator: Marcio Albuquerque <marcio.lima.albuquerque@gmail.com>\n"
 "Language-Team: SERPRO Salvador <marcio.albuquerque@serpro.gov.br>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -86,6 +86,10 @@ msgstr "Mostrar contatos offline"
 msgid "Don't show offline contacts"
 msgstr "Não mostrar contatos offline"
 
+#: Messenger/Frontend/Http.php:53
+msgid "ME"
+msgstr "EU"
+
 #: Messenger/js/Groupie.js:250
 msgid " has joined the room as a "
 msgstr " entrou na sala como um "
@@ -99,15 +103,15 @@ msgid " has left the room."
 msgstr " saiu da sala."
 
 #: Messenger/js/Groupie.js:361
-#: Messenger/js/Groupie.js:538
-#: Messenger/js/RosterTree.js:219
-#: Messenger/js/RosterTree.js:292
-#: Messenger/js/RosterTree.js:496
+#: Messenger/js/Groupie.js:539
+#: Messenger/js/RosterTree.js:232
+#: Messenger/js/RosterTree.js:307
+#: Messenger/js/RosterTree.js:511
 msgid "Status"
 msgstr "Status"
 
 #: Messenger/js/Groupie.js:362
-#: Messenger/js/Groupie.js:539
+#: Messenger/js/Groupie.js:540
 msgid "Role"
 msgstr "Papel"
 
@@ -228,9 +232,9 @@ msgstr "Envio de erro:"
 
 #: Messenger/js/LogHandler.js:212
 #: Messenger/js/Messenger.js:148
-#: Messenger/js/Messenger.js:289
-#: Messenger/js/Messenger.js:380
-#: Messenger/js/Messenger.js:398
+#: Messenger/js/Messenger.js:290
+#: Messenger/js/Messenger.js:381
+#: Messenger/js/Messenger.js:399
 #: Messenger/js/FileTransfer.js:32
 #: Messenger/js/RosterHandler.js:305
 #: Messenger/js/RosterHandler.js:360
@@ -283,9 +287,9 @@ msgstr "Tem certeza que quer baixar este chat"
 #: Messenger/js/ChatHandler.js:108
 #: Messenger/js/FileTransfer.js:15
 #: Messenger/js/FileTransfer.js:39
-#: Messenger/js/FileTransfer.js:123
-#: Messenger/js/FileTransfer.js:178
-#: Messenger/js/FileTransfer.js:245
+#: Messenger/js/FileTransfer.js:127
+#: Messenger/js/FileTransfer.js:182
+#: Messenger/js/FileTransfer.js:249
 msgid "File Transfer"
 msgstr "Transferência de Arquivo"
 
@@ -294,7 +298,7 @@ msgid "Chat has no content"
 msgstr "Chat não tem nenhum conteúdo"
 
 #: Messenger/js/ChatHandler.js:116
-#: Messenger/js/FileTransfer.js:148
+#: Messenger/js/FileTransfer.js:152
 msgid "File Transfer Error"
 msgstr "Erro de Transferência de Arquivo"
 
@@ -303,8 +307,8 @@ msgid "Error creating chat history file"
 msgstr "Erro ao criar arquivo de histórico do chat"
 
 #: Messenger/js/ChatHandler.js:127
-#: Messenger/js/FileTransfer.js:83
-#: Messenger/js/FileTransfer.js:90
+#: Messenger/js/FileTransfer.js:87
+#: Messenger/js/FileTransfer.js:94
 msgid "Temporary files not deleted"
 msgstr "Arquivos temporários não foram apagados"
 
@@ -312,13 +316,13 @@ msgstr "Arquivos temporários não foram apagados"
 msgid "Your messages will be sent offline"
 msgstr "Sua mensagem será enviada offline"
 
-#: Messenger/js/ChatHandler.js:246
-msgid " stopped typing!"
-msgstr " parou de digitar!"
-
-#: Messenger/js/ChatHandler.js:248
+#: Messenger/js/ChatHandler.js:258
 msgid " is typing..."
 msgstr " está digitando..."
+
+#: Messenger/js/ChatHandler.js:260
+msgid " stopped typing!"
+msgstr " parou de digitar!"
 
 #: Messenger/js/Window.js:18
 msgid "Group created successfully"
@@ -346,10 +350,6 @@ msgstr "Adicionar Contato"
 #: Messenger/js/Window.js:62
 msgid "Buddy not added"
 msgstr "Contato não adicionado"
-
-#: Messenger/js/Messenger.js:29
-msgid "ME"
-msgstr "EU"
 
 #: Messenger/js/Messenger.js:45
 msgid "Available"
@@ -408,32 +408,32 @@ msgstr[1] "Messengers"
 msgid "IM Message"
 msgstr "Mensagem de IM"
 
-#: Messenger/js/Messenger.js:280
+#: Messenger/js/Messenger.js:281
 msgid "Connecting"
 msgstr "Conectando"
 
-#: Messenger/js/Messenger.js:290
+#: Messenger/js/Messenger.js:291
 msgid "Can't connect to server"
 msgstr "Não conseguiu conectar no servidor"
 
-#: Messenger/js/Messenger.js:361
+#: Messenger/js/Messenger.js:362
 msgid "Leave page"
 msgstr "Deixar a página"
 
-#: Messenger/js/Messenger.js:366
+#: Messenger/js/Messenger.js:367
 msgid "Close window"
 msgstr "Fechar janela"
 
-#: Messenger/js/Messenger.js:381
+#: Messenger/js/Messenger.js:382
 msgid "Authentication failed"
 msgstr "Autenticação falhou"
 
-#: Messenger/js/Messenger.js:399
+#: Messenger/js/Messenger.js:400
 msgid "Unknown error"
 msgstr "Erro desconhecido"
 
-#: Messenger/js/Messenger.js:480
-#: Messenger/js/Messenger.js:497
+#: Messenger/js/Messenger.js:481
+#: Messenger/js/Messenger.js:498
 #: Messenger/js/Layout.js:54
 msgid "Hide offline contacts"
 msgstr "Esconder contatos offline"
@@ -531,63 +531,63 @@ msgstr "Enviando arquivo"
 msgid "Maximum file size: 200MB"
 msgstr "Tamanho máximo para arquivo: 200MB"
 
-#: Messenger/js/FileTransfer.js:88
+#: Messenger/js/FileTransfer.js:92
 msgid "Temporary files deleted"
 msgstr "Arquivos temporários foram apagados"
 
-#: Messenger/js/FileTransfer.js:107
-#: Messenger/js/FileTransfer.js:114
-#: Messenger/js/FileTransfer.js:124
+#: Messenger/js/FileTransfer.js:111
+#: Messenger/js/FileTransfer.js:118
+#: Messenger/js/FileTransfer.js:128
 msgid "File sent"
 msgstr "Arquivo enviado"
 
-#: Messenger/js/FileTransfer.js:137
+#: Messenger/js/FileTransfer.js:141
 msgid "Error sending file"
 msgstr "Erro ao enviar arquivo"
 
-#: Messenger/js/FileTransfer.js:149
+#: Messenger/js/FileTransfer.js:153
 msgid "Error uploading file"
 msgstr "Erro ao carregar arquivo"
 
-#: Messenger/js/FileTransfer.js:182
+#: Messenger/js/FileTransfer.js:186
 msgid "wants to send you a file:"
 msgstr "quer enviar um arquivo para você:"
 
-#: Messenger/js/FileTransfer.js:187
+#: Messenger/js/FileTransfer.js:191
 msgid "Do you allow"
 msgstr "Você permite"
 
-#: Messenger/js/FileTransfer.js:191
-#: Messenger/js/RosterTree.js:81
-#: Messenger/js/RosterTree.js:180
+#: Messenger/js/FileTransfer.js:195
+#: Messenger/js/RosterTree.js:94
+#: Messenger/js/RosterTree.js:193
 msgid "Yes"
 msgstr "Sim"
 
-#: Messenger/js/FileTransfer.js:193
+#: Messenger/js/FileTransfer.js:197
 msgid "File received"
 msgstr "Arquivo recebido"
 
-#: Messenger/js/FileTransfer.js:203
-#: Messenger/js/RosterTree.js:82
-#: Messenger/js/RosterTree.js:181
+#: Messenger/js/FileTransfer.js:207
+#: Messenger/js/RosterTree.js:95
+#: Messenger/js/RosterTree.js:194
 msgid "No"
 msgstr "Não"
 
-#: Messenger/js/FileTransfer.js:205
+#: Messenger/js/FileTransfer.js:209
 msgid "File refused"
 msgstr "Arquivo recusado"
 
-#: Messenger/js/FileTransfer.js:253
+#: Messenger/js/FileTransfer.js:257
 msgid " has more than one resource. Choose one!"
 msgstr " tem mais de um recurso. Escolha um!"
 
 #: Messenger/js/RosterTree.js:18
-#: Messenger/js/RosterTree.js:139
+#: Messenger/js/RosterTree.js:152
 msgid "Rename"
 msgstr "Renomear"
 
 #: Messenger/js/RosterTree.js:22
-#: Messenger/js/RosterTree.js:143
+#: Messenger/js/RosterTree.js:156
 msgid "Remove"
 msgstr "Remover"
 
@@ -600,43 +600,46 @@ msgid "Move to"
 msgstr "Mover para"
 
 #: Messenger/js/RosterTree.js:44
-#: Messenger/js/Chat.js:27
 msgid "Send file"
 msgstr "Enviar arquivo"
 
-#: Messenger/js/RosterTree.js:64
-#: Messenger/js/RosterTree.js:157
+#: Messenger/js/RosterTree.js:55
+msgid "Show contact history"
+msgstr "Mostrar histórico do contato"
+
+#: Messenger/js/RosterTree.js:77
+#: Messenger/js/RosterTree.js:170
 msgid "A name is required"
 msgstr "Um nome é obrigatório"
 
-#: Messenger/js/RosterTree.js:84
+#: Messenger/js/RosterTree.js:97
 msgid "Delete Contact"
 msgstr "Excluir Contato"
 
-#: Messenger/js/RosterTree.js:85
-#: Messenger/js/RosterTree.js:184
+#: Messenger/js/RosterTree.js:98
+#: Messenger/js/RosterTree.js:197
 msgid "Are you sure you want to delete "
 msgstr "Tem certeza que deseja excluir "
 
-#: Messenger/js/RosterTree.js:120
+#: Messenger/js/RosterTree.js:133
 msgid "Empty"
 msgstr "Vazio"
 
-#: Messenger/js/RosterTree.js:168
+#: Messenger/js/RosterTree.js:181
 msgid "Rename Group"
 msgstr "Renomear Grupo"
 
-#: Messenger/js/RosterTree.js:169
+#: Messenger/js/RosterTree.js:182
 msgid "The group already exists!"
 msgstr "O grupo criado já existe!"
 
-#: Messenger/js/RosterTree.js:183
+#: Messenger/js/RosterTree.js:196
 msgid "Delete Group"
 msgstr "Excluir Grupo"
 
-#: Messenger/js/RosterTree.js:221
-#: Messenger/js/RosterTree.js:293
-#: Messenger/js/RosterTree.js:498
+#: Messenger/js/RosterTree.js:234
+#: Messenger/js/RosterTree.js:308
+#: Messenger/js/RosterTree.js:513
 msgid "Subscription"
 msgstr "Assinatura"
 
@@ -696,6 +699,14 @@ msgstr " já existe. Não foi renomeado."
 msgid "was not removed"
 msgstr "não foi removido"
 
+#: Messenger/js/History.js:7
+msgid "History Chat with"
+msgstr "Histórico de Chat com"
+
+#: Messenger/js/History.js:16
+msgid "Download"
+msgstr "Baixar"
+
 #: Messenger/js/Chat.js:40
 msgid "Start video chat"
 msgstr "Iniciar video chat"
@@ -705,58 +716,85 @@ msgstr "Iniciar video chat"
 msgid "Choose a Emoticon"
 msgstr "Escolha um Emoticon"
 
+#: Messenger/js/Chat.js:106
+msgid "Contact Chat History"
+msgstr "Histórico de Chat do Contato"
+
 #~ msgid "File too big - must be less then 2MB"
 #~ msgstr "Arquivo muito grande - deve ser inferior a 2MB"
+
 #~ msgid "File partially uploaded"
 #~ msgstr "Arquivo carregado parcialmente"
+
 #~ msgid "File was not uploaded"
 #~ msgstr "O arquivo não foi carregado"
+
 #~ msgid "File transfer error"
 #~ msgstr "Erro de Transferência de Arquivo"
+
 #~ msgid "Emoticons"
 #~ msgstr "Emoticons"
+
 #~ msgid "Can't get Emoticons"
 #~ msgstr "Não é possível obter Emoticons"
+
 #~ msgid "Messenger has been disconnected!"
 #~ msgstr "Messenger foi desconectado!"
+
 #~ msgid "Disconnecting"
 #~ msgstr "Desconectando"
+
 #~ msgid "Options"
 #~ msgstr "Opções"
+
 #~ msgid "Connect"
 #~ msgstr "Conectar"
+
 #~ msgid "Actions"
 #~ msgstr "Ações"
+
 #~ msgid "Logout"
 #~ msgstr "Sair"
+
 #~ msgid "Show notifications ..."
 #~ msgstr "Exibir notificações"
+
 #~ msgid "History of chats ..."
 #~ msgstr "Histórico dos chats ..."
+
 #~ msgid "Custon name ..."
 #~ msgstr "Nome Personalizado ..."
+
 #~ msgid "Action"
+
 #~ msgid_plural "Actions"
 #~ msgstr[0] "Ação"
 #~ msgstr[1] "Ações"
+
 #~ msgid "Preference"
+
 #~ msgid_plural "Preferences"
 #~ msgstr[0] "Preferência"
 #~ msgstr[1] "Preferências"
+
 #~ msgid "Account"
+
 #~ msgid_plural "Accounts"
 #~ msgstr[0] "Conta"
 #~ msgstr[1] "Contas"
+
 #~ msgid "Email Accounts"
+
 #~ msgid_plural "Email Accounts"
 #~ msgstr[0] "Conta de E-mail"
 #~ msgstr[1] "Contas de E-mail"
+
 #~ msgid ""
 #~ "You're logged in Messenger. If you leave the page, Messenger will "
 #~ "disconnect!"
 #~ msgstr ""
 #~ "Você está conectado no Messenger. Se sair da página, o Messenger será "
 #~ "desconectado!"
+
 #~ msgid " was successfully removed!"
 #~ msgstr " foi excluído com sucesso!"
-

@@ -78,6 +78,10 @@
         {
           "text": "Upload.js",
           "path": "js/"
+        },
+        {
+          "text": "History.js",
+          "path": "js/"
         }
       ]
     },

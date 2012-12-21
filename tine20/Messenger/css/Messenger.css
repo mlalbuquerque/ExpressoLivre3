@@ -405,3 +405,29 @@ p.file_transfer_progress span {
     font-weight: bold;
     padding: 5px 0 0 20px;
 }
+
+.history-list-button {
+    cursor: pointer;
+    font-weight: bold;
+    padding: 5px;
+    text-align: center;
+}
+
+.history-list-button-chosen {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+}
+
+.history-list-button:hover {
+    opacity: 0.6;
+}
+
+#history-loading {
+    padding: 10px;
+    text-align: center;
+}
+
+.messenger-history-display {
+    border-bottom: 1px grey dashed;
+    padding: 5px;
+}

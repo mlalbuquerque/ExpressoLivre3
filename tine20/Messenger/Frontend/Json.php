@@ -46,6 +46,21 @@ class Messenger_Frontend_Json extends Tinebase_Frontend_Json_Abstract
        return $this->_controller->saveChatHistory($id, $title, $content);
    }
    
+   public function saveHistory($jid, $contact, $direction, $message, $time)
+   {
+       return $this->_controller->saveHistory($jid, $contact, $direction, $message, $time);
+   }
+   
+   public function listHistory($jid, $contact)
+   {
+       return $this->_controller->listHistory($jid, $contact);
+   }
+
+   public function getHistory($jid, $contact, $date)
+   {
+       return $this->_controller->getHistory($jid, $contact, $date);
+   }
+   
    public function logFileTransfer($text)
    {
        //Tinebase_Core::getLogger()->info($text);

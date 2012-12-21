@@ -567,7 +567,7 @@ Tine.Messenger.Util = {
         var atpos = jid.indexOf('@'),
             name = jid.substr(0, atpos),
             server = jid.substr(atpos);
-        console.log(name.replace(/\./g, "_") + server.replace(/@/g, "__").replace(/\./g, "-").replace(/\//g, "_"));
+
         return name.replace(/\./g, "_") +
                server.replace(/@/g, "__").replace(/\./g, "-").replace(/\//g, "_");
     },
@@ -579,7 +579,7 @@ Tine.Messenger.Util = {
         var seppos = clean.indexOf('__'),
             name = clean.substr(0, seppos),
             server = clean.substr(seppos);
-        console.log(name.replace(/_/g, ".") + server.replace(/__/g, "@").replace(/\-/g, ".").replace(/_/g, "/"));
+
         return name.replace(/_/g, ".") +
                server.replace(/__/g, "@").replace(/\-/g, ".").replace(/_/g, "/");
     },
@@ -680,7 +680,7 @@ Tine.Messenger.Util = {
             var t = stamp.match(/(\d{2})\:(\d{2})\:(\d{2})/);
             return t[1] - TZ + ":" + t[2] + ":" + t[3];
         }
-        return Date().match(/\d{2}\:\d{2}\:\d{2}/)[0];
+        return (new Date()).toTimeString().match(/\d{2}\:\d{2}\:\d{2}/)[0];
     },
     
     insertAtCursor: function (myField, myValue) {
