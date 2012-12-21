@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tine 2.0 Messenger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-21 16:02-0300\n"
-"PO-Revision-Date: 2013-01-14 16:47-0300\n"
-"Last-Translator: Lavoisier Vieira <lavoisier.vieira@serpro.gov.br>\n"
+"POT-Creation-Date: 2013-01-15 09:42-0300\n"
+"PO-Revision-Date: 2013-01-15 09:42-0300\n"
+"Last-Translator: Marcio Albuquerque <marcio.lima.albuquerque@gmail.com>\n"
 "Language-Team: SERPRO Salvador <marcio.albuquerque@serpro.gov.br>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -104,9 +104,9 @@ msgstr " saiu da sala."
 
 #: Messenger/js/Groupie.js:361
 #: Messenger/js/Groupie.js:539
-#: Messenger/js/RosterTree.js:232
-#: Messenger/js/RosterTree.js:307
-#: Messenger/js/RosterTree.js:511
+#: Messenger/js/RosterTree.js:236
+#: Messenger/js/RosterTree.js:311
+#: Messenger/js/RosterTree.js:515
 msgid "Status"
 msgstr "Status"
 
@@ -152,12 +152,13 @@ msgid "Change"
 msgstr "Trocar"
 
 #: Messenger/js/Priority.js:76
+#: Messenger/js/ChatHandler.js:593
 #: Messenger/js/ConfigWindow.js:92
 msgid "Cancel"
 msgstr "Cancelar"
 
 #: Messenger/js/LogHandler.js:81
-#: Messenger/js/ChatHandler.js:140
+#: Messenger/js/ChatHandler.js:157
 msgid "is unavailable"
 msgstr "está indisponível"
 
@@ -263,8 +264,8 @@ msgid "Cancel 503: Service unavailable."
 msgstr "Cancelamento 503: Serviço indisponível."
 
 #: Messenger/js/LogHandler.js:253
-#: Messenger/js/ChatHandler.js:140
-#: Messenger/js/ChatHandler.js:141
+#: Messenger/js/ChatHandler.js:157
+#: Messenger/js/ChatHandler.js:158
 msgid "Info"
 msgstr "Informação"
 
@@ -312,17 +313,34 @@ msgstr "Erro ao criar arquivo de histórico do chat"
 msgid "Temporary files not deleted"
 msgstr "Arquivos temporários não foram apagados"
 
-#: Messenger/js/ChatHandler.js:141
+#: Messenger/js/ChatHandler.js:158
 msgid "Your messages will be sent offline"
 msgstr "Sua mensagem será enviada offline"
 
-#: Messenger/js/ChatHandler.js:258
+#: Messenger/js/ChatHandler.js:275
 msgid " is typing..."
 msgstr " está digitando..."
 
-#: Messenger/js/ChatHandler.js:260
+#: Messenger/js/ChatHandler.js:277
 msgid " stopped typing!"
 msgstr " parou de digitar!"
+
+#: Messenger/js/ChatHandler.js:514
+msgid "Group Message"
+msgstr "Mensagem de Grupo"
+
+#: Messenger/js/ChatHandler.js:524
+#: Messenger/js/ChatHandler.js:550
+msgid "Choose a Emoticon"
+msgstr "Escolha um Emoticon"
+
+#: Messenger/js/ChatHandler.js:579
+msgid "Send"
+msgstr "Enviar"
+
+#: Messenger/js/ChatHandler.js:607
+msgid "Send message to:"
+msgstr "Enviar mensagem para:"
 
 #: Messenger/js/Window.js:18
 msgid "Group created successfully"
@@ -559,7 +577,7 @@ msgstr "Você permite"
 
 #: Messenger/js/FileTransfer.js:195
 #: Messenger/js/RosterTree.js:94
-#: Messenger/js/RosterTree.js:193
+#: Messenger/js/RosterTree.js:197
 msgid "Yes"
 msgstr "Sim"
 
@@ -569,7 +587,7 @@ msgstr "Arquivo recebido"
 
 #: Messenger/js/FileTransfer.js:207
 #: Messenger/js/RosterTree.js:95
-#: Messenger/js/RosterTree.js:194
+#: Messenger/js/RosterTree.js:198
 msgid "No"
 msgstr "Não"
 
@@ -608,7 +626,7 @@ msgid "Show contact history"
 msgstr "Mostrar histórico do contato"
 
 #: Messenger/js/RosterTree.js:77
-#: Messenger/js/RosterTree.js:170
+#: Messenger/js/RosterTree.js:174
 msgid "A name is required"
 msgstr "Um nome é obrigatório"
 
@@ -617,7 +635,7 @@ msgid "Delete Contact"
 msgstr "Excluir Contato"
 
 #: Messenger/js/RosterTree.js:98
-#: Messenger/js/RosterTree.js:197
+#: Messenger/js/RosterTree.js:201
 msgid "Are you sure you want to delete "
 msgstr "Tem certeza que deseja excluir "
 
@@ -625,21 +643,25 @@ msgstr "Tem certeza que deseja excluir "
 msgid "Empty"
 msgstr "Vazio"
 
-#: Messenger/js/RosterTree.js:181
+#: Messenger/js/RosterTree.js:160
+msgid "Send group message"
+msgstr "Enviar mensagem de grupo"
+
+#: Messenger/js/RosterTree.js:185
 msgid "Rename Group"
 msgstr "Renomear Grupo"
 
-#: Messenger/js/RosterTree.js:182
+#: Messenger/js/RosterTree.js:186
 msgid "The group already exists!"
 msgstr "O grupo criado já existe!"
 
-#: Messenger/js/RosterTree.js:196
+#: Messenger/js/RosterTree.js:200
 msgid "Delete Group"
 msgstr "Excluir Grupo"
 
-#: Messenger/js/RosterTree.js:234
-#: Messenger/js/RosterTree.js:308
-#: Messenger/js/RosterTree.js:513
+#: Messenger/js/RosterTree.js:238
+#: Messenger/js/RosterTree.js:312
+#: Messenger/js/RosterTree.js:517
 msgid "Subscription"
 msgstr "Assinatura"
 
@@ -711,67 +733,82 @@ msgstr "Baixar"
 msgid "Start video chat"
 msgstr "Iniciar video chat"
 
-#: Messenger/js/Chat.js:50
-#: Messenger/js/Chat.js:76
-msgid "Choose a Emoticon"
-msgstr "Escolha um Emoticon"
-
 #: Messenger/js/Chat.js:106
 msgid "Contact Chat History"
-msgstr "Histórico de Chat do Contato"
+msgstr "Histórico do Contato"
 
 #~ msgid "File too big - must be less then 2MB"
 #~ msgstr "Arquivo muito grande - deve ser inferior a 2MB"
+
 #~ msgid "File partially uploaded"
 #~ msgstr "Arquivo carregado parcialmente"
+
 #~ msgid "File was not uploaded"
 #~ msgstr "O arquivo não foi carregado"
+
 #~ msgid "File transfer error"
 #~ msgstr "Erro de Transferência de Arquivo"
-#~ msgid "Emoticons"
-#~ msgstr "Emoticons"
+
 #~ msgid "Can't get Emoticons"
 #~ msgstr "Não é possível obter Emoticons"
+
 #~ msgid "Messenger has been disconnected!"
 #~ msgstr "Messenger foi desconectado!"
+
 #~ msgid "Disconnecting"
 #~ msgstr "Desconectando"
+
 #~ msgid "Options"
 #~ msgstr "Opções"
+
 #~ msgid "Connect"
 #~ msgstr "Conectar"
+
 #~ msgid "Actions"
 #~ msgstr "Ações"
+
 #~ msgid "Logout"
 #~ msgstr "Sair"
+
 #~ msgid "Show notifications ..."
 #~ msgstr "Exibir notificações"
+
 #~ msgid "History of chats ..."
 #~ msgstr "Histórico dos chats ..."
+
 #~ msgid "Custon name ..."
 #~ msgstr "Nome Personalizado ..."
+
 #~ msgid "Action"
+
 #~ msgid_plural "Actions"
 #~ msgstr[0] "Ação"
 #~ msgstr[1] "Ações"
+
 #~ msgid "Preference"
+
 #~ msgid_plural "Preferences"
 #~ msgstr[0] "Preferência"
 #~ msgstr[1] "Preferências"
+
 #~ msgid "Account"
+
 #~ msgid_plural "Accounts"
 #~ msgstr[0] "Conta"
 #~ msgstr[1] "Contas"
+
 #~ msgid "Email Accounts"
+
 #~ msgid_plural "Email Accounts"
 #~ msgstr[0] "Conta de E-mail"
 #~ msgstr[1] "Contas de E-mail"
+
 #~ msgid ""
 #~ "You're logged in Messenger. If you leave the page, Messenger will "
 #~ "disconnect!"
 #~ msgstr ""
 #~ "Você está conectado no Messenger. Se sair da página, o Messenger será "
 #~ "desconectado!"
+
 #~ msgid " was successfully removed!"
 #~ msgstr " foi excluído com sucesso!"
-

@@ -157,6 +157,10 @@ Tine.Messenger.RosterTree = function(iq){
                           handler: removeGroup,
                           node:_node, 
                           icon:"/images/messenger/group_delete.png"});
+            items.push({text: app.i18n._('Send group message'), 
+                          handler: Tine.Messenger.ChatHandler.sendGroupMessage,
+                          node:_node, 
+                          icon:"/images/messenger/icn_message_send.gif"});
             var menu = new Ext.menu.Menu({ 
                             items: items
                     }); 

@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tine 2.0 Messenger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-21 16:02-0300\n"
-"PO-Revision-Date: 2013-01-14 16:47-0300\n"
-"Last-Translator: Lavoisier Vieira <lavoisier.vieira@serpro.gov.br>\n"
+"POT-Creation-Date: 2013-01-15 09:36-0300\n"
+"PO-Revision-Date: 2013-01-15 09:36-0300\n"
+"Last-Translator: Marcio Albuquerque <marcio.lima.albuquerque@gmail.com>\n"
 "Language-Team: SERPRO Salvador <marcio.albuquerque@serpro.gov.br>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -104,9 +104,9 @@ msgstr " has left the room."
 
 #: Messenger/js/Groupie.js:361
 #: Messenger/js/Groupie.js:539
-#: Messenger/js/RosterTree.js:232
-#: Messenger/js/RosterTree.js:307
-#: Messenger/js/RosterTree.js:511
+#: Messenger/js/RosterTree.js:236
+#: Messenger/js/RosterTree.js:311
+#: Messenger/js/RosterTree.js:515
 msgid "Status"
 msgstr "Status"
 
@@ -152,12 +152,13 @@ msgid "Change"
 msgstr "Change"
 
 #: Messenger/js/Priority.js:76
+#: Messenger/js/ChatHandler.js:593
 #: Messenger/js/ConfigWindow.js:92
 msgid "Cancel"
 msgstr "Cancel"
 
 #: Messenger/js/LogHandler.js:81
-#: Messenger/js/ChatHandler.js:140
+#: Messenger/js/ChatHandler.js:157
 msgid "is unavailable"
 msgstr "is unavailable"
 
@@ -263,8 +264,8 @@ msgid "Cancel 503: Service unavailable."
 msgstr "Cancel 503: Service unavailable."
 
 #: Messenger/js/LogHandler.js:253
-#: Messenger/js/ChatHandler.js:140
-#: Messenger/js/ChatHandler.js:141
+#: Messenger/js/ChatHandler.js:157
+#: Messenger/js/ChatHandler.js:158
 msgid "Info"
 msgstr "Info"
 
@@ -312,17 +313,34 @@ msgstr "Error creating chat history file"
 msgid "Temporary files not deleted"
 msgstr "Temporary files not deleted"
 
-#: Messenger/js/ChatHandler.js:141
+#: Messenger/js/ChatHandler.js:158
 msgid "Your messages will be sent offline"
 msgstr "Your messages will be sent offline"
 
-#: Messenger/js/ChatHandler.js:258
+#: Messenger/js/ChatHandler.js:275
 msgid " is typing..."
 msgstr " is typing..."
 
-#: Messenger/js/ChatHandler.js:260
+#: Messenger/js/ChatHandler.js:277
 msgid " stopped typing!"
 msgstr " stopped typing!"
+
+#: Messenger/js/ChatHandler.js:514
+msgid "Group Message"
+msgstr "Group Message"
+
+#: Messenger/js/ChatHandler.js:524
+#: Messenger/js/ChatHandler.js:550
+msgid "Choose a Emoticon"
+msgstr "Choose a Emoticon"
+
+#: Messenger/js/ChatHandler.js:579
+msgid "Send"
+msgstr "Send"
+
+#: Messenger/js/ChatHandler.js:607
+msgid "Send message to:"
+msgstr "Send message to:"
 
 #: Messenger/js/Window.js:18
 msgid "Group created successfully"
@@ -559,7 +577,7 @@ msgstr "Do you allow"
 
 #: Messenger/js/FileTransfer.js:195
 #: Messenger/js/RosterTree.js:94
-#: Messenger/js/RosterTree.js:193
+#: Messenger/js/RosterTree.js:197
 msgid "Yes"
 msgstr "Yes"
 
@@ -569,7 +587,7 @@ msgstr "File received"
 
 #: Messenger/js/FileTransfer.js:207
 #: Messenger/js/RosterTree.js:95
-#: Messenger/js/RosterTree.js:194
+#: Messenger/js/RosterTree.js:198
 msgid "No"
 msgstr "No"
 
@@ -608,7 +626,7 @@ msgid "Show contact history"
 msgstr "Show contact history"
 
 #: Messenger/js/RosterTree.js:77
-#: Messenger/js/RosterTree.js:170
+#: Messenger/js/RosterTree.js:174
 msgid "A name is required"
 msgstr "A name is required"
 
@@ -617,7 +635,7 @@ msgid "Delete Contact"
 msgstr "Delete Contact"
 
 #: Messenger/js/RosterTree.js:98
-#: Messenger/js/RosterTree.js:197
+#: Messenger/js/RosterTree.js:201
 msgid "Are you sure you want to delete "
 msgstr "Are you sure you want to delete "
 
@@ -625,21 +643,25 @@ msgstr "Are you sure you want to delete "
 msgid "Empty"
 msgstr "Empty"
 
-#: Messenger/js/RosterTree.js:181
+#: Messenger/js/RosterTree.js:160
+msgid "Send group message"
+msgstr "Send group message"
+
+#: Messenger/js/RosterTree.js:185
 msgid "Rename Group"
 msgstr "Rename Group"
 
-#: Messenger/js/RosterTree.js:182
+#: Messenger/js/RosterTree.js:186
 msgid "The group already exists!"
 msgstr "The group already exists!"
 
-#: Messenger/js/RosterTree.js:196
+#: Messenger/js/RosterTree.js:200
 msgid "Delete Group"
 msgstr "Delete Group"
 
-#: Messenger/js/RosterTree.js:234
-#: Messenger/js/RosterTree.js:308
-#: Messenger/js/RosterTree.js:513
+#: Messenger/js/RosterTree.js:238
+#: Messenger/js/RosterTree.js:312
+#: Messenger/js/RosterTree.js:517
 msgid "Subscription"
 msgstr "Subscription"
 
@@ -711,51 +733,63 @@ msgstr "Download"
 msgid "Start video chat"
 msgstr "Start video chat"
 
-#: Messenger/js/Chat.js:50
-#: Messenger/js/Chat.js:76
-msgid "Choose a Emoticon"
-msgstr "Choose a Emoticon"
-
 #: Messenger/js/Chat.js:106
 msgid "Contact Chat History"
 msgstr "Contact Chat History"
 
 #~ msgid "File too big - must be less then 2MB"
 #~ msgstr "File too big - must be less then 2MB"
+
 #~ msgid "File partially uploaded"
 #~ msgstr "File partially uploaded"
+
 #~ msgid "File was not uploaded"
 #~ msgstr "File was not uploaded"
+
 #~ msgid "File transfer error"
 #~ msgstr "File transfer error"
+
 #~ msgid "Emoticons"
 #~ msgstr "Emoticons"
+
 #~ msgid "Can't get Emoticons"
 #~ msgstr "Can't get Emoticons"
+
 #~ msgid "Messenger has been disconnected!"
 #~ msgstr "Messenger has been disconnected!"
+
 #~ msgid "Disconnecting"
 #~ msgstr "Disconnecting"
+
 #~ msgid "Options"
 #~ msgstr "Options"
+
 #~ msgid "Connect"
 #~ msgstr "Connect"
+
 #~ msgid "Actions"
 #~ msgstr "Actions"
+
 #~ msgid "Logout"
 #~ msgstr "Logout"
+
 #~ msgid "Show notifications ..."
 #~ msgstr "Show notifications ..."
+
 #~ msgid "History of chats ..."
 #~ msgstr "History of chats ..."
+
 #~ msgid "Custon name ..."
 #~ msgstr "Custon name ..."
+
 #~ msgid "Action"
+
 #~ msgid_plural "Actions"
 #~ msgstr[0] "Action"
 #~ msgstr[1] "Actions"
+
 #~ msgid "Preference"
+
 #~ msgid_plural "Preferences"
 #~ msgstr[0] "Preference"
 #~ msgstr[1] "Preferences"
-

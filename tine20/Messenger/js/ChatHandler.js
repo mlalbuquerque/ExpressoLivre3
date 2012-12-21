@@ -498,6 +498,123 @@ Tine.Messenger.ChatHandler = {
                 }
             });
         }
+    },
+    
+    sendGroupMessage: function (menu_item) {
+        var nodes = menu_item.node.childNodes,
+            ids = [];
+
+        for (var i = 0; i < nodes.length; i++)
+            ids.push('<span style="font-weight: bold;">' + Tine.Messenger.RosterHandler.getContactElement(nodes[i].id).text + '</span>');
+        
+        ids = ids.join(', ');
+        
+        var windowGroupMsg = new Ext.Window({
+            id: 'messenger-group-message-window',
+            title: Tine.Tinebase.appMgr.get('Messenger').i18n._('Group Message'),
+            closeAction: 'close',
+            height: 350,
+            width: 450,
+            layout: 'border',
+            tbar: [
+                {
+                    xtype: 'button',
+                    itemId: 'messenger-chat-emoticons',
+                    icon: '/images/messenger/emoticons/smile.png',
+                    tooltip: Tine.Tinebase.appMgr.get('Messenger').i18n._('Choose a Emoticon'),
+                    listeners: {
+                        scope: this,
+                        click: function() {
+                            var emoticonWindow,
+                                mainChatWindow = this,
+                                emoticonsPath = '/images/messenger/emoticons',
+                                check = [];
+                                
+                            if (Ext.getCmp('emoticon-window-choose')) {
+                                emoticonWindow = Ext.getCmp('emoticon-window-choose');
+                            } else {
+                                emoticonWindow = new Ext.Window({
+                                    id: 'emoticon-window-choose',
+                                    autoScroll: true,
+                                    closeAction: 'hide',
+                                    layout: {
+                                        type: 'table',
+                                        columns: 10
+                                    },
+                                    margins: {
+                                        top: 5,
+                                        left: 5
+                                    },
+                                    height: 175,
+                                    width: 290,
+                                    title: Tine.Tinebase.appMgr.get('Messenger').i18n._('Choose a Emoticon')
+                                });
+
+                                Ext.each(EMOTICON.emoticons, function (item, index) {
+                                    if (check.indexOf(EMOTICON.translates[index]) < 0) {
+                                        check.push(EMOTICON.translates[index]);
+                                        emoticonWindow.add({
+                                            xtype: 'button',
+                                            icon: emoticonsPath + '/' + EMOTICON.translates[index] + '.png',
+                                            cls: 'emoticon-button',
+                                            tooltip: EMOTICON.translates[index].toUpperCase(),
+                                            emoticon: item,
+                                            handler: function () {
+                                                var textarea = Ext.getCmp('messenger-group-message-text');
+                                                Tine.Messenger.Util.insertAtCursor(textarea, this.emoticon)
+                                                emoticonWindow.close();
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                            
+                            emoticonWindow.show();
+                        }
+                    }
+                 }
+            ],
+            buttons: [
+                {
+                    text: Tine.Tinebase.appMgr.get('Messenger').i18n._('Send'),
+                    handler: function () {
+                        var msg = Ext.getCmp('messenger-group-message-text').getValue();
+                        for (var i = 0; i < nodes.length; i++) {
+                            Tine.Messenger.Application.connection.send($msg({
+                                "to": nodes[i].id,
+                                "type": 'chat'})
+                            .c("body").t(msg).up()
+                            .c("active", {xmlns: "http://jabber.org/protocol/chatstates"}));
+                        }
+                        windowGroupMsg.close();
+                    }
+                },
+                {
+                    text: Tine.Tinebase.appMgr.get('Messenger').i18n._('Cancel'),
+                    handler: function () {
+                        windowGroupMsg.close();
+                    }
+                }
+            ],
+            items: [
+                {
+                    xtype: 'panel',
+                    id: 'messenger-group-message-list',
+                    region: 'north',
+                    border: false,
+                    frame: false,
+                    bodyStyle: 'background: transparent',
+                    html: '<h1>' + Tine.Tinebase.appMgr.get('Messenger').i18n._('Send message to:') + '</h1>' + ids
+                },
+                {
+                    xtype: 'textarea',
+                    id: 'messenger-group-message-text',
+                    region: 'center'
+                }
+            ]
+        });
+        
+        windowGroupMsg.show();
     }
     
 };
