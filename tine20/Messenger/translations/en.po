@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tine 2.0 Messenger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-01 15:19-0300\n"
-"PO-Revision-Date: 2013-02-15 16:38-0300\n"
-"Last-Translator: Lavoisier Vieira <lavoisier.vieira@serpro.gov.br>\n"
+"POT-Creation-Date: 2013-02-22 09:19-0300\n"
+"PO-Revision-Date: 2013-02-22 09:19-0300\n"
+"Last-Translator: Marcio Albuquerque <marcio.lima.albuquerque@gmail.com>\n"
 "Language-Team: SERPRO Salvador <marcio.albuquerque@serpro.gov.br>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -787,40 +787,57 @@ msgstr "Contact Chat History"
 
 #~ msgid "File too big - must be less then 2MB"
 #~ msgstr "File too big - must be less then 2MB"
+
 #~ msgid "File partially uploaded"
 #~ msgstr "File partially uploaded"
+
 #~ msgid "File was not uploaded"
 #~ msgstr "File was not uploaded"
+
 #~ msgid "File transfer error"
 #~ msgstr "File transfer error"
+
 #~ msgid "Emoticons"
 #~ msgstr "Emoticons"
+
 #~ msgid "Can't get Emoticons"
 #~ msgstr "Can't get Emoticons"
+
 #~ msgid "Messenger has been disconnected!"
 #~ msgstr "Messenger has been disconnected!"
+
 #~ msgid "Disconnecting"
 #~ msgstr "Disconnecting"
+
 #~ msgid "Options"
 #~ msgstr "Options"
+
 #~ msgid "Connect"
 #~ msgstr "Connect"
+
 #~ msgid "Actions"
 #~ msgstr "Actions"
+
 #~ msgid "Logout"
 #~ msgstr "Logout"
+
 #~ msgid "Show notifications ..."
 #~ msgstr "Show notifications ..."
+
 #~ msgid "History of chats ..."
 #~ msgstr "History of chats ..."
+
 #~ msgid "Custon name ..."
 #~ msgstr "Custon name ..."
+
 #~ msgid "Action"
+
 #~ msgid_plural "Actions"
 #~ msgstr[0] "Action"
 #~ msgstr[1] "Actions"
+
 #~ msgid "Preference"
+
 #~ msgid_plural "Preferences"
 #~ msgstr[0] "Preference"
 #~ msgstr[1] "Preferences"
-

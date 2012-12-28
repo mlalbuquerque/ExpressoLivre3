@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tine 2.0 Messenger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-01 15:21-0300\n"
-"PO-Revision-Date: 2013-02-15 16:38-0300\n"
-"Last-Translator: Lavoisier Vieira <lavoisier.vieira@serpro.gov.br>\n"
+"POT-Creation-Date: 2013-02-22 09:19-0300\n"
+"PO-Revision-Date: 2013-02-22 09:19-0300\n"
+"Last-Translator: Marcio Albuquerque <marcio.lima.albuquerque@gmail.com>\n"
 "Language-Team: SERPRO Salvador <marcio.albuquerque@serpro.gov.br>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -787,56 +787,79 @@ msgstr "Histórico do Contato"
 
 #~ msgid "File too big - must be less then 2MB"
 #~ msgstr "Arquivo muito grande - deve ser inferior a 2MB"
+
 #~ msgid "File partially uploaded"
 #~ msgstr "Arquivo carregado parcialmente"
+
 #~ msgid "File was not uploaded"
 #~ msgstr "O arquivo não foi carregado"
+
 #~ msgid "File transfer error"
 #~ msgstr "Erro de Transferência de Arquivo"
+
 #~ msgid "Emoticons"
 #~ msgstr "Emoticons"
+
 #~ msgid "Can't get Emoticons"
 #~ msgstr "Não é possível obter Emoticons"
+
 #~ msgid "Messenger has been disconnected!"
 #~ msgstr "Messenger foi desconectado!"
+
 #~ msgid "Disconnecting"
 #~ msgstr "Desconectando"
+
 #~ msgid "Options"
 #~ msgstr "Opções"
+
 #~ msgid "Connect"
 #~ msgstr "Conectar"
+
 #~ msgid "Actions"
 #~ msgstr "Ações"
+
 #~ msgid "Logout"
 #~ msgstr "Sair"
+
 #~ msgid "Show notifications ..."
 #~ msgstr "Exibir notificações"
+
 #~ msgid "History of chats ..."
 #~ msgstr "Histórico dos chats ..."
+
 #~ msgid "Custon name ..."
 #~ msgstr "Nome Personalizado ..."
+
 #~ msgid "Action"
+
 #~ msgid_plural "Actions"
 #~ msgstr[0] "Ação"
 #~ msgstr[1] "Ações"
+
 #~ msgid "Preference"
+
 #~ msgid_plural "Preferences"
 #~ msgstr[0] "Preferência"
 #~ msgstr[1] "Preferências"
+
 #~ msgid "Account"
+
 #~ msgid_plural "Accounts"
 #~ msgstr[0] "Conta"
 #~ msgstr[1] "Contas"
+
 #~ msgid "Email Accounts"
+
 #~ msgid_plural "Email Accounts"
 #~ msgstr[0] "Conta de E-mail"
 #~ msgstr[1] "Contas de E-mail"
+
 #~ msgid ""
 #~ "You're logged in Messenger. If you leave the page, Messenger will "
 #~ "disconnect!"
 #~ msgstr ""
 #~ "Você está conectado no Messenger. Se sair da página, o Messenger será "
 #~ "desconectado!"
+
 #~ msgid " was successfully removed!"
 #~ msgstr " foi excluído com sucesso!"
-
