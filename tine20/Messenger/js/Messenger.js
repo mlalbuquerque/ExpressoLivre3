@@ -429,6 +429,9 @@ Tine.Messenger.IM = {
         
         // Enable Priority settings
         Ext.getCmp('messenger-change-priority').enable();
+        
+        // Enable Collapse/Expand Groups
+        Ext.getCmp('messenger-expand-collapse-groups').enable();
     },
     disableOnDisconnect: function(){
         // Change IM icon
@@ -453,6 +456,9 @@ Tine.Messenger.IM = {
         
         // Disable Priority settings
         Ext.getCmp('messenger-change-priority').disable();
+        
+        // Disable Collapse/Expand Groups
+        Ext.getCmp('messenger-expand-collapse-groups').disable();
 
         // Close all chats
         var chats = Ext.query('.messenger-chat-window');
@@ -509,6 +515,21 @@ Tine.Messenger.IM = {
         
         pn.setIcon('images/messenger/' + texts[0] + '.png');
         pn.setTooltip(i18n._(texts[1]));
+    },
+    changeTreeviewGroupsDisplay: function (button) {
+        var i18n = Tine.Tinebase.appMgr.get('Messenger').i18n;
+        
+        if (button.collapsed) {
+            Tine.Messenger.RootNode().expandChildNodes(true);
+            button.setTooltip(i18n._('Collapse groups'));
+            button.setIcon('/images/messenger/collapse.png');
+            button.collapsed = false;
+        } else {
+            Tine.Messenger.RootNode().collapseChildNodes(true);
+            button.setTooltip(i18n._('Expand groups'));
+            button.setIcon('/images/messenger/expand.png');
+            button.collapsed = true;
+        }
     }
 };
 

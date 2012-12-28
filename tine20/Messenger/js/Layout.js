@@ -61,6 +61,17 @@ Tine.Messenger.ClientDialog = function(args){
                              }
                          },
                          {
+                             id: 'messenger-expand-collapse-groups',
+                             xtype: 'button',
+                             tooltip: app.i18n._('Collapse groups'),
+                             icon: 'images/messenger/collapse.png',
+                             disabled: true,
+                             collapsed: false,
+                             handler: function(button) {
+                                 Tine.Messenger.IM.changeTreeviewGroupsDisplay(button);
+                             }
+                         },
+                         {
                              id: 'messenger-change-priority',
                              xtype: 'button',
                              tooltip: app.i18n._('Priority setting'),
