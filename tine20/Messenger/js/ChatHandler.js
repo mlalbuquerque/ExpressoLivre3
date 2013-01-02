@@ -132,7 +132,24 @@ Tine.Messenger.ChatHandler = {
             
             new_chat = true;
         }
+        
+        // Get the active and focused chat window
+        var focusedChat = null,
+            htmlChatTextFields = Ext.query('.messenger-chat-field');
+        for (var i = 0; i < htmlChatTextFields.length; i++) {
+            var chatTextField = Ext.getCmp(htmlChatTextFields[i].id);
+            if (chatTextField.hasFocus) {
+                focusedChat = chatTextField.ownerCt;
+                break;
+            }
+        }
+        
+        // Show chat that received message
         chat.show();
+        
+        // Reestablishes focus on the other window, if any
+        if (focusedChat)
+            focusedChat.show();
 
         Tine.Messenger.ChatHandler.adjustChatAreaHeight(chat_id);
         
@@ -422,18 +439,17 @@ Tine.Messenger.ChatHandler = {
     },
     
     blinkTitle: function () {
-        Tine.Tinebase.appMgr.get('Messenger').windowOriginalTitle = document.title;
-
-        if (Tine.Tinebase.appMgr.get('Messenger').isBlurred &&
-            !Tine.Tinebase.appMgr.get('Messenger').blinking) {
+        Tine.Tinebase.appMgr.get('Messenger').windowOriginalTitle = Tine.title + ' - ' + Tine.Tinebase.appMgr.activeApp.getTitle();
+        
+        if (!document.hasFocus() && !Tine.Tinebase.appMgr.get('Messenger').blinking) {
+            var i18n = Tine.Tinebase.appMgr.get('Messenger').i18n,
+                title = Tine.Tinebase.appMgr.get('Messenger').windowOriginalTitle,
+                blink = "=== " + i18n._(Tine.Tinebase.appMgr.get('Messenger').blinkTitle) + "! ===";
+            
+            Tine.Tinebase.appMgr.get('Messenger').blinking = true;
             Tine.Tinebase.appMgr.get('Messenger').blinkTimer = window.setInterval(function () {
-                var i18n = Tine.Tinebase.appMgr.get('Messenger').i18n,
-                    title = Tine.Tinebase.appMgr.get('Messenger').windowOriginalTitle,
-                    blink = "=== " + i18n._(Tine.Tinebase.appMgr.get('Messenger').blinkTitle) + "! ===";
-
                     document.title = document.title == blink ? title : blink;
             }, 500);
-            Tine.Tinebase.appMgr.get('Messenger').blinking = true;
         }
     },
     

@@ -170,7 +170,7 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
             this.startMessengerDelayedTask.delay(1000);
         }
         
-        this.isBlurred = false;
+        //this.isBlurred = false;
         this.blinking = false;
         this.windowOriginalTitle = null;
         this.blinkTitle = "IM Message"; // _('IM Message')
@@ -258,15 +258,15 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
             20
         );
             
-        window.onblur = function () {
-            Tine.Tinebase.appMgr.get('Messenger').isBlurred = true;
-        };
-        
+//        window.onblur = function () {
+//            console.log('====== BLUR =======');
+//            Tine.Tinebase.appMgr.get('Messenger').isBlurred = true;
+//        };
+//        
         window.onfocus = function () {
-            if (Tine.Tinebase.appMgr.get('Messenger').isBlurred && Tine.Tinebase.appMgr.get('Messenger').blinking) {
+            if (Tine.Tinebase.appMgr.get('Messenger').blinking) {
                 document.title = Tine.Tinebase.appMgr.get('Messenger').windowOriginalTitle;
                 window.clearInterval(Tine.Tinebase.appMgr.get('Messenger').blinkTimer);
-                Tine.Tinebase.appMgr.get('Messenger').isBlurred = false;
                 Tine.Tinebase.appMgr.get('Messenger').blinking = false;
             }
         };
