@@ -60,35 +60,36 @@ class Felamimail_Controller_Cache_Imap_Message extends Felamimail_Controller_Cac
     *
     * @param Felamimail_Model_FolderFilter  $_filter
     * @return Tinebase_Record_RecordSet
+    * 
+    * @todo Reactivates folder sql cache to update folder when detecting diferences on counting between cache and imap
     */
     public function getFolderStatus(Felamimail_Model_FolderFilter $_filter)
     {
 //        $this->_availableUpdateTime = NULL;
 //        
 //        // add user account ids to filter and use the folder backend to search as the folder controller has some special handling in its search function
-//        $_filter->createFilter(array('field' => 'account_id', 'operator' => 'in', 'value' => Felamimail_Controller_Account::getInstance()->search()->getArrayOfIds()));
-//        $folderBackend = Felamimail_Backend_Folder::getInstance();
-//        $folders = $folderBackend->search($_filter);
+        $_filter->createFilter(array('field' => 'account_id', 'operator' => 'in', 'value' => Felamimail_Controller_Account::getInstance()->search()->getArrayOfIds()));
+        $folderBackend = Felamimail_Backend_Folder::getInstance();
+        $folders = $folderBackend->search($_filter);
 //        
 //        if (Tinebase_Core::isLogLevel(Zend_Log::TRACE)) Tinebase_Core::getLogger()->trace(__METHOD__ . '::' . __LINE__ .  ' ' . print_r($_filter->toArray(), TRUE));
 //        if (Tinebase_Core::isLogLevel(Zend_Log::INFO)) Tinebase_Core::getLogger()->info(__METHOD__ . '::' . __LINE__ .  " Checking status of " . count($folders) . ' folders.');
-//        
+//      
         $result = new Tinebase_Record_RecordSet('Felamimail_Model_Folder');
-//        foreach ($folders as $folder) {
-//            if (Tinebase_Core::isLogLevel(Zend_Log::DEBUG)) Tinebase_Core::getLogger()->debug(__METHOD__ . '::' . __LINE__ .  ' Checking folder ' . $folder->globalname);
+        foreach ($folders as $folder) {
+            if (Tinebase_Core::isLogLevel(Zend_Log::DEBUG)) Tinebase_Core::getLogger()->debug(__METHOD__ . '::' . __LINE__ .  ' Checking folder ' . $folder->globalname);
 //            
 //            if ($this->_doNotUpdateCache($folder, FALSE)) {
 //                continue;
 //            }
 //            
-//            $imap = Felamimail_Backend_ImapFactory::factory($folder->account_id);
-//            
-//            $folder = Felamimail_Controller_Cache_Folder::getInstance()->getIMAPFolderCounter($folder);
-//            
-//            if ($this->_cacheIsInvalid($folder) || $this->_messagesInCacheButNotOnIMAP($folder)) {
-//                $result->addRecord($folder);
-//                continue;
-//            }
+           // $imap = Felamimail_Backend_ImapFactory::factory($folder->account_id);     
+            $folder = Felamimail_Controller_Cache_Folder::getInstance()->getIMAPFolderCounter($folder);
+            
+             // we don't have cache, checking only recent messages
+            if ($folder->cache_recentcount > 0) {
+                $result->addRecord($folder);                
+            }
 //            
 //            if ($folder->imap_totalcount > 0) {
 //                try {
@@ -103,10 +104,9 @@ class Felamimail_Controller_Cache_Imap_Message extends Felamimail_Controller_Cac
 //                    continue;
 //                }
 //            }
-//        }
-//
-//        if (Tinebase_Core::isLogLevel(Zend_Log::INFO)) Tinebase_Core::getLogger()->info(__METHOD__ . '::' . __LINE__ .  " Found " . count($result) . ' folders that need an update.');
-        
+        }
+        if (Tinebase_Core::isLogLevel(Zend_Log::INFO)) Tinebase_Core::getLogger()->info(__METHOD__ . '::' . __LINE__ .  " Found " . count($result) . ' folders that need an update.');
+
         return $result;
     }
     
