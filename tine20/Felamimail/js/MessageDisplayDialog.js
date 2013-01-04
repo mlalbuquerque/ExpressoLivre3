@@ -200,11 +200,34 @@ Tine.Felamimail.MessageDisplayDialog = Ext.extend(Tine.Felamimail.GridDetailsPan
             accountId = folder ? folder.get('account_id') : null,
             account = mainApp.getAccountStore().getById(accountId),
             trashId = account ? account.getTrashFolderId() : null;
-            
+        
         this.loadMask.show();
+        if(Tine.Felamimail.registry.get('preferences').get('confirmDelete') == '1')
+        {
+            Ext.MessageBox.confirm('', this.app.i18n._('Confirm Delete') + ' ?', function(btn) {
+                if(btn == 'yes') { 
+                    this.moveOrDeleteMessage(trashId);
+                }
+                else {
+                    this.loadMask.hide();
+                }
+            }, this);
+            
+        }
+        else
+            {
+                this.moveOrDeleteMessage(trashId);
+            }
+    },
+    
+    /**
+     * Do the actual delete or move
+     */
+    
+    moveOrDeleteMessage: function(trashId){
         if (trashId) {
             var filter = [{field: 'id', operator: 'equals', value: this.record.id}];
-            
+
             Tine.Felamimail.messageBackend.moveMessages(filter, trashId, { 
                 callback: this.onAfterDelete.createDelegate(this, ['move'])
             });
