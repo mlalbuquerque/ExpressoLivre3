@@ -215,13 +215,19 @@ Tine.Messenger.ChatHandler = {
                  +'    <span class="chat-user-msg">' + msg + '</span>'
                  +'</div>';
         }
+        if (flow == 'messenger-chat-state') {
+            txt = '<div class="chat-message-state">'
+                 + msg
+                 +'</div>';
+        }
         return txt;
     },
     
     /** flow parameter:
-     *      'messenger-send' => message that user send
-     *      'messenger-receive' => message that user received
-     *      'messenger-notify' => notification that user received
+     *      'messenger-send'       => message that user send
+     *      'messenger-receive'    => message that user received
+     *      'messenger-notify'     => notification that user received
+     *      'messenger-chat-state' => notification about composing messages
      */
     setChatMessage: function (id, msg, name, flow, stamp, color) {
         var chat_id = Tine.Messenger.ChatHandler.formatChatId(id),
@@ -236,8 +242,10 @@ Tine.Messenger.ChatHandler = {
             html: Tine.Messenger.ChatHandler.formatMessage(msg_with_emotions, name, flow, stamp, color),
             cls: 'chat-message'
         });
-        chat_area.doLayout();
         
+        Tine.Messenger.ChatHandler.hideChatNotifications();
+        
+        chat_area.doLayout();
         chat_area.body.scroll('down', 500);
     },
     
@@ -258,16 +266,17 @@ Tine.Messenger.ChatHandler = {
             body = $(message).find("body");
         }
 
+        console.log(body);
         // Typing events
         if (body.length > 0){
             // Shows the specific chat window
             Tine.Messenger.ChatHandler.showChatWindow(jid, name, type);
             // Set received chat message
-            Tine.Messenger.ChatHandler.setChatMessage(jid, body.text(), name, 'messenger-receive');
+            Tine.Messenger.ChatHandler.setChatMessage(jid, body.html(), name, 'messenger-receive');
             Tine.Messenger.ChatHandler.setChatState(jid);
             // If in another tab, it will blink!
             Tine.Messenger.ChatHandler.blinkTitle();
-        } else if ($(message).find('thread') || $(message).find('x')) { // Expresso V2 special case
+        } else if ($(message).find('thread').length > 0 || $(message).find('x').length > 0) { // Expresso V2 special case
             $(message).children('thread').remove();
             $(message).children('x').remove();
             body = $(message).text();
@@ -286,22 +295,23 @@ Tine.Messenger.ChatHandler = {
         var app = Tine.Tinebase.appMgr.get('Messenger');
         var chat_id = Tine.Messenger.ChatHandler.formatChatId(id),
             chat = Ext.getCmp(chat_id);
-       
+
         if(chat){
             var node = chat.getComponent('messenger-chat-notifications');
             if(state){
                 var message = state,
                     html = '',
                     type = '';
+                    
+                Tine.Messenger.ChatHandler.hideChatNotifications();
 
                 html = Tine.Messenger.ChatHandler.formatChatStateMessage(message, type);
-                node.body.dom.innerHTML = html;
-                node.show();
 
+                Tine.Messenger.ChatHandler.setChatMessage(id, html, '', 'messenger-chat-state');
                 if (app.i18n._(state).search(app.i18n._(Tine.Messenger.ChatHandler.PAUSED_STATE)) >= 0) {
                     Tine.Messenger.ChatHandler.clearPausedStateMessage = setTimeout(
                         function () {
-                            node.hide();
+                            Tine.Messenger.ChatHandler.hideChatNotifications();
                         },
                         2000
                     );
@@ -309,16 +319,23 @@ Tine.Messenger.ChatHandler = {
                     clearTimeout(Tine.Messenger.ChatHandler.clearPausedStateMessage);
                 }
             } else {
-                node.hide();
+                Tine.Messenger.ChatHandler.hideChatNotifications();
             }
         }
     },
     
     formatChatStateMessage: function(message, type){
-        var html = '<div class="chat-notification">' 
+        var html = '<span class="chat-notification">' 
                   +    message
-                  +'</div>';
+                  +'</span>';
         return html;
+    },
+    
+    hideChatNotifications: function () {
+        var chat_notifications = Ext.query('.chat-message-state .chat-notification');
+        Ext.each(chat_notifications, function (item, index) {
+            item.parentNode.removeChild(item);
+        });
     },
     
     /**
@@ -349,11 +366,13 @@ Tine.Messenger.ChatHandler = {
     
     sendMessage: function (msg, id) {
         var myNick = Tine.Messenger.Credential.myNick();
-        var message = $msg({
-            "to": Tine.Messenger.Util.idToJid(id),
-            "type": 'chat'
-        }).c("body").t(msg).up()
-          .c("active", {xmlns: "http://jabber.org/protocol/chatstates"});
+        var message = $msg({'to': Tine.Messenger.Util.idToJid(id)});
+        message.attrs({'type': 'chat'})
+            .c("active", {xmlns: "http://jabber.org/protocol/chatstates"}).up()
+            .c('html', {xmlns: Strophe.NS.XHTML_IM})
+            .c('body', {xmlns: Strophe.NS.XHTML})
+            .h(msg);
+            
         Tine.Messenger.Application.connection.send(message);
         Tine.Messenger.ChatHandler.setChatMessage(id, msg, myNick);
         
@@ -386,7 +405,7 @@ Tine.Messenger.ChatHandler = {
     },
     
     replaceLinks: function(message) {
-        return message.replace(/(http|https|ftp|ftps):\/\/([\S]+)/gi, '<a href="$1://$2" target="_blank">$1://$2</a>');
+        return message.replace(/[^<[\S]+](http|https|ftp|ftps):\/\/([\S]+)[^[\S]+>]/gi, '<a href="$1://$2" target="_blank">$1://$2</a>');
     },
     
     disconnect: function() {
