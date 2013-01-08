@@ -230,7 +230,7 @@ class Addressbook_Backend_Ldap implements Tinebase_Backend_Interface
     public function get($_id, $_getDeleted = FALSE)
     {
         $filter = '(&' .$this->_generateLdapFilter($_id) . $this->_options['filter'] .')';        
-        $return = $this->_backend->search($filter, $this->_options['basedn'], $this->_options['scope'], 
+        $return = $this->_backend->search($filter, $this->_options['baseDn'], $this->_options['scope'], 
                                                                 $this->_generateAttributesArray('*'), null, null, 1, 0);
         if (! $return)
         {
@@ -261,7 +261,7 @@ class Addressbook_Backend_Ldap implements Tinebase_Backend_Interface
             $filter = '(&(|' . $filter . ')' . $this->_options['filter'] .')';
             $arrAttrib = $this->_generateAttributesArray('*');
             $maxresults = $this->_getMaxResults();
-            $return = $this->_backend->search($filter, $this->_options['basedn'], $this->_options['scope'], $arrAttrib,
+            $return = $this->_backend->search($filter, $this->_options['baseDn'], $this->_options['scope'], $arrAttrib,
                                                                                                null, null, $maxresults);
             if (! $return)
             {
