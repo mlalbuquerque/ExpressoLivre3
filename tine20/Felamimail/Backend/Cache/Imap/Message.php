@@ -601,6 +601,10 @@ class Felamimail_Backend_Cache_Imap_Message extends Felamimail_Backend_Cache_Ima
             $isRecordSet = true;
             $_messages = $_messages->toArray();
         }
+        else
+        {
+            $_messages = (Array) $_messages;
+        }
         
         $limit = empty($_pagination->limit) ? count($_messages) : $_pagination->limit;
         $chunked = array_chunk($_messages, $limit, true);
@@ -649,7 +653,7 @@ Tinebase_Core::getLogger()->alert(__METHOD__ . '#####::#####' . __LINE__ . ' Mes
         // TODO: do pagination on $ids and return after getMultiple
          if($imapFilters['filters'] == 'Id'){
             $ids = $filterObjects[0]->getValue();
-            $ids = $this->_doPagination((Array)$ids, $pagination);
+            $ids = $this->_doPagination($ids, $pagination);
             if($_cols === TRUE)
                 return empty($ids) ? array() : $ids;
             else
