@@ -86,7 +86,7 @@ class Addressbook_Backend_AddressbookProxy
         }
         else
         {
-            $bk = $_SESSION[$this->_lastUserBackend];            
+            $bk = $_SESSION[$this->_lastUserBackend];
             if (!(is_null($bk)))
             {
                 switch ($_name)
@@ -105,7 +105,7 @@ class Addressbook_Backend_AddressbookProxy
         }
         
         Tinebase_Core::getLogger()->debug(__METHOD__ . '::' . __LINE__ . ' Calling ' . $_name . ' from the 
-                                                                                                       ' .$backendType);
+                                                                                                       ' .$backendType .' com argumentos '.print_r($_arguments,true));
         return call_user_func_array(array(Addressbook_Backend_Factory::factory($backendType, $arrOptions), $_name), 
                                                                                                            $_arguments);
     }

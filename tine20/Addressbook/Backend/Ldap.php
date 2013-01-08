@@ -192,7 +192,7 @@ class Addressbook_Backend_Ldap implements Tinebase_Backend_Interface
                                                                                                    . $filter['filter']);
             $attributes = $this->_generateAttributesArray($_cols);
             $maxresults = $this->_getMaxResults();
-            $return = $this->_backend->search($filter['filter'], $this->_options['basedn'], $this->_options['scope'],
+            $return = $this->_backend->search($filter['filter'], $this->_options['baseDn'], $this->_options['scope'],
                                                                                   $attributes, null, null, $maxresults);
             $result = $this->_ldap2Contacts($return);
             $cache->save($result, $cacheId, array('container', 'ldap'), null);
@@ -385,8 +385,16 @@ class Addressbook_Backend_Ldap implements Tinebase_Backend_Interface
         {            
             $data = array();
             foreach ($this->_attributes as $key=>$value)
-            {
-                $data[$key] = implode($ldapEntry[$value], ' ');
+            {  if(!empty($value)){
+                 if(!empty($ldapEntry[$value]))
+                    {
+                    $data[$key] = implode($ldapEntry[$value], ' ');
+                    }
+                }
+               else
+                {
+                $data[$key] = '';
+                }
             }
             $data['container_id']= $this->_options['container'];            
             $this->_setContactImage($data);            
@@ -425,6 +433,7 @@ class Addressbook_Backend_Ldap implements Tinebase_Backend_Interface
                     //look for the definition of the fields in the model of the filter
                     $filterModel = $filter->getFilterModel();
                     $addressBookFilters = $filter->getFilterObjects();
+
                     foreach ($addressBookFilters[0] as $adrFilter)
                     {
                         $value    = $adrFilter->getValue();
@@ -434,7 +443,7 @@ class Addressbook_Backend_Ldap implements Tinebase_Backend_Interface
                         switch ($field)
                         {
                             case 'container_id': //do nothing, container id is a sql only field
-                                break;
+                                continue;
                             default:
                                 if (isset($filterModel[$field]['options']['fields']))
                                 {
@@ -452,6 +461,7 @@ class Addressbook_Backend_Ldap implements Tinebase_Backend_Interface
                         foreach ($arrFields as $field)
                         {
                             $filter .= $this->_generateLdapFilter($value, $field, $operator);
+
                         }
                         if (!(empty($filter)))
                         {
@@ -462,6 +472,28 @@ class Addressbook_Backend_Ldap implements Tinebase_Backend_Interface
                             $arrFilters[] = $filter;
                         }
                     }
+                   break;
+                case 'Addressbook_Model_ContactIdFilter':
+                        $value    = $filter->getValue();
+                        $field    = $filter->getField();
+                        $operator = $filter->getOperator();
+                        $arrFields = array();
+                        $arrFields[] = $this->_attributes[$field];
+                        $filter = '';
+                        foreach ($arrFields as $field)
+                         {
+                            $filter .= $this->_generateLdapFilter($value, $field, $operator);
+
+                        }
+                        if (!(empty($filter)))
+                        {
+                            if (count($arrFields)>1)
+                            {
+                                $filter = '(|' . $filter. ')';
+                            }
+                            $arrFilters[] = $filter;
+                        }
+
                    break;
             }
         }

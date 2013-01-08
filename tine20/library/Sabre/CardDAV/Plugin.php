@@ -245,6 +245,7 @@ class Sabre_CardDAV_Plugin extends Sabre_DAV_ServerPlugin {
                 continue;
             }
 
+
             $validNodes[] = $node;
 
             if ($query->limit && $query->limit <= count($validNodes)) {
@@ -287,7 +288,9 @@ class Sabre_CardDAV_Plugin extends Sabre_DAV_ServerPlugin {
         $success = true;
 
         foreach($filters as $filter) {
-
+          
+            if($filter['name']=='mail')
+                $filter['name']=email;
             $isDefined = isset($vcard->{$filter['name']});
             if ($filter['is-not-defined']) {
                 if ($isDefined) {
