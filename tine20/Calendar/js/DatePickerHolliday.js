@@ -92,20 +92,20 @@ prepara_feriados_nacionais();
 }
 
 // Apply fix: time dayligth (Brazil)
-Date.prototype.clearTime = function(clone){
-     if(clone){
-    	return this.clone().clearTime();
-    }
-    if(this.getHours() == 23){
-    	this.setTime(this.getTime()+(3600000));
-    }else{
-    	this.setHours(0);
-    }
-    this.setMinutes(0);
-    this.setSeconds(0);
-    this.setMilliseconds(0);
-    return this;
-};
+//Date.prototype.clearTime = function(clone){
+//     if(clone){
+//    	return this.clone().clearTime();
+//    }
+//    if(this.getHours() == 23){
+//    	this.setTime(this.getTime()+(3600000));
+//    }else{
+//    	this.setHours(0);
+//    }
+//    this.setMinutes(0);
+//    this.setSeconds(0);
+//    this.setMilliseconds(0);
+//    return this;
+//};
 
 /*!
  * Ext JS Library 3.1.1
