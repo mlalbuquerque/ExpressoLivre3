@@ -42,8 +42,9 @@ Tine.Felamimail.ContactSearchCombo = Ext.extend(Tine.Addressbook.SearchCombo, {
         
         this.tpl = new Ext.XTemplate(
             '<tpl for="."><div class="search-item">',
-                '{[this.encode(values.n_fileas)]}',
+                '{[this.encode(values.n_fn)]}',
                 ' (<b>{[this.encode(values.email, values.email_home)]}</b>)',
+                '  {[this.encode(values.org_unit)]}',
             '</div></tpl>',
             {
                 encode: function(email, email_home) {
