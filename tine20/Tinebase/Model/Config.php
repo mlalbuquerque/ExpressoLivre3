@@ -45,7 +45,7 @@ class Tinebase_Model_Config extends Tinebase_Record_Abstract
      * 
      * @var string 
      */
-    const MESSENGERCONFIG = 'messenger';
+    const MESSENGER = 'messenger';
 
     /**
      * authentication backend config

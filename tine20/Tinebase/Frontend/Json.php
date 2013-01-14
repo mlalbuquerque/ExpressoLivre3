@@ -637,7 +637,6 @@ class Tinebase_Frontend_Json extends Tinebase_Frontend_Json_Abstract
                 'mapPanel'          => Tinebase_Config::getInstance()->getConfig(Tinebase_Config::MAPPANEL, NULL, TRUE)->value,
                 'confirmLogout'     => Tinebase_Core::getPreference()->getValue(Tinebase_Preference::CONFIRM_LOGOUT, 1),
                 'persistentFilters' => Tinebase_Frontend_Json_PersistentFilter::getAllPersistentFilters(),
-                'messenger'         => $this->getMessengerConfig()
             );
         }
 
@@ -702,11 +701,6 @@ class Tinebase_Frontend_Json extends Tinebase_Frontend_Json_Abstract
         }       
 
         return $registryData;
-    }
-    
-    public function getMessengerConfig()
-    {
-        return Tinebase_Config::getInstance()->getConfigAsArray(Tinebase_Model_Config::MESSENGERCONFIG, 'Tinebase', array());
     }
 
     /**

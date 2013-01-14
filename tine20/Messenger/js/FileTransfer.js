@@ -96,7 +96,7 @@ Tine.Messenger.FileTransfer = {
                         });
 
                         var info = $msg({'to': to + '/' + Tine.Messenger.FileTransfer.resource});
-                        if (Tine.Messenger.FileTransfer.resource == Tine.Tinebase.registry.get('messenger').messenger.resource) {
+                        if (Tine.Messenger.FileTransfer.resource == Tine.Messenger.registry.get('resource')) {
                             info.attrs({'type': 'filetransfer'})
                                 .c("file", {
                                     'name': file.data.name,

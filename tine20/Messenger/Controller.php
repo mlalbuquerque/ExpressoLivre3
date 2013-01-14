@@ -6,7 +6,7 @@ class Messenger_Controller extends Tinebase_Controller_Event
     /*
      * path to save chat history temporarily
      */
-    const PATH = '/var/tmp/apache2/tine20im';
+    const TMP_PATH = '/tmp/tine20im';
 
     /*
      * path to save contact history
@@ -19,6 +19,13 @@ class Messenger_Controller extends Tinebase_Controller_Event
      * @var Messenger_Controller
      */
     private static $_instance = NULL;
+    
+    /**
+     * application name
+     *
+     * @var string
+     */
+    protected $_applicationName = 'Messenger';
 
     /**
      * constructor (get current user)
@@ -47,6 +54,18 @@ class Messenger_Controller extends Tinebase_Controller_Event
         }
         
         return self::$_instance;
+    }
+    
+    public function getMessengerConfig()
+    {
+        $config = self::getConfig();
+
+        return array(
+            'domain'         => $config['messenger']['domain'],
+            'resource'       => $config['messenger']['resource'],
+            'format'         => $config['messenger']['format'],
+            'rtmfpServerUrl' => $config['messenger']['rtmfpServerUrl']
+        );
     }
     
     /**
@@ -143,8 +162,14 @@ class Messenger_Controller extends Tinebase_Controller_Event
     
     public function saveChatHistory($id, $title, $content)
     {
-        if (!file_exists(self::PATH))
-            mkdir(self::PATH, 0777, true);
+        $config = self::getConfig();
+        
+        $tempPath = !empty($config['messenger']['tempFiles']) ?
+                        $config['messenger']['tempFiles'] :
+                        $tempPath = self::TMP_PATH;
+
+        if (!file_exists($tempPath))
+            mkdir($tempPath);
 
         $length = strlen($content);
         $status = null;
@@ -161,7 +186,7 @@ class Messenger_Controller extends Tinebase_Controller_Event
             $body = "<body><h1>$title</h1>$content</body>";
             $html = "<html>$head$body</html>";
             $fileName = $id . '-' . time() . '.html';
-            $filePath = self::PATH . '/' . $fileName;
+            $filePath = $tempPath . '/' . $fileName;
             $response = file_put_contents($filePath, $html, FILE_APPEND);
             
             if ($response !== false)
@@ -179,7 +204,7 @@ class Messenger_Controller extends Tinebase_Controller_Event
         {
             $status = 'NO_FILE';
             $fileName = 'no file';
-            $filePath = self::PATH;
+            $filePath = $tempPath;
         }
         
         return array(
@@ -187,6 +212,25 @@ class Messenger_Controller extends Tinebase_Controller_Event
             'fileName' => $fileName,
             'filePath' => $filePath
         );
+    }
+    
+    public function getTempPath()
+    {
+        $config = self::getConfig();
+        
+        $tempPath = !empty($config['messenger']['tempFiles']) ?
+                        $config['messenger']['tempFiles'] :
+                        $tempPath = self::TMP_PATH;
+
+        if (!file_exists($tempPath))
+            mkdir($tempPath);
+        
+        return $tempPath;
+    }
+    
+    private static function getConfig()
+    {
+        return Tinebase_Config::getInstance()->getConfigAsArray(Tinebase_Model_Config::MESSENGER);
     }
     
     private static function chatHistoryStyle()

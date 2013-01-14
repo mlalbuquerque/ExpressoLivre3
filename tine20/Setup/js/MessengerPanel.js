@@ -11,7 +11,7 @@
 Ext.ns('Tine', 'Tine.Setup');
  
 /**
- * Setup Email Config Manager
+ * Setup Messenger Config Manager
  * 
  * @namespace   Tine.Setup
  * @class       Tine.Setup.MessengerPanel
@@ -127,6 +127,21 @@ Tine.Setup.MessengerPanel = Ext.extend(Tine.Tinebase.widgets.form.ConfigPanel, {
                                allowBlank: true,
                                name: 'messenger_rtmfpServerUrl',
                                fieldLabel: this.app.i18n._('Videochat Server address'),
+                               xtype: 'textfield'
+                           }
+                       ]
+                   },
+                   {
+                       xtype: 'fieldset',
+                       autoHeight: 'auto',
+                       defaults: {width: 300},
+                       title: this.app.i18n._('Temporary files'),
+                       id: 'setup-messenger-tmp-files',
+                       items: [
+                           {
+                               allowBlank: true,
+                               name: 'messenger_tempFiles',
+                               fieldLabel: this.app.i18n._('Temporary Uploaded Files Path'),
                                xtype: 'textfield'
                            }
                        ]

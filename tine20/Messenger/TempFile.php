@@ -2,13 +2,7 @@
 
 class Messenger_TempFile extends Tinebase_TempFile
 {
-    
-    /**
-     * holds the file transfer Temp File path
-     */
-    const TEMP_PATH = '/var/tmp/apache2/tine20im';
-    
-    /**
+     /**
      * holds the instance of the singleton
      *
      * @var Tinebase_TempFile
@@ -42,7 +36,7 @@ class Messenger_TempFile extends Tinebase_TempFile
      */
     public function uploadTempFile()
     {
-        $path = tempnam(self::TEMP_PATH, 'tine_messenger_');
+        $path = tempnam(Messenger_Controller::getTempPath(), 'tine_messenger_');
         if (! $path) {
             throw new Tinebase_Exception_UnexpectedValue('Can not upload file, tempnam() could not return a valid filename!');
         }
@@ -101,7 +95,7 @@ class Messenger_TempFile extends Tinebase_TempFile
      */
     public function joinTempFiles($_tempFiles)
     {
-        $path = tempnam(self::TEMP_PATH, 'tine_messenger_');
+        $path = tempnam(Messenger_Controller::getTempPath(), 'tine_messenger_');
         $name = preg_replace('/\.\d+\.chunk$/', '', $_tempFiles->getFirstRecord()->name);
         $type = $_tempFiles->getFirstRecord()->type;
         

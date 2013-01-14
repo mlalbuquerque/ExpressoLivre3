@@ -517,16 +517,16 @@ Tine.Messenger.IM = {
 Tine.Messenger.Util = {
     
     getJidFromConfig: function () {
-        var domain = Tine.Tinebase.registry.get('messenger').messenger.domain,
-            resource = Tine.Tinebase.registry.get('messenger').messenger.resource,
-            name = Tine.Messenger.Util.getJabberName(Tine.Tinebase.registry.get('messenger').messenger.format);
+        var domain = Tine.Messenger.registry.get('domain'),
+            resource = Tine.Messenger.registry.get('resource'),
+            name = Tine.Messenger.Util.getJabberName(Tine.Messenger.registry.get('format'));
         
         return name + '@' + domain + '/' + resource;
     },
     
     getJidFromConfigNoResource: function () {
-        var domain = Tine.Tinebase.registry.get('messenger').messenger.domain,
-            name = Tine.Messenger.Util.getJabberName(Tine.Tinebase.registry.get('messenger').messenger.format),
+        var domain = Tine.Messenger.registry.get('domain'),
+            name = Tine.Messenger.Util.getJabberName(Tine.Messenger.registry.get('format')),
             jid = '';
             
         if (name != null)
@@ -546,7 +546,7 @@ Tine.Messenger.Util = {
                 name = Tine.Tinebase.registry.get('userContact').account_id;
                 break;
             default:
-                name = Tine.Tinebase.registry.get('messenger').messenger.custom_name;
+                name = Tine.Messenger.registry.get('preferences').map.name;
         }
         
         return name;
