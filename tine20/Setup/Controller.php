@@ -1074,7 +1074,7 @@ class Setup_Controller
      */
     public function saveMessengerConfig($_data)
     {
-        Tinebase_Config::getInstance()->setConfigForApplication(Tinebase_Model_Config::MESSENGERCONFIG, $_data);
+        Tinebase_Config::getInstance()->setConfigForApplication(Tinebase_Model_Config::MESSENGER, $_data);
     }
     
     /**
@@ -1084,7 +1084,7 @@ class Setup_Controller
      */
     public function getMessengerConfig()
     {
-        return Tinebase_Config::getInstance()->getConfigAsArray(Tinebase_Model_Config::MESSENGERCONFIG, 'Tinebase', array());
+        return Tinebase_Config::getInstance()->getConfigAsArray(Tinebase_Model_Config::MESSENGER, 'Tinebase', array());
     }
     
     /**

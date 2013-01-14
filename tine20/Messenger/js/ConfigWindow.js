@@ -67,7 +67,7 @@ Tine.Messenger.ConfigWindow = Ext.extend(Ext.Window, {
                     xtype: 'fieldset',
                     layout: 'fit',
                     title: _('Custom Name'),
-                    disabled: (Tine.Tinebase.registry.get('messenger').messenger.format != 'custom'),
+                    disabled: (Tine.Messenger.registry.get('format') != 'custom'),
                     items: [
                         {
                             xtype: 'textfield',

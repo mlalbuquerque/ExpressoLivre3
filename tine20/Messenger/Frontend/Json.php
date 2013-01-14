@@ -28,6 +28,11 @@ class Messenger_Frontend_Json extends Tinebase_Frontend_Json_Abstract
        $this->_controller = Messenger_Controller::getInstance();
    }
    
+   public function getRegistryData()
+   {
+       return $this->_controller->getMessengerConfig();
+   }
+   
    /**
     *  
     */
