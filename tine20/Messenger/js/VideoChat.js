@@ -245,7 +245,6 @@ Tine.Messenger.VideoChat = {
    
     startVideo: function (window_chat, id, jid){
 
-	console.debug('begin startVideo');
 	if(Tine.Messenger.VideoChat.state == VideoChatStates.IDLE){
 	    Tine.Messenger.VideoChat.jid = jid;
 	    Tine.Messenger.VideoChat.loadVideoChat(window_chat);
@@ -270,11 +269,9 @@ Tine.Messenger.VideoChat = {
    
     appLoaded: function()
     {
-	console.debug('begin appLoaded');
 	Tine.Messenger.VideoChat.startApp();
     },
     startApp:function(){
-	console.debug('begin startApp');
 	var movie = Tine.Messenger.VideoChat.getFlashMovie(); 
 	    
 	//movie.startApp("rtmfp://10.200.118.61", Tine.Messenger.Util.getJidFromConfigNoResource());
@@ -287,7 +284,7 @@ Tine.Messenger.VideoChat = {
      * Both sides of videochat call this function. The side is identified by the state.
      */
     myId: function(id){
-	console.debug('begin myId');
+	
 	Tine.Messenger.VideoChat.id = id;
 	if(Tine.Messenger.VideoChat.state == VideoChatStates.CALL_CALLING){
 	    Tine.Messenger.VideoChat.acceptCallFrom(Tine.Messenger.VideoChat.jid);
@@ -299,18 +296,15 @@ Tine.Messenger.VideoChat = {
 
     },
     acceptCallFrom:function(jid){
-	console.debug('begin acceptCallFrom');
 	var movie = Tine.Messenger.VideoChat.getFlashMovie(); 
 	movie.acceptCallFrom(jid);
     },
     placeCall: function(farId){
-	console.debug('begin placeCall');
 	var movie = Tine.Messenger.VideoChat.getFlashMovie(); 
 	movie.placeCall('', farId);
     },
     
     callStarted: function(){
-	console.debug('begin callStarted');
 	
 	var chat = Tine.Messenger.ChatHandler.showChatWindow(Tine.Messenger.VideoChat.jid, '', 'chat', true);
 	Tine.Messenger.VideoChat.showVideoChat(chat);
@@ -318,8 +312,6 @@ Tine.Messenger.VideoChat = {
 	Tine.Messenger.VideoChat.state = VideoChatStates.CALL_ESTABLISHED;
     },
     hangup: function(_box){
-	console.debug('begin hangup');
-	
 	
 	if(Tine.Messenger.VideoChat.state != VideoChatStates.IDLE){
 	    
@@ -349,7 +341,6 @@ Tine.Messenger.VideoChat = {
 	
     },
     callEnded: function(id){
-	console.debug('begin callEnded ');
 	var _jid = Tine.Messenger.VideoChat.jid;
 	Tine.Messenger.VideoChat.jid = null;
 	if(_jid !== null){
@@ -366,7 +357,6 @@ Tine.Messenger.VideoChat = {
     },
     
     unloadVideoChat: function(_box){
-	console.debug('begin unloadVideoChat...');
 	
 	_box.getComponent('messenger-chat-videochat').removeAll();
 	_box.doLayout();
@@ -377,7 +367,6 @@ Tine.Messenger.VideoChat = {
     
     
     loadVideoChat : function(_box){
-	console.debug('begin loadVideoChat');
 	var app = Tine.Tinebase.appMgr.get('Messenger');
 	var flash = new Ext.FlashComponent({
 	    url: "Messenger/flash/ExpressoVideoChat.swf",
@@ -431,7 +420,6 @@ Tine.Messenger.VideoChat = {
     
     },
     showVideoChat: function(_box){
-	console.debug('begin showVideoChat');
 	if(Tine.Messenger.VideoChat.hided){
 	    
 	    _box.setWidth(Tine.Messenger.VideoChat.originalChatWidth + Tine.Messenger.VideoChat.flashVideoWidth);
@@ -447,7 +435,6 @@ Tine.Messenger.VideoChat = {
     },
    
     hideVideoChat : function(_box){
-	console.debug('begin hideVideoChat');
 	if(!Tine.Messenger.VideoChat.hided){
 	    _box.setWidth(Tine.Messenger.VideoChat.originalChatWidth);
 	    _box.getComponent('messenger-chat-videochat').getEl().setWidth(0);
