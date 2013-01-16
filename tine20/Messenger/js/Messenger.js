@@ -221,6 +221,7 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
         Ext.getCmp('connectloading').show();
         
         this.connectToJabber();
+	this.initVideoChat();
         
         Ext.getCmp("ClientDialog").show();
 
@@ -236,6 +237,13 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
         Tine.Tinebase.appMgr.get('Messenger').getConnection().disconnect();
         Tine.Messenger.Log.debug("Messenger Stopped!");
         Tine.Messenger.IM.changeSystemLogonButton(['startup', 'Login']);
+    },
+    
+    initVideoChat: function(){
+	var rtmfpServerUrl = Ext.util.Format.trim(Tine.Tinebase.registry.get('messenger').messenger.rtmfpServerUrl);
+	Tine.Messenger.VideoChat.enabled = (rtmfpServerUrl != '');
+	Tine.Messenger.VideoChat.rtmfpServerUrl = rtmfpServerUrl;
+	
     },
     
     getConnection: function () {

@@ -11,6 +11,16 @@ var VideoChatStates = {
 Tine.Messenger.VideoChat = {
     
     /**
+     * Indicates if the video chat functionality is enabled.
+     */
+    enabled: false,
+    
+    /**
+     * The RTMFP server url.
+     */
+    rtmfpServerUrl: '',
+    
+    /**
      * The videochat state.
      */
     state: VideoChatStates.IDLE,
@@ -267,7 +277,9 @@ Tine.Messenger.VideoChat = {
 	console.debug('begin startApp');
 	var movie = Tine.Messenger.VideoChat.getFlashMovie(); 
 	    
-	movie.startApp("rtmfp://10.200.118.61", Tine.Messenger.Util.getJidFromConfigNoResource());
+	//movie.startApp("rtmfp://10.200.118.61", Tine.Messenger.Util.getJidFromConfigNoResource());
+	movie.startApp(Tine.Messenger.VideoChat.rtmfpServerUrl, Tine.Messenger.Util.getJidFromConfigNoResource());
+	
 	    
 	return true;
     },
