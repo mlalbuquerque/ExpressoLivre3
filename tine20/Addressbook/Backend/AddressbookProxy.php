@@ -18,7 +18,7 @@
  */
 class Addressbook_Backend_AddressbookProxy
 {
-    private $_lastUserBackend = 'lastUserBakend';
+    private $_lastUserBackend = 'lastUserBackend';
     /**
      * object instance
      *
@@ -86,26 +86,28 @@ class Addressbook_Backend_AddressbookProxy
         }
         else
         {
-            $bk = $_SESSION[$this->_lastUserBackend];
-            if (!(is_null($bk)))
+            if (isset($_SESSION[$this->_lastUserBackend]))
             {
-                switch ($_name)
+                $bk = $_SESSION[$this->_lastUserBackend];
+                if (!(is_null($bk)))
                 {
-                    case "get":
-                    case "getImage":
-                    case "getMultiple":
-                    case "getAll":
-                        $backendType = $bk['backendtype'];
-                        $arrOptions  = $bk['arrOptions'];
-                      break;
+                    switch ($_name)
+                    {
+                        case "get":
+                        case "getImage":
+                        case "getMultiple":
+                        case "getAll":
+                            $backendType = $bk['backendtype'];
+                            $arrOptions  = $bk['arrOptions'];
+                        break;
+                    }
                 }
-            }
+            }            
             Tinebase_Core::getLogger()->debug(__METHOD__ . '::' . __LINE__ . ' No Container Found'
                                                                                           . ' Assuming default values');
         }
-        
-        Tinebase_Core::getLogger()->debug(__METHOD__ . '::' . __LINE__ . ' Calling ' . $_name . ' from the 
-                                                                                                       ' .$backendType .' com argumentos '.print_r($_arguments,true));
+        Tinebase_Core::getLogger()->debug(__METHOD__ . '::' . __LINE__ . ' Calling ' . $_name . ' from the ' 
+                                                          . $backendType .' com argumentos '.print_r($_arguments,true));
         return call_user_func_array(array(Addressbook_Backend_Factory::factory($backendType, $arrOptions), $_name), 
                                                                                                            $_arguments);
     }
