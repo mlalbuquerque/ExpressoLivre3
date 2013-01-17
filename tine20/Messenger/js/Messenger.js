@@ -326,17 +326,6 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
                 roster, Tine.Messenger.Util.callbackWrapper(Tine.Messenger.RosterHandler._onStartRoster)
             );
                 
-            // Updating Roster
-            XMPPConnection.addHandler(
-                Tine.Messenger.Util.callbackWrapper(Tine.Messenger.RosterHandler._onRosterUpdate),
-                'jabber:client', 'iq', 'set'
-            );
-              
-            XMPPConnection.addHandler(
-                Tine.Messenger.Util.callbackWrapper(Tine.Messenger.RosterHandler._onRosterGet),
-                'jabber:client', 'iq', 'get'
-            );
-                
             XMPPConnection.addHandler(
                 Tine.Messenger.Util.callbackWrapper(Tine.Messenger.RosterHandler._onRosterResult),
                 'jabber:client', 'iq', 'result'
@@ -352,11 +341,6 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
                 null, 'message', 'error'
             );
                 
-            XMPPConnection.addHandler(
-                Tine.Messenger.Util.callbackWrapper(Tine.Messenger.LogHandler._getPresence),
-                'jabber:client', 'presence'
-            );
-        
             // Start unload events
             window.onbeforeunload = function () {
                 Tine.Tinebase.appMgr.get('Messenger').stopMessenger(Tine.Tinebase.appMgr.get('Messenger').i18n._('Leave page') + '!');

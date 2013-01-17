@@ -2,7 +2,11 @@ Ext.ns('Tine.Messenger');
 
 Tine.Messenger.RosterHandler = {
     
+    
+    
     _onStartRoster: function(iq) {
+        var XMPPConnection = Tine.Tinebase.appMgr.get('Messenger').getConnection();
+
         try {
             // Modify Main Menu status
             Tine.Tinebase.MainScreen.getMainMenu().onlineStatus.setStatus('online');
@@ -10,13 +14,23 @@ Tine.Messenger.RosterHandler = {
             Tine.Messenger.RosterHandler.changeStatus(Ext.getCmp("ClientDialog").status, 
                                                         '',//Ext.getCmp("ClientDialog").statusText, 
                                                         true);
+                                                        
+            Tine.Messenger.RosterHandler._onRosterUpdate(iq);
+            
+            XMPPConnection.addHandler(
+                Tine.Messenger.Util.callbackWrapper(Tine.Messenger.LogHandler._getPresence),
+                'jabber:client', 'presence'
+            );
+            
+            XMPPConnection.addHandler(
+                Tine.Messenger.Util.callbackWrapper(Tine.Messenger.RosterHandler._onRosterUpdate),
+                'jabber:client', 'iq', 'set'
+            );
             
         } catch (e) {
             alert('Something went wrong!\n'+e.getMessage());
             console.log(e);
         }
-        
-        return true;
     },
     
     _onRosterUpdate: function (iq) {
