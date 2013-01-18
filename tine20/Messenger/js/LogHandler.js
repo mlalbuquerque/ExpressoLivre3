@@ -110,6 +110,11 @@ console.log('GET PRESENCE 0');
                             Tine.Messenger.LogHandler.status(title, status, 'STATUS', resource);
                             Tine.Messenger.LogHandler.onChatStatusChange(from, title + " " + status);
                         }
+			
+			Tine.Messenger.VideoChat.setIconVisible( 
+			    Tine.Messenger.VideoChat.getChatWindow(jid),
+			    Tine.Messenger.VideoChat.enabled && type != 'unavailable'
+			);
                     }
                 }
             }

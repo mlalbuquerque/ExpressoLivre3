@@ -9,8 +9,8 @@ Tine.Messenger.Chat = Ext.extend(Ext.Window, {
         cls:         'messenger-chat-window',
         width:       460,
         minWidth:    400,
-        height:      360,
-        minHeight:   280,
+        height:      378,
+        minHeight:   378,
         closeAction: 'hide', //'close' - destroy the component
         collapsible: true,
         plain:       true,
@@ -151,6 +151,11 @@ Tine.Messenger.Chat = Ext.extend(Ext.Window, {
 		// only if the chat being closed is the one using videochat
 		if(Tine.Messenger.VideoChat.jid != null && Tine.Messenger.VideoChat.getChatWindow(Tine.Messenger.VideoChat.jid).id == _box.id){
 		    Tine.Messenger.VideoChat.hangup(_box);
+		}
+	    },
+	    beforecollapse: function(_box){
+		if(Tine.Messenger.VideoChat.state != VideoChatStates.IDLE){
+		    return false;
 		}
 	    }
         }

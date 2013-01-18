@@ -273,10 +273,10 @@ Tine.Messenger.VideoChat = {
     },
     startApp:function(){
 	var movie = Tine.Messenger.VideoChat.getFlashMovie(); 
-	    
-	//movie.startApp("rtmfp://10.200.118.61", Tine.Messenger.Util.getJidFromConfigNoResource());
-	movie.startApp(Tine.Messenger.VideoChat.rtmfpServerUrl, Tine.Messenger.Util.getJidFromConfigNoResource());
 	
+	if(movie && typeof(movie.startApp) != "undefined"){
+	    movie.startApp(Tine.Messenger.VideoChat.rtmfpServerUrl, Tine.Messenger.Util.getJidFromConfigNoResource());
+	}
 	    
 	return true;
     },
@@ -297,11 +297,15 @@ Tine.Messenger.VideoChat = {
     },
     acceptCallFrom:function(jid){
 	var movie = Tine.Messenger.VideoChat.getFlashMovie(); 
-	movie.acceptCallFrom(jid);
+	if(movie && typeof(movie.acceptCallFrom) != "undefined"){
+	    movie.acceptCallFrom(jid);
+	}
     },
     placeCall: function(farId){
 	var movie = Tine.Messenger.VideoChat.getFlashMovie(); 
-	movie.placeCall('', farId);
+	if(movie && typeof(movie.placeCall) != "undefined"){
+	    movie.placeCall('', farId);
+	}
     },
     
     callStarted: function(){
@@ -329,7 +333,7 @@ Tine.Messenger.VideoChat = {
 	    }
 	    var movie = Tine.Messenger.VideoChat.getFlashMovie(); 
 	    
-	    if(movie){
+	    if(movie && typeof(movie.hangup) != "undefined"){
 		movie.hangup();
 		
 		//workaround: two flash calls to callEnded doesn't work
@@ -462,6 +466,13 @@ Tine.Messenger.VideoChat = {
 	var chat_id = Tine.Messenger.ChatHandler.formatChatId(jid);
 	var chat = Ext.getCmp(chat_id) ? Ext.getCmp(chat_id) : null;
 	return chat;
+    },
+    
+    
+    
+    
+    setIconVisible: function(chat, visible){
+	chat.getTopToolbar().getComponent('messenger-chat-video').setVisible(visible);
     }
     
     

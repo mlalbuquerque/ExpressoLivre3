@@ -158,13 +158,14 @@ Tine.Messenger.ChatHandler = {
             Tine.Messenger.ChatHandler.setChatMessage(jid, app.i18n._('Your messages will be sent offline'), app.i18n._('Info'), 'messenger-notify');
         }
 	
+
 	(function() {
-	    chat.getTopToolbar().getComponent('messenger-chat-video').setVisible(
-		Tine.Messenger.VideoChat.enabled &&
-		!Tine.Messenger.RosterHandler.isContactUnavailable(jid)
-	    );
+	    Tine.Messenger.VideoChat.setIconVisible( 
+		chat, 
+		Tine.Messenger.VideoChat.enabled && !Tine.Messenger.RosterHandler.isContactUnavailable(jid)
+	    )
 	}).defer(50);
-    
+   
         return chat;
     },
     
