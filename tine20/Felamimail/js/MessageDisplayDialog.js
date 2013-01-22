@@ -248,7 +248,7 @@ Tine.Felamimail.MessageDisplayDialog = Ext.extend(Tine.Felamimail.GridDetailsPan
             listeners: {
                 'update': this.onAfterCompose.createDelegate(this, ['reply', Ext.encode([this.record.data])], 1)
             }
-        });
+        }, true);
     },
     
     /**
@@ -260,7 +260,7 @@ Tine.Felamimail.MessageDisplayDialog = Ext.extend(Tine.Felamimail.GridDetailsPan
             listeners: {
                 'update': this.onAfterCompose.createDelegate(this, ['forward', Ext.encode([this.record.data])], 1)
             }
-        });
+        }, true);
     },
     
     onMessagePrint: Tine.Felamimail.GridPanel.prototype.onPrint,

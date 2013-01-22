@@ -1209,12 +1209,14 @@ Ext.namespace('Tine.Felamimail');
  * Felamimail Edit Popup
  * 
  * @param   {Object} config
+ * @param   {boolean} modal
  * @return  {Ext.ux.Window}
  */
-Tine.Felamimail.MessageEditDialog.openWindow = function (config) {
+Tine.Felamimail.MessageEditDialog.openWindow = function (config, modal) {
     var window = Tine.WindowFactory.getWindow({
         width: 700,
         height: 700,
+        modal: typeof modal != 'undefined' ? modal : false,
         name: Tine.Felamimail.MessageEditDialog.prototype.windowNamePrefix + Ext.id(),
         contentPanelConstructor: 'Tine.Felamimail.MessageEditDialog',
         contentPanelConstructorConfig: config
