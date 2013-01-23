@@ -109,7 +109,7 @@ class Felamimail_Backend_Cache_Imap_Folder extends Felamimail_Backend_Cache_Imap
                 foreach ($_folderName as $folder)
                 {
                     $decodedFolder = self::decodeFolderUid($folder);
-                    $folders = array_merge($folders, $this->_getFolder($_account, $decodedFolder['globalName']));
+                    $folders = array_merge($folders, $this->_getFolder($_account, Felamimail_Model_Folder::decodeFolderName($decodedFolder['globalName'])));
                 }
             }  
         }
