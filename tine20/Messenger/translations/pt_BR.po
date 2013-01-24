@@ -737,6 +737,34 @@ msgstr "Iniciar video chat"
 msgid "Contact Chat History"
 msgstr "Histórico do Contato"
 
+#: Messenger/js/VideoChat.js:122
+msgid "{0} is inviting you to a video chat. Do you Accept?"
+msgstr "{0} está convidando você para um video chat. Aceitar?"
+
+#: Messenger/js/VideoChat.js:160
+msgid "{0} rejected your video chat call"
+msgstr "{0} rejeitou sua chamada de video chat"
+
+#: Messenger/js/VideoChat.js:181
+msgid "{0} is busy for video chat"
+msgstr "{0} está ocupado para video chat"
+
+#: Messenger/js/VideoChat.js:201
+msgid "One video chat call missed from {0}"
+msgstr "Uma chamada de video chat perdida de {0}"
+
+#: Messenger/js/VideoChat.js:250
+msgid "You are already in a video chat"
+msgstr "Você já está em um video chat"
+
+#: Messenger/js/VideoChat.js:403
+msgid "End"
+msgstr "Terminar"
+
+#: Messenger/js/VideoChat.js:404
+msgid "End video chat"
+msgstr "Terminar video chat"
+
 #~ msgid "File too big - must be less then 2MB"
 #~ msgstr "Arquivo muito grande - deve ser inferior a 2MB"
 

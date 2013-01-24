@@ -55,7 +55,7 @@ Tine.Messenger.ChatHandler = {
             });
 
             chat.on('hide', function (window_chat) {
-                var chat_table = window_chat.getComponent('messenger-chat-table'),
+		var chat_table = window_chat.getComponent('messenger-chat-textchat').getComponent('messenger-chat-table'),
                     chat_area = chat_table.getComponent('messenger-chat-body'),
                     chat_lines = chat_area.items.items;
                     
@@ -176,7 +176,7 @@ Tine.Messenger.ChatHandler = {
     adjustChatAreaHeight: function(_chat_id, _width, _height){
       var chat = Ext.getCmp(_chat_id);
       if(chat.isVisible()){
-        var chat_table = chat.getComponent('messenger-chat-table'),
+	var chat_table = chat.getComponent('messenger-chat-textchat').getComponent('messenger-chat-table'),
             chat_area = chat_table.getComponent('messenger-chat-body'),
             chat_table_height = chat_table.body.dom.clientHeight,
             chat_area_height = chat_area.body.dom.clientHeight;
@@ -233,7 +233,7 @@ Tine.Messenger.ChatHandler = {
      */
     setChatMessage: function (id, msg, name, flow, stamp, color) {
         var chat_id = Tine.Messenger.ChatHandler.formatChatId(id),
-            chat_table = Ext.getCmp(chat_id).getComponent('messenger-chat-table'),
+	    chat_table = Ext.getCmp(chat_id).getComponent('messenger-chat-textchat').getComponent('messenger-chat-table'),
             chat_area = chat_table.getComponent('messenger-chat-body');
             
         msg = Tine.Messenger.ChatHandler.replaceLinks(msg);
@@ -296,7 +296,7 @@ Tine.Messenger.ChatHandler = {
             chat = Ext.getCmp(chat_id);
        
         if(chat){
-            var node = chat.getComponent('messenger-chat-notifications');
+            var node = chat.getComponent('messenger-chat-textchat').getComponent('messenger-chat-notifications');
             if(state){
                 var message = state,
                     html = '',
@@ -434,7 +434,7 @@ Tine.Messenger.ChatHandler = {
         var html = '<div class="chat-notification">' 
                   +    message
                   +'</div>';
-        var node = chat.getComponent('messenger-chat-notifications');
+	var node = chat.getComponent('messenger-chat-textchat').getComponent('messenger-chat-notifications');
         node.hide();
 //        html.delay(8000).fadeOut("slow");
         node.body.dom.innerHTML = html;

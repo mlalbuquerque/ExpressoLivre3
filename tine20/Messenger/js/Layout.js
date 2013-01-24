@@ -275,7 +275,22 @@ Tine.Messenger.AddItems = function(_box) {
                         });
         }
         
+        items.push({
+	    itemId: 'messenger-chat-videochat',
+            layout: 'column',
+            region: 'west',
+	    width: 0,
+            border: false,
+            items: [{
+            }]
+	});	
+        
         items.push(
+	    {
+		layout: 'border',
+		region: 'center',
+		itemId: 'messenger-chat-textchat',
+		items:[
                 {
                     itemId: 'messenger-chat-table',
                     layout: 'column',
@@ -294,9 +309,8 @@ Tine.Messenger.AddItems = function(_box) {
                             }
                             ,bodyroster
                         ]
-                }
-            );
-        items.push(
+                },
+            
                 {
                     itemId: 'messenger-chat-notifications',
                     bodyStyle: 'background: transparent',
@@ -327,10 +341,10 @@ Tine.Messenger.AddItems = function(_box) {
                             Tine.Messenger.Chat.alreadySentComposing = false;
                         },
                         keypress: function (field, ev) {
-                            var chatId = field.ownerCt.id,
-                                type = field.ownerCt.type,
-                                privy = field.ownerCt.privy,
-                                old_id = field.ownerCt.initialConfig.id;
+                            var chatId = field.ownerCt.ownerCt.id,
+                                type = field.ownerCt.ownerCt.type,
+                                privy = field.ownerCt.ownerCt.privy,
+                                old_id = field.ownerCt.ownerCt.initialConfig.id;
 
                             if(type == 'chat' || privy){
                                 if (ev.getKey() != ev.ENTER) {
@@ -374,6 +388,7 @@ Tine.Messenger.AddItems = function(_box) {
                         }
                     }
                 }
+		]}
             );
 //        return items;
          _box.add(items);

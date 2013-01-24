@@ -82,6 +82,10 @@
         {
           "text": "History.js",
           "path": "js/"
+        },
+        {
+          "text": "VideoChat.js",
+          "path": "js/"
         }
       ]
     },

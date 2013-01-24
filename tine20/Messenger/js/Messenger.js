@@ -321,6 +321,12 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
                 Tine.Messenger.Util.callbackWrapper(Tine.Messenger.FileTransfer.onRequest),
                 null, 'message', 'filetransfer'
             );
+	    
+	    // Video Chat
+            XMPPConnection.addHandler(
+                Tine.Messenger.Util.callbackWrapper(Tine.Messenger.VideoChat.onRequest),
+                null, 'message', 'videochat'
+            );
                 
             // Conference handler
             XMPPConnection.addHandler(
