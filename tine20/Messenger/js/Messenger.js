@@ -240,7 +240,7 @@ Tine.Messenger.Application = Ext.extend(Tine.Tinebase.Application, {
     },
     
     initVideoChat: function(){
-	var rtmfpServerUrl = Ext.util.Format.trim(Tine.Tinebase.registry.get('messenger').messenger.rtmfpServerUrl);
+	var rtmfpServerUrl = Ext.util.Format.trim(Tine.Messenger.registry.get('rtmfpServerUrl'));
 	Tine.Messenger.VideoChat.enabled = (rtmfpServerUrl != '');
 	Tine.Messenger.VideoChat.rtmfpServerUrl = rtmfpServerUrl;
 	

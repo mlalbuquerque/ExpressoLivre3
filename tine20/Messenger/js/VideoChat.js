@@ -63,7 +63,7 @@ Tine.Messenger.VideoChat = {
 	var to = typeof jid == 'string' ? jid : jid.node.attributes.jid;
                        
 	var info = $msg({
-	    'to': to + '/' + Tine.Tinebase.registry.get('messenger').messenger.resource,
+	    'to': to + '/' + Tine.Messenger.registry.get('resource'),
 	    'type': 'videochat'
 	});
 	
@@ -79,7 +79,7 @@ Tine.Messenger.VideoChat = {
 	var to = typeof item == 'string' ? item : item.node.attributes.jid;
 	               
 	var info = $msg({
-	    'to': to + '/' + Tine.Tinebase.registry.get('messenger').messenger.resource,
+	    'to': to + '/' + Tine.Messenger.registry.get('resource'),
 	    'type': 'videochat'
 	});
 	
@@ -92,7 +92,7 @@ Tine.Messenger.VideoChat = {
     sendBusy: function(jid){
                        
 	var info = $msg({
-	    'to': jid + '/' + Tine.Tinebase.registry.get('messenger').messenger.resource,
+	    'to': jid + '/' + Tine.Messenger.registry.get('resource'),
 	    'type': 'videochat'
 	});
 	
@@ -105,7 +105,7 @@ Tine.Messenger.VideoChat = {
     sendCancelCall: function(jid){
                        
 	var info = $msg({
-	    'to': jid + '/' + Tine.Tinebase.registry.get('messenger').messenger.resource,
+	    'to': jid + '/' + Tine.Messenger.registry.get('resource'),
 	    'type': 'videochat'
 	});
 	
