@@ -494,10 +494,42 @@ Ext.ns('Tine.Felamimail');
                 
             case 'a[class=tinebase-email-link]':
                 // open compose dlg
-                var email = target.id.split(':')[1];
+                
+                // support RFC 6068
+                var mailto = target.id.split('123:')[1],
+                    to = typeof mailto.split('?')[0] != 'undefined' ? mailto.split('?')[0].split(',') : [],
+                    fields = typeof mailto.split('?')[1] != 'undefined' ? mailto.split('?')[1].split('&') : [],
+                    subject = '', body = '', cc = [], bcc = [];
+                    
                 var defaults = Tine.Felamimail.Model.Message.getDefaultData();
-                defaults.to = [email];
-                defaults.body = Tine.Felamimail.getSignature();
+                
+                Ext.each(fields, function(field){
+                    var test = field.split('=');
+                    switch (Ext.util.Format.lowercase(test[0]))
+                    {
+                        case 'subject':
+                            subject = decodeURIComponent(test[1]);
+                            break;
+                        case 'body':
+                            test[1] = test[1].replace(/%0A/g, '<br />'); // adding line breaks
+                            body = decodeURIComponent(test[1]);
+                            break;
+                        case 'to':
+                            to = Ext.isEmpty(to) ? test[1].split[','] : to;
+                        case 'cc':
+                            cc = Ext.isEmpty(cc) ? test[1].split[','] : cc;
+                            break;
+                        case 'bcc':
+                            bcc = Ext.isEmpty(bcc) ? test[1].split[','] : bcc;
+                            break;
+                    }
+                });
+                
+                defaults.to = to;
+                defaults.cc = cc;
+                defaults.bcc = bcc;
+                defaults.subject = subject;
+                defaults.body = body + Tine.Felamimail.getSignature();
                 
                 var record = new Tine.Felamimail.Model.Message(defaults, 0);
                 var popupWindow = Tine.Felamimail.MessageEditDialog.openWindow({

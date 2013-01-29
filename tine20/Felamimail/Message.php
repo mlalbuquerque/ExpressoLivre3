@@ -298,10 +298,18 @@ class Felamimail_Message extends Zend_Mail_Message
     public static function replaceEmails($_content) 
     {
         // add anchor to email addresses (remove mailto hrefs first)
-        $mailtoPattern = '/<a[="a-z\-0-9 ]*href="mailto:([a-z0-9_\+-\.]+@[a-z0-9-\.]+\.[a-z]{2,4})"[^>]*>.*<\/a>/iU';
-        $result = preg_replace($mailtoPattern, "\\1", $_content);
-        $result = preg_replace(Tinebase_Mail::EMAIL_ADDRESS_REGEXP, "<a href=\"#\" id=\"123:\\1\" class=\"tinebase-email-link\">\\1</a>", $result);
+        $mailtoPattern = '/<[aA][^>]*href="mailto:'
+         .'((([a-z0-9_\+-\.]+@[a-z0-9-\.]+\.[a-z]{2,4}){1}|([a-z0-9_\+-\.]+@[a-z0-9-\.]+\.[a-z]{2,4},{0,1})*).*)"[^>]*>(.*)<\/[Aa]>/iU';
+        $match = array();
+        preg_match_all($mailtoPattern, $_content, $match, PREG_SET_ORDER);
+        $result = $_content;
         
+        foreach ($match as $mailto)
+        {
+            // Ugly hack because of malformed mailto URI
+            $mailto[1] = preg_replace('/(=\?[a-zA-Z0-9\-]*\?[qQbB]\?[^?]*\?=)/e', "rawurlencode(iconv_mime_decode('\\1', 2, 'UTF-8'))", $mailto[1]);
+            $result = str_replace($mailto[0], "<a href=\"#\" id=\"123:{$mailto[1]}\" class=\"tinebase-email-link\">$mailto[5]</a>", $result);
+        }
         return $result;
     }
     
