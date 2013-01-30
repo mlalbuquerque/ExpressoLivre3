@@ -20,6 +20,11 @@ Ext.ns('Tine.Webconference');
  * 
  */
 Tine.Webconference.EmailDetailsPanel = Ext.extend(Tine.widgets.grid.DetailsPanel, {
+    /**
+     * @property acceptAction
+     * @type Ext.Action
+     */
+    acceptAction: null,
     
     /**
      * @cfg {Object} preparedPart
@@ -53,6 +58,13 @@ Tine.Webconference.EmailDetailsPanel = Ext.extend(Tine.widgets.grid.DetailsPanel
         this.app = Tine.Tinebase.appMgr.get('Webconference');
 
         this.InviteRecord = new Tine.Webconference.Model.Invite(this.preparedPart.preparedData);
+        
+        this.acceptAction = new Ext.Action({
+            text: this.app.i18n._('Enter'),
+            handler: this.processEmail.createDelegate(this, 0),
+            icon: 'images/oxygen/16x16/actions/ok.png',
+            flex: 1
+        });
         
         this.initInviteToolbar();
 
@@ -91,11 +103,7 @@ Tine.Webconference.EmailDetailsPanel = Ext.extend(Tine.widgets.grid.DetailsPanel
         this.statusActions = [];
         
         
-        this.statusActions.push (new Ext.Action({
-            text: this.app.i18n._('Enter'),
-            handler: this.processEmail.createDelegate(this, 0),
-            icon: 'images/oxygen/16x16/actions/ok.png' 
-        }));
+        this.statusActions.push (this.acceptAction);
         this.actions = this.actions.concat(this.statusActions);
         
         // add more actions here (no spam / apply / crush / send event / ...)
@@ -184,27 +192,41 @@ Tine.Webconference.EmailDetailsPanel = Ext.extend(Tine.widgets.grid.DetailsPanel
                         defaults:{
                             margins:'0 5 0 0'
                         },
-                        items: [{
-                            flex: 2,
-                            layout: 'ux.display',
-                            labelWidth: 100,
-                            layoutConfig: {
-                                background: 'solid'
-                            },
-                            items: [
-                                {
-                                    xtype: 'ux.displayfield',
-                                    name: 'roomTitle',
-                                    fieldLabel: this.app.i18n._('Room Title')
+                        items: [
+                            {
+                                flex: 2,
+                                layout: 'ux.display',
+                                labelWidth: 100,
+                                layoutConfig: {
+                                    background: 'solid'
                                 },
-                                {
-                                    xtype: 'ux.displayfield',
-                                    name: 'moderator',
-                                    fieldLabel: this.app.i18n._('Type'),
-                                    renderer: this.moderatorRenderer.createDelegate(this)
-                                }
+                                items: [
+                                    {
+                                        xtype: 'ux.displayfield',
+                                        name: 'roomTitle',
+                                        fieldLabel: this.app.i18n._('Room Title')
+                                    },
+                                    {
+                                        xtype: 'ux.displayfield',
+                                        name: 'moderator',
+                                        fieldLabel: this.app.i18n._('Type'),
+                                        renderer: this.moderatorRenderer.createDelegate(this)
+                                    },
+                                    {
+                                        layout: 'hbox',
+                                        border: false,
+                                        width: 100,
+                                        style: {
+                                            "margin-top": "20px",
+                                            "padding-left": "30px"
+                                        },
+                                        items: [
+                                            new Ext.Button(this.acceptAction)
+                                        ]
+                                    }
+                                ]
+                            }
                             ]
-                        }]
                     }]
                 }]
             });
