@@ -756,6 +756,7 @@ abstract class Felamimail_Controller_Message_Abstract extends Tinebase_Controlle
         Tinebase_Core::getLogger()->info(__METHOD__ . '::' . __LINE__ . ' Purifying html body. (cache path: ' . $path .')');
         
         $config = HTMLPurifier_Config::createDefault();
+        $config->set('Core.LexerImpl', 'PH5P');
         $config->set('HTML.DefinitionID', 'purify message body contents'); 
         $config->set('HTML.DefinitionRev', 1);
         $config->set('CSS.AllowTricky', 1);
