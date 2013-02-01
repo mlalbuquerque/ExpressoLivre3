@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Tine 2.0 - Addressbook\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2013-01-24 15:32-0300\n"
+"PO-Revision-Date: 2013-02-01 14:44-0300\n"
 "Last-Translator: Cassiano Dal Pizzol <cassiano@dalpizzol@serpro.gov.br>\n"
 "Language-Team: Tine 2.0 Translators\n"
 "MIME-Version: 1.0\n"
@@ -814,3 +814,4 @@ msgstr "Cco"
 #: /Felamimail/js/ContactGrid.js:113
 msgid "None"
 msgstr "Nenhum"
+
