@@ -346,7 +346,14 @@
     overflow-x: hidden!important;
 }
 
-.messenger-chat-notifications .chat-notification {
+.chat-notification {
+    color: #acacac;
+    font-size: 0.8em;
+    font-weight: bold;
+    padding: 0 5px;
+}
+
+/*.messenger-chat-notifications .chat-notification {
     background-color: #000000;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
@@ -363,7 +370,7 @@
     min-width: 200px;
     max-width: 400px;
     width: 40%;
-}
+}*/
 
 .messenger-groupchat {
     background-image: url('/images/messenger/icon_chat.png')
