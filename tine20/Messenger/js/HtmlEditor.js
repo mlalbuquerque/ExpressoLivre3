@@ -37,10 +37,10 @@ Tine.Messenger.HtmlEditor = Ext.extend(Ext.form.HtmlEditor, {
                 overflowText: i18n._('Send Message'),
                 tooltip: title,
                 handler: function (cmp, e) {
-                    var chat_id = this.ownerCt.ownerCt.ownerCt.id,
-                        type = this.ownerCt.ownerCt.ownerCt.type,
-                        private_chat = this.ownerCt.ownerCt.ownerCt.privy,
-                        old_id = this.ownerCt.ownerCt.ownerCt.initialConfig.id,
+                    var chat_id = this.ownerCt.ownerCt.id,
+                        type = this.ownerCt.ownerCt.type,
+                        private_chat = this.ownerCt.ownerCt.privy,
+                        old_id = this.ownerCt.ownerCt.initialConfig.id,
                         message = this.getValue();
                     
                     this.sendMessage(chat_id, type, private_chat, old_id, message, e);
@@ -54,7 +54,7 @@ Tine.Messenger.HtmlEditor = Ext.extend(Ext.form.HtmlEditor, {
     },
     getValue: function () {
         var value = this.superclass().getValue.call(this);
-        
+
         value = value.replace(/<div.*?>(.+?)<\/div>/g, '<br>$1')
                      .replace(/<b>(.+)<\/b>/g, '<strong>$1</strong>')
                      .replace(/<i>(.+)<\/i>/g, '<em>$1</em>')
@@ -65,10 +65,10 @@ Tine.Messenger.HtmlEditor = Ext.extend(Ext.form.HtmlEditor, {
         return value;
     },
     keyPress: function(e) {
-        var chat_id = this.ownerCt.ownerCt.ownerCt.id,
-            type = this.ownerCt.ownerCt.ownerCt.type,
-            private_chat = this.ownerCt.ownerCt.ownerCt.privy,
-            old_id = this.ownerCt.ownerCt.ownerCt.initialConfig.id,
+        var chat_id = this.ownerCt.ownerCt.id,
+            type = this.ownerCt.ownerCt.type,
+            private_chat = this.ownerCt.ownerCt.privy,
+            old_id = this.ownerCt.ownerCt.initialConfig.id,
             message = this.getValue();
         
         if (e.ctrlKey && e.getKey() == Ext.EventObject.ENTER && !this.isVoidMessage()) {
